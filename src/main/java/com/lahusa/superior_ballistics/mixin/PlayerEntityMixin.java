@@ -1,13 +1,16 @@
 package com.lahusa.superior_ballistics.mixin;
 
 import com.lahusa.superior_ballistics.SpruceCannonBlock;
+import com.lahusa.superior_ballistics.SpruceCannonBlockEntity;
 import net.minecraft.block.Block;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -25,11 +28,13 @@ public class PlayerEntityMixin {
         HitResult hit = client.crosshairTarget;
         if(hit != null && hit.getType() == HitResult.Type.BLOCK) {
             BlockHitResult blockHit = (BlockHitResult) hit;
-            Block block = client.world.getBlockState(blockHit.getBlockPos()).getBlock();
+            BlockPos pos = blockHit.getBlockPos();
+            Block block = client.world.getBlockState(pos).getBlock();
             if(block instanceof SpruceCannonBlock) {
-                //((PlayerEntity)(Object)this).sendMessage(new LiteralText("[Loading Stage: Insert Powder]"), true);
-                client.inGameHud.setTitleTicks(0, 0, 0);
-                client.inGameHud.setOverlayMessage(new LiteralText("[Loading Stage: Insert Powder]"), false);
+                SpruceCannonBlockEntity blockEntity = (SpruceCannonBlockEntity) client.world.getBlockEntity(pos);
+
+                client.inGameHud.setOverlayMessage(new LiteralText("[Cannon Loading Stage: Insert Powder (" + blockEntity.getPowderAmount() + "/5)]"), false);
+
                 isShowingStatusText = true;
             }
             else if(isShowingStatusText) {

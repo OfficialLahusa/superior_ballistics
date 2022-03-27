@@ -5,6 +5,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
@@ -42,6 +43,7 @@ public class SpruceCannonBlock extends HorizontalFacingBlock implements BlockEnt
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 
         ItemStack heldStack = player.getInventory().getMainHandStack();
+        SpruceCannonBlockEntity blockEntity = (SpruceCannonBlockEntity) world.getBlockEntity(pos);
 
         if(heldStack.isEmpty()) {
             // Calculate and set new angle
@@ -58,8 +60,16 @@ public class SpruceCannonBlock extends HorizontalFacingBlock implements BlockEnt
                 world.setBlockState(pos, state.with(ANGLE, newAngle));
             }
         }
-        else {
+        else if(heldStack.isOf(Items.GUNPOWDER) && blockEntity.canLoadPowder()) {
+            // Play sound and load powder
             player.playSound(SoundEvents.BLOCK_SAND_BREAK, 1.f, 1.4f);
+            blockEntity.addPowder();
+
+            // Remove gunpowder from hand
+            if(!player.isCreative()) heldStack.decrement(1);
+        }
+        else {
+
         }
 
         return ActionResult.SUCCESS;

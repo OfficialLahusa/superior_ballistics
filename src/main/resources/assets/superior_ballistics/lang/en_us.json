@@ -3,5 +3,11 @@
     "item.superior_ballistics.stone_bullets":"Stone Bullets",
     "item.superior_ballistics.stone_bullets.tooltip": "Can break glass and pottery",
     "item.superior_ballistics.flintlock_pistol":"Flintlock Pistol",
-    "item.superior_ballistics.flintlock_musket":"Flintlock Musket"
+    "item.superior_ballistics.flintlock_musket":"Flintlock Musket",
+    "item.superior_ballistics.sponge_on_a_stick":"Sponge on a Stick",
+    "item.superior_ballistics.sponge_on_a_stick.tooltip":"Soak this in ",
+    "item.superior_ballistics.wet_sponge_on_a_stick":"Wet Sponge on a Stick",
+    "item.superior_ballistics.wet_sponge_on_a_stick.tooltip":"Scrubs dirt out of cannons",
+    "item.superior_ballistics.piston_loader":"Piston Loader",
+    "item.superior_ballistics.piston_loader.tooltip":"Pushes loads into cannons"
 }

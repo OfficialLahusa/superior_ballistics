@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "   ",
+      "IIF",
+      " LP"
+    ],
+    "key": {
+      "P": {
+        "tag": "minecraft:planks"
+      },
+      "F": {
+        "item": "minecraft:flint_and_steel"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      },
+      "L": {
+        "item": "minecraft:lever"
+      }
+    },
+    "result": {
+      "item": "superior_ballistics:flintlock_pistol",
+      "count": 1
+    }
+  }
+

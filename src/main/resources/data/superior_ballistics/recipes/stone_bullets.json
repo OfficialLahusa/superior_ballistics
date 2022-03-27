@@ -1,0 +1,8 @@
+{
+    "type":"minecraft:stonecutting",
+    "ingredient": {
+        "item": "minecraft:cobblestone"
+    },
+    "result": "superior_ballistics:stone_bullets",
+    "count": 4
+}

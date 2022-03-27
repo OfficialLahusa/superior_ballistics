@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "superior_ballistics",
+  "version": "${version}",
+
+  "name": "Superior Ballistics",
+  "description": "In search of more firepower?",
+  "authors": [
+    "Lahusa"
+  ],
+  "contact": {
+    "homepage": "https://github.com/OfficialLahusa",
+    "sources": "https://github.com/OfficialLahusa"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/superior_ballistics/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.lahusa.superior_ballistics.SuperiorBallisticsMod"
+    ],
+    "client": [
+      "com.lahusa.superior_ballistics.SuperiorBallisticsClient"
+    ]
+  },
+  "mixins": [
+    "superior_ballistics.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.17.x",
+    "java": ">=16"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

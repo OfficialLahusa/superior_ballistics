@@ -59,7 +59,7 @@ public class SpruceCannonBlock extends HorizontalFacingBlock implements BlockEnt
             }
         }
         else {
-            player.playSound(SoundEvents.BLOCK_SAND_HIT, 1.f, 1.0f);
+            player.playSound(SoundEvents.BLOCK_SAND_BREAK, 1.f, 1.4f);
         }
 
         return ActionResult.SUCCESS;

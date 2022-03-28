@@ -4,6 +4,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -43,19 +44,6 @@ public class CannonBlock extends BlockWithEntity implements BlockEntityProvider 
                         .with(Properties.HORIZONTAL_FACING, Direction.NORTH)
                         .with(ANGLE, 1)
         );
-    }
-
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return (BlockState)state.with(FACING, rotation.rotate((Direction)state.get(FACING)));
-    }
-
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation((Direction)state.get(FACING)));
-    }
-
-    @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new CannonBlockEntity(pos, state);
     }
 
     @Override
@@ -151,6 +139,19 @@ public class CannonBlock extends BlockWithEntity implements BlockEntityProvider 
                 blockEntity.sync();
             }
         }
+    }
+
+    public BlockState rotate(BlockState state, BlockRotation rotation) {
+        return (BlockState)state.with(FACING, rotation.rotate((Direction)state.get(FACING)));
+    }
+
+    public BlockState mirror(BlockState state, BlockMirror mirror) {
+        return state.rotate(mirror.getRotation((Direction)state.get(FACING)));
+    }
+
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new CannonBlockEntity(pos, state);
     }
 
     @Override

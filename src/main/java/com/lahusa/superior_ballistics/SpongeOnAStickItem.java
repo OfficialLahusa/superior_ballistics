@@ -49,7 +49,7 @@ public class SpongeOnAStickItem extends Item {
                 }
 
                 if (world.getFluidState(blockPos).isIn(FluidTags.WATER)) {
-                    world.playSound(user, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+                    world.playSound(user, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_PLAYER_SPLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
                     world.emitGameEvent(user, GameEvent.FLUID_PICKUP, blockPos);
                     ItemStack newStack = SuperiorBallisticsMod.WET_SPONGE_ON_A_STICK_ITEM.getDefaultStack();
                     newStack.setDamage(itemStack.getDamage());

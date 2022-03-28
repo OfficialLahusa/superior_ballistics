@@ -4,6 +4,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EnderPearlItem;
 import net.minecraft.item.ItemPlacementContext;
@@ -132,10 +133,22 @@ public class SpruceCannonBlock extends BlockWithEntity implements BlockEntityPro
                     player.setStackInHand(Hand.MAIN_HAND, newItemStack);
                 }
                 blockEntity.clean();
+                world.playSound(player, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.NEUTRAL, 1.0f, 1.0f);
             }
         }
 
         return ActionResult.SUCCESS;
+    }
+
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        if(!world.isClient) {
+            SpruceCannonBlockEntity blockEntity = ((SpruceCannonBlockEntity)world.getBlockEntity(pos));
+            if (world.isReceivingRedstonePower(pos) && blockEntity.getLoadingStage() == SpruceCannonBlockEntity.READY_STAGE) {
+                blockEntity.light();
+                world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                blockEntity.markDirty();
+            }
+        }
     }
 
     @Override

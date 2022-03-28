@@ -29,7 +29,7 @@ public class PlayerEntityMixin {
         HitResult hit = client.crosshairTarget;
 
         // If looking at block
-        if(hit != null && hit.getType() == HitResult.Type.BLOCK) {
+        if(client.world != null && hit != null && hit.getType() == HitResult.Type.BLOCK) {
             BlockHitResult blockHit = (BlockHitResult) hit;
             BlockPos pos = blockHit.getBlockPos();
             Block block = client.world.getBlockState(pos).getBlock();
@@ -52,10 +52,10 @@ public class PlayerEntityMixin {
                         break;
                     case SpruceCannonBlockEntity.READY_STAGE:
                         text.append(new LiteralText("Ready to light ").formatted(Formatting.DARK_GREEN));
-                        text.append(new LiteralText("(using Flint and Steel)").formatted(Formatting.GOLD));
+                        text.append(new LiteralText("(Flint and Steel / Redstone)").formatted(Formatting.GOLD));
                         break;
                     case SpruceCannonBlockEntity.LIT_STAGE:
-                        text.append(new LiteralText("LIT").formatted(Formatting.RED));
+                        text.append(new LiteralText("FIRING").formatted(Formatting.RED));
                         break;
                     case SpruceCannonBlockEntity.CLEANUP_STAGE:
                         text.append(new LiteralText("Cleanup").formatted(Formatting.DARK_GREEN));

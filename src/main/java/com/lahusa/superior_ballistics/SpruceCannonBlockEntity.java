@@ -4,9 +4,13 @@ import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class SpruceCannonBlockEntity extends BlockEntity implements BlockEntityClientSerializable {
@@ -27,6 +31,9 @@ public class SpruceCannonBlockEntity extends BlockEntity implements BlockEntityC
 
     // Lit phase
     public static final short MAX_LIT_TICKS = 40;
+
+    // Firing phase
+    public static final double BARREL_LENGTH = 13.0/16.0;
 
     private short loadingStage = 0;
     private short powderAmount = 0;
@@ -50,9 +57,47 @@ public class SpruceCannonBlockEntity extends BlockEntity implements BlockEntityC
     }
 
     private void fire() {
+        if(world == null) return;
+
         if(loadingStage == LIT_STAGE) {
             // Play sound
-            world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, 1.0f, 1.2f, false);
+            world.playSound(null, pos, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, 2.0f, 1.2f);
+
+            // Summon particles
+            if(!world.isClient) {
+                // Determine barrel pivot point
+                Vec3d pivot = new Vec3d(0.5, 7.5/16.0, 0.5);
+                final double offset = 1.0/32.0;
+                switch (world.getBlockState(pos).get(Properties.HORIZONTAL_FACING)) {
+                    case NORTH -> pivot = pivot.add(0.0, 0.0,  offset);
+                    case SOUTH -> pivot = pivot.add(0.0, 0.0, -offset);
+                    case EAST  -> pivot = pivot.add(-offset, 0.0, 0.0);
+                    case WEST  -> pivot = pivot.add (offset, 0.0, 0.0);
+                    default -> throw new IllegalStateException("Unexpected value: " + world.getBlockState(pos).get(Properties.HORIZONTAL_FACING));
+                }
+
+                // Determine barrel direction
+                double angle = world.getBlockState(pos).get(SpruceCannonBlock.ANGLE) * 22.5;
+                double slopeHorizontal = Math.cos(Math.toRadians(angle));
+                double slopeVertical = Math.sin(Math.toRadians(angle));
+                Vec3d dir = new Vec3d(0.0, slopeVertical, 0.0);
+                switch (world.getBlockState(pos).get(Properties.HORIZONTAL_FACING)) {
+                    case NORTH -> dir = dir.add(0.0, 0.0, -slopeHorizontal);
+                    case SOUTH -> dir = dir.add(0.0, 0.0,  slopeHorizontal);
+                    case EAST  -> dir = dir.add( slopeHorizontal, 0.0, 0.0);
+                    case WEST  -> dir = dir.add(-slopeHorizontal, 0.0, 0.0);
+                    default -> throw new IllegalStateException("Unexpected value: " + world.getBlockState(pos).get(Properties.HORIZONTAL_FACING));
+                }
+
+                // Spawn particles
+                ((ServerWorld)world).spawnParticles(
+                        ParticleTypes.POOF,
+                        pos.getX() + pivot.x + 1.2 * BARREL_LENGTH * dir.x,
+                        pos.getY() + pivot.y + 1.2 * BARREL_LENGTH * dir.y,
+                        pos.getZ() + pivot.z + 1.2 * BARREL_LENGTH * dir.z,
+                        75, 0.3, 0.3, 0.3, 0.1
+                );
+            }
 
             loadingStage = CLEANUP_STAGE;
         }
@@ -109,6 +154,7 @@ public class SpruceCannonBlockEntity extends BlockEntity implements BlockEntityC
         powderAmount = 0;
         isShotLoaded = false;
         shotType = NO_SHOT;
+        litTicks = 0;
         markDirty();
     }
 
@@ -149,6 +195,7 @@ public class SpruceCannonBlockEntity extends BlockEntity implements BlockEntityC
         tag.putShort("powderAmount", powderAmount);
         tag.putBoolean("isShotLoaded", isShotLoaded);
         tag.putShort("shotType", shotType);
+        tag.putShort("litTicks", litTicks);
 
         super.writeNbt(tag);
 
@@ -163,6 +210,7 @@ public class SpruceCannonBlockEntity extends BlockEntity implements BlockEntityC
         powderAmount = (short)Math.min(tag.getShort("powderAmount"), MAX_POWDER);
         isShotLoaded = tag.getBoolean("isShotLoaded");
         shotType = tag.getShort("shotType");
+        litTicks = tag.getShort("litTicks");
     }
 
     @Override

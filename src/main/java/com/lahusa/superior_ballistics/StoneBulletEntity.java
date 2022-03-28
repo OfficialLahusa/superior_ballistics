@@ -37,11 +37,11 @@ public class StoneBulletEntity extends ThrownItemEntity {
     }
 
     public StoneBulletEntity(World world, LivingEntity owner) {
-        super(SuperiorBallisticsMod.STONE_BULLET_ENTITY_TYPE, owner, world); // null will be changed later
+        super(SuperiorBallisticsMod.STONE_BULLET_ENTITY_TYPE, owner, world);
     }
 
     public StoneBulletEntity(World world, double x, double y, double z) {
-        super(SuperiorBallisticsMod.STONE_BULLET_ENTITY_TYPE, x, y, z, world); // null will be changed later
+        super(SuperiorBallisticsMod.STONE_BULLET_ENTITY_TYPE, x, y, z, world);
     }
 
     @Override

@@ -1,11 +1,8 @@
 package com.lahusa.superior_ballistics;
 
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.*;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -55,35 +52,6 @@ public class FlintlockPistolItem extends RangedWeaponItem {
                 if (!((double)pullProgress < 0.1D)) {
                     // Only execute on server
                     if (!world.isClient) {
-                        /*ArrowItem arrowItem = (ArrowItem)(itemStack.getItem() instanceof ArrowItem ? itemStack.getItem() : Items.ARROW);
-                        PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, itemStack, playerEntity);
-                        persistentProjectileEntity.setProperties(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 3.0F, 1.0F);
-                        if (f == 1.0F) {
-                            persistentProjectileEntity.setCritical(true);
-                        }
-
-                        int j = EnchantmentHelper.getLevel(Enchantments.POWER, stack);
-                        if (j > 0) {
-                            persistentProjectileEntity.setDamage(persistentProjectileEntity.getDamage() + (double)j * 0.5D + 0.5D);
-                        }
-
-                        int k = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack);
-                        if (k > 0) {
-                            persistentProjectileEntity.setPunch(k);
-                        }
-
-                        if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) {
-                            persistentProjectileEntity.setOnFireFor(100);
-                        }
-
-                        stack.damage(1, playerEntity, (p) -> {
-                            p.sendToolBreakStatus(playerEntity.getActiveHand());
-                        });
-                        if (bl2 || playerEntity.getAbilities().creativeMode && (itemStack.isOf(Items.SPECTRAL_ARROW) || itemStack.isOf(Items.TIPPED_ARROW))) {
-                            persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
-                        }
-
-                        world.spawnEntity(persistentProjectileEntity);*/
                         StoneBulletEntity snowballEntity = new StoneBulletEntity(world, user);
                         snowballEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
                         snowballEntity.setProperties(user, user.getPitch(), user.getYaw(), 0.0F, 3.0F, 3.5F);

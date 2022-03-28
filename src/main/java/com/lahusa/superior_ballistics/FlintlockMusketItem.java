@@ -1,17 +1,12 @@
 package com.lahusa.superior_ballistics;
 
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.*;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.stat.Stats;
@@ -20,7 +15,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -32,9 +26,9 @@ public class FlintlockMusketItem extends RangedWeaponItem {
 
     private boolean loaded = false;
 
-    private float speed = 3.0f;
-    private float divergence = 0.35f;
-    private float soundPitch = 1.0f;
+    private static final float speed = 3.0f;
+    private static final float divergence = 0.35f;
+    private static final float soundPitch = 1.0f;
 
     public FlintlockMusketItem(Settings settings) {
         super(settings);

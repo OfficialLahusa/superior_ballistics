@@ -5,6 +5,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -93,7 +94,7 @@ public class CannonBlock extends BlockWithEntity implements BlockEntityProvider 
             else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {
                 blockEntity.push();
                 world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.NEUTRAL, 1.0f, 1.0f);
-                if(!player.isCreative() && !world.isClient) heldStack.damage(1, world.random, (ServerPlayerEntity) player);
+                if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
             }
         }
         // Shot loading stage
@@ -109,7 +110,7 @@ public class CannonBlock extends BlockWithEntity implements BlockEntityProvider 
             else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {
                 blockEntity.push();
                 world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.NEUTRAL, 1.0f, 1.0f);
-                if(!player.isCreative() && !world.isClient) heldStack.damage(1, world.random, (ServerPlayerEntity) player);
+                if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
             }
         }
         // Ready stage
@@ -117,7 +118,7 @@ public class CannonBlock extends BlockWithEntity implements BlockEntityProvider 
             if(heldStack.isOf(Items.FLINT_AND_STEEL)) {
                 blockEntity.light();
                 world.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.NEUTRAL, 1.0f, 1.0f);
-                if(!player.isCreative() && !world.isClient) heldStack.damage(1, world.random, (ServerPlayerEntity) player);
+                if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
             }
         }
         // Cleanup stage
@@ -127,7 +128,7 @@ public class CannonBlock extends BlockWithEntity implements BlockEntityProvider 
                 if(!player.isCreative()) {
                     ItemStack newItemStack = new ItemStack(SuperiorBallisticsMod.SPONGE_ON_A_STICK_ITEM);
                     newItemStack.setDamage(heldStack.getDamage());
-                    if(!world.isClient) newItemStack.damage(1, world.random, (ServerPlayerEntity) player);
+                    if(!player.isCreative() && !world.isClient) newItemStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
                     player.setStackInHand(Hand.MAIN_HAND, newItemStack);
                 }
                 blockEntity.clean();

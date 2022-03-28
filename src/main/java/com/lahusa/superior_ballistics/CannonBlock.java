@@ -4,9 +4,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.EnderPearlItem;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -30,7 +28,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 
-public class SpruceCannonBlock extends BlockWithEntity implements BlockEntityProvider {
+public class CannonBlock extends BlockWithEntity implements BlockEntityProvider {
 
     public static final IntProperty ANGLE = IntProperty.of("angle", 0, 3);
     public static final DirectionProperty FACING;
@@ -39,7 +37,7 @@ public class SpruceCannonBlock extends BlockWithEntity implements BlockEntityPro
         FACING = Properties.HORIZONTAL_FACING;
     }
 
-    public SpruceCannonBlock(Settings settings) {
+    public CannonBlock(Settings settings) {
         super(settings);
         setDefaultState(
                 this.getStateManager().getDefaultState()
@@ -58,14 +56,14 @@ public class SpruceCannonBlock extends BlockWithEntity implements BlockEntityPro
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new SpruceCannonBlockEntity(pos, state);
+        return new CannonBlockEntity(pos, state);
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 
         ItemStack heldStack = player.getInventory().getMainHandStack();
-        SpruceCannonBlockEntity blockEntity = (SpruceCannonBlockEntity) world.getBlockEntity(pos);
+        CannonBlockEntity blockEntity = (CannonBlockEntity) world.getBlockEntity(pos);
 
         if(heldStack.isEmpty()) {
             // Calculate and set new angle
@@ -83,7 +81,7 @@ public class SpruceCannonBlock extends BlockWithEntity implements BlockEntityPro
             }
         }
         // Powder loading stage
-        else if(blockEntity.getLoadingStage() == SpruceCannonBlockEntity.POWDER_LOADING_STAGE) {
+        else if(blockEntity.getLoadingStage() == CannonBlockEntity.POWDER_LOADING_STAGE) {
             if(heldStack.isOf(Items.GUNPOWDER) && blockEntity.canLoadPowder()) {
                 // Play sound and load powder
                 player.playSound(SoundEvents.BLOCK_SAND_BREAK, 1.f, 1.4f);
@@ -99,7 +97,7 @@ public class SpruceCannonBlock extends BlockWithEntity implements BlockEntityPro
             }
         }
         // Shot loading stage
-        else if(blockEntity.getLoadingStage() == SpruceCannonBlockEntity.SHOT_LOADING_STAGE) {
+        else if(blockEntity.getLoadingStage() == CannonBlockEntity.SHOT_LOADING_STAGE) {
             if(heldStack.isOf(Items.IRON_BLOCK) && !blockEntity.isShotLoaded()) {
                 // Play sound and load powder
                 player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 1.f, 1.4f);
@@ -115,7 +113,7 @@ public class SpruceCannonBlock extends BlockWithEntity implements BlockEntityPro
             }
         }
         // Ready stage
-        else if(blockEntity.getLoadingStage() == SpruceCannonBlockEntity.READY_STAGE) {
+        else if(blockEntity.getLoadingStage() == CannonBlockEntity.READY_STAGE) {
             if(heldStack.isOf(Items.FLINT_AND_STEEL)) {
                 blockEntity.light();
                 world.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.NEUTRAL, 1.0f, 1.0f);
@@ -123,7 +121,7 @@ public class SpruceCannonBlock extends BlockWithEntity implements BlockEntityPro
             }
         }
         // Cleanup stage
-        else if(blockEntity.getLoadingStage() == SpruceCannonBlockEntity.CLEANUP_STAGE) {
+        else if(blockEntity.getLoadingStage() == CannonBlockEntity.CLEANUP_STAGE) {
             if(heldStack.isOf(SuperiorBallisticsMod.WET_SPONGE_ON_A_STICK_ITEM)) {
                 //Replace held item
                 if(!player.isCreative()) {
@@ -142,8 +140,8 @@ public class SpruceCannonBlock extends BlockWithEntity implements BlockEntityPro
 
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
         if(!world.isClient) {
-            SpruceCannonBlockEntity blockEntity = ((SpruceCannonBlockEntity)world.getBlockEntity(pos));
-            if (world.isReceivingRedstonePower(pos) && blockEntity.getLoadingStage() == SpruceCannonBlockEntity.READY_STAGE) {
+            CannonBlockEntity blockEntity = ((CannonBlockEntity)world.getBlockEntity(pos));
+            if (world.isReceivingRedstonePower(pos) && blockEntity.getLoadingStage() == CannonBlockEntity.READY_STAGE) {
                 blockEntity.light();
                 world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.NEUTRAL, 1.0f, 1.0f);
                 blockEntity.markDirty();
@@ -158,7 +156,7 @@ public class SpruceCannonBlock extends BlockWithEntity implements BlockEntityPro
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, SuperiorBallisticsMod.SPRUCE_CANNON_BLOCK_ENTITY, (world1, pos, state1, be) -> SpruceCannonBlockEntity.tick(world1, pos, state1, be));
+        return checkType(type, SuperiorBallisticsMod.SPRUCE_CANNON_BLOCK_ENTITY, (world1, pos, state1, be) -> CannonBlockEntity.tick(world1, pos, state1, be));
     }
 
     @Override

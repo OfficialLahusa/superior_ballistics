@@ -3,8 +3,6 @@ package com.lahusa.superior_ballistics;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -15,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class SpruceCannonBlockEntity extends BlockEntity implements BlockEntityClientSerializable {
+public class CannonBlockEntity extends BlockEntity implements BlockEntityClientSerializable {
 
     // Loading stages
     public static final short POWDER_LOADING_STAGE = 0;
@@ -44,11 +42,11 @@ public class SpruceCannonBlockEntity extends BlockEntity implements BlockEntityC
     private short litTicks = 0;
 
 
-    public SpruceCannonBlockEntity(BlockPos pos, BlockState state) {
+    public CannonBlockEntity(BlockPos pos, BlockState state) {
         super(SuperiorBallisticsMod.SPRUCE_CANNON_BLOCK_ENTITY, pos, state);
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, SpruceCannonBlockEntity blockEntity) {
+    public static void tick(World world, BlockPos pos, BlockState state, CannonBlockEntity blockEntity) {
         if(blockEntity.getLoadingStage() == LIT_STAGE) {
             ++blockEntity.litTicks;
         }
@@ -79,7 +77,7 @@ public class SpruceCannonBlockEntity extends BlockEntity implements BlockEntityC
                 }
 
                 // Determine barrel direction
-                double angle = world.getBlockState(pos).get(SpruceCannonBlock.ANGLE) * 22.5;
+                double angle = world.getBlockState(pos).get(CannonBlock.ANGLE) * 22.5;
                 double slopeHorizontal = Math.cos(Math.toRadians(angle));
                 double slopeVertical = Math.sin(Math.toRadians(angle));
                 Vec3d dir = new Vec3d(0.0, slopeVertical, 0.0);

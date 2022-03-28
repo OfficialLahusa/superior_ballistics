@@ -12,21 +12,18 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.*;
-import net.minecraft.tag.Tag;
-import net.minecraft.tag.TagManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import org.lwjgl.system.CallbackI;
 
 public class SuperiorBallisticsMod implements ModInitializer {
 
 	public static final String MODID = "superior_ballistics";
 
 	// Blocks
-	public static final Block SPRUCE_CANNON_BLOCK = new SpruceCannonBlock(FabricBlockSettings.of(Material.METAL).strength(4.0f));
+	public static final Block SPRUCE_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.METAL).strength(4.0f));
 
 	// BlockEntities
-	public static BlockEntityType<SpruceCannonBlockEntity> SPRUCE_CANNON_BLOCK_ENTITY;
+	public static BlockEntityType<CannonBlockEntity> SPRUCE_CANNON_BLOCK_ENTITY;
 
 	// Items
 	public static final Item SPRUCE_CANNON_ITEM = new BlockItem(SPRUCE_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
@@ -57,7 +54,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "spruce_cannon"), SPRUCE_CANNON_BLOCK);
 
 		// BlockEntities
-		SPRUCE_CANNON_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "spruce_cannon_block_entity"), FabricBlockEntityTypeBuilder.create(SpruceCannonBlockEntity::new, SPRUCE_CANNON_BLOCK).build(null));
+		SPRUCE_CANNON_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "spruce_cannon_block_entity"), FabricBlockEntityTypeBuilder.create(CannonBlockEntity::new, SPRUCE_CANNON_BLOCK).build(null));
 
 		// Items
 		Registry.register(Registry.ITEM, new Identifier(MODID, "spruce_cannon"), SPRUCE_CANNON_ITEM);

@@ -142,10 +142,15 @@ public class CannonBlock extends BlockWithEntity implements BlockEntityProvider 
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
         if(!world.isClient) {
             CannonBlockEntity blockEntity = ((CannonBlockEntity)world.getBlockEntity(pos));
-            if (world.isReceivingRedstonePower(pos) && blockEntity.getLoadingStage() == CannonBlockEntity.READY_STAGE) {
+
+            // Get Redstone Power (direct or from behind)
+            Direction facing = state.get(FACING);
+            boolean isPowered = world.isReceivingRedstonePower(pos) || world.isReceivingRedstonePower(pos.add(-facing.getOffsetX(), 0, -facing.getOffsetZ()));
+
+            if (isPowered && blockEntity.getLoadingStage() == CannonBlockEntity.READY_STAGE) {
                 blockEntity.light();
                 world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.NEUTRAL, 1.0f, 1.0f);
-                blockEntity.markDirty();
+                blockEntity.sync();
             }
         }
     }

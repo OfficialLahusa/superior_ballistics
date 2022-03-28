@@ -5,11 +5,9 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -147,7 +145,7 @@ public class CannonBlock extends BlockWithEntity implements BlockEntityProvider 
             Direction facing = state.get(FACING);
             boolean isPowered = world.isReceivingRedstonePower(pos) || world.isReceivingRedstonePower(pos.add(-facing.getOffsetX(), 0, -facing.getOffsetZ()));
 
-            if (isPowered && blockEntity.getLoadingStage() == CannonBlockEntity.READY_STAGE) {
+            if (blockEntity != null && isPowered && blockEntity.getLoadingStage() == CannonBlockEntity.READY_STAGE) {
                 blockEntity.light();
                 world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.NEUTRAL, 1.0f, 1.0f);
                 blockEntity.sync();
@@ -162,7 +160,7 @@ public class CannonBlock extends BlockWithEntity implements BlockEntityProvider 
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, SuperiorBallisticsMod.SPRUCE_CANNON_BLOCK_ENTITY, (world1, pos, state1, be) -> CannonBlockEntity.tick(world1, pos, state1, be));
+        return checkType(type, SuperiorBallisticsMod.CANNON_BLOCK_ENTITY, CannonBlockEntity::tick);
     }
 
     @Override

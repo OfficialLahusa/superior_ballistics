@@ -43,7 +43,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
 
 
     public CannonBlockEntity(BlockPos pos, BlockState state) {
-        super(SuperiorBallisticsMod.SPRUCE_CANNON_BLOCK_ENTITY, pos, state);
+        super(SuperiorBallisticsMod.CANNON_BLOCK_ENTITY, pos, state);
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, CannonBlockEntity blockEntity) {

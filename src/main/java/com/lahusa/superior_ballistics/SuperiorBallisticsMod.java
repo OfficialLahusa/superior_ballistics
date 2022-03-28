@@ -20,13 +20,13 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final String MODID = "superior_ballistics";
 
 	// Blocks
-	public static final Block SPRUCE_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.METAL).strength(4.0f));
+	public static final Block CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.METAL).strength(4.0f));
 
 	// BlockEntities
-	public static BlockEntityType<CannonBlockEntity> SPRUCE_CANNON_BLOCK_ENTITY;
+	public static BlockEntityType<CannonBlockEntity> CANNON_BLOCK_ENTITY;
 
 	// Items
-	public static final Item SPRUCE_CANNON_ITEM = new BlockItem(SPRUCE_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item CANNON_ITEM = new BlockItem(CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
 	public static final Item STONE_BULLETS_ITEM = new StoneBulletsItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(16));
 	public static final Item STONE_BULLET_ITEM = new StoneBulletItem(new FabricItemSettings());
 	public static final Item FLINTLOCK_PISTOL_ITEM = new FlintlockPistolItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(450));
@@ -51,13 +51,13 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		System.out.println("Superior Ballistics Init: Starting");
 
 		// Blocks
-		Registry.register(Registry.BLOCK, new Identifier(MODID, "spruce_cannon"), SPRUCE_CANNON_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "spruce_cannon"), CANNON_BLOCK);
 
 		// BlockEntities
-		SPRUCE_CANNON_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "spruce_cannon_block_entity"), FabricBlockEntityTypeBuilder.create(CannonBlockEntity::new, SPRUCE_CANNON_BLOCK).build(null));
+		CANNON_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "spruce_cannon_block_entity"), FabricBlockEntityTypeBuilder.create(CannonBlockEntity::new, CANNON_BLOCK).build(null));
 
 		// Items
-		Registry.register(Registry.ITEM, new Identifier(MODID, "spruce_cannon"), SPRUCE_CANNON_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "spruce_cannon"), CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullets"), STONE_BULLETS_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullet"), STONE_BULLET_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_pistol"), FLINTLOCK_PISTOL_ITEM);

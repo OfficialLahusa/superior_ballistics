@@ -68,58 +68,56 @@ public class CannonBlock extends BlockWithEntity {
         }
         else if(blockEntity != null) {
             // Loading stages:
-            // Powder loading stage
-            if(blockEntity.getLoadingStage() == CannonBlockEntity.POWDER_LOADING_STAGE) {
-                if(heldStack.isOf(Items.GUNPOWDER) && blockEntity.canLoadPowder()) {
-                    // Play sound and load powder
-                    player.playSound(SoundEvents.BLOCK_SAND_BREAK, 1.f, 1.4f);
-                    blockEntity.addPowder();
+            switch(blockEntity.getLoadingStage()) {
+                case CannonBlockEntity.POWDER_LOADING_STAGE -> {
+                    if(heldStack.isOf(Items.GUNPOWDER) && blockEntity.canLoadPowder()) {
+                        // Play sound and load powder
+                        player.playSound(SoundEvents.BLOCK_SAND_BREAK, 1.f, 1.4f);
+                        blockEntity.addPowder();
 
-                    // Remove gunpowder from hand
-                    if(!player.isCreative()) heldStack.decrement(1);
-                }
-                else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {
-                    blockEntity.push();
-                    world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.NEUTRAL, 1.0f, 1.0f);
-                    if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
-                }
-            }
-            // Shot loading stage
-            else if(blockEntity.getLoadingStage() == CannonBlockEntity.SHOT_LOADING_STAGE) {
-                if(heldStack.isOf(Items.IRON_BLOCK) && !blockEntity.isShotLoaded()) {
-                    // Play sound and load powder
-                    player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 1.f, 1.4f);
-                    blockEntity.loadShot((short) 1);
-
-                    // Remove shot from hand
-                    if(!player.isCreative()) heldStack.decrement(1);
-                }
-                else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {
-                    blockEntity.push();
-                    world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.NEUTRAL, 1.0f, 1.0f);
-                    if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
-                }
-            }
-            // Ready stage
-            else if(blockEntity.getLoadingStage() == CannonBlockEntity.READY_STAGE) {
-                if(heldStack.isOf(Items.FLINT_AND_STEEL)) {
-                    blockEntity.light();
-                    world.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.NEUTRAL, 1.0f, 1.0f);
-                    if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
-                }
-            }
-            // Cleanup stage
-            else if(blockEntity.getLoadingStage() == CannonBlockEntity.CLEANUP_STAGE) {
-                if(heldStack.isOf(SuperiorBallisticsMod.WET_SPONGE_ON_A_STICK_ITEM)) {
-                    //Replace held item
-                    if(!player.isCreative()) {
-                        ItemStack newItemStack = new ItemStack(SuperiorBallisticsMod.SPONGE_ON_A_STICK_ITEM);
-                        newItemStack.setDamage(heldStack.getDamage());
-                        if(!player.isCreative() && !world.isClient) newItemStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
-                        player.setStackInHand(Hand.MAIN_HAND, newItemStack);
+                        // Remove gunpowder from hand
+                        if(!player.isCreative()) heldStack.decrement(1);
                     }
-                    blockEntity.clean();
-                    world.playSound(player, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                    else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {
+                        blockEntity.push();
+                        world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                        if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
+                    }
+                }
+                case CannonBlockEntity.SHOT_LOADING_STAGE -> {
+                    if(heldStack.isOf(Items.IRON_BLOCK) && !blockEntity.isShotLoaded()) {
+                        // Play sound and load powder
+                        player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 1.f, 1.4f);
+                        blockEntity.loadShot((short) 1);
+
+                        // Remove shot from hand
+                        if(!player.isCreative()) heldStack.decrement(1);
+                    }
+                    else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {
+                        blockEntity.push();
+                        world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                        if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
+                    }
+                }
+                case CannonBlockEntity.READY_STAGE -> {
+                    if(heldStack.isOf(Items.FLINT_AND_STEEL)) {
+                        blockEntity.light();
+                        world.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                        if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
+                    }
+                }
+                case CannonBlockEntity.CLEANUP_STAGE -> {
+                    if(heldStack.isOf(SuperiorBallisticsMod.WET_SPONGE_ON_A_STICK_ITEM)) {
+                        //Replace held item
+                        if(!player.isCreative()) {
+                            ItemStack newItemStack = new ItemStack(SuperiorBallisticsMod.SPONGE_ON_A_STICK_ITEM);
+                            newItemStack.setDamage(heldStack.getDamage());
+                            if(!player.isCreative() && !world.isClient) newItemStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
+                            player.setStackInHand(Hand.MAIN_HAND, newItemStack);
+                        }
+                        blockEntity.clean();
+                        world.playSound(player, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                    }
                 }
             }
         }

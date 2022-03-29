@@ -27,7 +27,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 
-public class CannonBlock extends BlockWithEntity implements BlockEntityProvider {
+public class CannonBlock extends BlockWithEntity {
 
     public static final IntProperty ANGLE = IntProperty.of("angle", 0, 3);
     public static final DirectionProperty FACING;
@@ -53,7 +53,7 @@ public class CannonBlock extends BlockWithEntity implements BlockEntityProvider 
 
         if(heldStack.isEmpty()) {
             // Calculate and set new angle
-            int oldAngle = state.get(ANGLE).intValue();
+            int oldAngle = state.get(ANGLE);
             int delta = player.isSneaking() ? -1 : 1;
             int newAngle = Math.max(0, Math.min(3, oldAngle + delta));
 
@@ -66,60 +66,64 @@ public class CannonBlock extends BlockWithEntity implements BlockEntityProvider 
                 world.setBlockState(pos, state.with(ANGLE, newAngle));
             }
         }
-        // Powder loading stage
-        else if(blockEntity.getLoadingStage() == CannonBlockEntity.POWDER_LOADING_STAGE) {
-            if(heldStack.isOf(Items.GUNPOWDER) && blockEntity.canLoadPowder()) {
-                // Play sound and load powder
-                player.playSound(SoundEvents.BLOCK_SAND_BREAK, 1.f, 1.4f);
-                blockEntity.addPowder();
+        else if(blockEntity != null) {
+            // Loading stages:
+            // Powder loading stage
+            if(blockEntity.getLoadingStage() == CannonBlockEntity.POWDER_LOADING_STAGE) {
+                if(heldStack.isOf(Items.GUNPOWDER) && blockEntity.canLoadPowder()) {
+                    // Play sound and load powder
+                    player.playSound(SoundEvents.BLOCK_SAND_BREAK, 1.f, 1.4f);
+                    blockEntity.addPowder();
 
-                // Remove gunpowder from hand
-                if(!player.isCreative()) heldStack.decrement(1);
-            }
-            else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {
-                blockEntity.push();
-                world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.NEUTRAL, 1.0f, 1.0f);
-                if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
-            }
-        }
-        // Shot loading stage
-        else if(blockEntity.getLoadingStage() == CannonBlockEntity.SHOT_LOADING_STAGE) {
-            if(heldStack.isOf(Items.IRON_BLOCK) && !blockEntity.isShotLoaded()) {
-                // Play sound and load powder
-                player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 1.f, 1.4f);
-                blockEntity.loadShot((short) 1);
-
-                // Remove shot from hand
-                if(!player.isCreative()) heldStack.decrement(1);
-            }
-            else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {
-                blockEntity.push();
-                world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.NEUTRAL, 1.0f, 1.0f);
-                if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
-            }
-        }
-        // Ready stage
-        else if(blockEntity.getLoadingStage() == CannonBlockEntity.READY_STAGE) {
-            if(heldStack.isOf(Items.FLINT_AND_STEEL)) {
-                blockEntity.light();
-                world.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.NEUTRAL, 1.0f, 1.0f);
-                if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
-            }
-        }
-        // Cleanup stage
-        else if(blockEntity.getLoadingStage() == CannonBlockEntity.CLEANUP_STAGE) {
-            if(heldStack.isOf(SuperiorBallisticsMod.WET_SPONGE_ON_A_STICK_ITEM)) {
-                //Replace held item
-                if(!player.isCreative()) {
-                    ItemStack newItemStack = new ItemStack(SuperiorBallisticsMod.SPONGE_ON_A_STICK_ITEM);
-                    newItemStack.setDamage(heldStack.getDamage());
-                    if(!player.isCreative() && !world.isClient) newItemStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
-                    player.setStackInHand(Hand.MAIN_HAND, newItemStack);
+                    // Remove gunpowder from hand
+                    if(!player.isCreative()) heldStack.decrement(1);
                 }
-                blockEntity.clean();
-                world.playSound(player, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {
+                    blockEntity.push();
+                    world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                    if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
+                }
+            }
+            // Shot loading stage
+            else if(blockEntity.getLoadingStage() == CannonBlockEntity.SHOT_LOADING_STAGE) {
+                if(heldStack.isOf(Items.IRON_BLOCK) && !blockEntity.isShotLoaded()) {
+                    // Play sound and load powder
+                    player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 1.f, 1.4f);
+                    blockEntity.loadShot((short) 1);
+
+                    // Remove shot from hand
+                    if(!player.isCreative()) heldStack.decrement(1);
+                }
+                else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {
+                    blockEntity.push();
+                    world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                    if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
+                }
+            }
+            // Ready stage
+            else if(blockEntity.getLoadingStage() == CannonBlockEntity.READY_STAGE) {
+                if(heldStack.isOf(Items.FLINT_AND_STEEL)) {
+                    blockEntity.light();
+                    world.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                    if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
+                }
+            }
+            // Cleanup stage
+            else if(blockEntity.getLoadingStage() == CannonBlockEntity.CLEANUP_STAGE) {
+                if(heldStack.isOf(SuperiorBallisticsMod.WET_SPONGE_ON_A_STICK_ITEM)) {
+                    //Replace held item
+                    if(!player.isCreative()) {
+                        ItemStack newItemStack = new ItemStack(SuperiorBallisticsMod.SPONGE_ON_A_STICK_ITEM);
+                        newItemStack.setDamage(heldStack.getDamage());
+                        if(!player.isCreative() && !world.isClient) newItemStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
+                        player.setStackInHand(Hand.MAIN_HAND, newItemStack);
+                    }
+                    blockEntity.clean();
+                    world.playSound(player, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+                }
             }
         }
+
 
         return ActionResult.SUCCESS;
     }
@@ -141,11 +145,11 @@ public class CannonBlock extends BlockWithEntity implements BlockEntityProvider 
     }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return (BlockState)state.with(FACING, rotation.rotate((Direction)state.get(FACING)));
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
     }
 
     public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation((Direction)state.get(FACING)));
+        return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
     @Override
@@ -176,6 +180,6 @@ public class CannonBlock extends BlockWithEntity implements BlockEntityProvider 
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return (BlockState)this.getDefaultState().with(Properties.HORIZONTAL_FACING, ctx.getPlayerFacing());
+        return this.getDefaultState().with(Properties.HORIZONTAL_FACING, ctx.getPlayerFacing());
     }
 }

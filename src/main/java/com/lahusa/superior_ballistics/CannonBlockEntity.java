@@ -35,6 +35,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
 
     // Firing phase
     private static final double BARREL_LENGTH = 13.0/16.0;
+    private static final double MUZZLE_PARTICLE_OFFSET = 4.5/16.0;
     private static final float FIRING_SOUND_VOLUME = 2.0f;
     private static final float FIRING_SOUND_PITCH = 1.2f;
 
@@ -94,23 +95,21 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
                 dir = dir.normalize();
 
                 // Spawn particles
-                final double MUZZLE_PARTICLE_OFFSET = 4.5/16.0;
-
                 // Explosion Emitter
                 ((ServerWorld)world).spawnParticles(
                         ParticleTypes.EXPLOSION,
-                        pos.getX() + pivot.x + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.x,
-                        pos.getY() + pivot.y + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.y,
-                        pos.getZ() + pivot.z + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.z,
+                        pos.getX() + pivot.x + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.x,
+                        pos.getY() + pivot.y + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.y,
+                        pos.getZ() + pivot.z + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.z,
                         1, 0.1, 0.1, 0.1, 0.08
                 );
 
                 // Muzzle area smoke
                 ((ServerWorld)world).spawnParticles(
                         SuperiorBallisticsMod.CANNON_MUZZLE_SMOKE_TRAIL,
-                        pos.getX() + pivot.x + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.x,
-                        pos.getY() + pivot.y + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.y,
-                        pos.getZ() + pivot.z + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.z,
+                        pos.getX() + pivot.x + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.x,
+                        pos.getY() + pivot.y + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.y,
+                        pos.getZ() + pivot.z + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.z,
                         150, 0.3, 0.3, 0.3, 0.08
                 );
 
@@ -126,15 +125,15 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
 
                     ((ServerWorld)world).spawnParticles(
                             SuperiorBallisticsMod.CANNON_MUZZLE_SMOKE_TRAIL,
-                            pos.getX() + pivot.x + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.x,
-                            pos.getY() + pivot.y + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.y,
-                            pos.getZ() + pivot.z + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.z,
+                            pos.getX() + pivot.x + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.x,
+                            pos.getY() + pivot.y + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.y,
+                            pos.getZ() + pivot.z + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.z,
                             0, particleDir.x, particleDir.y, particleDir.z, speed
                     );
                 }
 
                 // Fire
-                for(int i = 0; i < 450; i++) {
+                for(int i = 0; i < 150; i++) {
                     final double scaleFac = 0.05;
                     double a = world.random.nextGaussian();
                     double b = world.random.nextGaussian();
@@ -145,9 +144,9 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
 
                     ((ServerWorld)world).spawnParticles(
                             SuperiorBallisticsMod.CANNON_MUZZLE_FIRE,
-                            pos.getX() + pivot.x + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.x,
-                            pos.getY() + pivot.y + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.y,
-                            pos.getZ() + pivot.z + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.z,
+                            pos.getX() + pivot.x + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.x,
+                            pos.getY() + pivot.y + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.y,
+                            pos.getZ() + pivot.z + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.z,
                             0, particleDir.x, particleDir.y, particleDir.z, speed
                     );
                 }

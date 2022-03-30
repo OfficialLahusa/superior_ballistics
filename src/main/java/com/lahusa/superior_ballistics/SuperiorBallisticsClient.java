@@ -1,12 +1,18 @@
 package com.lahusa.superior_ballistics;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.particle.CloudParticle;
+import net.minecraft.client.particle.ExplosionSmokeParticle;
+import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
@@ -19,9 +25,14 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        // EntityRenderer
         EntityRendererRegistry.INSTANCE.register(SuperiorBallisticsMod.STONE_BULLET_ENTITY_TYPE, (context) ->
                 new FlyingItemEntityRenderer(context));
         receiveEntityPacket();
+
+        // Particles
+        ParticleFactoryRegistry.getInstance().register(SuperiorBallisticsMod.CANNON_MUZZLE_FIRE, CannonMuzzleFireParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(SuperiorBallisticsMod.CANNON_MUZZLE_SMOKE_TRAIL, CannonMuzzleSmokeTrailParticle.Factory::new);
     }
 
     public void receiveEntityPacket() {

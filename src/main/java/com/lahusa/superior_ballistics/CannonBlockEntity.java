@@ -3,6 +3,7 @@ package com.lahusa.superior_ballistics;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -33,7 +34,9 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
     public static final short MAX_LIT_TICKS = 40;
 
     // Firing phase
-    public static final double BARREL_LENGTH = 13.0/16.0;
+    private static final double BARREL_LENGTH = 13.0/16.0;
+    private static final float FIRING_SOUND_VOLUME = 2.0f;
+    private static final float FIRING_SOUND_PITCH = 1.2f;
 
     private short loadingStage = 0;
     private short powderAmount = 0;
@@ -61,7 +64,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
 
         if(loadingStage == LIT_STAGE) {
             // Play sound
-            world.playSound(null, pos, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, 2.0f, 1.2f);
+            world.playSound(null, pos, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, FIRING_SOUND_VOLUME, FIRING_SOUND_PITCH);
 
             // Summon particles
             if(!world.isClient) {
@@ -88,15 +91,66 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
                     case WEST  -> dir = dir.add(-slopeHorizontal, 0.0, 0.0);
                     default -> throw new IllegalStateException("Unexpected value: " + world.getBlockState(pos).get(Properties.HORIZONTAL_FACING));
                 }
+                dir = dir.normalize();
 
                 // Spawn particles
+                final double MUZZLE_PARTICLE_OFFSET = 4.5/16.0;
+
+                // Explosion Emitter
                 ((ServerWorld)world).spawnParticles(
-                        ParticleTypes.POOF,
-                        pos.getX() + pivot.x + 1.2 * BARREL_LENGTH * dir.x,
-                        pos.getY() + pivot.y + 1.2 * BARREL_LENGTH * dir.y,
-                        pos.getZ() + pivot.z + 1.2 * BARREL_LENGTH * dir.z,
-                        75, 0.3, 0.3, 0.3, 0.1
+                        ParticleTypes.EXPLOSION,
+                        pos.getX() + pivot.x + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.x,
+                        pos.getY() + pivot.y + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.y,
+                        pos.getZ() + pivot.z + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.z,
+                        1, 0.1, 0.1, 0.1, 0.08
                 );
+
+                // Muzzle area smoke
+                ((ServerWorld)world).spawnParticles(
+                        SuperiorBallisticsMod.CANNON_MUZZLE_SMOKE_TRAIL,
+                        pos.getX() + pivot.x + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.x,
+                        pos.getY() + pivot.y + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.y,
+                        pos.getZ() + pivot.z + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.z,
+                        150, 0.3, 0.3, 0.3, 0.08
+                );
+
+                // Trail smoke
+                for(int i = 0; i < 250; i++) {
+                    final double scaleFac = 0.1;
+                    double a = world.random.nextGaussian();
+                    double b = world.random.nextGaussian();
+                    double c = world.random.nextGaussian();
+                    Vec3d particleDir = new Vec3d(dir.x + scaleFac * a, dir.y + scaleFac * b, dir.z + scaleFac * c);
+
+                    float speed = (float) Math.abs(world.random.nextGaussian());
+
+                    ((ServerWorld)world).spawnParticles(
+                            SuperiorBallisticsMod.CANNON_MUZZLE_SMOKE_TRAIL,
+                            pos.getX() + pivot.x + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.x,
+                            pos.getY() + pivot.y + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.y,
+                            pos.getZ() + pivot.z + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.z,
+                            0, particleDir.x, particleDir.y, particleDir.z, speed
+                    );
+                }
+
+                // Fire
+                for(int i = 0; i < 450; i++) {
+                    final double scaleFac = 0.05;
+                    double a = world.random.nextGaussian();
+                    double b = world.random.nextGaussian();
+                    double c = world.random.nextGaussian();
+                    Vec3d particleDir = new Vec3d(dir.x + scaleFac * a, dir.y + scaleFac * b, dir.z + scaleFac * c);
+
+                    float speed = 2.0f * 0.35f * (float) Math.abs(world.random.nextGaussian());
+
+                    ((ServerWorld)world).spawnParticles(
+                            SuperiorBallisticsMod.CANNON_MUZZLE_FIRE,
+                            pos.getX() + pivot.x + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.x,
+                            pos.getY() + pivot.y + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.y,
+                            pos.getZ() + pivot.z + BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET * dir.z,
+                            0, particleDir.x, particleDir.y, particleDir.z, speed
+                    );
+                }
             }
 
             loadingStage = CLEANUP_STAGE;
@@ -145,6 +199,66 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
 
     public void clean() {
         if(loadingStage == CLEANUP_STAGE) {
+            if(world != null) {
+                // Summon particles
+                if(!world.isClient) {
+                    // Determine barrel pivot point
+                    Vec3d pivot = new Vec3d(0.5, 7.5/16.0, 0.5);
+                    final double offset = 1.0/32.0;
+                    switch (world.getBlockState(pos).get(Properties.HORIZONTAL_FACING)) {
+                        case NORTH -> pivot = pivot.add(0.0, 0.0,  offset);
+                        case SOUTH -> pivot = pivot.add(0.0, 0.0, -offset);
+                        case EAST  -> pivot = pivot.add(-offset, 0.0, 0.0);
+                        case WEST  -> pivot = pivot.add (offset, 0.0, 0.0);
+                        default -> throw new IllegalStateException("Unexpected value: " + world.getBlockState(pos).get(Properties.HORIZONTAL_FACING));
+                    }
+
+                    // Determine barrel direction
+                    double angle = world.getBlockState(pos).get(CannonBlock.ANGLE) * 22.5;
+                    double slopeHorizontal = Math.cos(Math.toRadians(angle));
+                    double slopeVertical = Math.sin(Math.toRadians(angle));
+                    Vec3d dir = new Vec3d(0.0, slopeVertical, 0.0);
+                    switch (world.getBlockState(pos).get(Properties.HORIZONTAL_FACING)) {
+                        case NORTH -> dir = dir.add(0.0, 0.0, -slopeHorizontal);
+                        case SOUTH -> dir = dir.add(0.0, 0.0,  slopeHorizontal);
+                        case EAST  -> dir = dir.add( slopeHorizontal, 0.0, 0.0);
+                        case WEST  -> dir = dir.add(-slopeHorizontal, 0.0, 0.0);
+                        default -> throw new IllegalStateException("Unexpected value: " + world.getBlockState(pos).get(Properties.HORIZONTAL_FACING));
+                    }
+                    dir = dir.normalize();
+
+                    // Spawn particles
+                    // Muzzle area smoke
+                    ((ServerWorld)world).spawnParticles(
+                            ParticleTypes.SMOKE,
+                            pos.getX() + pivot.x + 1.15 * BARREL_LENGTH * dir.x,
+                            pos.getY() + pivot.y + 1.15 * BARREL_LENGTH * dir.y,
+                            pos.getZ() + pivot.z + 1.15 * BARREL_LENGTH * dir.z,
+                            world.random.nextInt(3) + 2, 0.05, 0.05, 0.05, 0.06
+                    );
+
+                    // Splash
+                    ((ServerWorld)world).spawnParticles(
+                            ParticleTypes.SPLASH,
+                            pos.getX() + pivot.x + 1.05 * BARREL_LENGTH * dir.x,
+                            pos.getY() + pivot.y + 1.05 * BARREL_LENGTH * dir.y,
+                            pos.getZ() + pivot.z + 1.05 * BARREL_LENGTH * dir.z,
+                            world.random.nextInt(4)+3, 0.01, 0.01, 0.01, 0.05
+                    );
+
+                    // Drip
+                    if(world.random.nextInt(3) == 2) {
+                        ((ServerWorld)world).spawnParticles(
+                                ParticleTypes.DRIPPING_WATER,
+                                pos.getX() + pivot.x + 1.05 * BARREL_LENGTH * dir.x,
+                                pos.getY() + pivot.y + 1.05 * BARREL_LENGTH * dir.y,
+                                pos.getZ() + pivot.z + 1.05 * BARREL_LENGTH * dir.z,
+                                1, 0.01, 0.01, 0.01, 1
+                        );
+                    }
+                }
+            }
+
             reset();
         }
     }

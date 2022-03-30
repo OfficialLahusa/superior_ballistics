@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
@@ -12,8 +13,10 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.*;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.lwjgl.system.CallbackI;
 
 public class SuperiorBallisticsMod implements ModInitializer {
 
@@ -46,6 +49,10 @@ public class SuperiorBallisticsMod implements ModInitializer {
 					.build()
 	);
 
+	// Particles
+	public static final DefaultParticleType CANNON_MUZZLE_FIRE = FabricParticleTypes.simple();
+	public static final DefaultParticleType CANNON_MUZZLE_SMOKE_TRAIL = FabricParticleTypes.simple();
+
 	@Override
 	public void onInitialize() {
 		System.out.println("Superior Ballistics Init: Starting");
@@ -66,6 +73,10 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "sponge_on_a_stick"), SPONGE_ON_A_STICK_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "wet_sponge_on_a_stick"), WET_SPONGE_ON_A_STICK_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "piston_loader"), PISTON_LOADER_ITEM);
+
+		// Particles
+		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "cannon_muzzle_fire"), CANNON_MUZZLE_FIRE);
+		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "cannon_muzzle_smoke_trail"), CANNON_MUZZLE_SMOKE_TRAIL);
 
 		System.out.println("Superior Ballistics Init: Done");
 	}

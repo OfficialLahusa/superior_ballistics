@@ -87,7 +87,7 @@ public class CannonBlock extends BlockWithEntity {
                 case CannonBlockEntity.SHOT_LOADING_STAGE -> {
                     if(heldStack.isOf(Items.IRON_BLOCK) && !blockEntity.isShotLoaded()) {
                         // Play sound and load powder
-                        player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 1.f, 1.4f);
+                        player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 0.75f, 1.4f);
                         blockEntity.loadShot((short) 1);
 
                         // Remove shot from hand
@@ -121,7 +121,6 @@ public class CannonBlock extends BlockWithEntity {
                 }
             }
         }
-
 
         return ActionResult.SUCCESS;
     }

@@ -37,36 +37,38 @@ public class PlayerEntityMixin {
             if(block instanceof CannonBlock) {
                 CannonBlockEntity blockEntity = (CannonBlockEntity) client.world.getBlockEntity(pos);
 
-                // Build overlay message
-                MutableText text = new LiteralText("[").formatted(Formatting.GRAY).append(new LiteralText("Cannon Loading Stage: ").formatted(Formatting.BLACK));
+                if(blockEntity != null) {
+                    // Build overlay message
+                    MutableText text = new LiteralText("[").formatted(Formatting.GRAY).append(new LiteralText("Cannon Loading Stage: ").formatted(Formatting.BLACK));
 
-                switch(blockEntity.getLoadingStage()) {
-                    case CannonBlockEntity.POWDER_LOADING_STAGE:
-                        text.append(new LiteralText("Insert Powder ").formatted(Formatting.DARK_GREEN));
-                        text.append(new LiteralText("(" + blockEntity.getPowderAmount() + "/" + blockEntity.MAX_POWDER + ")").formatted(Formatting.GOLD));
-                        break;
-                    case CannonBlockEntity.SHOT_LOADING_STAGE:
-                        text.append(new LiteralText("Insert Shot ").formatted(Formatting.DARK_GREEN));
-                        text.append(new LiteralText("(" + blockEntity.getShotName() + ")").formatted(Formatting.GOLD));
-                        break;
-                    case CannonBlockEntity.READY_STAGE:
-                        text.append(new LiteralText("Ready to light ").formatted(Formatting.DARK_GREEN));
-                        text.append(new LiteralText("(Flint and Steel / Redstone)").formatted(Formatting.GOLD));
-                        break;
-                    case CannonBlockEntity.LIT_STAGE:
-                        text.append(new LiteralText("FIRING").formatted(Formatting.RED));
-                        break;
-                    case CannonBlockEntity.CLEANUP_STAGE:
-                        text.append(new LiteralText("Cleanup").formatted(Formatting.DARK_GREEN));
-                        break;
-                    default:
-                        text.append(new LiteralText("INVALID").formatted(Formatting.RED));
-                        break;
+                    switch(blockEntity.getLoadingStage()) {
+                        case CannonBlockEntity.POWDER_LOADING_STAGE:
+                            text.append(new LiteralText("Insert Powder ").formatted(Formatting.DARK_GREEN));
+                            text.append(new LiteralText("(" + blockEntity.getPowderAmount() + "/" + blockEntity.MAX_POWDER + ")").formatted(Formatting.GOLD));
+                            break;
+                        case CannonBlockEntity.SHOT_LOADING_STAGE:
+                            text.append(new LiteralText("Insert Shot ").formatted(Formatting.DARK_GREEN));
+                            text.append(new LiteralText("(" + blockEntity.getShotName() + ")").formatted(Formatting.GOLD));
+                            break;
+                        case CannonBlockEntity.READY_STAGE:
+                            text.append(new LiteralText("Ready to light ").formatted(Formatting.DARK_GREEN));
+                            text.append(new LiteralText("(Flint and Steel / Redstone)").formatted(Formatting.GOLD));
+                            break;
+                        case CannonBlockEntity.LIT_STAGE:
+                            text.append(new LiteralText("FIRING").formatted(Formatting.RED));
+                            break;
+                        case CannonBlockEntity.CLEANUP_STAGE:
+                            text.append(new LiteralText("Cleanup").formatted(Formatting.DARK_GREEN));
+                            break;
+                        default:
+                            text.append(new LiteralText("INVALID").formatted(Formatting.RED));
+                            break;
+                    }
+                    text.append(new LiteralText("]").formatted(Formatting.GRAY));
+
+                    client.inGameHud.setOverlayMessage(text, false);
+                    isShowingStatusText = true;
                 }
-                text.append(new LiteralText("]").formatted(Formatting.GRAY));
-
-                client.inGameHud.setOverlayMessage(text, false);
-                isShowingStatusText = true;
             }
             else if(isShowingStatusText) {
                 // Reset overlay message

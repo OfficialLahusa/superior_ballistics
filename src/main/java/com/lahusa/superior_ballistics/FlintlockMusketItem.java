@@ -41,7 +41,9 @@ public class FlintlockMusketItem extends RangedWeaponItem {
 
     public static void setCharged(ItemStack stack, boolean charged) {
         NbtCompound compoundTag = stack.getNbt();
-        compoundTag.putBoolean("Charged", charged);
+        if (compoundTag != null) {
+            compoundTag.putBoolean("Charged", charged);
+        }
     }
 
     @Override
@@ -67,8 +69,7 @@ public class FlintlockMusketItem extends RangedWeaponItem {
     }
 
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
-        if (user instanceof PlayerEntity) {
-            PlayerEntity playerEntity = (PlayerEntity)user;
+        if (user instanceof PlayerEntity playerEntity) {
             boolean creativeMode = playerEntity.getAbilities().creativeMode;
             // Get the ammo stack, that should be used
             ItemStack ammoStack = playerEntity.getArrowType(stack);
@@ -138,7 +139,7 @@ public class FlintlockMusketItem extends RangedWeaponItem {
         }
 
         // Play firing sound
-        world.playSound((PlayerEntity)null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, soundPitch);
+        world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, soundPitch);
 
         // Spawn smoke particles
         Vec3d lookDir = shooter.getRotationVector();
@@ -149,8 +150,8 @@ public class FlintlockMusketItem extends RangedWeaponItem {
         }
 
         // Increment statistics
-        if(shooter instanceof PlayerEntity) {
-            ((PlayerEntity)shooter).incrementStat(Stats.USED.getOrCreateStat(this));
+        if(shooter instanceof PlayerEntity playerEntity) {
+            playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
         }
     }
 

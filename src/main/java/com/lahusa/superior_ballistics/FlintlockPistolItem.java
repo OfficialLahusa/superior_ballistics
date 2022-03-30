@@ -33,8 +33,7 @@ public class FlintlockPistolItem extends RangedWeaponItem {
     }
 
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
-        if (user instanceof PlayerEntity) {
-            PlayerEntity playerEntity = (PlayerEntity)user;
+        if (user instanceof PlayerEntity playerEntity) {
             boolean creativeMode = playerEntity.getAbilities().creativeMode;
             // Get the ammo stack, that should be used
             ItemStack itemStack = playerEntity.getArrowType(stack);
@@ -59,7 +58,7 @@ public class FlintlockPistolItem extends RangedWeaponItem {
                     }
 
                     // Play firing sound
-                    world.playSound((PlayerEntity)null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, 1.4F);
+                    world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, 1.4F);
 
                     Vec3d lookDir = playerEntity.getRotationVector();
                     if (!user.getEntityWorld().isClient) {

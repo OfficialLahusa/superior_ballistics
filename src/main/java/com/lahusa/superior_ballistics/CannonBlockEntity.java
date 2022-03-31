@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -17,6 +18,8 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
+import net.minecraft.world.explosion.ExplosionBehavior;
 import org.apache.logging.log4j.core.jmx.Server;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,6 +41,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
     public static final short NO_SHOT = 0;
     public static final short IRON_CANNONBALL = 1;
     public static final short IRON_GRAPESHOT = 2;
+    public static final short BLANK_SHOT = 3;
 
     // Lit phase
     public static final short MAX_LIT_TICKS = 40;
@@ -166,19 +170,27 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
                 if(lastUserUUID != null) {
                     PlayerEntity player = world.getPlayerByUuid(lastUserUUID);
 
-                    switch(shotType) {
-                        case IRON_CANNONBALL -> {
-                            CannonBallEntity cannonBallEntity = new CannonBallEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
-                            cannonBallEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_CANNONBALL));
-                            cannonBallEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, SHOT_DIVERGENCE);
-                            world.spawnEntity(cannonBallEntity);
-                        }
-                        case IRON_GRAPESHOT -> {
-                            for(int i = 0; i < 8; i++) {
-                                StoneBulletEntity grapeshotEntity = new StoneBulletEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
-                                grapeshotEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_SINGLE_GRAPESHOT));
-                                grapeshotEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, GRAPESHOT_DIVERGENCE);
-                                world.spawnEntity(grapeshotEntity);
+                    // Check for powder overload
+                    if(powderAmount > MAX_POWDER && shotType != BLANK_SHOT) {
+                        // Blow up cannon
+                        world.createExplosion(player, pos.getX(), pos.getY(), pos.getZ(), Math.min(0.7f * powderAmount, 20.0f), true, Explosion.DestructionType.DESTROY);
+                    }
+                    // Normal powder amount
+                    else {
+                        switch(shotType) {
+                            case IRON_CANNONBALL -> {
+                                CannonBallEntity cannonBallEntity = new CannonBallEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
+                                cannonBallEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_CANNONBALL));
+                                cannonBallEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, SHOT_DIVERGENCE);
+                                world.spawnEntity(cannonBallEntity);
+                            }
+                            case IRON_GRAPESHOT -> {
+                                for(int i = 0; i < 8; i++) {
+                                    StoneBulletEntity grapeshotEntity = new StoneBulletEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
+                                    grapeshotEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_SINGLE_GRAPESHOT));
+                                    grapeshotEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, GRAPESHOT_DIVERGENCE);
+                                    world.spawnEntity(grapeshotEntity);
+                                }
                             }
                         }
                     }
@@ -325,13 +337,13 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         markDirty();
     }
 
-    public boolean canLoadPowder() {
-        return powderAmount < MAX_POWDER;
-    }
-
     private void updateLastUserUUID(PlayerEntity player) {
         lastUserUUID = player.getUuid();
         markDirty();
+    }
+
+    public boolean canLoadPowder() {
+        return powderAmount < Short.MAX_VALUE;
     }
 
     private float getProjectileSpeedFactor() {
@@ -361,6 +373,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         return switch (shotType) {
             case IRON_CANNONBALL -> "Iron Shot";
             case IRON_GRAPESHOT -> "Iron Grapeshot";
+            case BLANK_SHOT -> "Blank Shot";
             default -> "None";
         };
     }
@@ -401,7 +414,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         super.readNbt(tag);
 
         loadingStage = tag.getShort("loadingState");
-        powderAmount = (short)Math.min(tag.getShort("powderAmount"), MAX_POWDER);
+        powderAmount = (short)Math.min(tag.getShort("powderAmount"), Short.MAX_VALUE);
         isShotLoaded = tag.getBoolean("isShotLoaded");
         shotType = tag.getShort("shotType");
         litTicks = tag.getShort("litTicks");

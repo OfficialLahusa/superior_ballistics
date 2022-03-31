@@ -101,6 +101,14 @@ public class CannonBlock extends BlockWithEntity {
                         // Remove shot from hand
                         if(!player.isCreative()) heldStack.decrement(1);
                     }
+                    else if(heldStack.isOf(Items.PAPER) && !blockEntity.isShotLoaded()) {
+                        // Play sound and load shot
+                        player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.75f, 1.0f);
+                        blockEntity.loadShot((short) 3, player);
+
+                        // Remove shot from hand
+                        if(!player.isCreative()) heldStack.decrement(1);
+                    }
                     else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {
                         blockEntity.push(player);
                         world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.NEUTRAL, 1.0f, 1.0f);

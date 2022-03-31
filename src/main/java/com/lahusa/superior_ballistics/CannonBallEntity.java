@@ -4,6 +4,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -52,7 +53,7 @@ public class CannonBallEntity extends ThrownItemEntity {
 
             Vec3d hitPos = hitResult.getPos();
 
-            this.world.createExplosion(this.getOwner(), hitPos.x, hitPos.y, hitPos.z, 5.0f, false, Explosion.DestructionType.BREAK);
+            this.world.createExplosion(this.getOwner(), hitPos.x, hitPos.y, hitPos.z, 5.0f, false, Explosion.DestructionType.DESTROY);
 
             // Spawn impact particles
             ((ServerWorld) world).spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.BLACKSTONE.getDefaultState()),

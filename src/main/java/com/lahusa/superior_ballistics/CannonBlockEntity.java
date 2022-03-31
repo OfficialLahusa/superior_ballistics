@@ -136,7 +136,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
                     double c = world.random.nextGaussian();
                     Vec3d particleDir = new Vec3d(dir.x + scaleFac * a, dir.y + scaleFac * b, dir.z + scaleFac * c);
 
-                    float speed = (float) Math.abs(world.random.nextGaussian());
+                    float speed = getProjectileSpeedFactor() * 0.5f * (float) Math.abs(world.random.nextGaussian());
 
                     ((ServerWorld)world).spawnParticles(
                             SuperiorBallisticsMod.CANNON_MUZZLE_SMOKE_TRAIL,
@@ -153,7 +153,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
                     double c = world.random.nextGaussian();
                     Vec3d particleDir = new Vec3d(dir.x + scaleFac * a, dir.y + scaleFac * b, dir.z + scaleFac * c);
 
-                    float speed = 2.0f * 0.35f * (float) Math.abs(world.random.nextGaussian());
+                    float speed = getProjectileSpeedFactor() * 0.35f * (float) Math.abs(world.random.nextGaussian());
 
                     ((ServerWorld)world).spawnParticles(
                             SuperiorBallisticsMod.CANNON_MUZZLE_FIRE,
@@ -170,14 +170,14 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
                         case IRON_CANNONBALL -> {
                             CannonBallEntity cannonBallEntity = new CannonBallEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
                             cannonBallEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_CANNONBALL));
-                            cannonBallEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, SHOT_SPEED, SHOT_DIVERGENCE);
+                            cannonBallEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, SHOT_DIVERGENCE);
                             world.spawnEntity(cannonBallEntity);
                         }
                         case IRON_GRAPESHOT -> {
                             for(int i = 0; i < 8; i++) {
                                 StoneBulletEntity grapeshotEntity = new StoneBulletEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
                                 grapeshotEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_SINGLE_GRAPESHOT));
-                                grapeshotEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, SHOT_SPEED, GRAPESHOT_DIVERGENCE);
+                                grapeshotEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, GRAPESHOT_DIVERGENCE);
                                 world.spawnEntity(grapeshotEntity);
                             }
                         }
@@ -202,8 +202,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         }
     }
 
-    public boolean loadShot(short shotTypeToLoad, @Nullable PlayerEntity player)
-    {
+    public boolean loadShot(short shotTypeToLoad, @Nullable PlayerEntity player) {
         if(!isShotLoaded) {
             shotType = shotTypeToLoad;
             isShotLoaded = true;
@@ -326,13 +325,17 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         markDirty();
     }
 
+    public boolean canLoadPowder() {
+        return powderAmount < MAX_POWDER;
+    }
+
     private void updateLastUserUUID(PlayerEntity player) {
         lastUserUUID = player.getUuid();
         markDirty();
     }
 
-    public boolean canLoadPowder() {
-        return powderAmount < MAX_POWDER;
+    private float getProjectileSpeedFactor() {
+        return 0.5f * powderAmount;
     }
 
     private float getProjectileYaw() {

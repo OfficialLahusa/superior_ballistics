@@ -51,10 +51,10 @@ public class FlintlockPistolItem extends RangedWeaponItem {
                 if (!((double)pullProgress < 0.1D)) {
                     // Only execute on server
                     if (!world.isClient) {
-                        StoneBulletEntity snowballEntity = new StoneBulletEntity(world, user);
-                        snowballEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
-                        snowballEntity.setProperties(user, user.getPitch(), user.getYaw(), 0.0F, 3.0F, 3.5F);
-                        world.spawnEntity(snowballEntity);
+                        StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, user);
+                        stoneBulletEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
+                        stoneBulletEntity.setProperties(user, user.getPitch(), user.getYaw(), 0.0F, 3.0F, 3.5F);
+                        world.spawnEntity(stoneBulletEntity);
                     }
 
                     // Play firing sound

@@ -46,8 +46,16 @@ public class SuperiorBallisticsMod implements ModInitializer {
 			Registry.ENTITY_TYPE,
 			new Identifier(MODID, "stone_bullet"),
 			FabricEntityTypeBuilder.<StoneBulletEntity>create(SpawnGroup.MISC, StoneBulletEntity::new)
-					.dimensions(EntityDimensions.fixed(0.25F, 0.25F)) // dimensions in Minecraft units of the projectile
-					.trackRangeBlocks(4).trackedUpdateRate(10) // necessary for all thrown projectiles (as it prevents it from breaking, lol)
+					.dimensions(EntityDimensions.fixed(0.25F, 0.25F))
+					.trackRangeBlocks(4).trackedUpdateRate(10)
+					.build()
+	);
+	public static final EntityType<CannonBallEntity> CANNONBALL_ENTITY_TYPE = Registry.register(
+			Registry.ENTITY_TYPE,
+			new Identifier(MODID, "cannonball"),
+			FabricEntityTypeBuilder.<CannonBallEntity>create(SpawnGroup.MISC, CannonBallEntity::new)
+					.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+					.trackRangeBlocks(4).trackedUpdateRate(10)
 					.build()
 	);
 

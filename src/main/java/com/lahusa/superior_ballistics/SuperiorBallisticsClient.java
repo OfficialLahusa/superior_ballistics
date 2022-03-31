@@ -26,8 +26,8 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         // EntityRenderer
-        EntityRendererRegistry.INSTANCE.register(SuperiorBallisticsMod.STONE_BULLET_ENTITY_TYPE, (context) ->
-                new FlyingItemEntityRenderer(context));
+        EntityRendererRegistry.INSTANCE.register(SuperiorBallisticsMod.STONE_BULLET_ENTITY_TYPE, FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.INSTANCE.register(SuperiorBallisticsMod.CANNONBALL_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         receiveEntityPacket();
 
         // Particles

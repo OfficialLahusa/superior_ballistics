@@ -132,10 +132,10 @@ public class FlintlockMusketItem extends RangedWeaponItem {
     public void shoot(World world, LivingEntity shooter, float soundPitch, float speed, float divergence) {
         // Shoot projectile
         if (!world.isClient) {
-            StoneBulletEntity snowballEntity = new StoneBulletEntity(world, shooter);
-            snowballEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
-            snowballEntity.setProperties(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, speed, divergence);
-            world.spawnEntity(snowballEntity);
+            StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, shooter);
+            stoneBulletEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
+            stoneBulletEntity.setProperties(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, speed, divergence);
+            world.spawnEntity(stoneBulletEntity);
         }
 
         // Play firing sound

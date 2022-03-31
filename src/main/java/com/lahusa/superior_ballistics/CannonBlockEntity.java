@@ -168,17 +168,17 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
 
                     switch(shotType) {
                         case IRON_CANNONBALL -> {
-                            StoneBulletEntity snowballEntity = new StoneBulletEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
-                            snowballEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_CANNONBALL));
-                            snowballEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, SHOT_SPEED, SHOT_DIVERGENCE);
-                            world.spawnEntity(snowballEntity);
+                            CannonBallEntity cannonBallEntity = new CannonBallEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
+                            cannonBallEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_CANNONBALL));
+                            cannonBallEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, SHOT_SPEED, SHOT_DIVERGENCE);
+                            world.spawnEntity(cannonBallEntity);
                         }
                         case IRON_GRAPESHOT -> {
                             for(int i = 0; i < 8; i++) {
-                                StoneBulletEntity snowballEntity = new StoneBulletEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
-                                snowballEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_SINGLE_GRAPESHOT));
-                                snowballEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, SHOT_SPEED, GRAPESHOT_DIVERGENCE);
-                                world.spawnEntity(snowballEntity);
+                                StoneBulletEntity grapeshotEntity = new StoneBulletEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
+                                grapeshotEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_SINGLE_GRAPESHOT));
+                                grapeshotEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, SHOT_SPEED, GRAPESHOT_DIVERGENCE);
+                                world.spawnEntity(grapeshotEntity);
                             }
                         }
                     }

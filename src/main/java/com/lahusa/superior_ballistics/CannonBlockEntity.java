@@ -4,8 +4,12 @@ import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.PlayerManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -13,6 +17,10 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.core.jmx.Server;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.UUID;
 
 public class CannonBlockEntity extends BlockEntity implements BlockEntityClientSerializable {
 
@@ -28,7 +36,8 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
 
     // Shot types
     public static final short NO_SHOT = 0;
-    public static final short IRON_SHOT = 1;
+    public static final short IRON_CANNONBALL = 1;
+    public static final short IRON_GRAPESHOT = 2;
 
     // Lit phase
     public static final short MAX_LIT_TICKS = 40;
@@ -38,12 +47,16 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
     private static final double MUZZLE_PARTICLE_OFFSET = 4.5/16.0;
     private static final float FIRING_SOUND_VOLUME = 2.0f;
     private static final float FIRING_SOUND_PITCH = 1.2f;
+    private static final float SHOT_SPEED = 2.0f;
+    private static final float SHOT_DIVERGENCE = 1.2f;
+    private static final float GRAPESHOT_DIVERGENCE = 3.0f;
 
     private short loadingStage = 0;
     private short powderAmount = 0;
     private boolean isShotLoaded = false;
     private short shotType = NO_SHOT;
     private short litTicks = 0;
+    private UUID lastUserUUID = null;
 
 
     public CannonBlockEntity(BlockPos pos, BlockState state) {
@@ -94,22 +107,24 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
                 }
                 dir = dir.normalize();
 
+                Vec3d muzzleParticlePos = new Vec3d(
+                        pos.getX() + pivot.x + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.x,
+                        pos.getY() + pivot.y + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.y,
+                        pos.getZ() + pivot.z + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.z
+                );
+
                 // Spawn particles
                 // Explosion Emitter
                 ((ServerWorld)world).spawnParticles(
                         ParticleTypes.EXPLOSION,
-                        pos.getX() + pivot.x + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.x,
-                        pos.getY() + pivot.y + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.y,
-                        pos.getZ() + pivot.z + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.z,
+                        muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z,
                         1, 0.1, 0.1, 0.1, 0.08
                 );
 
                 // Muzzle area smoke
                 ((ServerWorld)world).spawnParticles(
                         SuperiorBallisticsMod.CANNON_MUZZLE_SMOKE_TRAIL,
-                        pos.getX() + pivot.x + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.x,
-                        pos.getY() + pivot.y + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.y,
-                        pos.getZ() + pivot.z + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.z,
+                        muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z,
                         150, 0.3, 0.3, 0.3, 0.08
                 );
 
@@ -125,9 +140,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
 
                     ((ServerWorld)world).spawnParticles(
                             SuperiorBallisticsMod.CANNON_MUZZLE_SMOKE_TRAIL,
-                            pos.getX() + pivot.x + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.x,
-                            pos.getY() + pivot.y + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.y,
-                            pos.getZ() + pivot.z + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.z,
+                            muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z,
                             0, particleDir.x, particleDir.y, particleDir.z, speed
                     );
                 }
@@ -144,11 +157,31 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
 
                     ((ServerWorld)world).spawnParticles(
                             SuperiorBallisticsMod.CANNON_MUZZLE_FIRE,
-                            pos.getX() + pivot.x + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.x,
-                            pos.getY() + pivot.y + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.y,
-                            pos.getZ() + pivot.z + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.z,
+                            muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z,
                             0, particleDir.x, particleDir.y, particleDir.z, speed
                     );
+                }
+
+                // Fire shot
+                if(lastUserUUID != null) {
+                    PlayerEntity player = world.getPlayerByUuid(lastUserUUID);
+
+                    switch(shotType) {
+                        case IRON_CANNONBALL -> {
+                            StoneBulletEntity snowballEntity = new StoneBulletEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
+                            snowballEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_CANNONBALL));
+                            snowballEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, SHOT_SPEED, SHOT_DIVERGENCE);
+                            world.spawnEntity(snowballEntity);
+                        }
+                        case IRON_GRAPESHOT -> {
+                            for(int i = 0; i < 8; i++) {
+                                StoneBulletEntity snowballEntity = new StoneBulletEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
+                                snowballEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_SINGLE_GRAPESHOT));
+                                snowballEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, SHOT_SPEED, GRAPESHOT_DIVERGENCE);
+                                world.spawnEntity(snowballEntity);
+                            }
+                        }
+                    }
                 }
             }
 
@@ -156,21 +189,30 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         }
     }
 
-    public void addPowder() {
+    public void addPowder(@Nullable PlayerEntity player) {
         if(!canLoadPowder()) return;
 
         if(loadingStage == POWDER_LOADING_STAGE) {
             ++powderAmount;
             markDirty();
+
+            if(player != null) {
+                updateLastUserUUID(player);
+            }
         }
     }
 
-    public boolean loadShot(short shotTypeToLoad)
+    public boolean loadShot(short shotTypeToLoad, @Nullable PlayerEntity player)
     {
         if(!isShotLoaded) {
             shotType = shotTypeToLoad;
             isShotLoaded = true;
             markDirty();
+
+            if(player != null) {
+                updateLastUserUUID(player);
+            }
+
             return true;
         }
         else {
@@ -178,21 +220,33 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         }
     }
 
-    public void push() {
+    public void push(@Nullable PlayerEntity player) {
         if(loadingStage == POWDER_LOADING_STAGE && powderAmount > 0) {
             loadingStage = SHOT_LOADING_STAGE;
             markDirty();
+
+            if(player != null) {
+                updateLastUserUUID(player);
+            }
         }
         else if(loadingStage == SHOT_LOADING_STAGE && isShotLoaded && shotType != NO_SHOT) {
             loadingStage = READY_STAGE;
             markDirty();
+
+            if(player != null) {
+                updateLastUserUUID(player);
+            }
         }
     }
 
-    public void light() {
+    public void light(@Nullable PlayerEntity player) {
         if(loadingStage == READY_STAGE) {
             loadingStage = LIT_STAGE;
             markDirty();
+
+            if(player != null) {
+                updateLastUserUUID(player);
+            }
         }
     }
 
@@ -268,6 +322,12 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         isShotLoaded = false;
         shotType = NO_SHOT;
         litTicks = 0;
+        lastUserUUID = null;
+        markDirty();
+    }
+
+    private void updateLastUserUUID(PlayerEntity player) {
+        lastUserUUID = player.getUuid();
         markDirty();
     }
 
@@ -275,14 +335,31 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         return powderAmount < MAX_POWDER;
     }
 
-    public String getShotName() {
-        switch(shotType) {
-            case IRON_SHOT:
-                return "Iron Shot";
-            case NO_SHOT:
-            default:
-                return "None";
+    private float getProjectileYaw() {
+        BlockState state = world.getBlockState(pos);
+
+        float yaw = 0.0f;
+        switch (state.get(Properties.HORIZONTAL_FACING)) {
+            case NORTH -> yaw = 180.0f;
+            case EAST -> yaw = -90.0f;
+            case WEST -> yaw = 90.0f;
         }
+
+        return yaw;
+    }
+
+    private float getProjectilePitch() {
+        BlockState state = world.getBlockState(pos);
+
+        return -22.5f * state.get(CannonBlock.ANGLE);
+    }
+
+    public String getShotName() {
+        return switch (shotType) {
+            case IRON_CANNONBALL -> "Iron Shot";
+            case IRON_GRAPESHOT -> "Iron Grapeshot";
+            default -> "None";
+        };
     }
 
     public short getLoadingStage() {
@@ -309,6 +386,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         tag.putBoolean("isShotLoaded", isShotLoaded);
         tag.putShort("shotType", shotType);
         tag.putShort("litTicks", litTicks);
+        if(lastUserUUID != null) tag.putUuid("lastUserUUID", lastUserUUID);
 
         super.writeNbt(tag);
 
@@ -324,6 +402,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         isShotLoaded = tag.getBoolean("isShotLoaded");
         shotType = tag.getShort("shotType");
         litTicks = tag.getShort("litTicks");
+        if(tag.contains("lastUserUUID")) lastUserUUID = tag.getUuid("lastUserUUID");
     }
 
     @Override

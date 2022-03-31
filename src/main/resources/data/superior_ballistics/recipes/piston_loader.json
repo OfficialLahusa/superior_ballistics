@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "P  ",
+      " s ",
+      "  s"
+    ],
+    "key": {
+      "s": {
+        "item": "minecraft:stick"
+      },
+      "P": {
+        "item": "minecraft:piston"
+      }
+    },
+    "result": {
+      "item": "superior_ballistics:piston_loader",
+      "count": 1
+    }
+  }
+

@@ -2,9 +2,9 @@ package com.lahusa.superior_ballistics;
 
 import net.minecraft.item.Item;
 
-public class GunpowderPouchItem extends Item {
+public class IronCannonballItem extends Item {
 
-    public GunpowderPouchItem(Settings settings) {
+    public IronCannonballItem(Settings settings) {
         super(settings);
     }
 }

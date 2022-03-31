@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "S  ",
+      " s ",
+      "  s"
+    ],
+    "key": {
+      "s": {
+        "item": "minecraft:stick"
+      },
+      "S": {
+        "item": "minecraft:sponge"
+      }
+    },
+    "result": {
+      "item": "superior_ballistics:sponge_on_a_stick",
+      "count": 1
+    }
+  }
+

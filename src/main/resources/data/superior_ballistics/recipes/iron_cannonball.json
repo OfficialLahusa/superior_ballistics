@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      " B ",
+      "BIB",
+      " B "
+    ],
+    "key": {
+      "B": {
+        "item": "minecraft:blackstone"
+      },
+      "I": {
+        "item": "minecraft:iron_block"
+      }
+    },
+    "result": {
+      "item": "superior_ballistics:iron_cannonball",
+      "count": 1
+    }
+  }
+

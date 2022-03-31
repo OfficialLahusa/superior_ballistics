@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "bib",
+      "ibi",
+      "bib"
+    ],
+    "key": {
+      "b": {
+        "item": "superior_ballistics:stone_bullets"
+      },
+      "i": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "superior_ballistics:iron_grapeshot",
+      "count": 1
+    }
+  }
+

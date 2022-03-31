@@ -34,10 +34,12 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final Item STONE_BULLET_ITEM = new StoneBulletItem(new FabricItemSettings());
 	public static final Item FLINTLOCK_PISTOL_ITEM = new FlintlockPistolItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(450));
 	public static final Item FLINTLOCK_MUSKET_ITEM = new FlintlockMusketItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(750));
-	public static final Item GUNPOWDER_POUCH_ITEM = new GunpowderPouchItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(512));
 	public static final Item SPONGE_ON_A_STICK_ITEM = new SpongeOnAStickItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
 	public static final Item WET_SPONGE_ON_A_STICK_ITEM = new WetSpongeOnAStickItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
 	public static final Item PISTON_LOADER_ITEM = new PistonLoaderItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
+	public static final Item IRON_CANNONBALL = new IronCannonballItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(16));
+	public static final Item IRON_GRAPESHOT = new IronGrapeshotItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(16));
+	public static final Item IRON_SINGLE_GRAPESHOT = new IronSingleGrapeshotItem(new FabricItemSettings());
 
 	// Entities
 	public static final EntityType<StoneBulletEntity> STONE_BULLET_ENTITY_TYPE = Registry.register(
@@ -69,10 +71,12 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullet"), STONE_BULLET_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_pistol"), FLINTLOCK_PISTOL_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_musket"), FLINTLOCK_MUSKET_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "gunpowder_pouch"), GUNPOWDER_POUCH_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "sponge_on_a_stick"), SPONGE_ON_A_STICK_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "wet_sponge_on_a_stick"), WET_SPONGE_ON_A_STICK_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "piston_loader"), PISTON_LOADER_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_cannonball"), IRON_CANNONBALL);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_grapeshot"), IRON_GRAPESHOT);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_single_grapeshot"), IRON_SINGLE_GRAPESHOT);
 
 		// Particles
 		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "cannon_muzzle_fire"), CANNON_MUZZLE_FIRE);

@@ -1,0 +1,30 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "IIi",
+      "PSS",
+      "LPL"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:iron_block"
+      },
+      "i": {
+        "item": "minecraft:iron_ingot"
+      },
+      "P": {
+        "item": "minecraft:spruce_planks"
+      },
+      "S": {
+        "item": "minecraft:spruce_stairs"
+      },
+      "L": {
+        "item": "minecraft:spruce_log"
+      }
+    },
+    "result": {
+      "item": "superior_ballistics:spruce_cannon",
+      "count": 1
+    }
+  }
+

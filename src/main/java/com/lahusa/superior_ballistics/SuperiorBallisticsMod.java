@@ -59,6 +59,9 @@ public class SuperiorBallisticsMod implements ModInitializer {
 					.build()
 	);
 
+	// Entity spawn packet
+	public static final Identifier PacketID = new Identifier(SuperiorBallisticsMod.MODID, "spawn_packet");
+
 	// Particles
 	public static final DefaultParticleType CANNON_MUZZLE_FIRE = FabricParticleTypes.simple();
 	public static final DefaultParticleType CANNON_MUZZLE_SMOKE_TRAIL = FabricParticleTypes.simple();

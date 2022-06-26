@@ -74,6 +74,6 @@ public class CannonBallEntity extends ThrownItemEntity {
 
     @Override
     public Packet createSpawnPacket() {
-        return EntitySpawnPacket.create(this, SuperiorBallisticsClient.PacketID);
+        return EntitySpawnPacket.create(this, SuperiorBallisticsMod.PacketID);
     }
 }

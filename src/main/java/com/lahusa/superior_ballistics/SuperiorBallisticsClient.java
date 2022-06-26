@@ -20,9 +20,6 @@ import net.minecraft.util.registry.Registry;
 import java.util.UUID;
 
 public class SuperiorBallisticsClient implements ClientModInitializer {
-
-    public static final Identifier PacketID = new Identifier(SuperiorBallisticsMod.MODID, "spawn_packet");
-
     @Override
     public void onInitializeClient() {
         // EntityRenderer
@@ -36,7 +33,7 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
     }
 
     public void receiveEntityPacket() {
-        ClientSidePacketRegistry.INSTANCE.register(PacketID, (ctx, byteBuf) -> {
+        ClientSidePacketRegistry.INSTANCE.register(SuperiorBallisticsMod.PacketID, (ctx, byteBuf) -> {
             EntityType<?> et = Registry.ENTITY_TYPE.get(byteBuf.readVarInt());
             UUID uuid = byteBuf.readUuid();
             int entityId = byteBuf.readVarInt();

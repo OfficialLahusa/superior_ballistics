@@ -96,8 +96,6 @@ public class StoneBulletEntity extends ThrownItemEntity {
 
     @Override
     public Packet createSpawnPacket() {
-        // return EntitySpawnPacket.create(this, SuperiorBallisticsClient.PacketID);
-        // TODO: OUTSOURCE
-        return EntitySpawnPacket.create(this, new Identifier(SuperiorBallisticsMod.MODID, "spawn_packet"));
+        return EntitySpawnPacket.create(this, SuperiorBallisticsMod.PacketID);
     }
 }

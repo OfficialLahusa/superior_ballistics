@@ -1,5 +1,6 @@
 package com.lahusa.superior_ballistics;
 
+import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
@@ -32,6 +33,9 @@ import net.minecraft.world.World;
 import org.lwjgl.system.CallbackI;
 
 public class StoneBulletEntity extends ThrownItemEntity {
+
+    public static final Tag<Block> STONE_BULLET_BREAKABLE_TAG = TagRegistry.block(new Identifier(SuperiorBallisticsMod.MODID, "stone_bullet_breakable"));
+    public static final Tag<Block> FLOWER_POT_TAG = TagRegistry.block(new Identifier("minecraft", "flower_pots"));
 
     public StoneBulletEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);
@@ -68,9 +72,7 @@ public class StoneBulletEntity extends ThrownItemEntity {
         if (!this.world.isClient) {
             // Determine hit block and break it, if it's contained in the tags
             BlockPos hitBlock = new BlockPos(hitResult.getPos().add(getVelocity().normalize().multiply(0.5)));
-            Tag<Block> breakableTag = MinecraftClient.getInstance().getNetworkHandler().getTagManager().getOrCreateTagGroup(Registry.BLOCK_KEY).getTag(new Identifier(SuperiorBallisticsMod.MODID, "stone_bullet_breakable"));
-            Tag<Block> flowerPotTag = MinecraftClient.getInstance().getNetworkHandler().getTagManager().getOrCreateTagGroup(Registry.BLOCK_KEY).getTag(new Identifier("minecraft", "flower_pots"));
-            if(breakableTag.contains(this.world.getBlockState(hitBlock).getBlock()) || flowerPotTag.contains(this.world.getBlockState(hitBlock).getBlock()))
+            if(STONE_BULLET_BREAKABLE_TAG.contains(this.world.getBlockState(hitBlock).getBlock()) || FLOWER_POT_TAG.contains(this.world.getBlockState(hitBlock).getBlock()))
             {
                 this.world.breakBlock(hitBlock, false, this.getOwner(), 400);
             }
@@ -94,6 +96,8 @@ public class StoneBulletEntity extends ThrownItemEntity {
 
     @Override
     public Packet createSpawnPacket() {
-        return EntitySpawnPacket.create(this, SuperiorBallisticsClient.PacketID);
+        // return EntitySpawnPacket.create(this, SuperiorBallisticsClient.PacketID);
+        // TODO: OUTSOURCE
+        return EntitySpawnPacket.create(this, new Identifier(SuperiorBallisticsMod.MODID, "spawn_packet"));
     }
 }

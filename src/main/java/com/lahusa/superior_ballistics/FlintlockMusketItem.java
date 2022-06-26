@@ -1,5 +1,6 @@
 package com.lahusa.superior_ballistics;
 
+import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -16,7 +17,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 
@@ -29,6 +29,8 @@ public class FlintlockMusketItem extends RangedWeaponItem {
     private static final float speed = 3.0f;
     private static final float divergence = 0.35f;
     private static final float soundPitch = 1.0f;
+
+    public static final Tag<Item> AMMUNITION_TAG = TagRegistry.item(new Identifier(SuperiorBallisticsMod.MODID, "pistol_ammunition"));
 
     public FlintlockMusketItem(Settings settings) {
         super(settings);
@@ -169,13 +171,11 @@ public class FlintlockMusketItem extends RangedWeaponItem {
         return 72000;
     }
 
-    public static final Predicate<ItemStack> FLINTLOCK_PISTOL_PROJECTILES = (stack) -> {
-        return stack.isIn(ServerTagManagerHolder.getTagManager().getTag(Registry.ITEM_KEY,new Identifier("superior_ballistics", "pistol_ammunition"), id -> new RuntimeException("Could not load tag: " + id.toString())));
-    };
+    public static final Predicate<ItemStack> FLINTLOCK_MUSKET_PROJECTILES = (stack) -> stack.isIn(AMMUNITION_TAG);
 
     @Override
     public Predicate<ItemStack> getProjectiles() {
-        return FLINTLOCK_PISTOL_PROJECTILES;
+        return FLINTLOCK_MUSKET_PROJECTILES;
     }
 
     @Override

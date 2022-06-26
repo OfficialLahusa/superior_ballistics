@@ -124,13 +124,11 @@ public class FlintlockPistolItem extends RangedWeaponItem {
         }
     }
 
-    public static final Predicate<ItemStack> FLINTLOCK_PISTOL_PROJECTILES = (stack) -> {
-        return stack.isIn(ServerTagManagerHolder.getTagManager().getTag(Registry.ITEM_KEY,new Identifier("superior_ballistics", "pistol_ammunition"),id -> new RuntimeException("Could not load tag: " + id.toString())));
-    };
+    public static final Predicate<ItemStack> FLINTLOCK_MUSKET_PROJECTILES = (stack) -> stack.isIn(FlintlockMusketItem.AMMUNITION_TAG);
 
     @Override
     public Predicate<ItemStack> getProjectiles() {
-        return FLINTLOCK_PISTOL_PROJECTILES;
+        return FLINTLOCK_MUSKET_PROJECTILES;
     }
 
     @Override

@@ -71,68 +71,95 @@ public class CannonBlock extends BlockWithEntity {
             switch(blockEntity.getLoadingStage()) {
                 case CannonBlockEntity.POWDER_LOADING_STAGE -> {
                     if(heldStack.isOf(Items.GUNPOWDER) && blockEntity.canLoadPowder()) {
-                        // Play sound and load powder
+                        // Load powder
+                        if(!world.isClient) blockEntity.addPowder(player);
+
+                        // Play sound
                         player.playSound(SoundEvents.BLOCK_SAND_BREAK, 1.f, 1.4f);
-                        blockEntity.addPowder(player);
 
                         // Remove gunpowder from hand
                         if(!player.isCreative()) heldStack.decrement(1);
                     }
                     else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {
-                        blockEntity.push(player);
+                        // Push powder
+                        if(!world.isClient) blockEntity.push(player);
+
+                        // Play sound
                         world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+
+                        // Damage piston
                         if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
                     }
                 }
                 case CannonBlockEntity.SHOT_LOADING_STAGE -> {
                     if(heldStack.isOf(SuperiorBallisticsMod.IRON_CANNONBALL) && !blockEntity.isShotLoaded()) {
-                        // Play sound and load shot
+                        // Load shot
+                        if(!world.isClient) blockEntity.loadShot((short) 1, player);
+
+                        // Play sound
                         player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 0.75f, 1.4f);
-                        blockEntity.loadShot((short) 1, player);
 
                         // Remove shot from hand
                         if(!player.isCreative()) heldStack.decrement(1);
                     }
                     else if(heldStack.isOf(SuperiorBallisticsMod.IRON_GRAPESHOT) && !blockEntity.isShotLoaded()) {
-                        // Play sound and load shot
+                        // Load shot
+                        if(!world.isClient) blockEntity.loadShot((short) 2, player);
+
+                        // Play sound
                         player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 0.75f, 1.4f);
-                        blockEntity.loadShot((short) 2, player);
 
                         // Remove shot from hand
                         if(!player.isCreative()) heldStack.decrement(1);
                     }
                     else if(heldStack.isOf(Items.PAPER) && !blockEntity.isShotLoaded()) {
-                        // Play sound and load shot
+                        // Load shot
+                        if(!world.isClient) blockEntity.loadShot((short) 3, player);
+
+                        // Play sound
                         player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.75f, 1.0f);
-                        blockEntity.loadShot((short) 3, player);
 
                         // Remove shot from hand
                         if(!player.isCreative()) heldStack.decrement(1);
                     }
                     else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {
-                        blockEntity.push(player);
+                        // Push
+                        if(!world.isClient) blockEntity.push(player);
+
+                        // Play sound
                         world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+
+                        // Damage piston
                         if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
                     }
                 }
                 case CannonBlockEntity.READY_STAGE -> {
                     if(heldStack.isOf(Items.FLINT_AND_STEEL)) {
-                        blockEntity.light(player);
+                        // Light cannon
+                        if(!world.isClient) blockEntity.light(player);
+
+                        // Play sound
                         world.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+
+                        // Damage flint and steel
                         if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
                     }
                 }
                 case CannonBlockEntity.CLEANUP_STAGE -> {
                     if(heldStack.isOf(SuperiorBallisticsMod.WET_SPONGE_ON_A_STICK_ITEM)) {
-                        //Replace held item
+                        // Clean cannon
+                        if(!world.isClient) blockEntity.clean();
+
+                        // Play sound
+                        world.playSound(player, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+
+                        // Damage and dry sponge
                         if(!player.isCreative()) {
                             ItemStack newItemStack = new ItemStack(SuperiorBallisticsMod.SPONGE_ON_A_STICK_ITEM);
                             newItemStack.setDamage(heldStack.getDamage());
                             if(!player.isCreative() && !world.isClient) newItemStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
                             player.setStackInHand(Hand.MAIN_HAND, newItemStack);
                         }
-                        blockEntity.clean();
-                        world.playSound(player, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.NEUTRAL, 1.0f, 1.0f);
                     }
                 }
             }
@@ -141,6 +168,7 @@ public class CannonBlock extends BlockWithEntity {
         return ActionResult.SUCCESS;
     }
 
+    // Fire cannon when powered by redstone
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
         if(!world.isClient) {
             CannonBlockEntity blockEntity = ((CannonBlockEntity)world.getBlockEntity(pos));
@@ -150,9 +178,11 @@ public class CannonBlock extends BlockWithEntity {
             boolean isPowered = world.isReceivingRedstonePower(pos) || world.isReceivingRedstonePower(pos.add(-facing.getOffsetX(), 0, -facing.getOffsetZ()));
 
             if (blockEntity != null && isPowered && blockEntity.getLoadingStage() == CannonBlockEntity.READY_STAGE) {
+                // Light cannon
                 blockEntity.light(null);
+
+                // Play sound
                 world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.NEUTRAL, 1.0f, 1.0f);
-                blockEntity.sync();
             }
         }
     }

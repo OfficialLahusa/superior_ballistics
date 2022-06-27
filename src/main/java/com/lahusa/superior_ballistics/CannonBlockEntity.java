@@ -1,20 +1,12 @@
 package com.lahusa.superior_ballistics;
 
-import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.PlayerManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -23,8 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
-import net.minecraft.world.explosion.ExplosionBehavior;
-import org.apache.logging.log4j.core.jmx.Server;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -211,6 +201,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         if(loadingStage == POWDER_LOADING_STAGE) {
             ++powderAmount;
             markDirty();
+            sync();
 
             if(player != null) {
                 updateLastUserUUID(player);
@@ -223,6 +214,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
             shotType = shotTypeToLoad;
             isShotLoaded = true;
             markDirty();
+            sync();
 
             if(player != null) {
                 updateLastUserUUID(player);
@@ -239,6 +231,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         if(loadingStage == POWDER_LOADING_STAGE && powderAmount > 0) {
             loadingStage = SHOT_LOADING_STAGE;
             markDirty();
+            sync();
 
             if(player != null) {
                 updateLastUserUUID(player);
@@ -247,6 +240,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         else if(loadingStage == SHOT_LOADING_STAGE && isShotLoaded && shotType != NO_SHOT) {
             loadingStage = READY_STAGE;
             markDirty();
+            sync();
 
             if(player != null) {
                 updateLastUserUUID(player);
@@ -258,6 +252,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         if(loadingStage == READY_STAGE) {
             loadingStage = LIT_STAGE;
             markDirty();
+            sync();
 
             if(player != null) {
                 updateLastUserUUID(player);
@@ -339,11 +334,13 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         litTicks = 0;
         lastUserUUID = null;
         markDirty();
+        sync();
     }
 
     private void updateLastUserUUID(PlayerEntity player) {
         lastUserUUID = player.getUuid();
         markDirty();
+        sync();
     }
 
     public boolean canLoadPowder() {

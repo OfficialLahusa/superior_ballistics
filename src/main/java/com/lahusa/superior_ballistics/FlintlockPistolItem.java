@@ -9,19 +9,20 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.tag.*;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 
 import java.util.function.Predicate;
 
 public class FlintlockPistolItem extends RangedWeaponItem {
+
+    private static final float speed = 3.0f;
+    private static final float divergence = 4.5f;
+    private static final float soundPitch = 1.4f;
 
     public FlintlockPistolItem(Settings settings) {
         super(settings);
@@ -35,43 +36,26 @@ public class FlintlockPistolItem extends RangedWeaponItem {
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (user instanceof PlayerEntity playerEntity) {
             boolean creativeMode = playerEntity.getAbilities().creativeMode;
+
             // Get the ammo stack, that should be used
             ItemStack itemStack = playerEntity.getArrowType(stack);
             boolean hasGunpowder = playerEntity.getInventory().contains(Items.GUNPOWDER.getDefaultStack());
+
             // Only execute, is there is ammo and gunpowder or user is in creative mode
             if ((!itemStack.isEmpty() && hasGunpowder) || creativeMode) {
                 // If there is no ammo, default to stone bullet
                 if (itemStack.isEmpty()) {
                     itemStack = new ItemStack(Items.ARROW);
                 }
+
                 // Calculate pull progress
                 int i = this.getMaxUseTime(stack) - remainingUseTicks;
                 float pullProgress = getPullProgress(i);
+
                 // Only execute, if pull progress is high enough
-                if (!((double)pullProgress < 0.1D)) {
-                    // Only execute on server
-                    if (!world.isClient) {
-                        StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, user);
-                        stoneBulletEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
-                        stoneBulletEntity.setProperties(user, user.getPitch(), user.getYaw(), 0.0F, 3.0F, 3.5F);
-                        world.spawnEntity(stoneBulletEntity);
-                    }
-
-                    // Play firing sound
-                    world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, 1.4F);
-
-                    Vec3d lookDir = playerEntity.getRotationVector();
-                    if (!user.getEntityWorld().isClient) {
-                        ((ServerWorld) user.getEntityWorld()).spawnParticles(ParticleTypes.POOF,
-                                user.getX() + lookDir.getX(),
-                                user.getY() + 1.4 + lookDir.getY(),
-                                user.getZ() + lookDir.getZ(),
-                                15,
-                                0.2,
-                                0.2,
-                                0.2,
-                                0.01);
-                    }
+                if (!((double)pullProgress < 0.25D)) {
+                    // Shoot
+                    shoot(world, user);
 
                     // Subtract ammo, if found
                     if (!playerEntity.getAbilities().creativeMode) {
@@ -84,18 +68,48 @@ public class FlintlockPistolItem extends RangedWeaponItem {
                         }
 
                         // Remove first gunpowder
-                        for(int j = 0; j < inventory.size(); ++j) {
+                        for (int j = 0; j < inventory.size(); ++j) {
                             ItemStack currentStack = inventory.getStack(j);
-                            if(currentStack.isOf(Items.GUNPOWDER)) {
+                            if (currentStack.isOf(Items.GUNPOWDER)) {
                                 currentStack.decrement(1);
                                 break;
                             }
                         }
                     }
-
-                    playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
                 }
             }
+        }
+    }
+
+    private void shoot(World world, LivingEntity shooter) {
+        // Only execute on server
+        if (!world.isClient) {
+            StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, shooter, 8, null);
+            stoneBulletEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
+            stoneBulletEntity.setProperties(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, FlintlockPistolItem.speed, FlintlockPistolItem.divergence);
+            world.spawnEntity(stoneBulletEntity);
+        }
+
+        // Play firing sound
+        world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, FlintlockPistolItem.soundPitch);
+
+        // Spawn particles
+        Vec3d lookDir = shooter.getRotationVector();
+        if (!shooter.getEntityWorld().isClient) {
+            ((ServerWorld) shooter.getEntityWorld()).spawnParticles(ParticleTypes.POOF,
+                    shooter.getX() + lookDir.getX(),
+                    shooter.getY() + 1.4 + lookDir.getY(),
+                    shooter.getZ() + lookDir.getZ(),
+                    15,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.01);
+        }
+
+        // Increment statistics
+        if(shooter instanceof PlayerEntity playerEntity) {
+            playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
         }
     }
 

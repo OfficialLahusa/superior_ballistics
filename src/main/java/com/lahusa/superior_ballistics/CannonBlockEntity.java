@@ -3,6 +3,7 @@ package com.lahusa.superior_ballistics;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -180,7 +181,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
                             }
                             case IRON_GRAPESHOT -> {
                                 for(int i = 0; i < 8; i++) {
-                                    StoneBulletEntity grapeshotEntity = new StoneBulletEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
+                                    StoneBulletEntity grapeshotEntity = new StoneBulletEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z, 13, StatusEffects.SLOWNESS);
                                     grapeshotEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_SINGLE_GRAPESHOT));
                                     grapeshotEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, GRAPESHOT_DIVERGENCE);
                                     world.spawnEntity(grapeshotEntity);

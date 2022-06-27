@@ -1,8 +1,8 @@
 package com.lahusa.superior_ballistics;
 
 import net.fabricmc.fabric.api.tag.TagRegistry;
-import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.*;
@@ -28,7 +28,7 @@ public class FlintlockMusketItem extends RangedWeaponItem {
     private boolean loaded = false;
 
     private static final float speed = 3.0f;
-    private static final float divergence = 0.35f;
+    private static final float divergence = 3.45f;
     private static final float soundPitch = 1.0f;
 
     public static final Tag<Item> AMMUNITION_TAG = TagRegistry.item(new Identifier(SuperiorBallisticsMod.MODID, "pistol_ammunition"));
@@ -57,7 +57,7 @@ public class FlintlockMusketItem extends RangedWeaponItem {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
         if (isCharged(itemStack)) {
-            shoot(world, user, soundPitch, speed, divergence);
+            shoot(world, user);
             setCharged(itemStack, false);
             return TypedActionResult.consume(itemStack);
         } else if (!user.getArrowType(itemStack).isEmpty() || user.getAbilities().creativeMode) {
@@ -132,17 +132,17 @@ public class FlintlockMusketItem extends RangedWeaponItem {
         }
     }
 
-    public void shoot(World world, LivingEntity shooter, float soundPitch, float speed, float divergence) {
+    public void shoot(World world, LivingEntity shooter) {
         // Shoot projectile
         if (!world.isClient) {
-            StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, shooter);
+            StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, shooter, 13, StatusEffects.SLOWNESS);
             stoneBulletEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
-            stoneBulletEntity.setProperties(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, speed, divergence);
+            stoneBulletEntity.setProperties(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, FlintlockMusketItem.speed, FlintlockMusketItem.divergence);
             world.spawnEntity(stoneBulletEntity);
         }
 
         // Play firing sound
-        world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, soundPitch);
+        world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, FlintlockMusketItem.soundPitch);
 
         // Spawn smoke particles
         Vec3d lookDir = shooter.getRotationVector();

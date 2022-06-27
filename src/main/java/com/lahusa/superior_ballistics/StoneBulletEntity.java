@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.ProjectileDamageSource;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
@@ -30,6 +31,7 @@ import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.system.CallbackI;
 
 public class StoneBulletEntity extends ThrownItemEntity {
@@ -37,16 +39,25 @@ public class StoneBulletEntity extends ThrownItemEntity {
     public static final Tag<Block> STONE_BULLET_BREAKABLE_TAG = TagRegistry.block(new Identifier(SuperiorBallisticsMod.MODID, "stone_bullet_breakable"));
     public static final Tag<Block> FLOWER_POT_TAG = TagRegistry.block(new Identifier("minecraft", "flower_pots"));
 
+    private int damage;
+    private StatusEffect statusEffect;
+
     public StoneBulletEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);
+        this.damage = 13;
+        this.statusEffect = null;
     }
 
-    public StoneBulletEntity(World world, LivingEntity owner) {
+    public StoneBulletEntity(World world, LivingEntity owner, int damage, @Nullable StatusEffect statusEffect) {
         super(SuperiorBallisticsMod.STONE_BULLET_ENTITY_TYPE, owner, world);
+        this.damage = damage;
+        this.statusEffect = statusEffect;
     }
 
-    public StoneBulletEntity(World world, double x, double y, double z) {
+    public StoneBulletEntity(World world, double x, double y, double z, int damage, @Nullable StatusEffect statusEffect) {
         super(SuperiorBallisticsMod.STONE_BULLET_ENTITY_TYPE, x, y, z, world);
+        this.damage = damage;
+        this.statusEffect = statusEffect;
     }
 
     @Override
@@ -59,11 +70,11 @@ public class StoneBulletEntity extends ThrownItemEntity {
         Entity entity = entityHitResult.getEntity(); // sets a new Entity instance as the EntityHitResult (victim)
 
         DamageSource source =  (new BulletDamageSource("thrown", this, this.getOwner())).setProjectile();
-        entity.damage(source, (float)13); // deals damage
+        entity.damage(source, (float)damage); // deals damage
 
 
-        if (entity instanceof LivingEntity) { // checks if entity is an instance of LivingEntity (meaning it is not a boat or minecart)
-            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.SLOWNESS, 20 * 3, 2))); // applies a status effect
+        if (statusEffect != null && entity instanceof LivingEntity) { // checks if entity is an instance of LivingEntity (meaning it is not a boat or minecart)
+            ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(statusEffect, 20 * 3, 1))); // applies a status effect
         }
     }
 

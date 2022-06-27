@@ -57,9 +57,17 @@ public class FlintlockMusketItem extends RangedWeaponItem {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
         if (isCharged(itemStack)) {
+            // Shoot projectile
             shoot(world, user);
+
+            // Reset charge
             setCharged(itemStack, false);
+
+            // Damage Musket
+            if(!user.isCreative() && !world.isClient) itemStack.damage(1, user, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
+
             return TypedActionResult.consume(itemStack);
+
         } else if (!user.getArrowType(itemStack).isEmpty() || user.getAbilities().creativeMode) {
             if (!isCharged(itemStack)) {
                 this.loaded = false;

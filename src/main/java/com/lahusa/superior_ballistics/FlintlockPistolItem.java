@@ -76,6 +76,9 @@ public class FlintlockPistolItem extends RangedWeaponItem {
                             }
                         }
                     }
+
+                    // Damage Pistol
+                    if(!playerEntity.isCreative() && !world.isClient) stack.damage(1, playerEntity, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
                 }
             }
         }

@@ -222,9 +222,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
 
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     public void push(@Nullable PlayerEntity player) {

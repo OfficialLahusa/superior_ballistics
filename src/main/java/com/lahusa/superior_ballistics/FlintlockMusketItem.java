@@ -1,6 +1,7 @@
 package com.lahusa.superior_ballistics;
 
 import net.fabricmc.fabric.api.tag.TagRegistry;
+import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

@@ -4,6 +4,7 @@
   "package": "com.lahusa.superior_ballistics.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "LivingEntityAccessor"
   ],
   "client": [
     "PlayerEntityMixin",

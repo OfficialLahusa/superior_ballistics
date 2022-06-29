@@ -1,6 +1,7 @@
 package com.lahusa.superior_ballistics.entity;
 
 import com.lahusa.superior_ballistics.entity.damage.BulletDamageSource;
+import com.lahusa.superior_ballistics.mixin.LivingEntityAccessor;
 import com.lahusa.superior_ballistics.net.EntitySpawnPacket;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import net.fabricmc.fabric.api.tag.TagRegistry;
@@ -61,6 +62,12 @@ public class StoneBulletEntity extends ThrownItemEntity {
         Entity entity = entityHitResult.getEntity(); // sets a new Entity instance as the EntityHitResult (victim)
 
         DamageSource source =  (new BulletDamageSource("thrown", this, this.getOwner())).setProjectile();
+
+        // Reset damage cooldown
+        if(entity instanceof LivingEntity livingEntity) {
+            ((LivingEntityAccessor)livingEntity).setLastDamageTaken(Float.MIN_VALUE);
+        }
+
         entity.damage(source, (float)damage); // deals damage
 
 

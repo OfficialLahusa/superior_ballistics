@@ -29,39 +29,39 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	// Blocks
 	public static final float CANNON_STRENGTH = 2.0f;
 	public static final float CANNON_HARDNESS = 14.0f;
-	public static final Block OAK_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
-	public static final Block SPRUCE_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
-	public static final Block BIRCH_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
-	public static final Block JUNGLE_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
-	public static final Block ACACIA_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
-	public static final Block DARK_OAK_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
-	public static final Block CRIMSON_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
-	public static final Block WARPED_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
+	public static final Block OAK_CANNON_BLOCK 		= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
+	public static final Block SPRUCE_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
+	public static final Block BIRCH_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
+	public static final Block JUNGLE_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
+	public static final Block ACACIA_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
+	public static final Block DARK_OAK_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
+	public static final Block CRIMSON_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
+	public static final Block WARPED_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
 
 	// BlockEntities
 	public static BlockEntityType<CannonBlockEntity> CANNON_BLOCK_ENTITY;
 
 	// Items
-	public static final Item OAK_CANNON_ITEM = new BlockItem(OAK_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item SPRUCE_CANNON_ITEM = new BlockItem(SPRUCE_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item BIRCH_CANNON_ITEM = new BlockItem(BIRCH_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item JUNGLE_CANNON_ITEM = new BlockItem(JUNGLE_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item ACACIA_CANNON_ITEM = new BlockItem(ACACIA_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item DARK_OAK_CANNON_ITEM = new BlockItem(DARK_OAK_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item CRIMSON_CANNON_ITEM = new BlockItem(CRIMSON_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item WARPED_CANNON_ITEM = new BlockItem(WARPED_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item OAK_CANNON_ITEM 		= new BlockItem(OAK_CANNON_BLOCK, 		new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item SPRUCE_CANNON_ITEM 	= new BlockItem(SPRUCE_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item BIRCH_CANNON_ITEM 		= new BlockItem(BIRCH_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item JUNGLE_CANNON_ITEM 	= new BlockItem(JUNGLE_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item ACACIA_CANNON_ITEM 	= new BlockItem(ACACIA_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item DARK_OAK_CANNON_ITEM 	= new BlockItem(DARK_OAK_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item CRIMSON_CANNON_ITEM 	= new BlockItem(CRIMSON_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item WARPED_CANNON_ITEM 	= new BlockItem(WARPED_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
 
-	public static final Item STONE_BULLETS_ITEM = new StoneBulletsItem(new FabricItemSettings().group(ItemGroup.MISC));
-	public static final Item STONE_BULLET_ITEM = new StoneBulletItem(new FabricItemSettings());
-	public static final Item FLINTLOCK_PISTOL_ITEM = new FlintlockPistolItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(225));
-	public static final Item FLINTLOCK_MUSKET_ITEM = new FlintlockMusketItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(600));
+	public static final Item STONE_BULLETS_ITEM 		= new StoneBulletsItem(new FabricItemSettings().group(ItemGroup.MISC));
+	public static final Item STONE_BULLET_ITEM 			= new StoneBulletItem(new FabricItemSettings());
+	public static final Item FLINTLOCK_PISTOL_ITEM 		= new FlintlockPistolItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(225));
+	public static final Item FLINTLOCK_MUSKET_ITEM 		= new FlintlockMusketItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(600));
 	public static final Item FLINTLOCK_BLUNDERBUSS_ITEM = new FlintlockBlunderbussItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(480));
-	public static final Item SPONGE_ON_A_STICK_ITEM = new SpongeOnAStickItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
+	public static final Item SPONGE_ON_A_STICK_ITEM 	= new SpongeOnAStickItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
 	public static final Item WET_SPONGE_ON_A_STICK_ITEM = new WetSpongeOnAStickItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
-	public static final Item PISTON_LOADER_ITEM = new PistonLoaderItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
-	public static final Item IRON_CANNONBALL = new IronCannonballItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(16));
-	public static final Item IRON_GRAPESHOT = new IronGrapeshotItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(16));
-	public static final Item IRON_SINGLE_GRAPESHOT = new IronSingleGrapeshotItem(new FabricItemSettings());
+	public static final Item PISTON_LOADER_ITEM 		= new PistonLoaderItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
+	public static final Item IRON_CANNONBALL 			= new IronCannonballItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(16));
+	public static final Item IRON_GRAPESHOT 			= new IronGrapeshotItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(16));
+	public static final Item IRON_SINGLE_GRAPESHOT 		= new IronSingleGrapeshotItem(new FabricItemSettings());
 
 	// Entities
 	public static final EntityType<StoneBulletEntity> STONE_BULLET_ENTITY_TYPE = Registry.register(

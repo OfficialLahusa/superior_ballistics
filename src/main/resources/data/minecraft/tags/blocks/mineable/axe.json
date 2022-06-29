@@ -1,0 +1,13 @@
+{
+    "replace": false,
+    "values": [
+        "superior_ballistics:oak_cannon",
+        "superior_ballistics:spruce_cannon",
+        "superior_ballistics:birch_cannon",
+        "superior_ballistics:jungle_cannon",
+        "superior_ballistics:acacia_cannon",
+        "superior_ballistics:dark_oak_cannon",
+        "superior_ballistics:crimson_cannon",
+        "superior_ballistics:warped_cannon"
+    ]
+}

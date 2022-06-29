@@ -1,7 +1,7 @@
 package com.lahusa.superior_ballistics.mixin;
 
-import com.lahusa.superior_ballistics.CannonBlock;
-import com.lahusa.superior_ballistics.CannonBlockEntity;
+import com.lahusa.superior_ballistics.block.CannonBlock;
+import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;

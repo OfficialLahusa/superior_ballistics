@@ -1,4 +1,4 @@
-package com.lahusa.superior_ballistics;
+package com.lahusa.superior_ballistics.net;
 
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;

@@ -1,4 +1,4 @@
-package com.lahusa.superior_ballistics;
+package com.lahusa.superior_ballistics.item;
 
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
@@ -10,14 +10,14 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class WetSpongeOnAStickItem extends Item {
+public class PistonLoaderItem extends Item {
 
-    public WetSpongeOnAStickItem(Settings settings) {
+    public PistonLoaderItem(Settings settings) {
         super(settings);
     }
 
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
-        tooltip.add(new TranslatableText("item.superior_ballistics.wet_sponge_on_a_stick.tooltip").formatted(Formatting.GRAY));
+        tooltip.add(new TranslatableText("item.superior_ballistics.piston_loader.tooltip").formatted(Formatting.GRAY));
     }
 }

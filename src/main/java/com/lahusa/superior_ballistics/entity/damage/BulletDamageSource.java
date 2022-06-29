@@ -1,4 +1,4 @@
-package com.lahusa.superior_ballistics;
+package com.lahusa.superior_ballistics.entity.damage;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.ProjectileDamageSource;

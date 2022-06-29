@@ -1,4 +1,4 @@
-package com.lahusa.superior_ballistics;
+package com.lahusa.superior_ballistics.util;
 
 import net.minecraft.util.Identifier;
 

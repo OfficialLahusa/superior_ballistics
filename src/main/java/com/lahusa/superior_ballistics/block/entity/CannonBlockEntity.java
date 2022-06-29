@@ -1,5 +1,9 @@
-package com.lahusa.superior_ballistics;
+package com.lahusa.superior_ballistics.block.entity;
 
+import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
+import com.lahusa.superior_ballistics.block.CannonBlock;
+import com.lahusa.superior_ballistics.entity.CannonBallEntity;
+import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

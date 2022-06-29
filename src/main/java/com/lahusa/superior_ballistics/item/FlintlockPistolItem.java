@@ -1,5 +1,7 @@
-package com.lahusa.superior_ballistics;
+package com.lahusa.superior_ballistics.item;
 
+import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
+import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -23,6 +25,7 @@ public class FlintlockPistolItem extends RangedWeaponItem {
     private static final float speed = 3.0f;
     private static final float divergence = 4.5f;
     private static final float soundPitch = 1.4f;
+    private static final int damage = 8;
 
     public FlintlockPistolItem(Settings settings) {
         super(settings);
@@ -87,7 +90,7 @@ public class FlintlockPistolItem extends RangedWeaponItem {
     private void shoot(World world, LivingEntity shooter) {
         // Only execute on server
         if (!world.isClient) {
-            StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, shooter, 8, null);
+            StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, shooter, damage, null);
             stoneBulletEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
             stoneBulletEntity.setProperties(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, FlintlockPistolItem.speed, FlintlockPistolItem.divergence);
             world.spawnEntity(stoneBulletEntity);

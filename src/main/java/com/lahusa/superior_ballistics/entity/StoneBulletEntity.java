@@ -1,38 +1,29 @@
-package com.lahusa.superior_ballistics;
+package com.lahusa.superior_ballistics.entity;
 
+import com.lahusa.superior_ballistics.entity.damage.BulletDamageSource;
+import com.lahusa.superior_ballistics.net.EntitySpawnPacket;
+import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.ParticlesMode;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.ProjectileDamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.MusicDiscItem;
 import net.minecraft.network.Packet;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.*;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3f;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.system.CallbackI;
 
 public class StoneBulletEntity extends ThrownItemEntity {
 

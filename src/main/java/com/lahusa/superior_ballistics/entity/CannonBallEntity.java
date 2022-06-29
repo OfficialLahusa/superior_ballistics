@@ -1,10 +1,11 @@
-package com.lahusa.superior_ballistics;
+package com.lahusa.superior_ballistics.entity;
 
+import com.lahusa.superior_ballistics.net.EntitySpawnPacket;
+import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;

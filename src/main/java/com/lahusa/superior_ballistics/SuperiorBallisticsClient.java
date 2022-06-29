@@ -1,19 +1,16 @@
 package com.lahusa.superior_ballistics;
 
+import com.lahusa.superior_ballistics.net.EntitySpawnPacket;
+import com.lahusa.superior_ballistics.particle.CannonMuzzleFireParticle;
+import com.lahusa.superior_ballistics.particle.CannonMuzzleSmokeTrailParticle;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.particle.CloudParticle;
-import net.minecraft.client.particle.ExplosionSmokeParticle;
-import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.screen.PlayerScreenHandler;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 

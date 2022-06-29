@@ -1,5 +1,7 @@
-package com.lahusa.superior_ballistics;
+package com.lahusa.superior_ballistics.block;
 
+import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
+import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;

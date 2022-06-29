@@ -1,4 +1,4 @@
-package com.lahusa.superior_ballistics;
+package com.lahusa.superior_ballistics.particle;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

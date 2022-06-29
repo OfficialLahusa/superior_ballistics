@@ -1,5 +1,6 @@
-package com.lahusa.superior_ballistics;
+package com.lahusa.superior_ballistics.item;
 
+import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;

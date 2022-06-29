@@ -1,6 +1,6 @@
 package com.lahusa.superior_ballistics.mixin;
 
-import com.lahusa.superior_ballistics.FlintlockMusketItem;
+import com.lahusa.superior_ballistics.item.FlintlockMusketItem;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
@@ -18,7 +18,7 @@ public class PlayerEntityRendererMixin {
     private static void handleArmPoses(AbstractClientPlayerEntity abstractClientPlayerEntity, Hand hand, CallbackInfoReturnable<BipedEntityModel.ArmPose> cir) {
         ItemStack stackInHand = abstractClientPlayerEntity.getStackInHand(hand);
 
-        if(stackInHand.getItem() == SuperiorBallisticsMod.FLINTLOCK_MUSKET_ITEM && FlintlockMusketItem.isCharged(stackInHand)) {
+        if((stackInHand.getItem() == SuperiorBallisticsMod.FLINTLOCK_MUSKET_ITEM || stackInHand.getItem() == SuperiorBallisticsMod.FLINTLOCK_BLUNDERBUSS_ITEM) && FlintlockMusketItem.isCharged(stackInHand)) {
             cir.setReturnValue(BipedEntityModel.ArmPose.CROSSBOW_HOLD);
         }
     }

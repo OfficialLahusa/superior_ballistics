@@ -27,12 +27,13 @@ import java.util.function.Predicate;
 
 public class FlintlockMusketItem extends RangedWeaponItem {
 
-    private boolean loaded = false;
+    protected boolean loaded = false;
 
-    private static final float speed = 3.0f;
-    private static final float divergence = 3.45f;
-    private static final float soundPitch = 1.0f;
-    private static final int shot_damage = 13;
+    protected static final float speed = 3.0f;
+    protected static final float divergence = 3.0f;
+    protected static final int shotDamage = 13;
+    protected static final float soundPitch = 1.0f;
+    protected static final float soundVolume = 1.0F;
 
     public static final Tag<Item> AMMUNITION_TAG = TagRegistry.item(new Identifier(SuperiorBallisticsMod.MODID, "pistol_ammunition"));
 
@@ -61,7 +62,7 @@ public class FlintlockMusketItem extends RangedWeaponItem {
         ItemStack itemStack = user.getStackInHand(hand);
         if (isCharged(itemStack)) {
             // Shoot projectile
-            shoot(world, user, shot_damage);
+            shoot(world, user);
 
             // Reset charge
             setCharged(itemStack, false);
@@ -85,19 +86,23 @@ public class FlintlockMusketItem extends RangedWeaponItem {
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (user instanceof PlayerEntity playerEntity) {
             boolean creativeMode = playerEntity.getAbilities().creativeMode;
+
             // Get the ammo stack, that should be used
             ItemStack ammoStack = playerEntity.getArrowType(stack);
             boolean hasAmmo = !playerEntity.getArrowType(stack).isEmpty();
             boolean hasGunpowder = playerEntity.getInventory().contains(Items.GUNPOWDER.getDefaultStack());
+
             // Only execute, is there is ammo and gunpowder or user is in creative mode
             if ((hasAmmo && hasGunpowder) || creativeMode) {
                 // If there is no ammo, default to stone bullet
                 if (ammoStack.isEmpty()) {
                     ammoStack = new ItemStack(Items.ARROW);
                 }
+
                 // Calculate pull progress
                 int i = this.getMaxUseTime(stack) - remainingUseTicks;
                 float pullProgress = getPullProgress(i);
+
                 // Only execute, if pull progress is high enough
                 if (pullProgress >= 1.0f) {
                     setCharged(stack, true);
@@ -128,6 +133,7 @@ public class FlintlockMusketItem extends RangedWeaponItem {
         if (!player.getAbilities().creativeMode) {
             PlayerInventory inventory = player.getInventory();
             ammoStack.decrement(1);
+
             // Remove bullet
             if (ammoStack.isEmpty()) {
                 inventory.removeOne(ammoStack);
@@ -143,17 +149,23 @@ public class FlintlockMusketItem extends RangedWeaponItem {
         }
     }
 
-    public void shoot(World world, LivingEntity shooter, int damage) {
-        // Shoot projectile
+    protected void fireProjectile(World world, LivingEntity shooter, int damage, float speed, float divergence)
+    {
+        // Only execute on server
         if (!world.isClient) {
             StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, shooter, damage, StatusEffects.SLOWNESS);
             stoneBulletEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
-            stoneBulletEntity.setProperties(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, FlintlockMusketItem.speed, FlintlockMusketItem.divergence);
+            stoneBulletEntity.setProperties(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, speed, divergence);
             world.spawnEntity(stoneBulletEntity);
         }
+    }
+
+    protected void shoot(World world, LivingEntity shooter) {
+        // Shoot projectile
+        fireProjectile(world, shooter, FlintlockMusketItem.shotDamage, FlintlockMusketItem.speed, FlintlockMusketItem.divergence);
 
         // Play firing sound
-        world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, FlintlockMusketItem.soundPitch);
+        world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, FlintlockMusketItem.soundVolume, FlintlockMusketItem.soundPitch);
 
         // Spawn smoke particles
         Vec3d lookDir = shooter.getRotationVector();

@@ -22,10 +22,11 @@ import java.util.function.Predicate;
 
 public class FlintlockPistolItem extends RangedWeaponItem {
 
-    private static final float speed = 3.0f;
-    private static final float divergence = 4.5f;
-    private static final float soundPitch = 1.4f;
-    private static final int damage = 8;
+    protected static final float speed = 3.0f;
+    protected static final float divergence = 5.2f;
+    protected static final float soundPitch = 1.4f;
+    protected static final float soundVolume = 1.0F;
+    protected static final int shotDamage = 8;
 
     public FlintlockPistolItem(Settings settings) {
         super(settings);
@@ -87,17 +88,23 @@ public class FlintlockPistolItem extends RangedWeaponItem {
         }
     }
 
-    private void shoot(World world, LivingEntity shooter) {
+    protected void fireProjectile(World world, LivingEntity shooter, int damage, float speed, float divergence)
+    {
         // Only execute on server
         if (!world.isClient) {
             StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, shooter, damage, null);
             stoneBulletEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
-            stoneBulletEntity.setProperties(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, FlintlockPistolItem.speed, FlintlockPistolItem.divergence);
+            stoneBulletEntity.setProperties(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, speed, divergence);
             world.spawnEntity(stoneBulletEntity);
         }
+    }
+
+    protected void shoot(World world, LivingEntity shooter) {
+        // Shoot projectile
+        fireProjectile(world, shooter, FlintlockPistolItem.shotDamage, FlintlockPistolItem.speed, FlintlockPistolItem.divergence);
 
         // Play firing sound
-        world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, FlintlockPistolItem.soundPitch);
+        world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, FlintlockPistolItem.soundVolume, FlintlockPistolItem.soundPitch);
 
         // Spawn particles
         Vec3d lookDir = shooter.getRotationVector();

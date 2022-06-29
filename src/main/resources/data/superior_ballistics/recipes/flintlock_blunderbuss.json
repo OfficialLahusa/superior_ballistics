@@ -1,0 +1,30 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "  F",
+      "BII",
+      " LP"
+    ],
+    "key": {
+      "P": {
+        "tag": "minecraft:planks"
+      },
+      "F": {
+        "item": "minecraft:flint_and_steel"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      },
+      "B": {
+        "item": "minecraft:iron_block"
+      },
+      "L": {
+        "item": "minecraft:lever"
+      }
+    },
+    "result": {
+      "item": "superior_ballistics:flintlock_blunderbuss",
+      "count": 1
+    }
+  }
+

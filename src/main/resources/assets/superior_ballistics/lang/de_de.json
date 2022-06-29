@@ -1,0 +1,16 @@
+{
+    "block.superior_ballistics.spruce_cannon": "Fichtenkanone",
+    "item.superior_ballistics.stone_bullets": "Steinkugeln",
+    "item.superior_ballistics.stone_bullets.tooltip": "Durchschlagen Glas und Tontöpfe",
+    "item.superior_ballistics.flintlock_pistol": "Steinschlosspistole",
+    "item.superior_ballistics.flintlock_musket": "Steinschlossmuskete",
+    "item.superior_ballistics.flintlock_blunderbuss": "Steinschloss-Donnerbüchse",
+    "item.superior_ballistics.sponge_on_a_stick": "Schwamm am Stock",
+    "item.superior_ballistics.sponge_on_a_stick.tooltip": "Tauche den Schwamm in ",
+    "item.superior_ballistics.wet_sponge_on_a_stick": "Nasser Schwamm am Stock",
+    "item.superior_ballistics.wet_sponge_on_a_stick.tooltip": "Schrubbt den Schmutz aus Kanonen",
+    "item.superior_ballistics.piston_loader": "Kolbenlader",
+    "item.superior_ballistics.piston_loader.tooltip": "Schiebt Ladungen in Kanonen hinein",
+    "item.superior_ballistics.iron_cannonball": "Eisen-Kanonenkugel",
+    "item.superior_ballistics.iron_grapeshot": "Eisen-Streugeschoss"
+}

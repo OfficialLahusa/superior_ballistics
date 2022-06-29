@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "IIi",
+      "PSS",
+      "LPL"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:iron_block"
+      },
+      "i": {
+        "item": "minecraft:iron_ingot"
+      },
+      "P": {
+        "item": "minecraft:oak_planks"
+      },
+      "S": {
+        "item": "minecraft:oak_stairs"
+      },
+      "L": {
+        "item": "minecraft:oak_log"
+      }
+    },
+    "result": {
+      "item": "superior_ballistics:oak_cannon",
+      "count": 1
+    }
+  }

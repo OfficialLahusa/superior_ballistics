@@ -27,13 +27,30 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final String MODID = "superior_ballistics";
 
 	// Blocks
-	public static final Block CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.METAL).strength(4.0f));
+	public static final float CANNON_STRENGTH = 2.0f;
+	public static final float CANNON_HARDNESS = 14.0f;
+	public static final Block OAK_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
+	public static final Block SPRUCE_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
+	public static final Block BIRCH_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
+	public static final Block JUNGLE_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
+	public static final Block ACACIA_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
+	public static final Block DARK_OAK_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
+	public static final Block CRIMSON_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
+	public static final Block WARPED_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS));
 
 	// BlockEntities
 	public static BlockEntityType<CannonBlockEntity> CANNON_BLOCK_ENTITY;
 
 	// Items
-	public static final Item CANNON_ITEM = new BlockItem(CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item OAK_CANNON_ITEM = new BlockItem(OAK_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item SPRUCE_CANNON_ITEM = new BlockItem(SPRUCE_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item BIRCH_CANNON_ITEM = new BlockItem(BIRCH_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item JUNGLE_CANNON_ITEM = new BlockItem(JUNGLE_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item ACACIA_CANNON_ITEM = new BlockItem(ACACIA_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item DARK_OAK_CANNON_ITEM = new BlockItem(DARK_OAK_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item CRIMSON_CANNON_ITEM = new BlockItem(CRIMSON_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item WARPED_CANNON_ITEM = new BlockItem(WARPED_CANNON_BLOCK, new FabricItemSettings().group(ItemGroup.COMBAT));
+
 	public static final Item STONE_BULLETS_ITEM = new StoneBulletsItem(new FabricItemSettings().group(ItemGroup.MISC));
 	public static final Item STONE_BULLET_ITEM = new StoneBulletItem(new FabricItemSettings());
 	public static final Item FLINTLOCK_PISTOL_ITEM = new FlintlockPistolItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(225));
@@ -76,13 +93,34 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		System.out.println("Superior Ballistics Init: Starting");
 
 		// Blocks
-		Registry.register(Registry.BLOCK, new Identifier(MODID, "spruce_cannon"), CANNON_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "oak_cannon"), 		OAK_CANNON_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "spruce_cannon"), 		SPRUCE_CANNON_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "birch_cannon"), 		BIRCH_CANNON_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "jungle_cannon"), 		JUNGLE_CANNON_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "acacia_cannon"), 		ACACIA_CANNON_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "dark_oak_cannon"), 	DARK_OAK_CANNON_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "crimson_cannon"), 	CRIMSON_CANNON_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "warped_cannon"), 		WARPED_CANNON_BLOCK);
 
 		// BlockEntities
-		CANNON_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "spruce_cannon_block_entity"), FabricBlockEntityTypeBuilder.create(CannonBlockEntity::new, CANNON_BLOCK).build(null));
+		CANNON_BLOCK_ENTITY = Registry.register(
+				Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "cannon_block_entity"),
+				FabricBlockEntityTypeBuilder.create(CannonBlockEntity::new, OAK_CANNON_BLOCK, SPRUCE_CANNON_BLOCK, BIRCH_CANNON_BLOCK, JUNGLE_CANNON_BLOCK, ACACIA_CANNON_BLOCK, DARK_OAK_CANNON_BLOCK, CRIMSON_CANNON_BLOCK, WARPED_CANNON_BLOCK)
+						.build(null)
+		);
+
 
 		// Items
-		Registry.register(Registry.ITEM, new Identifier(MODID, "spruce_cannon"), CANNON_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "oak_cannon"), 		OAK_CANNON_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "spruce_cannon"), 	SPRUCE_CANNON_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "birch_cannon"),	BIRCH_CANNON_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "jungle_cannon"), 	JUNGLE_CANNON_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "acacia_cannon"), 	ACACIA_CANNON_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "dark_oak_cannon"), DARK_OAK_CANNON_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "crimson_cannon"), 	CRIMSON_CANNON_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "warped_cannon"), 	WARPED_CANNON_ITEM);
+
+
 		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullets"), STONE_BULLETS_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullet"), STONE_BULLET_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_pistol"), FLINTLOCK_PISTOL_ITEM);

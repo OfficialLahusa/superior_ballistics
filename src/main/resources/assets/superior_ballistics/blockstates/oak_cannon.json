@@ -1,0 +1,20 @@
+{
+    "variants": {
+      "angle=0,facing=north": { "model": "superior_ballistics:block/oak_cannon_0", "uvlock": true },
+      "angle=0,facing=east":  { "model": "superior_ballistics:block/oak_cannon_0", "y":  90, "uvlock": true },
+      "angle=0,facing=south": { "model": "superior_ballistics:block/oak_cannon_0", "y": 180, "uvlock": true },
+      "angle=0,facing=west":  { "model": "superior_ballistics:block/oak_cannon_0", "y": 270, "uvlock": true },
+      "angle=1,facing=north": { "model": "superior_ballistics:block/oak_cannon_1", "uvlock": true },
+      "angle=1,facing=east":  { "model": "superior_ballistics:block/oak_cannon_1", "y":  90, "uvlock": true },
+      "angle=1,facing=south": { "model": "superior_ballistics:block/oak_cannon_1", "y": 180, "uvlock": true },
+      "angle=1,facing=west":  { "model": "superior_ballistics:block/oak_cannon_1", "y": 270, "uvlock": true },
+      "angle=2,facing=north": { "model": "superior_ballistics:block/oak_cannon_2", "uvlock": true },
+      "angle=2,facing=east":  { "model": "superior_ballistics:block/oak_cannon_2", "y":  90, "uvlock": true },
+      "angle=2,facing=south": { "model": "superior_ballistics:block/oak_cannon_2", "y": 180, "uvlock": true },
+      "angle=2,facing=west":  { "model": "superior_ballistics:block/oak_cannon_2", "y": 270, "uvlock": true },
+      "angle=3,facing=north": { "model": "superior_ballistics:block/oak_cannon_3", "uvlock": true },
+      "angle=3,facing=east":  { "model": "superior_ballistics:block/oak_cannon_3", "y":  90, "uvlock": true },
+      "angle=3,facing=south": { "model": "superior_ballistics:block/oak_cannon_3", "y": 180, "uvlock": true },
+      "angle=3,facing=west":  { "model": "superior_ballistics:block/oak_cannon_3", "y": 270, "uvlock": true }
+    }
+  }

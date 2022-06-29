@@ -1,5 +1,12 @@
 {
+    "block.superior_ballistics.oak_cannon": "Oak Cannon",
     "block.superior_ballistics.spruce_cannon": "Spruce Cannon",
+    "block.superior_ballistics.birch_cannon": "Birch Cannon",
+    "block.superior_ballistics.jungle_cannon": "Jungle Cannon",
+    "block.superior_ballistics.acacia_cannon": "Acacia Cannon",
+    "block.superior_ballistics.dark_oak_cannon": "Dark Oak Cannon",
+    "block.superior_ballistics.crimson_cannon": "Crimson Cannon",
+    "block.superior_ballistics.warped_cannon": "Warped Cannon",
     "item.superior_ballistics.stone_bullets": "Stone Bullets",
     "item.superior_ballistics.stone_bullets.tooltip": "Can break glass and pottery",
     "item.superior_ballistics.flintlock_pistol": "Flintlock Pistol",

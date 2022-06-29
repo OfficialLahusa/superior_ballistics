@@ -13,17 +13,17 @@
       "item": "minecraft:iron_ingot"
     },
     "P": {
-      "item": "minecraft:spruce_planks"
+      "item": "minecraft:dark_oak_planks"
     },
     "S": {
-      "item": "minecraft:spruce_stairs"
+      "item": "minecraft:dark_oak_stairs"
     },
     "L": {
-      "item": "minecraft:spruce_log"
+      "item": "minecraft:dark_oak_log"
     }
   },
   "result": {
-    "item": "superior_ballistics:spruce_cannon",
+    "item": "superior_ballistics:dark_oak_cannon",
     "count": 1
   }
 }

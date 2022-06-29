@@ -13,17 +13,17 @@
       "item": "minecraft:iron_ingot"
     },
     "P": {
-      "item": "minecraft:spruce_planks"
+      "item": "minecraft:crimson_planks"
     },
     "S": {
-      "item": "minecraft:spruce_stairs"
+      "item": "minecraft:crimson_stairs"
     },
     "L": {
-      "item": "minecraft:spruce_log"
+      "item": "minecraft:crimson_stem"
     }
   },
   "result": {
-    "item": "superior_ballistics:spruce_cannon",
+    "item": "superior_ballistics:crimson_cannon",
     "count": 1
   }
 }

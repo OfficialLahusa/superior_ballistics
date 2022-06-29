@@ -13,15 +13,15 @@ public class CannonMuzzleSmokeTrailParticle extends SpriteBillboardParticle {
     protected CannonMuzzleSmokeTrailParticle(ClientWorld world, double x, double y, double z, double d, double e, double f, SpriteProvider spriteProvider) {
         super(world, x, y, z);
         this.gravityStrength = -0.05F;
-        this.field_28786 = 0.9F;
+        this.velocityMultiplier = 0.9F;
         this.spriteProvider = spriteProvider;
         this.velocityX = d + (Math.random() * 2.0D - 1.0D) * 0.05000000074505806D;
         this.velocityY = e + (Math.random() * 2.0D - 1.0D) * 0.05000000074505806D;
         this.velocityZ = f + (Math.random() * 2.0D - 1.0D) * 0.05000000074505806D;
         float g = this.random.nextFloat() * 0.3F + 0.7F;
-        this.colorRed = g;
-        this.colorGreen = g;
-        this.colorBlue = g;
+        this.red = g;
+        this.green = g;
+        this.blue = g;
         this.scale = 0.1F * (this.random.nextFloat() * this.random.nextFloat() * 6.0F + 1.0F);
         this.maxAge = (int)(3.5*((16.0D / ((double)this.random.nextFloat() * 0.8D + 0.2D)) + 2.0));
         this.setSpriteForAge(spriteProvider);
@@ -45,9 +45,9 @@ public class CannonMuzzleSmokeTrailParticle extends SpriteBillboardParticle {
                 this.velocityZ *= 1.1D;
             }
 
-            this.velocityX *= (double)this.field_28786;
-            this.velocityY *= (double)this.field_28786;
-            this.velocityZ *= (double)this.field_28786;
+            this.velocityX *= (double)this.velocityMultiplier;
+            this.velocityY *= (double)this.velocityMultiplier;
+            this.velocityZ *= (double)this.velocityMultiplier;
             if (this.onGround) {
                 this.velocityX *= 0.699999988079071D;
                 this.velocityZ *= 0.699999988079071D;

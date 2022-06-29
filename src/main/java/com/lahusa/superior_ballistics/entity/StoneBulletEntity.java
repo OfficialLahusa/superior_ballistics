@@ -4,7 +4,6 @@ import com.lahusa.superior_ballistics.entity.damage.BulletDamageSource;
 import com.lahusa.superior_ballistics.mixin.LivingEntityAccessor;
 import com.lahusa.superior_ballistics.net.EntitySpawnPacket;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
-import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -19,17 +18,20 @@ import net.minecraft.network.Packet;
 import net.minecraft.particle.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class StoneBulletEntity extends ThrownItemEntity {
 
-    public static final Tag<Block> STONE_BULLET_BREAKABLE_TAG = TagRegistry.block(new Identifier(SuperiorBallisticsMod.MODID, "stone_bullet_breakable"));
-    public static final Tag<Block> FLOWER_POT_TAG = TagRegistry.block(new Identifier("minecraft", "flower_pots"));
+    public static final TagKey<Block> STONE_BULLET_BREAKABLE_TAG = TagKey.of(Registry.BLOCK_KEY, new Identifier(SuperiorBallisticsMod.MODID, "stone_bullet_breakable"));
+    public static final TagKey<Block> FLOWER_POT_TAG = TagKey.of(Registry.BLOCK_KEY, new Identifier("minecraft", "flower_pots"));
 
     private int damage;
     private StatusEffect statusEffect;
@@ -80,10 +82,13 @@ public class StoneBulletEntity extends ThrownItemEntity {
         super.onCollision(hitResult);
         if (!this.world.isClient) {
             // Determine hit block and break it, if it's contained in the tags
-            BlockPos hitBlock = new BlockPos(hitResult.getPos().add(getVelocity().normalize().multiply(0.5)));
-            if(STONE_BULLET_BREAKABLE_TAG.contains(this.world.getBlockState(hitBlock).getBlock()) || FLOWER_POT_TAG.contains(this.world.getBlockState(hitBlock).getBlock()))
+            BlockPos hitBlockPos = new BlockPos(hitResult.getPos().add(getVelocity().normalize().multiply(0.5)));
+
+            Block hitBlock = this.world.getBlockState(hitBlockPos).getBlock();
+            RegistryEntry.Reference<Block> hitBlockRegEntry = hitBlock.getRegistryEntry();
+            if(hitBlockRegEntry.isIn(STONE_BULLET_BREAKABLE_TAG) || hitBlockRegEntry.isIn(FLOWER_POT_TAG))
             {
-                this.world.breakBlock(hitBlock, false, this.getOwner(), 400);
+                this.world.breakBlock(hitBlockPos, false, this.getOwner(), 400);
             }
 
             // Spawn impact particles

@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.8-SNAPSHOT'
+	id 'fabric-loom' version '0.12-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -31,8 +31,8 @@ dependencies {
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
 
-	// GekoLib implementation
-	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.17:3.0.32'
+	// GeckoLib implementation
+	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.18:3.0.50'
 }
 
 processResources {

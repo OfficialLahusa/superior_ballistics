@@ -4,13 +4,16 @@ import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import com.lahusa.superior_ballistics.block.CannonBlock;
 import com.lahusa.superior_ballistics.entity.CannonBallEntity;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
-import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.Packet;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -24,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class CannonBlockEntity extends BlockEntity implements BlockEntityClientSerializable {
+public class CannonBlockEntity extends BlockEntity {
 
     // Loading stages
     public static final short POWDER_LOADING_STAGE = 0;
@@ -180,14 +183,14 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
                             case IRON_CANNONBALL -> {
                                 CannonBallEntity cannonBallEntity = new CannonBallEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
                                 cannonBallEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_CANNONBALL));
-                                cannonBallEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, SHOT_DIVERGENCE);
+                                cannonBallEntity.setVelocity(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, SHOT_DIVERGENCE);
                                 world.spawnEntity(cannonBallEntity);
                             }
                             case IRON_GRAPESHOT -> {
                                 for(int i = 0; i < 8; i++) {
                                     StoneBulletEntity grapeshotEntity = new StoneBulletEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z, 13, StatusEffects.SLOWNESS);
                                     grapeshotEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_SINGLE_GRAPESHOT));
-                                    grapeshotEntity.setProperties(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, GRAPESHOT_DIVERGENCE);
+                                    grapeshotEntity.setVelocity(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, GRAPESHOT_DIVERGENCE);
                                     world.spawnEntity(grapeshotEntity);
                                 }
                             }
@@ -399,7 +402,7 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound tag) {
+    public void writeNbt(NbtCompound tag) {
 
         tag.putShort("loadingState", loadingStage);
         tag.putShort("powderAmount", powderAmount);
@@ -409,8 +412,6 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         if(lastUserUUID != null) tag.putUuid("lastUserUUID", lastUserUUID);
 
         super.writeNbt(tag);
-
-        return tag;
     }
 
     @Override
@@ -425,13 +426,18 @@ public class CannonBlockEntity extends BlockEntity implements BlockEntityClientS
         if(tag.contains("lastUserUUID")) lastUserUUID = tag.getUuid("lastUserUUID");
     }
 
+    @Nullable
     @Override
-    public void fromClientTag(NbtCompound tag) {
-        readNbt(tag);
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
     }
 
     @Override
-    public NbtCompound toClientTag(NbtCompound tag) {
-        return writeNbt(tag);
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
+    }
+
+    private void sync() {
+        getWorld().updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_LISTENERS);
     }
 }

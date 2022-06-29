@@ -1,6 +1,8 @@
 package com.lahusa.superior_ballistics;
 
+import com.lahusa.superior_ballistics.block.AnimatedCannonBlock;
 import com.lahusa.superior_ballistics.block.CannonBlock;
+import com.lahusa.superior_ballistics.block.entity.AnimatedCannonBlockEntity;
 import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
 import com.lahusa.superior_ballistics.entity.CannonBallEntity;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
@@ -29,6 +31,8 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	// Blocks
 	public static final float CANNON_STRENGTH = 2.0f;
 	public static final float CANNON_HARDNESS = 14.0f;
+
+	public static final Block ANIMATED_CANNON_BLOCK = new AnimatedCannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
 	public static final Block OAK_CANNON_BLOCK 		= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
 	public static final Block SPRUCE_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
 	public static final Block BIRCH_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
@@ -39,9 +43,11 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final Block WARPED_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
 
 	// BlockEntities
+	public static BlockEntityType<AnimatedCannonBlockEntity> ANIMATED_CANNON_BLOCK_ENTITY;
 	public static BlockEntityType<CannonBlockEntity> CANNON_BLOCK_ENTITY;
 
 	// Items
+	public static final Item ANIMATED_CANNON_ITEM 	= new BlockItem(ANIMATED_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
 	public static final Item OAK_CANNON_ITEM 		= new BlockItem(OAK_CANNON_BLOCK, 		new FabricItemSettings().group(ItemGroup.COMBAT));
 	public static final Item SPRUCE_CANNON_ITEM 	= new BlockItem(SPRUCE_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
 	public static final Item BIRCH_CANNON_ITEM 		= new BlockItem(BIRCH_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
@@ -93,6 +99,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		System.out.println("Superior Ballistics Init: Starting");
 
 		// Blocks
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "animated_cannon"), 	ANIMATED_CANNON_BLOCK);
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "oak_cannon"), 		OAK_CANNON_BLOCK);
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "spruce_cannon"), 		SPRUCE_CANNON_BLOCK);
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "birch_cannon"), 		BIRCH_CANNON_BLOCK);
@@ -103,6 +110,11 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "warped_cannon"), 		WARPED_CANNON_BLOCK);
 
 		// BlockEntities
+		ANIMATED_CANNON_BLOCK_ENTITY = Registry.register(
+				Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "animated_cannon_block_entity"),
+				FabricBlockEntityTypeBuilder.create(AnimatedCannonBlockEntity::new, ANIMATED_CANNON_BLOCK)
+						.build(null)
+		);
 		CANNON_BLOCK_ENTITY = Registry.register(
 				Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "cannon_block_entity"),
 				FabricBlockEntityTypeBuilder.create(CannonBlockEntity::new, OAK_CANNON_BLOCK, SPRUCE_CANNON_BLOCK, BIRCH_CANNON_BLOCK, JUNGLE_CANNON_BLOCK, ACACIA_CANNON_BLOCK, DARK_OAK_CANNON_BLOCK, CRIMSON_CANNON_BLOCK, WARPED_CANNON_BLOCK)
@@ -111,6 +123,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 
 
 		// Items
+		Registry.register(Registry.ITEM, new Identifier(MODID, "animated_cannon"), ANIMATED_CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "oak_cannon"), 		OAK_CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "spruce_cannon"), 	SPRUCE_CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "birch_cannon"),	BIRCH_CANNON_ITEM);

@@ -94,7 +94,7 @@ public class FlintlockPistolItem extends RangedWeaponItem {
         if (!world.isClient) {
             StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, shooter, damage, null);
             stoneBulletEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
-            stoneBulletEntity.setProperties(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, speed, divergence);
+            stoneBulletEntity.setVelocity(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, speed, divergence);
             world.spawnEntity(stoneBulletEntity);
         }
     }

@@ -1,13 +1,16 @@
 package com.lahusa.superior_ballistics;
 
+import com.lahusa.superior_ballistics.block.renderer.AnimatedCannonBlockRenderer;
 import com.lahusa.superior_ballistics.net.EntitySpawnPacket;
 import com.lahusa.superior_ballistics.particle.CannonMuzzleFireParticle;
 import com.lahusa.superior_ballistics.particle.CannonMuzzleSmokeTrailParticle;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -19,10 +22,13 @@ import java.util.UUID;
 public class SuperiorBallisticsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        // EntityRenderer
+        // EntityRenderers
         EntityRendererRegistry.INSTANCE.register(SuperiorBallisticsMod.STONE_BULLET_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.INSTANCE.register(SuperiorBallisticsMod.CANNONBALL_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         receiveEntityPacket();
+
+        // BlockEntityRenderers
+        BlockEntityRendererRegistry.register(SuperiorBallisticsMod.ANIMATED_CANNON_BLOCK_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new AnimatedCannonBlockRenderer());
 
         // Particles
         ParticleFactoryRegistry.getInstance().register(SuperiorBallisticsMod.CANNON_MUZZLE_FIRE, CannonMuzzleFireParticle.Factory::new);

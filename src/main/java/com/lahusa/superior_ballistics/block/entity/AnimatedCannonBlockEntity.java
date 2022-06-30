@@ -1,7 +1,7 @@
 package com.lahusa.superior_ballistics.block.entity;
 
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
-import com.lahusa.superior_ballistics.block.CannonBlock;
+import com.lahusa.superior_ballistics.block.AnimatedCannonBlock;
 import com.lahusa.superior_ballistics.entity.CannonBallEntity;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
 import net.minecraft.block.Block;
@@ -24,10 +24,17 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.UUID;
 
-public class CannonBlockEntity extends BlockEntity {
+public class AnimatedCannonBlockEntity extends BlockEntity implements IAnimatable {
 
     // Loading stages
     public static final short POWDER_LOADING_STAGE = 0;
@@ -64,12 +71,14 @@ public class CannonBlockEntity extends BlockEntity {
     private short litTicks = 0;
     private UUID lastUserUUID = null;
 
+    private AnimationFactory factory = new AnimationFactory(this);
 
-    public CannonBlockEntity(BlockPos pos, BlockState state) {
-        super(SuperiorBallisticsMod.CANNON_BLOCK_ENTITY, pos, state);
+
+    public AnimatedCannonBlockEntity(BlockPos pos, BlockState state) {
+        super(SuperiorBallisticsMod.ANIMATED_CANNON_BLOCK_ENTITY, pos, state);
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, CannonBlockEntity blockEntity) {
+    public static void tick(World world, BlockPos pos, BlockState state, AnimatedCannonBlockEntity blockEntity) {
         if(blockEntity.getLoadingStage() == LIT_STAGE) {
             ++blockEntity.litTicks;
         }
@@ -77,6 +86,21 @@ public class CannonBlockEntity extends BlockEntity {
         if(blockEntity.litTicks >= MAX_LIT_TICKS) {
             blockEntity.fire();
         }
+    }
+
+    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.animated_cannon.idle", true));
+        return PlayState.CONTINUE;
+    }
+
+    @Override
+    public void registerControllers(AnimationData animationData) {
+        animationData.addAnimationController(new AnimationController<>(this, "controller", 0, this::predicate));
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return this.factory;
     }
 
     private void fire() {
@@ -100,7 +124,7 @@ public class CannonBlockEntity extends BlockEntity {
                 }
 
                 // Determine barrel direction
-                double angle = world.getBlockState(pos).get(CannonBlock.ANGLE) * 22.5;
+                double angle = world.getBlockState(pos).get(AnimatedCannonBlock.ANGLE) * 22.5;
                 double slopeHorizontal = Math.cos(Math.toRadians(angle));
                 double slopeVertical = Math.sin(Math.toRadians(angle));
                 Vec3d dir = new Vec3d(0.0, slopeVertical, 0.0);
@@ -283,7 +307,7 @@ public class CannonBlockEntity extends BlockEntity {
                     }
 
                     // Determine barrel direction
-                    double angle = world.getBlockState(pos).get(CannonBlock.ANGLE) * 22.5;
+                    double angle = world.getBlockState(pos).get(AnimatedCannonBlock.ANGLE) * 22.5;
                     double slopeHorizontal = Math.cos(Math.toRadians(angle));
                     double slopeVertical = Math.sin(Math.toRadians(angle));
                     Vec3d dir = new Vec3d(0.0, slopeVertical, 0.0);
@@ -373,7 +397,7 @@ public class CannonBlockEntity extends BlockEntity {
     private float getProjectilePitch() {
         BlockState state = world.getBlockState(pos);
 
-        return -22.5f * state.get(CannonBlock.ANGLE);
+        return -22.5f * state.get(AnimatedCannonBlock.ANGLE);
     }
 
     public String getShotName() {

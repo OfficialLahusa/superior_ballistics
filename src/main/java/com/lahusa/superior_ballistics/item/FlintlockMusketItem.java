@@ -2,7 +2,6 @@ package com.lahusa.superior_ballistics.item;
 
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
-import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,6 +19,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 
@@ -35,7 +35,7 @@ public class FlintlockMusketItem extends RangedWeaponItem {
     protected static final float soundPitch = 1.0f;
     protected static final float soundVolume = 1.0F;
 
-    public static final Tag<Item> AMMUNITION_TAG = TagRegistry.item(new Identifier(SuperiorBallisticsMod.MODID, "pistol_ammunition"));
+    public static final TagKey<Item> AMMUNITION_TAG = TagKey.of(Registry.ITEM_KEY, new Identifier(SuperiorBallisticsMod.MODID, "pistol_ammunition"));
 
     public FlintlockMusketItem(Settings settings) {
         super(settings);
@@ -155,7 +155,7 @@ public class FlintlockMusketItem extends RangedWeaponItem {
         if (!world.isClient) {
             StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, shooter, damage, StatusEffects.SLOWNESS);
             stoneBulletEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
-            stoneBulletEntity.setProperties(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, speed, divergence);
+            stoneBulletEntity.setVelocity(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, speed, divergence);
             world.spawnEntity(stoneBulletEntity);
         }
     }

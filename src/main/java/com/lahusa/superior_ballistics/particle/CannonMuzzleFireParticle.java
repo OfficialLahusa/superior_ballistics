@@ -11,7 +11,7 @@ import net.minecraft.util.math.MathHelper;
 public class CannonMuzzleFireParticle extends SpriteBillboardParticle {
     CannonMuzzleFireParticle(ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
         super(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
-        this.field_28786 = 0.96F;
+        this.velocityMultiplier = 0.96F;
         this.velocityX = velocityX;
         this.velocityY = velocityY;
         this.velocityZ = velocityZ;
@@ -44,9 +44,9 @@ public class CannonMuzzleFireParticle extends SpriteBillboardParticle {
                 this.velocityZ *= 1.1D;
             }
 
-            this.velocityX *= (double)this.field_28786;
-            this.velocityY *= (double)this.field_28786;
-            this.velocityZ *= (double)this.field_28786;
+            this.velocityX *= (double)this.velocityMultiplier;
+            this.velocityY *= (double)this.velocityMultiplier;
+            this.velocityZ *= (double)this.velocityMultiplier;
             if (this.onGround) {
                 this.velocityX *= 0.699999988079071D;
                 this.velocityZ *= 0.699999988079071D;

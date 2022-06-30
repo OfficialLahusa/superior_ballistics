@@ -30,7 +30,8 @@
 - [ ] Uniformteile die mit Lederrüstung harmonieren (Zweispitz, Dreispitz, Shako, Pickelhaube) 
 
 **Ferne Ideen:** 
-- [ ] Hopper Einspeisung in Kanonen Boote 
+- [ ] Hopper Einspeisung in Kanonen 
+- [ ] Boote 
 
 **Bereits abgearbeitete Punkte (Archiv):** 
 - [x] Kanonen mit Spitzhacke/Axt abbaubar machen 

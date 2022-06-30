@@ -196,6 +196,8 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
                 if(lastUserUUID != null) {
                     PlayerEntity player = world.getPlayerByUuid(lastUserUUID);
 
+                    if(player == null) return;
+
                     // Check for powder overload
                     if(powderAmount > MAX_POWDER && shotType != BLANK_SHOT) {
                         // Blow up cannon

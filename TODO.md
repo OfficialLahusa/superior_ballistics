@@ -14,6 +14,7 @@
  - [ ] Andere Art der Munition für die Pistole 
  - [ ] Bajonett-Variante der Muskete
  - [ ] entity.superior_ballistics.stone_bullet in de_de und en_us localizen
+ - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
 
 **Rüstung:**
 - [ ] Uniformteile die mit Lederrüstung harmonieren (Zweispitz, Dreispitz, Shako, Pickelhaube) 

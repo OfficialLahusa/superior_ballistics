@@ -1,7 +1,7 @@
 package com.lahusa.superior_ballistics.mixin;
 
-import com.lahusa.superior_ballistics.block.AnimatedCannonBlock;
-import com.lahusa.superior_ballistics.block.entity.AnimatedCannonBlockEntity;
+import com.lahusa.superior_ballistics.block.CannonBlock;
+import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,30 +35,30 @@ public class PlayerEntityMixin {
 
 
             // If looking at cannon
-            if(block instanceof AnimatedCannonBlock) {
-                AnimatedCannonBlockEntity blockEntity = (AnimatedCannonBlockEntity)client.world.getBlockEntity(pos);
+            if(block instanceof CannonBlock) {
+                CannonBlockEntity blockEntity = (CannonBlockEntity)client.world.getBlockEntity(pos);
 
                 if(blockEntity != null) {
                     // Build overlay message
                     MutableText text = new LiteralText("[").formatted(Formatting.GRAY).append(new LiteralText("Cannon Loading Stage: ").formatted(Formatting.BLACK));
 
                     switch (blockEntity.getLoadingStage()) {
-                        case AnimatedCannonBlockEntity.POWDER_LOADING_STAGE -> {
+                        case CannonBlockEntity.POWDER_LOADING_STAGE -> {
                             text.append(new LiteralText("Insert Powder ").formatted(Formatting.DARK_GREEN));
-                            text.append(new LiteralText("(" + blockEntity.getPowderAmount() + "/" + AnimatedCannonBlockEntity.MAX_POWDER + ")")
-                                    .formatted(blockEntity.getPowderAmount() > AnimatedCannonBlockEntity.MAX_POWDER ? Formatting.RED : Formatting.GOLD)
+                            text.append(new LiteralText("(" + blockEntity.getPowderAmount() + "/" + CannonBlockEntity.MAX_POWDER + ")")
+                                    .formatted(blockEntity.getPowderAmount() > CannonBlockEntity.MAX_POWDER ? Formatting.RED : Formatting.GOLD)
                             );
                         }
-                        case AnimatedCannonBlockEntity.SHOT_LOADING_STAGE -> {
+                        case CannonBlockEntity.SHOT_LOADING_STAGE -> {
                             text.append(new LiteralText("Insert Shot ").formatted(Formatting.DARK_GREEN));
                             text.append(new LiteralText("(" + blockEntity.getShotName() + ")").formatted(Formatting.GOLD));
                         }
-                        case AnimatedCannonBlockEntity.READY_STAGE -> {
+                        case CannonBlockEntity.READY_STAGE -> {
                             text.append(new LiteralText("Ready to light ").formatted(Formatting.DARK_GREEN));
                             text.append(new LiteralText("(Flint and Steel / Redstone)").formatted(Formatting.GOLD));
                         }
-                        case AnimatedCannonBlockEntity.LIT_STAGE -> text.append(new LiteralText("FIRING").formatted(Formatting.RED));
-                        case AnimatedCannonBlockEntity.CLEANUP_STAGE -> text.append(new LiteralText("Cleanup").formatted(Formatting.DARK_GREEN));
+                        case CannonBlockEntity.LIT_STAGE -> text.append(new LiteralText("FIRING").formatted(Formatting.RED));
+                        case CannonBlockEntity.CLEANUP_STAGE -> text.append(new LiteralText("Cleanup").formatted(Formatting.DARK_GREEN));
                         default -> text.append(new LiteralText("INVALID").formatted(Formatting.RED));
                     }
                     text.append(new LiteralText("]").formatted(Formatting.GRAY));

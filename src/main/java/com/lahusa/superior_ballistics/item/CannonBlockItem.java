@@ -11,11 +11,11 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.network.ISyncable;
 
-public class AnimatedCannonBlockItem extends BlockItem implements IAnimatable, ISyncable {
+public class CannonBlockItem extends BlockItem implements IAnimatable, ISyncable {
 
     public AnimationFactory factory = new AnimationFactory(this);
 
-    public AnimatedCannonBlockItem(Block block, Settings settings) {
+    public CannonBlockItem(Block block, Settings settings) {
         super(block, settings);
     }
 

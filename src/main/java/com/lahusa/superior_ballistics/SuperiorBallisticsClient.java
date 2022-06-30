@@ -1,7 +1,7 @@
 package com.lahusa.superior_ballistics;
 
-import com.lahusa.superior_ballistics.block.renderer.AnimatedCannonBlockRenderer;
-import com.lahusa.superior_ballistics.item.renderer.AnimatedCannonBlockItemRenderer;
+import com.lahusa.superior_ballistics.block.renderer.CannonBlockRenderer;
+import com.lahusa.superior_ballistics.item.renderer.CannonBlockItemRenderer;
 import com.lahusa.superior_ballistics.net.EntitySpawnPacket;
 import com.lahusa.superior_ballistics.particle.CannonMuzzleFireParticle;
 import com.lahusa.superior_ballistics.particle.CannonMuzzleSmokeTrailParticle;
@@ -17,7 +17,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
-import software.bernie.example.registry.ItemRegistry;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 
 import java.util.UUID;
@@ -31,17 +30,17 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
         receiveEntityPacket();
 
         // BlockEntityRenderers
-        BlockEntityRendererRegistry.register(SuperiorBallisticsMod.ANIMATED_CANNON_BLOCK_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new AnimatedCannonBlockRenderer());
+        BlockEntityRendererRegistry.register(SuperiorBallisticsMod.CANNON_BLOCK_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new CannonBlockRenderer());
 
         // ItemRenderers
-        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.OAK_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
-        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.SPRUCE_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
-        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.BIRCH_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
-        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.JUNGLE_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
-        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.ACACIA_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
-        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.DARK_OAK_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
-        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.CRIMSON_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
-        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.WARPED_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.OAK_CANNON_ITEM, new CannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.SPRUCE_CANNON_ITEM, new CannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.BIRCH_CANNON_ITEM, new CannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.JUNGLE_CANNON_ITEM, new CannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.ACACIA_CANNON_ITEM, new CannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.DARK_OAK_CANNON_ITEM, new CannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.CRIMSON_CANNON_ITEM, new CannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.WARPED_CANNON_ITEM, new CannonBlockItemRenderer());
 
         // Particles
         ParticleFactoryRegistry.getInstance().register(SuperiorBallisticsMod.CANNON_MUZZLE_FIRE, CannonMuzzleFireParticle.Factory::new);

@@ -1,6 +1,6 @@
 package com.lahusa.superior_ballistics.block;
 
-import com.lahusa.superior_ballistics.block.entity.AnimatedCannonBlockEntity;
+import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -26,7 +26,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 
-public class AnimatedCannonBlock extends BlockWithEntity {
+public class CannonBlock extends BlockWithEntity {
 
     public static final IntProperty ANGLE = IntProperty.of("angle", 0, 3);
     public static final DirectionProperty FACING;
@@ -38,7 +38,7 @@ public class AnimatedCannonBlock extends BlockWithEntity {
     protected final Identifier plankVariant;
     protected final Identifier logVariant;
 
-    public AnimatedCannonBlock(Identifier plankVariant, Identifier logVariant, Settings settings) {
+    public CannonBlock(Identifier plankVariant, Identifier logVariant, Settings settings) {
         super(settings);
         setDefaultState(
                 this.getStateManager().getDefaultState()
@@ -53,7 +53,7 @@ public class AnimatedCannonBlock extends BlockWithEntity {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 
         ItemStack heldStack = player.getInventory().getMainHandStack();
-        AnimatedCannonBlockEntity blockEntity = (AnimatedCannonBlockEntity) world.getBlockEntity(pos);
+        CannonBlockEntity blockEntity = (CannonBlockEntity) world.getBlockEntity(pos);
 
         if(heldStack.isEmpty()) {
             // Calculate and set new angle
@@ -73,7 +73,7 @@ public class AnimatedCannonBlock extends BlockWithEntity {
         else if(blockEntity != null) {
             // Loading stages:
             switch(blockEntity.getLoadingStage()) {
-                case AnimatedCannonBlockEntity.POWDER_LOADING_STAGE -> {
+                case CannonBlockEntity.POWDER_LOADING_STAGE -> {
                     if(heldStack.isOf(Items.GUNPOWDER) && blockEntity.canLoadPowder()) {
                         // Load powder
                         if(!world.isClient) blockEntity.addPowder(player);
@@ -95,7 +95,7 @@ public class AnimatedCannonBlock extends BlockWithEntity {
                         if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
                     }
                 }
-                case AnimatedCannonBlockEntity.SHOT_LOADING_STAGE -> {
+                case CannonBlockEntity.SHOT_LOADING_STAGE -> {
                     if(heldStack.isOf(SuperiorBallisticsMod.IRON_CANNONBALL) && !blockEntity.isShotLoaded()) {
                         // Load shot
                         if(!world.isClient) blockEntity.loadShot((short) 1, player);
@@ -137,7 +137,7 @@ public class AnimatedCannonBlock extends BlockWithEntity {
                         if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
                     }
                 }
-                case AnimatedCannonBlockEntity.READY_STAGE -> {
+                case CannonBlockEntity.READY_STAGE -> {
                     if(heldStack.isOf(Items.FLINT_AND_STEEL)) {
                         // Light cannon
                         if(!world.isClient) blockEntity.light(player);
@@ -149,7 +149,7 @@ public class AnimatedCannonBlock extends BlockWithEntity {
                         if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
                     }
                 }
-                case AnimatedCannonBlockEntity.CLEANUP_STAGE -> {
+                case CannonBlockEntity.CLEANUP_STAGE -> {
                     if(heldStack.isOf(SuperiorBallisticsMod.WET_SPONGE_ON_A_STICK_ITEM)) {
                         // Clean cannon
                         if(!world.isClient) blockEntity.clean();
@@ -175,13 +175,13 @@ public class AnimatedCannonBlock extends BlockWithEntity {
     // Fire cannon when powered by redstone
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
         if(!world.isClient) {
-            AnimatedCannonBlockEntity blockEntity = ((AnimatedCannonBlockEntity)world.getBlockEntity(pos));
+            CannonBlockEntity blockEntity = ((CannonBlockEntity)world.getBlockEntity(pos));
 
             // Get Redstone Power (direct or from behind)
             Direction facing = state.get(FACING);
             boolean isPowered = world.isReceivingRedstonePower(pos) || world.isReceivingRedstonePower(pos.add(-facing.getOffsetX(), 0, -facing.getOffsetZ()));
 
-            if (blockEntity != null && isPowered && blockEntity.getLoadingStage() == AnimatedCannonBlockEntity.READY_STAGE) {
+            if (blockEntity != null && isPowered && blockEntity.getLoadingStage() == CannonBlockEntity.READY_STAGE) {
                 // Light cannon
                 blockEntity.light(null);
 
@@ -201,7 +201,7 @@ public class AnimatedCannonBlock extends BlockWithEntity {
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new AnimatedCannonBlockEntity(pos, state);
+        return new CannonBlockEntity(pos, state);
     }
 
     @Override
@@ -211,7 +211,7 @@ public class AnimatedCannonBlock extends BlockWithEntity {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, SuperiorBallisticsMod.ANIMATED_CANNON_BLOCK_ENTITY, AnimatedCannonBlockEntity::tick);
+        return checkType(type, SuperiorBallisticsMod.CANNON_BLOCK_ENTITY, CannonBlockEntity::tick);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.lahusa.superior_ballistics.block.entity;
 
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
-import com.lahusa.superior_ballistics.block.AnimatedCannonBlock;
+import com.lahusa.superior_ballistics.block.CannonBlock;
 import com.lahusa.superior_ballistics.entity.CannonBallEntity;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
 import net.minecraft.block.Block;
@@ -34,7 +34,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.UUID;
 
-public class AnimatedCannonBlockEntity extends BlockEntity implements IAnimatable {
+public class CannonBlockEntity extends BlockEntity implements IAnimatable {
 
     // Loading stages
     public static final short POWDER_LOADING_STAGE = 0;
@@ -74,11 +74,11 @@ public class AnimatedCannonBlockEntity extends BlockEntity implements IAnimatabl
     private AnimationFactory factory = new AnimationFactory(this);
 
 
-    public AnimatedCannonBlockEntity(BlockPos pos, BlockState state) {
-        super(SuperiorBallisticsMod.ANIMATED_CANNON_BLOCK_ENTITY, pos, state);
+    public CannonBlockEntity(BlockPos pos, BlockState state) {
+        super(SuperiorBallisticsMod.CANNON_BLOCK_ENTITY, pos, state);
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, AnimatedCannonBlockEntity blockEntity) {
+    public static void tick(World world, BlockPos pos, BlockState state, CannonBlockEntity blockEntity) {
         if(blockEntity.getLoadingStage() == LIT_STAGE) {
             ++blockEntity.litTicks;
         }
@@ -124,7 +124,7 @@ public class AnimatedCannonBlockEntity extends BlockEntity implements IAnimatabl
                 }
 
                 // Determine barrel direction
-                double angle = world.getBlockState(pos).get(AnimatedCannonBlock.ANGLE) * 22.5;
+                double angle = world.getBlockState(pos).get(CannonBlock.ANGLE) * 22.5;
                 double slopeHorizontal = Math.cos(Math.toRadians(angle));
                 double slopeVertical = Math.sin(Math.toRadians(angle));
                 Vec3d dir = new Vec3d(0.0, slopeVertical, 0.0);
@@ -307,7 +307,7 @@ public class AnimatedCannonBlockEntity extends BlockEntity implements IAnimatabl
                     }
 
                     // Determine barrel direction
-                    double angle = world.getBlockState(pos).get(AnimatedCannonBlock.ANGLE) * 22.5;
+                    double angle = world.getBlockState(pos).get(CannonBlock.ANGLE) * 22.5;
                     double slopeHorizontal = Math.cos(Math.toRadians(angle));
                     double slopeVertical = Math.sin(Math.toRadians(angle));
                     Vec3d dir = new Vec3d(0.0, slopeVertical, 0.0);
@@ -397,7 +397,7 @@ public class AnimatedCannonBlockEntity extends BlockEntity implements IAnimatabl
     private float getProjectilePitch() {
         BlockState state = world.getBlockState(pos);
 
-        return -22.5f * state.get(AnimatedCannonBlock.ANGLE);
+        return -22.5f * state.get(CannonBlock.ANGLE);
     }
 
     public String getShotName() {

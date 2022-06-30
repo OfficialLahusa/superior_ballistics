@@ -35,7 +35,7 @@ public class AnimatedCannonBlockItemRenderer extends GeoItemRenderer<AnimatedCan
         super.renderEarly(animatable, stackIn, partialTicks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 
         this.renderTypeBuffer = renderTypeBuffer;
-        
+
         // Rotate cannon barrel
         short angle = 0;
         float rotX = (angle * 22.5f) / 180.0f * (float)Math.PI;

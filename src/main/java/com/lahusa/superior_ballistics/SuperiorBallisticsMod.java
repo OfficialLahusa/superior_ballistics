@@ -33,30 +33,28 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final float CANNON_HARDNESS = 14.0f;
 	protected static final FabricBlockSettings cannonSettings = FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool();
 
-	public static final Block ANIMATED_CANNON_BLOCK = new AnimatedCannonBlock(new Identifier("minecraft", "spruce_planks"), new Identifier("minecraft", "spruce_log"), cannonSettings);
-	public static final Block OAK_CANNON_BLOCK 		= new CannonBlock(cannonSettings);
-	public static final Block SPRUCE_CANNON_BLOCK 	= new CannonBlock(cannonSettings);
-	public static final Block BIRCH_CANNON_BLOCK 	= new CannonBlock(cannonSettings);
-	public static final Block JUNGLE_CANNON_BLOCK 	= new CannonBlock(cannonSettings);
-	public static final Block ACACIA_CANNON_BLOCK 	= new CannonBlock(cannonSettings);
-	public static final Block DARK_OAK_CANNON_BLOCK = new CannonBlock(cannonSettings);
-	public static final Block CRIMSON_CANNON_BLOCK 	= new CannonBlock(cannonSettings);
-	public static final Block WARPED_CANNON_BLOCK 	= new CannonBlock(cannonSettings);
+	public static final Block OAK_CANNON_BLOCK 		= new AnimatedCannonBlock(new Identifier("minecraft", "oak_planks"), new Identifier("minecraft", "oak_log"), cannonSettings);
+	public static final Block SPRUCE_CANNON_BLOCK 	= new AnimatedCannonBlock(new Identifier("minecraft", "spruce_planks"), new Identifier("minecraft", "spruce_log"), cannonSettings);
+	public static final Block BIRCH_CANNON_BLOCK 	= new AnimatedCannonBlock(new Identifier("minecraft", "birch_planks"), new Identifier("minecraft", "birch_log"), cannonSettings);
+	public static final Block JUNGLE_CANNON_BLOCK 	= new AnimatedCannonBlock(new Identifier("minecraft", "jungle_planks"), new Identifier("minecraft", "jungle_log"), cannonSettings);
+	public static final Block ACACIA_CANNON_BLOCK 	= new AnimatedCannonBlock(new Identifier("minecraft", "acacia_planks"), new Identifier("minecraft", "acacia_log"), cannonSettings);
+	public static final Block DARK_OAK_CANNON_BLOCK = new AnimatedCannonBlock(new Identifier("minecraft", "dark_oak_planks"), new Identifier("minecraft", "dark_oak_log"), cannonSettings);
+	public static final Block CRIMSON_CANNON_BLOCK 	= new AnimatedCannonBlock(new Identifier("minecraft", "crimson_planks"), new Identifier("minecraft", "crimson_stem"), cannonSettings);
+	public static final Block WARPED_CANNON_BLOCK 	= new AnimatedCannonBlock(new Identifier("minecraft", "warped_planks"), new Identifier("minecraft", "warped_stem"), cannonSettings);
 
 	// BlockEntities
 	public static BlockEntityType<AnimatedCannonBlockEntity> ANIMATED_CANNON_BLOCK_ENTITY;
 	public static BlockEntityType<CannonBlockEntity> CANNON_BLOCK_ENTITY;
 
 	// Items
-	public static final Item ANIMATED_CANNON_ITEM 	= new AnimatedCannonBlockItem(ANIMATED_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item OAK_CANNON_ITEM 		= new BlockItem(OAK_CANNON_BLOCK, 		new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item SPRUCE_CANNON_ITEM 	= new BlockItem(SPRUCE_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item BIRCH_CANNON_ITEM 		= new BlockItem(BIRCH_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item JUNGLE_CANNON_ITEM 	= new BlockItem(JUNGLE_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item ACACIA_CANNON_ITEM 	= new BlockItem(ACACIA_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item DARK_OAK_CANNON_ITEM 	= new BlockItem(DARK_OAK_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item CRIMSON_CANNON_ITEM 	= new BlockItem(CRIMSON_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item WARPED_CANNON_ITEM 	= new BlockItem(WARPED_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item OAK_CANNON_ITEM 		= new AnimatedCannonBlockItem(OAK_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item SPRUCE_CANNON_ITEM 	= new AnimatedCannonBlockItem(SPRUCE_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item BIRCH_CANNON_ITEM 		= new AnimatedCannonBlockItem(BIRCH_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item JUNGLE_CANNON_ITEM 	= new AnimatedCannonBlockItem(JUNGLE_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item ACACIA_CANNON_ITEM 	= new AnimatedCannonBlockItem(ACACIA_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item DARK_OAK_CANNON_ITEM 	= new AnimatedCannonBlockItem(DARK_OAK_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item CRIMSON_CANNON_ITEM 	= new AnimatedCannonBlockItem(CRIMSON_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item WARPED_CANNON_ITEM 	= new AnimatedCannonBlockItem(WARPED_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
 
 	public static final Item STONE_BULLETS_ITEM 		= new StoneBulletsItem(new FabricItemSettings().group(ItemGroup.MISC));
 	public static final Item STONE_BULLET_ITEM 			= new StoneBulletItem(new FabricItemSettings());
@@ -100,7 +98,6 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		System.out.println("Superior Ballistics Init: Starting");
 
 		// Blocks
-		Registry.register(Registry.BLOCK, new Identifier(MODID, "animated_cannon"), 	ANIMATED_CANNON_BLOCK);
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "oak_cannon"), 		OAK_CANNON_BLOCK);
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "spruce_cannon"), 		SPRUCE_CANNON_BLOCK);
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "birch_cannon"), 		BIRCH_CANNON_BLOCK);
@@ -113,18 +110,13 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		// BlockEntities
 		ANIMATED_CANNON_BLOCK_ENTITY = Registry.register(
 				Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "animated_cannon_block_entity"),
-				FabricBlockEntityTypeBuilder.create(AnimatedCannonBlockEntity::new, ANIMATED_CANNON_BLOCK)
-						.build(null)
-		);
-		CANNON_BLOCK_ENTITY = Registry.register(
-				Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "cannon_block_entity"),
-				FabricBlockEntityTypeBuilder.create(CannonBlockEntity::new, OAK_CANNON_BLOCK, SPRUCE_CANNON_BLOCK, BIRCH_CANNON_BLOCK, JUNGLE_CANNON_BLOCK, ACACIA_CANNON_BLOCK, DARK_OAK_CANNON_BLOCK, CRIMSON_CANNON_BLOCK, WARPED_CANNON_BLOCK)
+				FabricBlockEntityTypeBuilder.create(
+						AnimatedCannonBlockEntity::new, OAK_CANNON_BLOCK, SPRUCE_CANNON_BLOCK, BIRCH_CANNON_BLOCK, JUNGLE_CANNON_BLOCK, ACACIA_CANNON_BLOCK, DARK_OAK_CANNON_BLOCK, CRIMSON_CANNON_BLOCK, WARPED_CANNON_BLOCK)
 						.build(null)
 		);
 
 
 		// Items
-		Registry.register(Registry.ITEM, new Identifier(MODID, "animated_cannon"), ANIMATED_CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "oak_cannon"), 		OAK_CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "spruce_cannon"), 	SPRUCE_CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "birch_cannon"),	BIRCH_CANNON_ITEM);

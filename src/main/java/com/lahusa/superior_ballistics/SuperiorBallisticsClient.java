@@ -34,7 +34,14 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
         BlockEntityRendererRegistry.register(SuperiorBallisticsMod.ANIMATED_CANNON_BLOCK_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new AnimatedCannonBlockRenderer());
 
         // ItemRenderers
-        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.ANIMATED_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.OAK_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.SPRUCE_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.BIRCH_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.JUNGLE_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.ACACIA_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.DARK_OAK_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.CRIMSON_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.WARPED_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
 
         // Particles
         ParticleFactoryRegistry.getInstance().register(SuperiorBallisticsMod.CANNON_MUZZLE_FIRE, CannonMuzzleFireParticle.Factory::new);

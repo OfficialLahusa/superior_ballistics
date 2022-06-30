@@ -35,6 +35,7 @@
 
 **Sonstiges:** 
 - [ ] Gunpowder Keg hinzufügen 
+- [ ] Interessante Advancements hinzufügen (bsp. "Haubitzen")
 
 **Ferne Ideen:** 
 - [ ] Hopper Einspeisung in Kanonen 

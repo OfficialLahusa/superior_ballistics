@@ -13,6 +13,7 @@
 **Schusswaffen:** 
  - [ ] Andere Art der Munition für die Pistole 
  - [ ] Bajonett-Variante der Muskete
+ - [ ] entity.superior_ballistics.stone_bullet in de_de und en_us localizen
 
 **Worldgen:** 
  - [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried

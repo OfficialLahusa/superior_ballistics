@@ -1,9 +1,7 @@
 package com.lahusa.superior_ballistics;
 
 import com.lahusa.superior_ballistics.block.AnimatedCannonBlock;
-import com.lahusa.superior_ballistics.block.CannonBlock;
 import com.lahusa.superior_ballistics.block.entity.AnimatedCannonBlockEntity;
-import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
 import com.lahusa.superior_ballistics.entity.CannonBallEntity;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
 import com.lahusa.superior_ballistics.item.*;
@@ -44,7 +42,6 @@ public class SuperiorBallisticsMod implements ModInitializer {
 
 	// BlockEntities
 	public static BlockEntityType<AnimatedCannonBlockEntity> ANIMATED_CANNON_BLOCK_ENTITY;
-	public static BlockEntityType<CannonBlockEntity> CANNON_BLOCK_ENTITY;
 
 	// Items
 	public static final Item OAK_CANNON_ITEM 		= new AnimatedCannonBlockItem(OAK_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));

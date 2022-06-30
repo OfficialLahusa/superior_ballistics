@@ -1,8 +1,6 @@
 package com.lahusa.superior_ballistics.item.renderer;
 
 import com.lahusa.superior_ballistics.block.AnimatedCannonBlock;
-import com.lahusa.superior_ballistics.block.entity.AnimatedCannonBlockEntity;
-import com.lahusa.superior_ballistics.block.model.AnimatedCannonBlockModel;
 import com.lahusa.superior_ballistics.item.AnimatedCannonBlockItem;
 import com.lahusa.superior_ballistics.item.model.AnimatedCannonBlockItemModel;
 import net.minecraft.client.render.RenderLayer;
@@ -11,7 +9,6 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
-import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 
 public class AnimatedCannonBlockItemRenderer extends GeoItemRenderer<AnimatedCannonBlockItem> {

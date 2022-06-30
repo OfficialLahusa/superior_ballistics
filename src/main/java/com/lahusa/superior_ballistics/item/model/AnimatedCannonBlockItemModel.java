@@ -1,7 +1,6 @@
 package com.lahusa.superior_ballistics.item.model;
 
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
-import com.lahusa.superior_ballistics.block.entity.AnimatedCannonBlockEntity;
 import com.lahusa.superior_ballistics.item.AnimatedCannonBlockItem;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.model.AnimatedGeoModel;

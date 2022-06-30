@@ -3,7 +3,6 @@ package com.lahusa.superior_ballistics.block.model;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import com.lahusa.superior_ballistics.block.entity.AnimatedCannonBlockEntity;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class AnimatedCannonBlockModel extends AnimatedGeoModel<AnimatedCannonBlockEntity> {

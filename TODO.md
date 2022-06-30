@@ -15,6 +15,11 @@
  - [ ] Bajonett-Variante der Muskete
  - [ ] entity.superior_ballistics.stone_bullet in de_de und en_us localizen
 
+**Rüstung:**
+- [ ] Uniformteile die mit Lederrüstung harmonieren (Zweispitz, Dreispitz, Shako, Pickelhaube) 
+- [ ] Pickelhaube ItemRenderer
+- [ ] Pickelhaube localizen
+
 **Worldgen:** 
  - [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried
        Treasures, Drowned-Dörfern und Shipwrecks
@@ -28,7 +33,6 @@
 
 **Sonstiges:** 
 - [ ] Gunpowder Keg hinzufügen 
-- [ ] Uniformteile die mit Lederrüstung harmonieren (Zweispitz, Dreispitz, Shako, Pickelhaube) 
 
 **Ferne Ideen:** 
 - [ ] Hopper Einspeisung in Kanonen 

@@ -1,6 +1,7 @@
 package com.lahusa.superior_ballistics;
 
 import com.lahusa.superior_ballistics.block.renderer.AnimatedCannonBlockRenderer;
+import com.lahusa.superior_ballistics.item.renderer.AnimatedCannonBlockItemRenderer;
 import com.lahusa.superior_ballistics.net.EntitySpawnPacket;
 import com.lahusa.superior_ballistics.particle.CannonMuzzleFireParticle;
 import com.lahusa.superior_ballistics.particle.CannonMuzzleSmokeTrailParticle;
@@ -16,6 +17,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
+import software.bernie.example.registry.ItemRegistry;
+import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 
 import java.util.UUID;
 
@@ -29,6 +32,9 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
 
         // BlockEntityRenderers
         BlockEntityRendererRegistry.register(SuperiorBallisticsMod.ANIMATED_CANNON_BLOCK_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new AnimatedCannonBlockRenderer());
+
+        // ItemRenderers
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.ANIMATED_CANNON_ITEM, new AnimatedCannonBlockItemRenderer());
 
         // Particles
         ParticleFactoryRegistry.getInstance().register(SuperiorBallisticsMod.CANNON_MUZZLE_FIRE, CannonMuzzleFireParticle.Factory::new);

@@ -48,7 +48,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static BlockEntityType<CannonBlockEntity> CANNON_BLOCK_ENTITY;
 
 	// Items
-	public static final Item ANIMATED_CANNON_ITEM 	= new BlockItem(ANIMATED_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item ANIMATED_CANNON_ITEM 	= new AnimatedCannonBlockItem(ANIMATED_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
 	public static final Item OAK_CANNON_ITEM 		= new BlockItem(OAK_CANNON_BLOCK, 		new FabricItemSettings().group(ItemGroup.COMBAT));
 	public static final Item SPRUCE_CANNON_ITEM 	= new BlockItem(SPRUCE_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
 	public static final Item BIRCH_CANNON_ITEM 		= new BlockItem(BIRCH_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));

@@ -35,13 +35,18 @@ public class AnimatedCannonBlock extends BlockWithEntity {
         FACING = Properties.HORIZONTAL_FACING;
     }
 
-    public AnimatedCannonBlock(Settings settings) {
+    protected final Identifier plankVariant;
+    protected final Identifier logVariant;
+
+    public AnimatedCannonBlock(Identifier plankVariant, Identifier logVariant, Settings settings) {
         super(settings);
         setDefaultState(
                 this.getStateManager().getDefaultState()
                         .with(Properties.HORIZONTAL_FACING, Direction.NORTH)
                         .with(ANGLE, 1)
         );
+        this.plankVariant = plankVariant;
+        this.logVariant = logVariant;
     }
 
     @Override
@@ -223,5 +228,13 @@ public class AnimatedCannonBlock extends BlockWithEntity {
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return this.getDefaultState().with(Properties.HORIZONTAL_FACING, ctx.getPlayerFacing());
+    }
+
+    public Identifier getPlankVariant() {
+        return plankVariant;
+    }
+
+    public Identifier getLogVariant() {
+        return logVariant;
     }
 }

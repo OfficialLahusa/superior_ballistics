@@ -31,16 +31,17 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	// Blocks
 	public static final float CANNON_STRENGTH = 2.0f;
 	public static final float CANNON_HARDNESS = 14.0f;
+	protected static final FabricBlockSettings cannonSettings = FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool();
 
-	public static final Block ANIMATED_CANNON_BLOCK = new AnimatedCannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
-	public static final Block OAK_CANNON_BLOCK 		= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
-	public static final Block SPRUCE_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
-	public static final Block BIRCH_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
-	public static final Block JUNGLE_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
-	public static final Block ACACIA_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
-	public static final Block DARK_OAK_CANNON_BLOCK = new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
-	public static final Block CRIMSON_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
-	public static final Block WARPED_CANNON_BLOCK 	= new CannonBlock(FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool());
+	public static final Block ANIMATED_CANNON_BLOCK = new AnimatedCannonBlock(new Identifier("minecraft", "spruce_planks"), new Identifier("minecraft", "spruce_log"), cannonSettings);
+	public static final Block OAK_CANNON_BLOCK 		= new CannonBlock(cannonSettings);
+	public static final Block SPRUCE_CANNON_BLOCK 	= new CannonBlock(cannonSettings);
+	public static final Block BIRCH_CANNON_BLOCK 	= new CannonBlock(cannonSettings);
+	public static final Block JUNGLE_CANNON_BLOCK 	= new CannonBlock(cannonSettings);
+	public static final Block ACACIA_CANNON_BLOCK 	= new CannonBlock(cannonSettings);
+	public static final Block DARK_OAK_CANNON_BLOCK = new CannonBlock(cannonSettings);
+	public static final Block CRIMSON_CANNON_BLOCK 	= new CannonBlock(cannonSettings);
+	public static final Block WARPED_CANNON_BLOCK 	= new CannonBlock(cannonSettings);
 
 	// BlockEntities
 	public static BlockEntityType<AnimatedCannonBlockEntity> ANIMATED_CANNON_BLOCK_ENTITY;

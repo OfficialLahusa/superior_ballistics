@@ -9,6 +9,7 @@
  - [ ] Reichweite der Kanonen verringern  
  - [ ] Maybe mehr Ungenauigkeit bei Kanonen  
  - [ ] Sponge on a Stick in Cauldron nass machen
+ - [ ] Statustext lokalisierbar machen
 
 **Schusswaffen:** 
  - [ ] Andere Art der Munition für die Pistole 

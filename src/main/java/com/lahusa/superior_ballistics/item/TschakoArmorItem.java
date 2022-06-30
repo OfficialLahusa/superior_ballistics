@@ -11,14 +11,14 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class PickelhaubeArmorItem extends ArmorItem implements IAnimatable {
+public class TschakoArmorItem extends ArmorItem implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
 
-    public PickelhaubeArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
+    public TschakoArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
         super(material, slot, settings);
     }
     private <P extends IAnimatable> PlayState predicate(AnimationEvent<P> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pickelhaube.idle", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tschako.idle", true));
         return PlayState.CONTINUE;
     }
     @Override

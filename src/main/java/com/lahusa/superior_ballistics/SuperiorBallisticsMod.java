@@ -70,6 +70,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final ArmorMaterial OLD_ARMOR_MATERIAL = new OldArmorMaterial();
 
 	public static final Item PICKELHAUBE_HELMET = new PickelhaubeArmorItem(OLD_ARMOR_MATERIAL, EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+	public static final Item TSCHAKO_HELMET = new TschakoArmorItem(OLD_ARMOR_MATERIAL, EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
 
 	// Entities
 	public static final EntityType<StoneBulletEntity> STONE_BULLET_ENTITY_TYPE = Registry.register(
@@ -144,6 +145,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 
 		// Armor
 		Registry.register(Registry.ITEM, new Identifier(MODID, "pickelhaube_helmet"), PICKELHAUBE_HELMET);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "tschako_helmet"), TSCHAKO_HELMET);
 
 		// Particles
 		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "cannon_muzzle_fire"), CANNON_MUZZLE_FIRE);

@@ -3,6 +3,7 @@ package com.lahusa.superior_ballistics;
 import com.lahusa.superior_ballistics.block.renderer.CannonBlockRenderer;
 import com.lahusa.superior_ballistics.item.renderer.CannonBlockItemRenderer;
 import com.lahusa.superior_ballistics.item.renderer.PickelhaubeArmorRenderer;
+import com.lahusa.superior_ballistics.item.renderer.TschakoArmorRenderer;
 import com.lahusa.superior_ballistics.net.EntitySpawnPacket;
 import com.lahusa.superior_ballistics.particle.CannonMuzzleFireParticle;
 import com.lahusa.superior_ballistics.particle.CannonMuzzleSmokeTrailParticle;
@@ -46,6 +47,7 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
 
         // ArmorRenderers
         GeoArmorRenderer.registerArmorRenderer(new PickelhaubeArmorRenderer(), SuperiorBallisticsMod.PICKELHAUBE_HELMET);
+        GeoArmorRenderer.registerArmorRenderer(new TschakoArmorRenderer(), SuperiorBallisticsMod.TSCHAKO_HELMET);
 
         // Particles
         ParticleFactoryRegistry.getInstance().register(SuperiorBallisticsMod.CANNON_MUZZLE_FIRE, CannonMuzzleFireParticle.Factory::new);

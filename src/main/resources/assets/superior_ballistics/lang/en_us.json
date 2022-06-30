@@ -19,5 +19,7 @@
     "item.superior_ballistics.piston_loader": "Piston Loader",
     "item.superior_ballistics.piston_loader.tooltip": "Pushes loads into cannons",
     "item.superior_ballistics.iron_cannonball": "Iron Cannonball",
-    "item.superior_ballistics.iron_grapeshot": "Iron Grapeshot"
+    "item.superior_ballistics.iron_grapeshot": "Iron Grapeshot",
+    "item.superior_ballistics.pickelhaube_helmet": "Pickelhaube",
+    "item.superior_ballistics.tschako_helmet": "Tschako"
 }

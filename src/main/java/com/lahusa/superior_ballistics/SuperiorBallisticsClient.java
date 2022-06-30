@@ -2,6 +2,7 @@ package com.lahusa.superior_ballistics;
 
 import com.lahusa.superior_ballistics.block.renderer.CannonBlockRenderer;
 import com.lahusa.superior_ballistics.item.renderer.CannonBlockItemRenderer;
+import com.lahusa.superior_ballistics.item.renderer.PickelhaubeArmorRenderer;
 import com.lahusa.superior_ballistics.net.EntitySpawnPacket;
 import com.lahusa.superior_ballistics.particle.CannonMuzzleFireParticle;
 import com.lahusa.superior_ballistics.particle.CannonMuzzleSmokeTrailParticle;
@@ -17,6 +18,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
+import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 
 import java.util.UUID;
@@ -41,6 +43,9 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.DARK_OAK_CANNON_ITEM, new CannonBlockItemRenderer());
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.CRIMSON_CANNON_ITEM, new CannonBlockItemRenderer());
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.WARPED_CANNON_ITEM, new CannonBlockItemRenderer());
+
+        // ArmorRenderers
+        GeoArmorRenderer.registerArmorRenderer(new PickelhaubeArmorRenderer(), SuperiorBallisticsMod.PICKELHAUBE_HELMET);
 
         // Particles
         ParticleFactoryRegistry.getInstance().register(SuperiorBallisticsMod.CANNON_MUZZLE_FIRE, CannonMuzzleFireParticle.Factory::new);

@@ -16,6 +16,7 @@ import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.*;
 import net.minecraft.particle.DefaultParticleType;
@@ -64,6 +65,11 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final Item IRON_CANNONBALL 			= new IronCannonballItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(16));
 	public static final Item IRON_GRAPESHOT 			= new IronGrapeshotItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(16));
 	public static final Item IRON_SINGLE_GRAPESHOT 		= new IronSingleGrapeshotItem(new FabricItemSettings());
+
+	//Armor
+	public static final ArmorMaterial OLD_ARMOR_MATERIAL = new OldArmorMaterial();
+
+	public static final Item PICKELHAUBE_HELMET = new PickelhaubeArmorItem(OLD_ARMOR_MATERIAL, EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
 
 	// Entities
 	public static final EntityType<StoneBulletEntity> STONE_BULLET_ENTITY_TYPE = Registry.register(
@@ -135,6 +141,9 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_cannonball"), IRON_CANNONBALL);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_grapeshot"), IRON_GRAPESHOT);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_single_grapeshot"), IRON_SINGLE_GRAPESHOT);
+
+		// Armor
+		Registry.register(Registry.ITEM, new Identifier(MODID, "pickelhaube_helmet"), PICKELHAUBE_HELMET);
 
 		// Particles
 		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "cannon_muzzle_fire"), CANNON_MUZZLE_FIRE);

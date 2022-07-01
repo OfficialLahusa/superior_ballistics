@@ -7,7 +7,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
-public class OldArmorMaterial implements ArmorMaterial {
+public class UniformArmorMaterial implements ArmorMaterial {
     private static final int[] BASE_DURABILITY = new int[] {13, 15, 16, 11};
     private static final int[] PROTECTION_VALUES = new int[] {1, 1, 1, 2};
 
@@ -28,7 +28,7 @@ public class OldArmorMaterial implements ArmorMaterial {
 
     @Override
     public SoundEvent getEquipSound() {
-        return SoundEvents.ITEM_ARMOR_EQUIP_IRON;
+        return SoundEvents.ITEM_ARMOR_EQUIP_LEATHER;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class OldArmorMaterial implements ArmorMaterial {
 
     @Override
     public String getName() {
-        return "pickelhaube";
+        return "uniform";
     }
 
     @Override

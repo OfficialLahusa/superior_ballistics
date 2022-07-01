@@ -67,10 +67,9 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final Item IRON_SINGLE_GRAPESHOT 		= new IronSingleGrapeshotItem(new FabricItemSettings());
 
 	//Armor
-	public static final ArmorMaterial OLD_ARMOR_MATERIAL = new OldArmorMaterial();
-
-	public static final Item PICKELHAUBE_HELMET = new PickelhaubeArmorItem(OLD_ARMOR_MATERIAL, EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
-	public static final Item TSCHAKO_HELMET = new TschakoArmorItem(OLD_ARMOR_MATERIAL, EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+	public static final ArmorMaterial UNIFORM_ARMOR_MATERIAL = new UniformArmorMaterial();
+	public static final Item PICKELHAUBE_HELMET = new PickelhaubeArmorItem(UNIFORM_ARMOR_MATERIAL, EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+	public static final Item TSCHAKO_HELMET = new TschakoArmorItem(UNIFORM_ARMOR_MATERIAL, EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
 
 	// Entities
 	public static final EntityType<StoneBulletEntity> STONE_BULLET_ENTITY_TYPE = Registry.register(
@@ -119,7 +118,6 @@ public class SuperiorBallisticsMod implements ModInitializer {
 						.build(null)
 		);
 
-
 		// Items
 		Registry.register(Registry.ITEM, new Identifier(MODID, "oak_cannon"), 		OAK_CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "spruce_cannon"), 	SPRUCE_CANNON_ITEM);
@@ -129,7 +127,6 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "dark_oak_cannon"), DARK_OAK_CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "crimson_cannon"), 	CRIMSON_CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "warped_cannon"), 	WARPED_CANNON_ITEM);
-
 
 		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullets"), STONE_BULLETS_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullet"), STONE_BULLET_ITEM);

@@ -2,7 +2,6 @@
 
 **Kanonen:** 
  - [ ] Räder UVs fixen 
- - [ ] Kanone Barrel UVs fixen  
  - [ ] Kanone Lunte hinzufügen + Partikel
  - [ ] Magmakanonenkugeln  
  - [ ] Limit für das Überladen mit Powder (16?)  

@@ -32,27 +32,27 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final float CANNON_HARDNESS = 14.0f;
 	protected static final FabricBlockSettings cannonSettings = FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool();
 
-	public static final Block OAK_CANNON_BLOCK 		= new CannonBlock(new Identifier("minecraft", "oak_planks"), new Identifier("minecraft", "oak_log"), cannonSettings);
-	public static final Block SPRUCE_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "spruce_planks"), new Identifier("minecraft", "spruce_log"), cannonSettings);
-	public static final Block BIRCH_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "birch_planks"), new Identifier("minecraft", "birch_log"), cannonSettings);
-	public static final Block JUNGLE_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "jungle_planks"), new Identifier("minecraft", "jungle_log"), cannonSettings);
-	public static final Block ACACIA_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "acacia_planks"), new Identifier("minecraft", "acacia_log"), cannonSettings);
-	public static final Block DARK_OAK_CANNON_BLOCK = new CannonBlock(new Identifier("minecraft", "dark_oak_planks"), new Identifier("minecraft", "dark_oak_log"), cannonSettings);
-	public static final Block CRIMSON_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "crimson_planks"), new Identifier("minecraft", "crimson_stem"), cannonSettings);
-	public static final Block WARPED_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "warped_planks"), new Identifier("minecraft", "warped_stem"), cannonSettings);
+	public static final Block OAK_CANNON_BLOCK 		= new CannonBlock(new Identifier("minecraft", "oak_planks"), 		new Identifier("minecraft", "oak_log"), 		cannonSettings);
+	public static final Block SPRUCE_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "spruce_planks"), 		new Identifier("minecraft", "spruce_log"), cannonSettings);
+	public static final Block BIRCH_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "birch_planks"), 		new Identifier("minecraft", "birch_log"), cannonSettings);
+	public static final Block JUNGLE_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "jungle_planks"), 		new Identifier("minecraft", "jungle_log"), 	cannonSettings);
+	public static final Block ACACIA_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "acacia_planks"), 		new Identifier("minecraft", "acacia_log"), 	cannonSettings);
+	public static final Block DARK_OAK_CANNON_BLOCK = new CannonBlock(new Identifier("minecraft", "dark_oak_planks"), 	new Identifier("minecraft", "dark_oak_log"), cannonSettings);
+	public static final Block CRIMSON_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "crimson_planks"), 	new Identifier("minecraft", "crimson_stem"), cannonSettings);
+	public static final Block WARPED_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "warped_planks"), 		new Identifier("minecraft", "warped_stem"), cannonSettings);
 
 	// BlockEntities
 	public static BlockEntityType<CannonBlockEntity> CANNON_BLOCK_ENTITY;
 
 	// Items
-	public static final Item OAK_CANNON_ITEM 		= new CannonBlockItem(OAK_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item SPRUCE_CANNON_ITEM 	= new CannonBlockItem(SPRUCE_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item BIRCH_CANNON_ITEM 		= new CannonBlockItem(BIRCH_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item JUNGLE_CANNON_ITEM 	= new CannonBlockItem(JUNGLE_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item ACACIA_CANNON_ITEM 	= new CannonBlockItem(ACACIA_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item OAK_CANNON_ITEM 		= new CannonBlockItem(OAK_CANNON_BLOCK, 		new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item SPRUCE_CANNON_ITEM 	= new CannonBlockItem(SPRUCE_CANNON_BLOCK, 		new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item BIRCH_CANNON_ITEM 		= new CannonBlockItem(BIRCH_CANNON_BLOCK, 		new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item JUNGLE_CANNON_ITEM 	= new CannonBlockItem(JUNGLE_CANNON_BLOCK, 		new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item ACACIA_CANNON_ITEM 	= new CannonBlockItem(ACACIA_CANNON_BLOCK, 		new FabricItemSettings().group(ItemGroup.COMBAT));
 	public static final Item DARK_OAK_CANNON_ITEM 	= new CannonBlockItem(DARK_OAK_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
 	public static final Item CRIMSON_CANNON_ITEM 	= new CannonBlockItem(CRIMSON_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
-	public static final Item WARPED_CANNON_ITEM 	= new CannonBlockItem(WARPED_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item WARPED_CANNON_ITEM 	= new CannonBlockItem(WARPED_CANNON_BLOCK, 		new FabricItemSettings().group(ItemGroup.COMBAT));
 
 	public static final Item STONE_BULLETS_ITEM 		= new StoneBulletsItem(new FabricItemSettings().group(ItemGroup.MISC));
 	public static final Item STONE_BULLET_ITEM 			= new StoneBulletItem(new FabricItemSettings());
@@ -68,8 +68,8 @@ public class SuperiorBallisticsMod implements ModInitializer {
 
 	//Armor
 	public static final ArmorMaterial UNIFORM_ARMOR_MATERIAL = new UniformArmorMaterial();
-	public static final Item PICKELHAUBE_HELMET = new PickelhaubeArmorItem(UNIFORM_ARMOR_MATERIAL, EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
-	public static final Item TSCHAKO_HELMET = new TschakoArmorItem(UNIFORM_ARMOR_MATERIAL, EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+	public static final Item PICKELHAUBE_HELMET = new PickelhaubeArmorItem(UNIFORM_ARMOR_MATERIAL, 	EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+	public static final Item TSCHAKO_HELMET 	= new TschakoArmorItem(UNIFORM_ARMOR_MATERIAL, 		EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
 
 	// Entities
 	public static final EntityType<StoneBulletEntity> STONE_BULLET_ENTITY_TYPE = Registry.register(
@@ -128,25 +128,25 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "crimson_cannon"), 	CRIMSON_CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "warped_cannon"), 	WARPED_CANNON_ITEM);
 
-		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullets"), STONE_BULLETS_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullet"), STONE_BULLET_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_pistol"), FLINTLOCK_PISTOL_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_musket"), FLINTLOCK_MUSKET_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_blunderbuss"), FLINTLOCK_BLUNDERBUSS_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "sponge_on_a_stick"), SPONGE_ON_A_STICK_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "wet_sponge_on_a_stick"), WET_SPONGE_ON_A_STICK_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "piston_loader"), PISTON_LOADER_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_cannonball"), IRON_CANNONBALL);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_grapeshot"), IRON_GRAPESHOT);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_single_grapeshot"), IRON_SINGLE_GRAPESHOT);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullets"), 			STONE_BULLETS_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullet"), 			STONE_BULLET_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_pistol"), 		FLINTLOCK_PISTOL_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_musket"), 		FLINTLOCK_MUSKET_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_blunderbuss"), 	FLINTLOCK_BLUNDERBUSS_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "sponge_on_a_stick"), 		SPONGE_ON_A_STICK_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "wet_sponge_on_a_stick"), 	WET_SPONGE_ON_A_STICK_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "piston_loader"), 			PISTON_LOADER_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_cannonball"), 		IRON_CANNONBALL);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_grapeshot"), 			IRON_GRAPESHOT);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_single_grapeshot"), 	IRON_SINGLE_GRAPESHOT);
 
 		// Armor
-		Registry.register(Registry.ITEM, new Identifier(MODID, "pickelhaube_helmet"), PICKELHAUBE_HELMET);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "tschako_helmet"), TSCHAKO_HELMET);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "pickelhaube_helmet"), 	PICKELHAUBE_HELMET);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "tschako_helmet"), 		TSCHAKO_HELMET);
 
 		// Particles
-		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "cannon_muzzle_fire"), CANNON_MUZZLE_FIRE);
-		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "cannon_muzzle_smoke_trail"), CANNON_MUZZLE_SMOKE_TRAIL);
+		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "cannon_muzzle_fire"), 		CANNON_MUZZLE_FIRE);
+		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "cannon_muzzle_smoke_trail"), 	CANNON_MUZZLE_SMOKE_TRAIL);
 
 		System.out.println("Superior Ballistics Init: Done");
 	}

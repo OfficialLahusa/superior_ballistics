@@ -10,6 +10,7 @@
  - [ ] Maybe mehr Ungenauigkeit bei Kanonen  
  - [ ] Sponge on a Stick in Cauldron nass machen
  - [ ] Statustext lokalisierbar machen
+ - [ ] Zirkel für genauere Distanzbestimmung und Winkelanzeige
 
 **Schusswaffen:** 
  - [ ] Andere Art der Munition für die Pistole 

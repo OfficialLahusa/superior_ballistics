@@ -9,6 +9,7 @@
 - [ ] Sponge on a Stick in Cauldron nass machen
 - [ ] Statustext lokalisierbar machen
 - [ ] Zirkel für genauere Distanzbestimmung und Winkelanzeige
+- [ ] Enderperle als Munition hinzufügen
 
 **Schusswaffen:** 
 - [ ] Andere Art der Munition für die Pistole 
@@ -36,6 +37,7 @@
 - [ ] "Haubitzen" (Kanone herstellen)
 - [ ] "Heil dir im Siegerkranz" (Pickelhaube aufsetzen)
 - [ ] "Schuss in den Ofen" (Kanone überladen und zünden)
+- [ ] "Auf Nimmerwiedersehen!" (Enderperle mit Kanone verschießen)
 - [ ] Diverse Advancements für die Handfeuerwaffen und Uniformteile
 
 **Sonstiges:** 

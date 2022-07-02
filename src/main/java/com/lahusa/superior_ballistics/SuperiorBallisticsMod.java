@@ -33,13 +33,13 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	protected static final FabricBlockSettings cannonSettings = FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool();
 
 	public static final Block OAK_CANNON_BLOCK 		= new CannonBlock(new Identifier("minecraft", "oak_planks"), 		new Identifier("minecraft", "oak_log"), 		cannonSettings);
-	public static final Block SPRUCE_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "spruce_planks"), 		new Identifier("minecraft", "spruce_log"), cannonSettings);
-	public static final Block BIRCH_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "birch_planks"), 		new Identifier("minecraft", "birch_log"), cannonSettings);
+	public static final Block SPRUCE_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "spruce_planks"), 		new Identifier("minecraft", "spruce_log"), 	cannonSettings);
+	public static final Block BIRCH_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "birch_planks"), 		new Identifier("minecraft", "birch_log"), 	cannonSettings);
 	public static final Block JUNGLE_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "jungle_planks"), 		new Identifier("minecraft", "jungle_log"), 	cannonSettings);
 	public static final Block ACACIA_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "acacia_planks"), 		new Identifier("minecraft", "acacia_log"), 	cannonSettings);
 	public static final Block DARK_OAK_CANNON_BLOCK = new CannonBlock(new Identifier("minecraft", "dark_oak_planks"), 	new Identifier("minecraft", "dark_oak_log"), cannonSettings);
-	public static final Block CRIMSON_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "crimson_planks"), 	new Identifier("minecraft", "crimson_stem"), cannonSettings);
-	public static final Block WARPED_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "warped_planks"), 		new Identifier("minecraft", "warped_stem"), cannonSettings);
+	public static final Block CRIMSON_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "crimson_planks"), 	new Identifier(MODID, "crimson_stem"), 				cannonSettings);
+	public static final Block WARPED_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "warped_planks"), 		new Identifier(MODID, "warped_stem"), 					cannonSettings);
 
 	// BlockEntities
 	public static BlockEntityType<CannonBlockEntity> CANNON_BLOCK_ENTITY;

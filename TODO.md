@@ -1,21 +1,20 @@
 **TODO Liste:**
 
 **Kanonen:** 
- - [ ] Räder UVs fixen 
- - [ ] Kanone Lunte hinzufügen + Partikel
- - [ ] Magmakanonenkugeln  
- - [ ] Limit für das Überladen mit Powder (16?)  
- - [ ] Reichweite der Kanonen verringern  
- - [ ] Maybe mehr Ungenauigkeit bei Kanonen  
- - [ ] Sponge on a Stick in Cauldron nass machen
- - [ ] Statustext lokalisierbar machen
- - [ ] Zirkel für genauere Distanzbestimmung und Winkelanzeige
+- [ ] Kanone Lunte hinzufügen + Partikel
+- [ ] Magmakanonenkugeln  
+- [ ] Limit für das Überladen mit Powder (16?)  
+- [ ] Reichweite der Kanonen verringern  
+- [ ] Maybe mehr Ungenauigkeit bei Kanonen  
+- [ ] Sponge on a Stick in Cauldron nass machen
+- [ ] Statustext lokalisierbar machen
+- [ ] Zirkel für genauere Distanzbestimmung und Winkelanzeige
 
 **Schusswaffen:** 
- - [ ] Andere Art der Munition für die Pistole 
- - [ ] Bajonett-Variante der Muskete
- - [ ] entity.superior_ballistics.stone_bullet in de_de und en_us localizen
- - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
+- [ ] Andere Art der Munition für die Pistole 
+- [ ] Bajonett-Variante der Muskete
+- [ ] entity.superior_ballistics.stone_bullet in de_de und en_us localizen
+- [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
 
 **Rüstung:**
 - [ ] Uniformteile die mit Lederrüstung harmonieren (Zweispitz, Dreispitz, Shako, Pickelhaube) 
@@ -23,15 +22,15 @@
 - [ ] Pickelhaube localizen
 
 **Worldgen:** 
- - [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried
-       Treasures, Drowned-Dörfern und Shipwrecks
+- [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried
+      Treasures, Drowned-Dörfern und Shipwrecks
 
 **Entities:** 
- - [ ] Boss, den man beschwören kann
- - [ ] Pillager, die Schusswaffen nutzen 
- - [ ] Skelette, die Schusswaffen nutzen  
- - [ ] Drowned, die Schusswaffen
-       nutzen
+- [ ] Boss, den man beschwören kann
+- [ ] Pillager, die Schusswaffen nutzen 
+- [ ] Skelette, die Schusswaffen nutzen  
+- [ ] Drowned, die Schusswaffen
+      nutzen
 
 **Sonstiges:** 
 - [ ] Gunpowder Keg hinzufügen 
@@ -53,3 +52,4 @@
 - [x] Musketen verlieren Leben wenn geschossen werden 
 - [x] CannonBlockEntity vom Server ausgehend synchronisieren 
 - [x] Gunpowder Rezept hinzugefügt
+- [x] Räder UVs fixen 

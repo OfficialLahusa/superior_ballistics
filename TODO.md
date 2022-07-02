@@ -32,9 +32,14 @@
 - [ ] Drowned, die Schusswaffen
       nutzen
 
+**Advancements:**
+- [ ] "Haubitzen" (Kanone herstellen)
+- [ ] "Heil dir im Siegerkranz" (Pickelhaube aufsetzen)
+- [ ] "Schuss in den Ofen" (Kanone überladen und zünden)
+- [ ] Diverse Advancements für die Handfeuerwaffen und Uniformteile
+
 **Sonstiges:** 
 - [ ] Gunpowder Keg hinzufügen 
-- [ ] Interessante Advancements hinzufügen (bsp. "Haubitzen")
 
 **Ferne Ideen:** 
 - [ ] Hopper Einspeisung in Kanonen 

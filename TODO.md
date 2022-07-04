@@ -7,9 +7,7 @@
 - [ ] Reichweite der Kanonen verringern  
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen  
 - [ ] Sponge on a Stick in Cauldron nass machen
-- [ ] Statustext lokalisierbar machen (Insbesondere auch geladene Projektiltypen)
 - [ ] Zirkel für genauere Distanzbestimmung und Winkelanzeige
-- [ ] Enderperle als Munition hinzufügen
 
 **Schusswaffen:** 
 - [ ] Andere Art der Munition für die Pistole 
@@ -18,8 +16,10 @@
 - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
 
 **Rüstung:**
-- [ ] Uniformteile die mit Lederrüstung harmonieren (Zweispitz, Dreispitz, Shako, Pickelhaube) 
+- [ ] Zweispitz
+- [ ] Dreispitz
 - [ ] Tschako in Shako umbenennen (außer auf Deutsch)
+- [ ] Rezepte
 
 **Worldgen:** 
 - [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried
@@ -59,3 +59,9 @@
 - [x] CannonBlockEntity vom Server ausgehend synchronisieren 
 - [x] Gunpowder Rezept hinzugefügt
 - [x] Räder UVs fixen 
+- [x] Pickelhaube ItemRenderer
+- [x] Pickelhaube localizen
+- [x] Enderperle als Munition hinzufügen
+- [x] Statustext lokalisierbar machen (Insbesondere auch geladene Projektiltypen)
+- [x] Pickelhaube
+- [x] Shako

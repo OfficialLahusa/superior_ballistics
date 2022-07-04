@@ -7,7 +7,7 @@
 - [ ] Reichweite der Kanonen verringern  
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen  
 - [ ] Sponge on a Stick in Cauldron nass machen
-- [ ] Statustext lokalisierbar machen
+- [ ] Statustext lokalisierbar machen (Insbesondere auch geladene Projektiltypen)
 - [ ] Zirkel für genauere Distanzbestimmung und Winkelanzeige
 - [ ] Enderperle als Munition hinzufügen
 

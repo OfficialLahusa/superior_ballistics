@@ -45,10 +45,18 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
         // ItemUniformRenderers
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.PICKELHAUBE_HELMET, new PickelhaubeItemRenderer());
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.TSCHAKO_HELMET, new TschakoItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.TRICORNE_HELMET, new TricorneItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.BICORNE_FRONT_HELMET, new BicorneFrontItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.BICORNE_SIDE_HELMET, new BicorneSideItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.PITH_HELMET, new PithHelmetItemRenderer());
 
         // ArmorRenderers
         GeoArmorRenderer.registerArmorRenderer(new PickelhaubeArmorRenderer(), SuperiorBallisticsMod.PICKELHAUBE_HELMET);
         GeoArmorRenderer.registerArmorRenderer(new TschakoArmorRenderer(), SuperiorBallisticsMod.TSCHAKO_HELMET);
+        GeoArmorRenderer.registerArmorRenderer(new TricorneArmorRenderer(), SuperiorBallisticsMod.TRICORNE_HELMET);
+        GeoArmorRenderer.registerArmorRenderer(new BicorneFrontArmorRenderer(), SuperiorBallisticsMod.BICORNE_FRONT_HELMET);
+        GeoArmorRenderer.registerArmorRenderer(new BicorneSideArmorRenderer(), SuperiorBallisticsMod.BICORNE_SIDE_HELMET);
+        GeoArmorRenderer.registerArmorRenderer(new PithHelmetArmorRenderer(), SuperiorBallisticsMod.PITH_HELMET);
 
         // Particles
         ParticleFactoryRegistry.getInstance().register(SuperiorBallisticsMod.CANNON_MUZZLE_FIRE, CannonMuzzleFireParticle.Factory::new);

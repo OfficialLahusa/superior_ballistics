@@ -70,6 +70,10 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final ArmorMaterial UNIFORM_ARMOR_MATERIAL = new UniformArmorMaterial();
 	public static final Item PICKELHAUBE_HELMET = new PickelhaubeArmorItem(UNIFORM_ARMOR_MATERIAL, 	EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
 	public static final Item TSCHAKO_HELMET 	= new TschakoArmorItem(UNIFORM_ARMOR_MATERIAL, 		EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+	public static final Item TRICORNE_HELMET 	= new TricorneArmorItem(UNIFORM_ARMOR_MATERIAL, 	EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+	public static final Item BICORNE_FRONT_HELMET 	= new BicorneFrontArmorItem(UNIFORM_ARMOR_MATERIAL, 	EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+	public static final Item BICORNE_SIDE_HELMET 	= new BicorneSideArmorItem(UNIFORM_ARMOR_MATERIAL, 	EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+	public static final Item PITH_HELMET 	= new PithHelmetArmorItem(UNIFORM_ARMOR_MATERIAL, 	EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
 
 	// Entities
 	public static final EntityType<StoneBulletEntity> STONE_BULLET_ENTITY_TYPE = Registry.register(
@@ -141,8 +145,13 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_single_grapeshot"), 	IRON_SINGLE_GRAPESHOT);
 
 		// Armor
-		Registry.register(Registry.ITEM, new Identifier(MODID, "pickelhaube_helmet"), 	PICKELHAUBE_HELMET);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "tschako_helmet"), 		TSCHAKO_HELMET);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "pickelhaube_helmet"), 		PICKELHAUBE_HELMET);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "tschako_helmet"), 			TSCHAKO_HELMET);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "tricorne_helmet"), 			TRICORNE_HELMET);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "bicorne_front_helmet"), 		BICORNE_FRONT_HELMET);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "bicorne_side_helmet"), 		BICORNE_SIDE_HELMET);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "pith_helmet"), 				PITH_HELMET);
+
 
 		// Particles
 		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "cannon_muzzle_fire"), 		CANNON_MUZZLE_FIRE);

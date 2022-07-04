@@ -31,5 +31,9 @@
     "superior_ballistics.cannon.firing": "SCHIESST",
     "superior_ballistics.cannon.cleanup": "Putzen",
     "superior_ballistics.cannon.blank_shot": "Salutschuss",
-    "superior_ballistics.cannon.empty": "Leer"
+    "superior_ballistics.cannon.empty": "Leer",
+    "item.superior_ballistics.tricorne_helmet":"Dreispitz",
+    "item.superior_ballistics.bicorne_front_helmet": "Zweispitz gerade",
+    "item.superior_ballistics.bicorne_side_helmet": "Zweispitz seitwärts",
+    "item.superior_ballistics.pith_helmet": "Tropenhelm"
 }

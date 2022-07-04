@@ -1,8 +1,6 @@
 package com.lahusa.superior_ballistics.item.renderer;
 
-import com.lahusa.superior_ballistics.item.PickelhaubeArmorItem;
 import com.lahusa.superior_ballistics.item.TschakoArmorItem;
-import com.lahusa.superior_ballistics.item.model.PickelhaubeArmorModel;
 import com.lahusa.superior_ballistics.item.model.TschakoArmorModel;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 

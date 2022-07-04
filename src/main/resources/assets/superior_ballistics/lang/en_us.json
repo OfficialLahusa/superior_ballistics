@@ -21,5 +21,13 @@
     "item.superior_ballistics.iron_cannonball": "Iron Cannonball",
     "item.superior_ballistics.iron_grapeshot": "Iron Grapeshot",
     "item.superior_ballistics.pickelhaube_helmet": "Pickelhaube",
-    "item.superior_ballistics.tschako_helmet": "Tschako"
+    "item.superior_ballistics.tschako_helmet": "Tschako",
+    "superior_ballistics.cannon.loading_stage": "Cannon Loading Stage: ",
+    "superior_ballistics.cannon.insert_powder": "Insert powder",
+    "superior_ballistics.cannon.insert_shot": "Insert shot",
+    "superior_ballistics.cannon.ready_to_light": "Ready to light",
+    "superior_ballistics.cannon.firing": "FIRING",
+    "superior_ballistics.cannon.cleanup": "Cleanup",
+    "superior_ballistics.cannon.blank_shot": "Blank Shot",
+    "superior_ballistics.cannon.empty": "Empty"
 }

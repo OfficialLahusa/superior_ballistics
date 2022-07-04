@@ -21,6 +21,8 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -412,13 +414,13 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
         return -22.5f * state.get(CannonBlock.ANGLE);
     }
 
-    public String getShotName() {
+    public Text getShotName() {
         return switch (shotType) {
-            case IRON_CANNONBALL -> "Iron Shot";
-            case IRON_GRAPESHOT -> "Iron Grapeshot";
-            case ENDER_PEARL_SHOT -> "Ender Pearl";
-            case BLANK_SHOT -> "Blank Shot";
-            default -> "None";
+            case IRON_CANNONBALL -> new TranslatableText("item.superior_ballistics.iron_cannonball");
+            case IRON_GRAPESHOT -> new TranslatableText("item.superior_ballistics.iron_grapeshot");
+            case ENDER_PEARL_SHOT -> new TranslatableText("item.minecraft.ender_pearl");
+            case BLANK_SHOT -> new TranslatableText("superior_ballistics.cannon.blank_shot");
+            default -> new TranslatableText("superior_ballistics.cannon.empty");
         };
     }
 

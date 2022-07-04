@@ -19,5 +19,15 @@
     "item.superior_ballistics.piston_loader": "Kolbenlader",
     "item.superior_ballistics.piston_loader.tooltip": "Schiebt Ladungen in Kanonen hinein",
     "item.superior_ballistics.iron_cannonball": "Eisen-Kanonenkugel",
-    "item.superior_ballistics.iron_grapeshot": "Eisen-Streugeschoss"
+    "item.superior_ballistics.iron_grapeshot": "Eisen-Streugeschoss",
+    "item.superior_ballistics.pickelhaube_helmet": "Pickelhaube",
+    "item.superior_ballistics.tschako_helmet": "Tschako",
+    "superior_ballistics.cannon.loading_stage": "Kanonenladestufe: ",
+    "superior_ballistics.cannon.insert_powder": "Pulver laden",
+    "superior_ballistics.cannon.insert_shot": "Schuss laden",
+    "superior_ballistics.cannon.ready_to_light": "Feuerbereit",
+    "superior_ballistics.cannon.firing": "SCHIESST",
+    "superior_ballistics.cannon.cleanup": "Putzen",
+    "superior_ballistics.cannon.blank_shot": "Salutschuss",
+    "superior_ballistics.cannon.empty": "Leer"
 }

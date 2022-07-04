@@ -96,46 +96,41 @@ public class CannonBlock extends BlockWithEntity {
                     }
                 }
                 case CannonBlockEntity.SHOT_LOADING_STAGE -> {
-                    if(heldStack.isOf(SuperiorBallisticsMod.IRON_CANNONBALL) && !blockEntity.isShotLoaded()) {
-                        // Load shot
-                        if(!world.isClient) blockEntity.loadShot(CannonBlockEntity.IRON_CANNONBALL, player);
+                    // If cannon isn't loaded yet
+                    if(!blockEntity.isShotLoaded()) {
+                        if(heldStack.isOf(SuperiorBallisticsMod.IRON_CANNONBALL)) {
+                            // Load shot
+                            if(!world.isClient) blockEntity.loadShot(CannonBlockEntity.IRON_CANNONBALL, player);
 
-                        // Play sound
-                        player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 0.75f, 1.4f);
+                            // Play sound
+                            player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 0.75f, 1.4f);
+                        }
+                        else if(heldStack.isOf(SuperiorBallisticsMod.IRON_GRAPESHOT)) {
+                            // Load shot
+                            if(!world.isClient) blockEntity.loadShot(CannonBlockEntity.IRON_GRAPESHOT, player);
 
-                        // Remove shot from hand
-                        if(!player.isCreative()) heldStack.decrement(1);
-                    }
-                    else if(heldStack.isOf(SuperiorBallisticsMod.IRON_GRAPESHOT) && !blockEntity.isShotLoaded()) {
-                        // Load shot
-                        if(!world.isClient) blockEntity.loadShot(CannonBlockEntity.IRON_GRAPESHOT, player);
+                            // Play sound
+                            player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 0.75f, 1.4f);
+                        }
+                        else if(heldStack.isOf(Items.ENDER_PEARL)) {
+                            // Load shot
+                            if(!world.isClient) blockEntity.loadShot(CannonBlockEntity.ENDER_PEARL_SHOT, player);
 
-                        // Play sound
-                        player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 0.75f, 1.4f);
+                            // Play sound
+                            player.playSound(SoundEvents.ENTITY_ENDER_EYE_LAUNCH, 0.75f, 1.4f);
+                        }
+                        else if(heldStack.isOf(Items.PAPER)) {
+                            // Load shot
+                            if(!world.isClient) blockEntity.loadShot(CannonBlockEntity.BLANK_SHOT, player);
 
-                        // Remove shot from hand
-                        if(!player.isCreative()) heldStack.decrement(1);
-                    }
-                    else if(heldStack.isOf(Items.ENDER_PEARL) && !blockEntity.isShotLoaded()) {
-                        // Load shot
-                        if(!world.isClient) blockEntity.loadShot(CannonBlockEntity.ENDER_PEARL_SHOT, player);
-
-                        // Play sound
-                        player.playSound(SoundEvents.ENTITY_ENDER_EYE_LAUNCH, 0.75f, 1.4f);
-
-                        // Remove shot from hand
-                        if(!player.isCreative()) heldStack.decrement(1);
-                    }
-                    else if(heldStack.isOf(Items.PAPER) && !blockEntity.isShotLoaded()) {
-                        // Load shot
-                        if(!world.isClient) blockEntity.loadShot(CannonBlockEntity.BLANK_SHOT, player);
-
-                        // Play sound
-                        player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.75f, 1.0f);
+                            // Play sound
+                            player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.75f, 1.0f);
+                        }
 
                         // Remove shot from hand
                         if(!player.isCreative()) heldStack.decrement(1);
                     }
+                    // If cannon is loaded and piston loader is held
                     else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {
                         // Push
                         if(!world.isClient) blockEntity.push(player);

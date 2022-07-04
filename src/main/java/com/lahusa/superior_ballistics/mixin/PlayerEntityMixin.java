@@ -7,6 +7,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -39,26 +40,29 @@ public class PlayerEntityMixin {
                 CannonBlockEntity blockEntity = (CannonBlockEntity)client.world.getBlockEntity(pos);
 
                 if(blockEntity != null) {
-                    // Build overlay message
-                    MutableText text = new LiteralText("[").formatted(Formatting.GRAY).append(new LiteralText("Cannon Loading Stage: ").formatted(Formatting.BLACK));
+                    // Build status text
+                    MutableText text = new LiteralText("[").formatted(Formatting.GRAY)
+                            .append(new TranslatableText("superior_ballistics.cannon.loading_stage").formatted(Formatting.BLACK));
 
                     switch (blockEntity.getLoadingStage()) {
                         case CannonBlockEntity.POWDER_LOADING_STAGE -> {
-                            text.append(new LiteralText("Insert Powder ").formatted(Formatting.DARK_GREEN));
-                            text.append(new LiteralText("(" + blockEntity.getPowderAmount() + "/" + CannonBlockEntity.MAX_POWDER + ")")
+                            text.append(new TranslatableText("superior_ballistics.cannon.insert_powder").formatted(Formatting.DARK_GREEN));
+                            text.append(new LiteralText(" (" + blockEntity.getPowderAmount() + "/" + CannonBlockEntity.MAX_POWDER + ")")
                                     .formatted(blockEntity.getPowderAmount() > CannonBlockEntity.MAX_POWDER ? Formatting.RED : Formatting.GOLD)
                             );
                         }
                         case CannonBlockEntity.SHOT_LOADING_STAGE -> {
-                            text.append(new LiteralText("Insert Shot ").formatted(Formatting.DARK_GREEN));
-                            text.append(new LiteralText("(" + blockEntity.getShotName() + ")").formatted(Formatting.GOLD));
+                            text.append(new TranslatableText("superior_ballistics.cannon.insert_shot").formatted(Formatting.DARK_GREEN));
+                            text.append(new LiteralText(" (").append(blockEntity.getShotName()).append(new LiteralText(")")).formatted(Formatting.GOLD));
                         }
                         case CannonBlockEntity.READY_STAGE -> {
-                            text.append(new LiteralText("Ready to light ").formatted(Formatting.DARK_GREEN));
-                            text.append(new LiteralText("(Flint and Steel / Redstone)").formatted(Formatting.GOLD));
+                            text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light").formatted(Formatting.DARK_GREEN));
+                            text.append(new LiteralText(" (").append(new TranslatableText("item.minecraft.flint_and_steel"))
+                                    .append(new LiteralText(" / ")).append(new TranslatableText("itemGroup.redstone")).append(new LiteralText(")"))
+                                    .formatted(Formatting.GOLD));
                         }
-                        case CannonBlockEntity.LIT_STAGE -> text.append(new LiteralText("FIRING").formatted(Formatting.RED));
-                        case CannonBlockEntity.CLEANUP_STAGE -> text.append(new LiteralText("Cleanup").formatted(Formatting.DARK_GREEN));
+                        case CannonBlockEntity.LIT_STAGE -> text.append(new TranslatableText("superior_ballistics.cannon.firing").formatted(Formatting.RED));
+                        case CannonBlockEntity.CLEANUP_STAGE -> text.append(new TranslatableText("superior_ballistics.cannon.cleanup").formatted(Formatting.DARK_GREEN));
                         default -> text.append(new LiteralText("INVALID").formatted(Formatting.RED));
                     }
                     text.append(new LiteralText("]").formatted(Formatting.GRAY));

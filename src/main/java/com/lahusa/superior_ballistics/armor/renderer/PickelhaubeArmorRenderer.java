@@ -1,7 +1,7 @@
-package com.lahusa.superior_ballistics.item.renderer;
+package com.lahusa.superior_ballistics.armor.renderer;
 
 import com.lahusa.superior_ballistics.item.PickelhaubeArmorItem;
-import com.lahusa.superior_ballistics.item.model.PickelhaubeArmorModel;
+import com.lahusa.superior_ballistics.armor.model.PickelhaubeArmorModel;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
 public class PickelhaubeArmorRenderer extends GeoArmorRenderer<PickelhaubeArmorItem> {

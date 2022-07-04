@@ -1,4 +1,4 @@
-package com.lahusa.superior_ballistics.item.model;
+package com.lahusa.superior_ballistics.armor.model;
 
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import com.lahusa.superior_ballistics.item.BicorneSideArmorItem;

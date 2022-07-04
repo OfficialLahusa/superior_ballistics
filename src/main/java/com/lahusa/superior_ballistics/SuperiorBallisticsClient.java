@@ -1,5 +1,6 @@
 package com.lahusa.superior_ballistics;
 
+import com.lahusa.superior_ballistics.armor.renderer.*;
 import com.lahusa.superior_ballistics.block.renderer.CannonBlockRenderer;
 import com.lahusa.superior_ballistics.item.renderer.*;
 import com.lahusa.superior_ballistics.net.EntitySpawnPacket;

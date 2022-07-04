@@ -12,7 +12,6 @@
 **Schusswaffen:** 
 - [ ] Andere Art der Munition für die Pistole 
 - [ ] Bajonett-Variante der Muskete
-- [ ] entity.superior_ballistics.stone_bullet in de_de und en_us localizen
 - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
 
 **Rüstung:**
@@ -65,3 +64,4 @@
 - [x] Statustext lokalisierbar machen (Insbesondere auch geladene Projektiltypen)
 - [x] Pickelhaube
 - [x] Shako
+- [x] entity.superior_ballistics.stone_bullet/cannonball in de_de und en_us localizen

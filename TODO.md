@@ -19,8 +19,7 @@
 
 **Rüstung:**
 - [ ] Uniformteile die mit Lederrüstung harmonieren (Zweispitz, Dreispitz, Shako, Pickelhaube) 
-- [ ] Pickelhaube ItemRenderer
-- [ ] Pickelhaube localizen
+- [ ] Tschako in Shako umbenennen (außer auf Deutsch)
 
 **Worldgen:** 
 - [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried

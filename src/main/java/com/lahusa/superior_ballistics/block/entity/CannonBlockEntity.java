@@ -9,7 +9,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
@@ -50,7 +52,8 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     public static final short NO_SHOT = 0;
     public static final short IRON_CANNONBALL = 1;
     public static final short IRON_GRAPESHOT = 2;
-    public static final short BLANK_SHOT = 3;
+    public static final short ENDER_PEARL_SHOT = 3;
+    public static final short BLANK_SHOT = 4;
 
     // Lit phase
     public static final short MAX_LIT_TICKS = 40;
@@ -211,6 +214,13 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
                                 cannonBallEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_CANNONBALL));
                                 cannonBallEntity.setVelocity(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, SHOT_DIVERGENCE);
                                 world.spawnEntity(cannonBallEntity);
+                            }
+                            case ENDER_PEARL_SHOT -> {
+                                EnderPearlEntity enderPearlEntity = new EnderPearlEntity(world, player);
+                                enderPearlEntity.setPos(muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
+                                enderPearlEntity.setItem(new ItemStack(Items.ENDER_PEARL));
+                                enderPearlEntity.setVelocity(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, SHOT_DIVERGENCE);
+                                world.spawnEntity(enderPearlEntity);
                             }
                             case IRON_GRAPESHOT -> {
                                 for(int i = 0; i < 8; i++) {
@@ -406,6 +416,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
         return switch (shotType) {
             case IRON_CANNONBALL -> "Iron Shot";
             case IRON_GRAPESHOT -> "Iron Grapeshot";
+            case ENDER_PEARL_SHOT -> "Ender Pearl";
             case BLANK_SHOT -> "Blank Shot";
             default -> "None";
         };

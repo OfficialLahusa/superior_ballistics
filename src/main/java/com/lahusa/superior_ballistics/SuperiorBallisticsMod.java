@@ -22,6 +22,7 @@ import net.minecraft.item.*;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import software.bernie.example.GeckoLibMod;
 
 public class SuperiorBallisticsMod implements ModInitializer {
 
@@ -102,6 +103,8 @@ public class SuperiorBallisticsMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		GeckoLibMod.DISABLE_IN_DEV = true;
+
 		System.out.println("Superior Ballistics Init: Starting");
 
 		// Blocks

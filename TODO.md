@@ -1,12 +1,11 @@
-**TODO Liste:**
+**TODO-Liste:**
 
 **Kanonen:** 
 - [ ] Kanone Lunte hinzufügen + Partikel
-- [ ] Magmakanonenkugeln  
+- [ ] Magma-Kanonenkugeln  
 - [ ] Limit für das Überladen mit Powder (16?)  
 - [ ] Reichweite der Kanonen verringern  
-- [ ] Maybe mehr Ungenauigkeit bei Kanonen  
-- [ ] Sponge on a Stick in Cauldron nass machen
+- [ ] Maybe mehr Ungenauigkeit bei Kanonen
 - [ ] Zirkel für genauere Distanzbestimmung und Winkelanzeige
 
 **Schusswaffen:** 
@@ -50,9 +49,9 @@
 - [x] Richtige Halteanimation für die Muskete (wie beim Crossbow) 
 - [x] Blunderbuss! 
 - [x] Schaden reduzieren bei der Muskete 
-- [x] Automatische Anpassung des Kanonen Model, je nach Holz 
+- [x] Automatische Anpassung des Kanonen-Models, je nach Holz 
 - [x] Effektivität von Kavallerie (mit Schwert oder Schusswaffe) gegen Beschuss testen 
-- [x] Musketen verlieren Leben wenn geschossen werden 
+- [x] Musketen verlieren Leben, wenn geschossen werden 
 - [x] CannonBlockEntity vom Server ausgehend synchronisieren 
 - [x] Gunpowder Rezept hinzugefügt
 - [x] Räder UVs fixen 
@@ -65,3 +64,4 @@
 - [x] entity.superior_ballistics.stone_bullet/cannonball in de_de und en_us localizen
 - [x] Zweispitz
 - [x] Dreispitz
+- [x] Sponge on a Stick in Cauldron nass machen

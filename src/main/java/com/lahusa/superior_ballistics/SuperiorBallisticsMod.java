@@ -23,6 +23,7 @@ import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import software.bernie.example.GeckoLibMod;
+import software.bernie.geckolib3.GeckoLib;
 
 public class SuperiorBallisticsMod implements ModInitializer {
 
@@ -104,6 +105,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		GeckoLibMod.DISABLE_IN_DEV = true;
+		GeckoLib.initialize();
 
 		System.out.println("Superior Ballistics Init: Starting");
 
@@ -148,8 +150,8 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_single_grapeshot"), 	IRON_SINGLE_GRAPESHOT);
 
 		// Armor
-		Registry.register(Registry.ITEM, new Identifier(MODID, "pickelhaube_helmet"), 		PICKELHAUBE_HELMET);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "tschako_helmet"), 			TSCHAKO_HELMET);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "pickelhaube_helmet"), 			PICKELHAUBE_HELMET);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "tschako_helmet"), 				TSCHAKO_HELMET);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "tricorne_helmet"), 			TRICORNE_HELMET);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "bicorne_front_helmet"), 		BICORNE_FRONT_HELMET);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "bicorne_side_helmet"), 		BICORNE_SIDE_HELMET);

@@ -4,6 +4,7 @@
   "package": "com.lahusa.superior_ballistics.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "CauldronBehaviorMixin",
     "LivingEntityAccessor"
   ],
   "client": [
@@ -11,7 +12,6 @@
     "PlayerEntityRendererMixin"
   ],
   "server": [
-
   ],
   "injectors": {
     "defaultRequire": 1

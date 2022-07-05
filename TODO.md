@@ -15,8 +15,6 @@
 - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
 
 **Rüstung:**
-- [ ] Zweispitz
-- [ ] Dreispitz
 - [ ] Tschako in Shako umbenennen (außer auf Deutsch)
 - [ ] Rezepte
 
@@ -65,3 +63,5 @@
 - [x] Pickelhaube
 - [x] Shako
 - [x] entity.superior_ballistics.stone_bullet/cannonball in de_de und en_us localizen
+- [x] Zweispitz
+- [x] Dreispitz

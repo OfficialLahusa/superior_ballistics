@@ -102,11 +102,12 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final DefaultParticleType CANNON_MUZZLE_FIRE = FabricParticleTypes.simple();
 	public static final DefaultParticleType CANNON_MUZZLE_SMOKE_TRAIL = FabricParticleTypes.simple();
 
+	static {
+		GeckoLibMod.DISABLE_IN_DEV = true;
+	}
+
 	@Override
 	public void onInitialize() {
-		GeckoLibMod.DISABLE_IN_DEV = true;
-		GeckoLib.initialize();
-
 		System.out.println("Superior Ballistics Init: Starting");
 
 		// Blocks

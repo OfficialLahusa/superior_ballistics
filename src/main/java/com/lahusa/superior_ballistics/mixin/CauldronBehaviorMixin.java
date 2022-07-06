@@ -26,7 +26,7 @@ public interface CauldronBehaviorMixin {
     public static Map<Item, CauldronBehavior> WATER_CAULDRON_BEHAVIOR = null;
 
     @Inject(at = @At("TAIL"), method = "registerBehavior()V")
-    private static void registerSpongeOnAStickBehaviors(CallbackInfo ci)
+    private static void registerSpongeOnAStickBehavior(CallbackInfo ci)
     {
         WATER_CAULDRON_BEHAVIOR.put(SuperiorBallisticsMod.SPONGE_ON_A_STICK_ITEM, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient) {

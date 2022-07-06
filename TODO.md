@@ -7,6 +7,7 @@
 - [ ] Reichweite der Kanonen verringern  
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
 - [ ] Zirkel für genauere Distanzbestimmung und Winkelanzeige
+- [ ] Angle in die Block Entity verschieben
 
 **Schusswaffen:** 
 - [ ] Andere Art der Munition für die Pistole 

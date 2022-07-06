@@ -70,12 +70,12 @@ public class SuperiorBallisticsMod implements ModInitializer {
 
 	//Armor
 	public static final ArmorMaterial UNIFORM_ARMOR_MATERIAL = new UniformArmorMaterial();
-	public static final Item PICKELHAUBE_HELMET = new PickelhaubeArmorItem(UNIFORM_ARMOR_MATERIAL, 	EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
-	public static final Item TSCHAKO_HELMET 	= new TschakoArmorItem(UNIFORM_ARMOR_MATERIAL, 		EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
-	public static final Item TRICORNE_HELMET 	= new TricorneArmorItem(UNIFORM_ARMOR_MATERIAL, 	EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+	public static final Item PICKELHAUBE_HELMET 	= new PickelhaubeArmorItem(UNIFORM_ARMOR_MATERIAL, 		EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+	public static final Item SHAKO_HELMET 			= new ShakoArmorItem(UNIFORM_ARMOR_MATERIAL, 			EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+	public static final Item TRICORNE_HELMET 		= new TricorneArmorItem(UNIFORM_ARMOR_MATERIAL, 		EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
 	public static final Item BICORNE_FRONT_HELMET 	= new BicorneFrontArmorItem(UNIFORM_ARMOR_MATERIAL, 	EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
-	public static final Item BICORNE_SIDE_HELMET 	= new BicorneSideArmorItem(UNIFORM_ARMOR_MATERIAL, 	EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
-	public static final Item PITH_HELMET 	= new PithHelmetArmorItem(UNIFORM_ARMOR_MATERIAL, 	EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+	public static final Item BICORNE_SIDE_HELMET 	= new BicorneSideArmorItem(UNIFORM_ARMOR_MATERIAL, 		EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+	public static final Item PITH_HELMET 			= new PithHelmetArmorItem(UNIFORM_ARMOR_MATERIAL, 		EquipmentSlot.HEAD,new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
 
 	// Entities
 	public static final EntityType<StoneBulletEntity> STONE_BULLET_ENTITY_TYPE = Registry.register(
@@ -151,7 +151,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 
 		// Armor
 		Registry.register(Registry.ITEM, new Identifier(MODID, "pickelhaube_helmet"), 			PICKELHAUBE_HELMET);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "tschako_helmet"), 				TSCHAKO_HELMET);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "shako_helmet"), 				SHAKO_HELMET);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "tricorne_helmet"), 			TRICORNE_HELMET);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "bicorne_front_helmet"), 		BICORNE_FRONT_HELMET);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "bicorne_side_helmet"), 		BICORNE_SIDE_HELMET);

@@ -9,13 +9,12 @@
 - [ ] Zirkel für genauere Distanzbestimmung und Winkelanzeige
 - [ ] Angle in die Block Entity verschieben
 
-**Schusswaffen:** 
-- [ ] Andere Art der Munition für die Pistole 
+**Schusswaffen:**
+- [ ] Andere Art der Munition für die Pistole
 - [ ] Bajonett-Variante der Muskete
 - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
 
 **Rüstung:**
-- [ ] Tschako in Shako umbenennen (außer auf Deutsch)
 - [ ] Rezepte
 
 **Worldgen:** 
@@ -66,3 +65,4 @@
 - [x] Zweispitz
 - [x] Dreispitz
 - [x] Sponge on a Stick in Cauldron nass machen
+- [x] Tschako in Shako umbenennen (außer auf Deutsch)

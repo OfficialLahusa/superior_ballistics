@@ -45,7 +45,7 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.WARPED_CANNON_ITEM, new CannonBlockItemRenderer());
         // ItemUniformRenderers
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.PICKELHAUBE_HELMET, new PickelhaubeItemRenderer());
-        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.TSCHAKO_HELMET, new TschakoItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.SHAKO_HELMET, new ShakoItemRenderer());
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.TRICORNE_HELMET, new TricorneItemRenderer());
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.BICORNE_FRONT_HELMET, new BicorneFrontItemRenderer());
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.BICORNE_SIDE_HELMET, new BicorneSideItemRenderer());
@@ -53,7 +53,7 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
 
         // ArmorRenderers
         GeoArmorRenderer.registerArmorRenderer(new PickelhaubeArmorRenderer(), SuperiorBallisticsMod.PICKELHAUBE_HELMET);
-        GeoArmorRenderer.registerArmorRenderer(new TschakoArmorRenderer(), SuperiorBallisticsMod.TSCHAKO_HELMET);
+        GeoArmorRenderer.registerArmorRenderer(new ShakoArmorRenderer(), SuperiorBallisticsMod.SHAKO_HELMET);
         GeoArmorRenderer.registerArmorRenderer(new TricorneArmorRenderer(), SuperiorBallisticsMod.TRICORNE_HELMET);
         GeoArmorRenderer.registerArmorRenderer(new BicorneFrontArmorRenderer(), SuperiorBallisticsMod.BICORNE_FRONT_HELMET);
         GeoArmorRenderer.registerArmorRenderer(new BicorneSideArmorRenderer(), SuperiorBallisticsMod.BICORNE_SIDE_HELMET);

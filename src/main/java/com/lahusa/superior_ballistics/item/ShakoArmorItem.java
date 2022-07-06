@@ -11,10 +11,10 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class TschakoArmorItem extends ArmorItem implements IAnimatable {
+public class ShakoArmorItem extends ArmorItem implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
 
-    public TschakoArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
+    public ShakoArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
         super(material, slot, settings);
     }
     private <P extends IAnimatable> PlayState predicate(AnimationEvent<P> event) {

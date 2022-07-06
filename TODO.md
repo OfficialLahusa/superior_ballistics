@@ -6,7 +6,7 @@
 - [ ] Limit für das Überladen mit Powder (16?)  
 - [ ] Reichweite der Kanonen verringern  
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
-- [ ] Zirkel für genauere Distanzbestimmung und Winkelanzeige
+- [ ] Zirkel/Theodolit/Tachymeter/Nivellier für genauere Distanzbestimmung und Winkelanzeige
 - [ ] Angle in die Block Entity verschieben
 
 **Schusswaffen:**

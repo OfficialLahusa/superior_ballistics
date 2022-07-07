@@ -20,8 +20,11 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -111,6 +114,43 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return this.factory;
+    }
+
+    public Text getStatusText() {
+        MutableText text = new LiteralText("[").formatted(Formatting.GRAY)
+                .append(new TranslatableText("superior_ballistics.cannon.loading_stage").formatted(Formatting.BLACK));
+
+        switch (getLoadingStage()) {
+            case CannonBlockEntity.POWDER_LOADING_STAGE -> {
+                text.append(new TranslatableText("superior_ballistics.cannon.insert_powder").formatted(Formatting.DARK_GREEN));
+                text.append(new LiteralText(" (" + getPowderAmount() + "/" + CannonBlockEntity.MAX_POWDER + ")")
+                        .formatted(getPowderAmount() > CannonBlockEntity.MAX_POWDER ? Formatting.RED : Formatting.GOLD)
+                );
+            }
+            case CannonBlockEntity.SHOT_LOADING_STAGE -> {
+                text.append(new TranslatableText("superior_ballistics.cannon.insert_shot").formatted(Formatting.DARK_GREEN));
+                text.append(new LiteralText(" (").append(getShotName()).append(new LiteralText(")")).formatted(Formatting.GOLD));
+            }
+            case CannonBlockEntity.READY_STAGE -> {
+                // Show different text when cannon is creative
+                if(!isCreative()) {
+                    text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light").formatted(Formatting.DARK_GREEN));
+                }
+                else {
+                    text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light_creative").formatted(Formatting.LIGHT_PURPLE));
+                }
+
+                text.append(new LiteralText(" (").append(new TranslatableText("item.minecraft.flint_and_steel"))
+                        .append(new LiteralText(" / ")).append(new TranslatableText("itemGroup.redstone")).append(new LiteralText(")"))
+                        .formatted(Formatting.GOLD));
+            }
+            case CannonBlockEntity.LIT_STAGE -> text.append(new TranslatableText("superior_ballistics.cannon.firing").formatted(Formatting.RED));
+            case CannonBlockEntity.CLEANUP_STAGE -> text.append(new TranslatableText("superior_ballistics.cannon.cleanup").formatted(Formatting.DARK_GREEN));
+            default -> text.append(new LiteralText("INVALID").formatted(Formatting.RED));
+        }
+        text.append(new LiteralText("]").formatted(Formatting.GRAY));
+
+        return text;
     }
 
     private void fire() {

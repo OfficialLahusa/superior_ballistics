@@ -56,7 +56,14 @@ public class PlayerEntityMixin {
                             text.append(new LiteralText(" (").append(blockEntity.getShotName()).append(new LiteralText(")")).formatted(Formatting.GOLD));
                         }
                         case CannonBlockEntity.READY_STAGE -> {
-                            text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light").formatted(Formatting.DARK_GREEN));
+                            // Show different text when cannon is creative
+                            if(!blockEntity.isCreative()) {
+                                text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light").formatted(Formatting.DARK_GREEN));
+                            }
+                            else {
+                                text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light_creative").formatted(Formatting.LIGHT_PURPLE));
+                            }
+
                             text.append(new LiteralText(" (").append(new TranslatableText("item.minecraft.flint_and_steel"))
                                     .append(new LiteralText(" / ")).append(new TranslatableText("itemGroup.redstone")).append(new LiteralText(")"))
                                     .formatted(Formatting.GOLD));

@@ -16,6 +16,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -150,6 +151,19 @@ public class CannonBlock extends BlockWithEntity {
 
                         // Damage flint and steel
                         if(!player.isCreative() && !world.isClient) heldStack.damage(1, player, (p) -> p.sendToolBreakStatus(p.getActiveHand()));
+                    }
+                    else if(heldStack.isOf(SuperiorBallisticsMod.CREATIVE_CANNON_MODULE) && !blockEntity.isCreative()) {
+                        // Make cannon creative
+                        if(!world.isClient) blockEntity.setCreative(true);
+
+                        // Play sound
+                        world.playSound(player, pos, SoundEvents.BLOCK_NOTE_BLOCK_PLING, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+
+                        // Show message
+                        if(world.isClient) player.sendMessage(new TranslatableText("item.superior_ballistics.creative_cannon_module.applied_message").formatted(Formatting.LIGHT_PURPLE), false);
+
+                        // Remove one from hand
+                        if(!player.isCreative()) heldStack.decrement(1);
                     }
                 }
                 case CannonBlockEntity.CLEANUP_STAGE -> {

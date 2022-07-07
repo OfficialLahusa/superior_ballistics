@@ -78,6 +78,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     private boolean isShotLoaded = false;
     private short shotType = NO_SHOT;
     private short litTicks = 0;
+    private boolean isCreative = false;
     private UUID lastUserUUID = null;
 
     private AnimationFactory factory = new AnimationFactory(this);
@@ -230,7 +231,13 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
                 }
             }
 
-            loadingStage = CLEANUP_STAGE;
+            if(!isCreative) {
+                loadingStage = CLEANUP_STAGE;
+            }
+            else {
+                loadingStage = READY_STAGE;
+                litTicks = 0;
+            }
         }
     }
 
@@ -363,6 +370,12 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
         sync();
     }
 
+    public void setCreative(boolean creative) {
+        isCreative = creative;
+        markDirty();
+        sync();
+    }
+
     private Vec3d getBarrelDirection() {
         double angleDegrees = getAngleDegrees();
         double slopeHorizontal = Math.cos(Math.toRadians(angleDegrees));
@@ -447,6 +460,10 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
         return shotType;
     }
 
+    public boolean isCreative() {
+        return isCreative;
+    }
+
     @Override
     public void writeNbt(NbtCompound tag) {
         tag.putShort("angle", angle);
@@ -455,6 +472,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
         tag.putBoolean("isShotLoaded", isShotLoaded);
         tag.putShort("shotType", shotType);
         tag.putShort("litTicks", litTicks);
+        tag.putBoolean("isCreative", isCreative);
         if(lastUserUUID != null) tag.putUuid("lastUserUUID", lastUserUUID);
 
         super.writeNbt(tag);
@@ -470,6 +488,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
         isShotLoaded = tag.getBoolean("isShotLoaded");
         shotType = tag.getShort("shotType");
         litTicks = tag.getShort("litTicks");
+        isCreative = tag.getBoolean("isCreative");
         if(tag.contains("lastUserUUID")) lastUserUUID = tag.getUuid("lastUserUUID");
     }
 

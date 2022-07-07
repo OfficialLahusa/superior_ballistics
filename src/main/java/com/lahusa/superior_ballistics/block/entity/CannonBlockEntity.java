@@ -70,7 +70,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     private static final float GRAPESHOT_DIVERGENCE = 3.0f;
 
     // Barrel angle
-    public static final short MAX_ANGLE = 3;
+    public static final short MAX_ANGLE = 14;
 
     private short angle = 1;
     private short loadingStage = 0;

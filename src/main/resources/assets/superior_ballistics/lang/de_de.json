@@ -22,6 +22,13 @@
     "item.superior_ballistics.iron_grapeshot": "Eisen-Streugeschoss",
     "item.superior_ballistics.pickelhaube_helmet": "Pickelhaube",
     "item.superior_ballistics.shako_helmet": "Tschako",
+    "item.superior_ballistics.tricorne_helmet":"Dreispitz",
+    "item.superior_ballistics.bicorne_front_helmet": "Zweispitz gerade",
+    "item.superior_ballistics.bicorne_side_helmet": "Zweispitz seitwärts",
+    "item.superior_ballistics.pith_helmet": "Tropenhelm",
+    "item.superior_ballistics.creative_cannon_module": "Kreatives Kanonenmodul",
+    "item.superior_ballistics.creative_cannon_module.tooltip.phase_hint": "Während Ladestufe \"%s\" benutzen.",
+    "item.superior_ballistics.creative_cannon_module.tooltip.description": "Wandelt die Kanone in eine kreative Kanone mit unendlich Munition um.",
     "entity.superior_ballistics.cannonball": "Kanonenkugel",
     "entity.superior_ballistics.stone_bullet": "Steinkugel",
     "superior_ballistics.cannon.loading_stage": "Kanonenladestufe: ",
@@ -31,9 +38,6 @@
     "superior_ballistics.cannon.firing": "SCHIESST",
     "superior_ballistics.cannon.cleanup": "Putzen",
     "superior_ballistics.cannon.blank_shot": "Salutschuss",
-    "superior_ballistics.cannon.empty": "Leer",
-    "item.superior_ballistics.tricorne_helmet":"Dreispitz",
-    "item.superior_ballistics.bicorne_front_helmet": "Zweispitz gerade",
-    "item.superior_ballistics.bicorne_side_helmet": "Zweispitz seitwärts",
-    "item.superior_ballistics.pith_helmet": "Tropenhelm"
+    "superior_ballistics.cannon.empty": "Leer"
+
 }

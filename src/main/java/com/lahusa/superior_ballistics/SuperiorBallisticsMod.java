@@ -1,5 +1,6 @@
 package com.lahusa.superior_ballistics;
 
+import com.eliotlash.mclib.math.functions.classic.Mod;
 import com.lahusa.superior_ballistics.block.CannonBlock;
 import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
 import com.lahusa.superior_ballistics.entity.CannonBallEntity;
@@ -21,6 +22,7 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.*;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import software.bernie.example.GeckoLibMod;
 import software.bernie.geckolib3.GeckoLib;
@@ -64,9 +66,10 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final Item SPONGE_ON_A_STICK_ITEM 	= new SpongeOnAStickItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
 	public static final Item WET_SPONGE_ON_A_STICK_ITEM = new WetSpongeOnAStickItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
 	public static final Item PISTON_LOADER_ITEM 		= new PistonLoaderItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
-	public static final Item IRON_CANNONBALL 			= new IronCannonballItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(16));
-	public static final Item IRON_GRAPESHOT 			= new IronGrapeshotItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(16));
+	public static final Item IRON_CANNONBALL 			= new IronCannonballItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(16));
+	public static final Item IRON_GRAPESHOT 			= new IronGrapeshotItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(16));
 	public static final Item IRON_SINGLE_GRAPESHOT 		= new IronSingleGrapeshotItem(new FabricItemSettings());
+	public static final Item CREATIVE_CANNON_MODULE		= new CreativeCannonModuleItem(new FabricItemSettings().rarity(Rarity.EPIC).group(ItemGroup.COMBAT));
 
 	//Armor
 	public static final ArmorMaterial UNIFORM_ARMOR_MATERIAL = new UniformArmorMaterial();
@@ -149,6 +152,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_cannonball"), 		IRON_CANNONBALL);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_grapeshot"), 			IRON_GRAPESHOT);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_single_grapeshot"), 	IRON_SINGLE_GRAPESHOT);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "creative_cannon_module"),	CREATIVE_CANNON_MODULE);
 
 		// Armor
 		Registry.register(Registry.ITEM, new Identifier(MODID, "pickelhaube_helmet"), 			PICKELHAUBE_HELMET);

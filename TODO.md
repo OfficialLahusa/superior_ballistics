@@ -12,6 +12,7 @@
 - [ ] Andere Art der Munition für die Pistole
 - [ ] Bajonett-Variante der Muskete
 - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
+- [ ] Viewmodels größer sichtbar machen
 
 **Rüstung:**
 - [ ] Rezepte

@@ -1,7 +1,6 @@
 package com.lahusa.superior_ballistics.block.entity;
 
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
-import com.lahusa.superior_ballistics.block.CannonBlock;
 import com.lahusa.superior_ballistics.entity.CannonBallEntity;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
 import net.minecraft.block.Block;
@@ -70,6 +69,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     private static final float SHOT_DIVERGENCE = 1.2f;
     private static final float GRAPESHOT_DIVERGENCE = 3.0f;
 
+    private short angle = 1;
     private short loadingStage = 0;
     private short powderAmount = 0;
     private boolean isShotLoaded = false;
@@ -130,18 +130,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
                 }
 
                 // Determine barrel direction
-                double angle = world.getBlockState(pos).get(CannonBlock.ANGLE) * 22.5;
-                double slopeHorizontal = Math.cos(Math.toRadians(angle));
-                double slopeVertical = Math.sin(Math.toRadians(angle));
-                Vec3d dir = new Vec3d(0.0, slopeVertical, 0.0);
-                switch (world.getBlockState(pos).get(Properties.HORIZONTAL_FACING)) {
-                    case NORTH -> dir = dir.add(0.0, 0.0, -slopeHorizontal);
-                    case SOUTH -> dir = dir.add(0.0, 0.0,  slopeHorizontal);
-                    case EAST  -> dir = dir.add( slopeHorizontal, 0.0, 0.0);
-                    case WEST  -> dir = dir.add(-slopeHorizontal, 0.0, 0.0);
-                    default -> throw new IllegalStateException("Unexpected value: " + world.getBlockState(pos).get(Properties.HORIZONTAL_FACING));
-                }
-                dir = dir.normalize();
+                Vec3d dir = getBarrelDirection();
 
                 Vec3d muzzleParticlePos = new Vec3d(
                         pos.getX() + pivot.x + (BARREL_LENGTH + MUZZLE_PARTICLE_OFFSET) * dir.x,
@@ -322,18 +311,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
                     }
 
                     // Determine barrel direction
-                    double angle = world.getBlockState(pos).get(CannonBlock.ANGLE) * 22.5;
-                    double slopeHorizontal = Math.cos(Math.toRadians(angle));
-                    double slopeVertical = Math.sin(Math.toRadians(angle));
-                    Vec3d dir = new Vec3d(0.0, slopeVertical, 0.0);
-                    switch (world.getBlockState(pos).get(Properties.HORIZONTAL_FACING)) {
-                        case NORTH -> dir = dir.add(0.0, 0.0, -slopeHorizontal);
-                        case SOUTH -> dir = dir.add(0.0, 0.0,  slopeHorizontal);
-                        case EAST  -> dir = dir.add( slopeHorizontal, 0.0, 0.0);
-                        case WEST  -> dir = dir.add(-slopeHorizontal, 0.0, 0.0);
-                        default -> throw new IllegalStateException("Unexpected value: " + world.getBlockState(pos).get(Properties.HORIZONTAL_FACING));
-                    }
-                    dir = dir.normalize();
+                    Vec3d dir = getBarrelDirection();
 
                     // Spawn particles
                     // Muzzle area smoke
@@ -382,6 +360,21 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
         sync();
     }
 
+    private Vec3d getBarrelDirection() {
+        double angleDegrees = angle * 22.5;
+        double slopeHorizontal = Math.cos(Math.toRadians(angleDegrees));
+        double slopeVertical = Math.sin(Math.toRadians(angleDegrees));
+        Vec3d dir = new Vec3d(0.0, slopeVertical, 0.0);
+        switch (world.getBlockState(pos).get(Properties.HORIZONTAL_FACING)) {
+            case NORTH -> dir = dir.add(0.0, 0.0, -slopeHorizontal);
+            case SOUTH -> dir = dir.add(0.0, 0.0,  slopeHorizontal);
+            case EAST  -> dir = dir.add( slopeHorizontal, 0.0, 0.0);
+            case WEST  -> dir = dir.add(-slopeHorizontal, 0.0, 0.0);
+            default -> throw new IllegalStateException("Unexpected value: " + world.getBlockState(pos).get(Properties.HORIZONTAL_FACING));
+        }
+        return dir.normalize();
+    }
+
     private void updateLastUserUUID(PlayerEntity player) {
         lastUserUUID = player.getUuid();
         markDirty();
@@ -410,9 +403,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     }
 
     private float getProjectilePitch() {
-        BlockState state = world.getBlockState(pos);
-
-        return -22.5f * state.get(CannonBlock.ANGLE);
+        return -22.5f * angle;
     }
 
     public Text getShotName() {
@@ -423,6 +414,14 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
             case BLANK_SHOT -> new TranslatableText("superior_ballistics.cannon.blank_shot");
             default -> new TranslatableText("superior_ballistics.cannon.empty");
         };
+    }
+
+    public void setAngle(short angle) {
+        this.angle = angle;
+    }
+
+    public short getAngle() {
+        return angle;
     }
 
     public short getLoadingStage() {
@@ -443,7 +442,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
 
     @Override
     public void writeNbt(NbtCompound tag) {
-
+        tag.putShort("angle", angle);
         tag.putShort("loadingState", loadingStage);
         tag.putShort("powderAmount", powderAmount);
         tag.putBoolean("isShotLoaded", isShotLoaded);
@@ -458,6 +457,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     public void readNbt(NbtCompound tag) {
         super.readNbt(tag);
 
+        angle = tag.getShort("angle");
         loadingStage = tag.getShort("loadingState");
         powderAmount = (short)Math.min(tag.getShort("powderAmount"), Short.MAX_VALUE);
         isShotLoaded = tag.getBoolean("isShotLoaded");

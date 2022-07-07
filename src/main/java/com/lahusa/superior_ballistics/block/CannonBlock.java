@@ -27,8 +27,6 @@ import net.minecraft.world.World;
 
 
 public class CannonBlock extends BlockWithEntity {
-
-    public static final IntProperty ANGLE = IntProperty.of("angle", 0, 3);
     public static final DirectionProperty FACING;
 
     static {
@@ -43,7 +41,6 @@ public class CannonBlock extends BlockWithEntity {
         setDefaultState(
                 this.getStateManager().getDefaultState()
                         .with(Properties.HORIZONTAL_FACING, Direction.NORTH)
-                        .with(ANGLE, 1)
         );
         this.plankVariant = plankVariant;
         this.logVariant = logVariant;
@@ -57,17 +54,17 @@ public class CannonBlock extends BlockWithEntity {
 
         if(heldStack.isEmpty()) {
             // Calculate and set new angle
-            int oldAngle = state.get(ANGLE);
-            int delta = player.isSneaking() ? -1 : 1;
-            int newAngle = Math.max(0, Math.min(3, oldAngle + delta));
+            short oldAngle = blockEntity.getAngle();
+            short delta = (short)(player.isSneaking() ? -1 : 1);
+            short newAngle = (short)Math.max(0, Math.min(3, oldAngle + delta));
 
             // Check if angle changed
             if(newAngle != oldAngle) {
                 // Play lever click sound
                 player.playSound(SoundEvents.BLOCK_LEVER_CLICK, 1.f, 0.6f);
 
-                // Set new block state
-                world.setBlockState(pos, state.with(ANGLE, newAngle));
+                // Set new angle
+                blockEntity.setAngle(newAngle);
             }
         }
         else if(blockEntity != null) {
@@ -222,7 +219,6 @@ public class CannonBlock extends BlockWithEntity {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
         stateManager.add(Properties.HORIZONTAL_FACING);
-        stateManager.add(ANGLE);
     }
 
     @Override

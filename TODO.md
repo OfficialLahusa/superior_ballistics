@@ -6,7 +6,6 @@
 - [ ] Reichweite der Kanonen verringern  
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
 - [ ] Zirkel/Theodolit/Tachymeter/Nivellier für genauere Distanzbestimmung und Winkelanzeige
-- [ ] Angle in die Block Entity verschieben
 
 **Schusswaffen:**
 - [ ] Andere Art der Munition für die Pistole
@@ -65,4 +64,5 @@
 - [x] Dreispitz
 - [x] Sponge on a Stick in Cauldron nass machen
 - [x] Tschako in Shako umbenennen (außer auf Deutsch)
-- [x] Limit für das Überladen mit Powder (~~16?~~ 8)  
+- [x] Limit für das Überladen mit Powder (~~16?~~ 8) 
+- [x] Angle in die Block Entity verschieben

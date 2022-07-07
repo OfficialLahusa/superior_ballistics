@@ -34,7 +34,7 @@ public class CannonBlockRenderer extends GeoBlockRenderer<CannonBlockEntity> {
         this.renderTypeBuffer = renderTypeBuffer;
 
         // Rotate cannon barrel
-        short angle = animatable.getCachedState().get(CannonBlock.ANGLE).shortValue();
+        short angle = animatable.getAngle();
         float rotX = (angle * 22.5f) / 180.0f * (float)Math.PI;
         getGeoModelProvider().getAnimationProcessor().getBone("Cannon").setRotationX(rotX);
     }

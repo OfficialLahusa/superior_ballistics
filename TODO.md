@@ -7,6 +7,7 @@
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
 - [ ] Zirkel/Theodolit/Tachymeter/Nivellier für genauere Distanzbestimmung und Winkelanzeige
 - [ ] Kreativmodus-Modul für unendlich Munition
+- [ ] Loot-only "Cursed Cannonball" o.ä.
 
 **Schusswaffen:**
 - [ ] Andere Art der Munition für die Pistole

@@ -2,8 +2,7 @@
 
 **Kanonen:** 
 - [ ] Kanone Lunte hinzufügen + Partikel
-- [ ] Magma-Kanonenkugeln  
-- [ ] Limit für das Überladen mit Powder (16?)  
+- [ ] Magma-Kanonenkugeln
 - [ ] Reichweite der Kanonen verringern  
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
 - [ ] Zirkel/Theodolit/Tachymeter/Nivellier für genauere Distanzbestimmung und Winkelanzeige
@@ -66,3 +65,4 @@
 - [x] Dreispitz
 - [x] Sponge on a Stick in Cauldron nass machen
 - [x] Tschako in Shako umbenennen (außer auf Deutsch)
+- [x] Limit für das Überladen mit Powder (~~16?~~ 8)  

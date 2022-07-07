@@ -49,6 +49,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
 
     // Powder
     public static final short MAX_POWDER = 5;
+    public static final short MAX_POWDER_OVERLOADING = 8;
 
     // Shot types
     public static final short NO_SHOT = 0;
@@ -388,7 +389,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     }
 
     public boolean canLoadPowder() {
-        return powderAmount < Short.MAX_VALUE;
+        return powderAmount < MAX_POWDER_OVERLOADING;
     }
 
     private float getProjectileSpeedFactor() {

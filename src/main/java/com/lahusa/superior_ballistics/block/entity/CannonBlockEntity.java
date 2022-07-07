@@ -69,6 +69,9 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     private static final float SHOT_DIVERGENCE = 1.2f;
     private static final float GRAPESHOT_DIVERGENCE = 3.0f;
 
+    // Barrel angle
+    public static final short MAX_ANGLE = 3;
+
     private short angle = 1;
     private short loadingStage = 0;
     private short powderAmount = 0;
@@ -361,7 +364,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     }
 
     private Vec3d getBarrelDirection() {
-        double angleDegrees = angle * 22.5;
+        double angleDegrees = getAngleDegrees();
         double slopeHorizontal = Math.cos(Math.toRadians(angleDegrees));
         double slopeVertical = Math.sin(Math.toRadians(angleDegrees));
         Vec3d dir = new Vec3d(0.0, slopeVertical, 0.0);
@@ -403,7 +406,11 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     }
 
     private float getProjectilePitch() {
-        return -22.5f * angle;
+        return -getAngleDegrees();
+    }
+
+    public float getAngleDegrees() {
+        return 90.0f * angle / (MAX_ANGLE + 1);
     }
 
     public Text getShotName() {

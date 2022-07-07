@@ -5,8 +5,8 @@
 - [ ] Magma-Kanonenkugeln
 - [ ] Reichweite der Kanonen verringern  
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
-- [ ] Winkel präziser einstellbar machen
 - [ ] Zirkel/Theodolit/Tachymeter/Nivellier für genauere Distanzbestimmung und Winkelanzeige
+- [ ] Kreativmodus-Modul für unendlich Munition
 
 **Schusswaffen:**
 - [ ] Andere Art der Munition für die Pistole
@@ -68,3 +68,4 @@
 - [x] Tschako in Shako umbenennen (außer auf Deutsch)
 - [x] Limit für das Überladen mit Powder (~~16?~~ 8) 
 - [x] Angle in die Block Entity verschieben
+- [x] Winkel präziser einstellbar machen

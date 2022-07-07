@@ -7,6 +7,7 @@
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
 - [ ] Winkel präziser einstellbar machen
 - [ ] Zirkel/Theodolit/Tachymeter/Nivellier für genauere Distanzbestimmung und Winkelanzeige
+- [ ] Kreativmodus-Modul für unendlich Munition
 
 **Schusswaffen:**
 - [ ] Andere Art der Munition für die Pistole

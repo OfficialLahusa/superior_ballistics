@@ -5,6 +5,7 @@
 - [ ] Magma-Kanonenkugeln
 - [ ] Reichweite der Kanonen verringern  
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
+- [ ] Winkel präziser einstellbar machen
 - [ ] Zirkel/Theodolit/Tachymeter/Nivellier für genauere Distanzbestimmung und Winkelanzeige
 
 **Schusswaffen:**

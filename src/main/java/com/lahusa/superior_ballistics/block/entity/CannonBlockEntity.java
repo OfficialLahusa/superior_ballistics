@@ -75,7 +75,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     // Barrel angle
     public static final short MAX_ANGLE = 14;
 
-    private short angle = 1;
+    private short angle = 4;
     private short loadingStage = 0;
     private short powderAmount = 0;
     private boolean isShotLoaded = false;

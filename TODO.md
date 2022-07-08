@@ -6,7 +6,6 @@
 - [ ] Reichweite der Kanonen verringern  
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
 - [ ] Zirkel/Theodolit/Tachymeter/Nivellier für genauere Distanzbestimmung und Winkelanzeige
-- [ ] Kreativmodus-Modul für unendlich Munition
 - [ ] Loot-only "Cursed Cannonball" o.ä.
 
 **Schusswaffen:**
@@ -70,3 +69,4 @@
 - [x] Limit für das Überladen mit Powder (~~16?~~ 8) 
 - [x] Angle in die Block Entity verschieben
 - [x] Winkel präziser einstellbar machen
+- [x] Kreativmodus-Modul für unendlich Munition

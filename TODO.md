@@ -37,6 +37,7 @@
 
 **Sonstiges:** 
 - [ ] Gunpowder Keg hinzufügen 
+- [ ] Mod Guidebook (z.B. mit Patchouli)
 
 **Ferne Ideen:** 
 - [ ] Hopper Einspeisung in Kanonen 

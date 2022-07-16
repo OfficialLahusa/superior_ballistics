@@ -6,7 +6,8 @@
 - [ ] Reichweite der Kanonen verringern  
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
 - [ ] Zirkel/Theodolit/Tachymeter/Nivellier für genauere Distanzbestimmung und Winkelanzeige
-- [ ] Loot-only "Cursed Cannonball" o.ä.
+- [ ] Loot-only Cursed Cannonball (Super Secret Settings Shader als Statuseffekt)
+- [ ] Dragons Breath Cannonball
 
 **Schusswaffen:**
 - [ ] Andere Art der Munition für die Pistole

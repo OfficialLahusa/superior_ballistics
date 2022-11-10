@@ -9,7 +9,8 @@
   ],
   "client": [
     "PlayerEntityMixin",
-    "PlayerEntityRendererMixin"
+    "PlayerEntityRendererMixin",
+    "GameRendererMixin"
   ],
   "server": [
   ],

@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "GIG",
+      "I I",
+      "   "
+    ],
+    "key": {
+      "G": {
+        "item": "minecraft:gold_nugget"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "superior_ballistics:pickelhaube_helmet",
+      "count": 1
+    }
+  }
+

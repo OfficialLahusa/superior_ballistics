@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "BBB",
+      "B B",
+      "III"
+    ],
+    "key": {
+      "B": {
+        "item": "minecraft:black_wool"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "superior_ballistics:shako_helmet",
+      "count": 1
+    }
+  }
+

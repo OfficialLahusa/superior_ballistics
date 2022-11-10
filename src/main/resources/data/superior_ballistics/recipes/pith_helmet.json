@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "BBB",
+      "BLB",
+      "   "
+    ],
+    "key": {
+      "B": {
+        "item": "minecraft:bamboo"
+      },
+      "L": {
+        "item": "minecraft:leather"
+      }
+    },
+    "result": {
+      "item": "superior_ballistics:pith_helmet",
+      "count": 1
+    }
+  }
+

@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      " I ",
+      "IBI",
+      "BBB"
+    ],
+    "key": {
+      "B": {
+        "item": "minecraft:black_wool"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "superior_ballistics:bicorne_side_helmet",
+      "count": 1
+    }
+  }
+

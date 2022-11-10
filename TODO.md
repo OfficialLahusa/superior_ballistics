@@ -16,7 +16,7 @@
 - [ ] Viewmodels größer sichtbar machen
 
 **Rüstung:**
-- [ ] Rezepte
+- [ ] Rezepte 🔥
 
 **Worldgen:** 
 - [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried
@@ -29,7 +29,7 @@
 - [ ] Drowned, die Schusswaffen
       nutzen
 
-**Advancements:**
+**Advancements:** 🔥
 - [ ] "Haubitzen" (Kanone herstellen)
 - [ ] "Heil dir im Siegerkranz" (Pickelhaube aufsetzen)
 - [ ] "Schuss in den Ofen" (Kanone überladen und zünden)

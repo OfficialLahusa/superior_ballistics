@@ -27,10 +27,9 @@
       nutzen
 
 **Advancements:** 🔥
-- [ ] "Haubitzen" (Kanone herstellen)
-- [ ] "Heil dir im Siegerkranz" (Pickelhaube aufsetzen)
 - [ ] "Schuss in den Ofen" (Kanone überladen und zünden)
 - [ ] "Auf Nimmerwiedersehen!" (Enderperle mit Kanone verschießen)
+- [ ] "Parry this!" (Schieße jemanden ab, der ein Schwert in der Hand hat)
 - [ ] Diverse Advancements für die Handfeuerwaffen und Uniformteile
 
 **Sonstiges:** 
@@ -70,3 +69,5 @@
 - [x] Winkel präziser einstellbar machen
 - [x] Kreativmodus-Modul für unendlich Munition
 - [x] Rezepte für Helme
+- [x] "Haubitzen" (Kanone herstellen)
+- [x] "Heil dir im Siegerkranz" (Pickelhaube aufsetzen)

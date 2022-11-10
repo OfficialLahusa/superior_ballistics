@@ -40,6 +40,22 @@
     "superior_ballistics.cannon.firing": "SCHIESST",
     "superior_ballistics.cannon.cleanup": "Putzen",
     "superior_ballistics.cannon.blank_shot": "Salutschuss",
-    "superior_ballistics.cannon.empty": "Leer"
+    "superior_ballistics.cannon.empty": "Leer",
+    "advancements.superior_ballistics.root.title": "Superior Ballistics",
+    "advancements.superior_ballistics.root.description": "Stelle eine Steinschlosspistole her",
+    "advancements.superior_ballistics.howitzers.title": "Haubitzen!",
+    "advancements.superior_ballistics.howitzers.description": "Baue eine beliebige Kanone",
+    "advancements.superior_ballistics.victors_crown.title": "Heil dir im Siegerkranz",
+    "advancements.superior_ballistics.victors_crown.description": "Erlange eine Pickelhaube",
+    "advancements.superior_ballistics.british_grenadier.title": "Britischer Grenadier",
+    "advancements.superior_ballistics.british_grenadier.description": "Erlange einen Dreispitz",
+    "advancements.superior_ballistics.colonialism.title": "Kolonialismus",
+    "advancements.superior_ballistics.colonialism.description": "Erlange einen Tropenhelm",
+    "advancements.superior_ballistics.grand_admiral.title": "Großadmiral",
+    "advancements.superior_ballistics.grand_admiral.description": "Erlange einen Zweispitz (gerade)",
+    "advancements.superior_ballistics.bonaparte.title": "Bonaparte",
+    "advancements.superior_ballistics.bonaparte.description": "Erlange einen Zweispitz (seitwärts)",
+    "advancements.superior_ballistics.rank_and_file.title": "In Reih und Glied",
+    "advancements.superior_ballistics.rank_and_file.description": "Erlange einen Tschako"
 
 }

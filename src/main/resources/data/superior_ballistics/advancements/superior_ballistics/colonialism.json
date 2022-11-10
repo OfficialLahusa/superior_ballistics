@@ -1,0 +1,37 @@
+{
+    "parent": "superior_ballistics:superior_ballistics/root",
+    "display": {
+      "icon": {
+        "item": "superior_ballistics:pith_helmet"
+      },
+      "title": {
+        "translate": "advancements.superior_ballistics.colonialism.title"
+      },
+      "description": {
+        "translate": "advancements.superior_ballistics.colonialism.description"
+      },
+      "frame": "task",
+      "show_toast": true,
+      "announce_to_chat": true,
+      "hidden": false
+    },
+    "criteria": {
+      "pith_helmet": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "superior_ballistics:pith_helmet"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "requirements": [
+      [
+        "pith_helmet"
+      ]
+    ]
+  }

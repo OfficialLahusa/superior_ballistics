@@ -40,5 +40,21 @@
     "superior_ballistics.cannon.firing": "FIRING",
     "superior_ballistics.cannon.cleanup": "Cleanup",
     "superior_ballistics.cannon.blank_shot": "Blank Shot",
-    "superior_ballistics.cannon.empty": "Empty"
+    "superior_ballistics.cannon.empty": "Empty",
+    "advancements.superior_ballistics.root.title": "Superior Ballistics",
+    "advancements.superior_ballistics.root.description": "Construct a flintlock pistol",
+    "advancements.superior_ballistics.howitzers.title": "Howitzers!",
+    "advancements.superior_ballistics.howitzers.description": "Build any type of cannon",
+    "advancements.superior_ballistics.victors_crown.title": "Hail Thee in the Victor's Crown",
+    "advancements.superior_ballistics.victors_crown.description": "Acquire a Pickelhaube",
+    "advancements.superior_ballistics.british_grenadier.title": "British Grenadier",
+    "advancements.superior_ballistics.british_grenadier.description": "Acquire a tricorne",
+    "advancements.superior_ballistics.colonialism.title": "Colonialism",
+    "advancements.superior_ballistics.colonialism.description": "Acquire a pith helmet",
+    "advancements.superior_ballistics.grand_admiral.title": "Grand Admiral",
+    "advancements.superior_ballistics.grand_admiral.description": "Acquire a bicorne (straight)",
+    "advancements.superior_ballistics.bonaparte.title": "Bonaparte",
+    "advancements.superior_ballistics.bonaparte.description": "Acquire a bicorne (sideways)",
+    "advancements.superior_ballistics.rank_and_file.title": "In Rank and File",
+    "advancements.superior_ballistics.rank_and_file.description": "Acquire a shako"
 }

@@ -1,0 +1,128 @@
+{
+    "parent": "superior_ballistics:superior_ballistics/root",
+    "display": {
+      "icon": {
+        "item": "superior_ballistics:spruce_cannon"
+      },
+      "title": {
+        "translate": "advancements.superior_ballistics.howitzers.title"
+      },
+      "description": {
+        "translate": "advancements.superior_ballistics.howitzers.description"
+      },
+      "frame": "task",
+      "show_toast": true,
+      "announce_to_chat": true,
+      "hidden": false
+    },
+    "criteria": {
+      "oak_cannon": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "superior_ballistics:oak_cannon"
+              ]
+            }
+          ]
+        }
+      },
+      "spruce_cannon": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "superior_ballistics:spruce_cannon"
+              ]
+            }
+          ]
+        }
+      },
+      "birch_cannon": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "superior_ballistics:birch_cannon"
+              ]
+            }
+          ]
+        }
+      },
+      "jungle_cannon": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "superior_ballistics:jungle_cannon"
+              ]
+            }
+          ]
+        }
+      },
+      "acacia_cannon": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "superior_ballistics:acacia_cannon"
+              ]
+            }
+          ]
+        }
+      },
+      "dark_oak_cannon": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "superior_ballistics:dark_oak_cannon"
+              ]
+            }
+          ]
+        }
+      },
+      "crimson_cannon": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "superior_ballistics:crimson_cannon"
+              ]
+            }
+          ]
+        }
+      },
+      "warped_cannon": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "superior_ballistics:warped_cannon"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "requirements": [
+      [
+        "oak_cannon",
+        "spruce_cannon",
+        "birch_cannon",
+        "jungle_cannon",
+        "acacia_cannon",
+        "dark_oak_cannon",
+        "crimson_cannon",
+        "warped_cannon"
+      ]
+    ]
+  }

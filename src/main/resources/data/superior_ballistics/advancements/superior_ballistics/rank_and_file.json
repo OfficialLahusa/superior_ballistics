@@ -1,0 +1,37 @@
+{
+    "parent": "superior_ballistics:superior_ballistics/root",
+    "display": {
+      "icon": {
+        "item": "superior_ballistics:shako_helmet"
+      },
+      "title": {
+        "translate": "advancements.superior_ballistics.rank_and_file.title"
+      },
+      "description": {
+        "translate": "advancements.superior_ballistics.rank_and_file.description"
+      },
+      "frame": "task",
+      "show_toast": true,
+      "announce_to_chat": true,
+      "hidden": false
+    },
+    "criteria": {
+      "shako_helmet": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "superior_ballistics:shako_helmet"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "requirements": [
+      [
+        "shako_helmet"
+      ]
+    ]
+  }

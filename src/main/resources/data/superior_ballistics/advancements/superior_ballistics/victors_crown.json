@@ -1,0 +1,37 @@
+{
+    "parent": "superior_ballistics:superior_ballistics/root",
+    "display": {
+      "icon": {
+        "item": "superior_ballistics:pickelhaube_helmet"
+      },
+      "title": {
+        "translate": "advancements.superior_ballistics.victors_crown.title"
+      },
+      "description": {
+        "translate": "advancements.superior_ballistics.victors_crown.description"
+      },
+      "frame": "task",
+      "show_toast": true,
+      "announce_to_chat": true,
+      "hidden": false
+    },
+    "criteria": {
+      "pickelhaube": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "superior_ballistics:pickelhaube_helmet"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "requirements": [
+      [
+        "pickelhaube"
+      ]
+    ]
+  }

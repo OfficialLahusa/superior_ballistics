@@ -15,9 +15,6 @@
 - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
 - [ ] Viewmodels größer sichtbar machen
 
-**Rüstung:**
-- [ ] Rezepte 🔥
-
 **Worldgen:** 
 - [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried
       Treasures, Drowned-Dörfern und Shipwrecks
@@ -72,3 +69,4 @@
 - [x] Angle in die Block Entity verschieben
 - [x] Winkel präziser einstellbar machen
 - [x] Kreativmodus-Modul für unendlich Munition
+- [x] Rezepte für Helme

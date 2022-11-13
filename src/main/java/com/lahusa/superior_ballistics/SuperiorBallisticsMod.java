@@ -2,19 +2,19 @@ package com.lahusa.superior_ballistics;
 
 import com.lahusa.superior_ballistics.advancement.criterion.CannonOverchargeCriterion;
 import com.lahusa.superior_ballistics.block.CannonBlock;
+import com.lahusa.superior_ballistics.block.GunpowderKegBlock;
 import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
+import com.lahusa.superior_ballistics.block.entity.GunpowderKegBlockEntity;
 import com.lahusa.superior_ballistics.entity.CannonBallEntity;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
 import com.lahusa.superior_ballistics.item.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.advancement.CriterionRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.minecraft.advancement.criterion.Criteria;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
-import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.advancement.criterion.Criterion;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
@@ -37,6 +37,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final float CANNON_STRENGTH = 2.0f;
 	public static final float CANNON_HARDNESS = 14.0f;
 	protected static final FabricBlockSettings cannonSettings = FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool();
+	protected static final FabricBlockSettings gunpowderKegSettings = FabricBlockSettings.of(Material.WOOD).nonOpaque().hardness(1.0f);
 
 	public static final Block OAK_CANNON_BLOCK 		= new CannonBlock(new Identifier("minecraft", "oak_planks"), 		new Identifier("minecraft", "oak_log"), 		cannonSettings);
 	public static final Block SPRUCE_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "spruce_planks"), 		new Identifier("minecraft", "spruce_log"), 	cannonSettings);
@@ -46,9 +47,10 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final Block DARK_OAK_CANNON_BLOCK = new CannonBlock(new Identifier("minecraft", "dark_oak_planks"), 	new Identifier("minecraft", "dark_oak_log"), cannonSettings);
 	public static final Block CRIMSON_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "crimson_planks"), 	new Identifier(MODID, "crimson_stem"), 				cannonSettings);
 	public static final Block WARPED_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "warped_planks"), 		new Identifier(MODID, "warped_stem"), 					cannonSettings);
-
+	public static final Block GUNPOWDER_KEG_BLOCK =new GunpowderKegBlock(gunpowderKegSettings);
 	// BlockEntities
 	public static BlockEntityType<CannonBlockEntity> CANNON_BLOCK_ENTITY;
+	public static BlockEntityType<GunpowderKegBlockEntity> GUNPOWDER_KEG_ENTITY;
 
 	// Items
 	public static final Item OAK_CANNON_ITEM 		= new CannonBlockItem(OAK_CANNON_BLOCK, 		new FabricItemSettings().group(ItemGroup.COMBAT));
@@ -59,6 +61,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final Item DARK_OAK_CANNON_ITEM 	= new CannonBlockItem(DARK_OAK_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
 	public static final Item CRIMSON_CANNON_ITEM 	= new CannonBlockItem(CRIMSON_CANNON_BLOCK, 	new FabricItemSettings().group(ItemGroup.COMBAT));
 	public static final Item WARPED_CANNON_ITEM 	= new CannonBlockItem(WARPED_CANNON_BLOCK, 		new FabricItemSettings().group(ItemGroup.COMBAT));
+	public static final Item GUNPOWDER_KEG_ITEM = new GunpowderKegBlockItem(GUNPOWDER_KEG_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS));
 
 	public static final Item STONE_BULLETS_ITEM 		= new StoneBulletsItem(new FabricItemSettings().group(ItemGroup.MISC));
 	public static final Item STONE_BULLET_ITEM 			= new StoneBulletItem(new FabricItemSettings());
@@ -103,12 +106,12 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	// Entity spawn packet
 	public static final Identifier PacketID = new Identifier(SuperiorBallisticsMod.MODID, "spawn_packet");
 
+	// TODO: Advancement criteria
+	public static final CannonOverchargeCriterion CANNON_OVERCHARGE_CRITERION = Criteria.register(new CannonOverchargeCriterion());
+
 	// Particles
 	public static final DefaultParticleType CANNON_MUZZLE_FIRE = FabricParticleTypes.simple();
 	public static final DefaultParticleType CANNON_MUZZLE_SMOKE_TRAIL = FabricParticleTypes.simple();
-
-	// TODO: Advancement criteria
-	public static final CannonOverchargeCriterion CANNON_OVERCHARGE_CRITERION = Criteria.register(new CannonOverchargeCriterion());
 
 	static {
 		GeckoLibMod.DISABLE_IN_DEV = true;
@@ -127,6 +130,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "dark_oak_cannon"), 	DARK_OAK_CANNON_BLOCK);
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "crimson_cannon"), 	CRIMSON_CANNON_BLOCK);
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "warped_cannon"), 		WARPED_CANNON_BLOCK);
+		Registry.register(Registry.BLOCK, new Identifier(MODID, "gunpowder_keg"), 		GUNPOWDER_KEG_BLOCK);
 
 		// BlockEntities
 		CANNON_BLOCK_ENTITY = Registry.register(
@@ -135,6 +139,14 @@ public class SuperiorBallisticsMod implements ModInitializer {
 						CannonBlockEntity::new, OAK_CANNON_BLOCK, SPRUCE_CANNON_BLOCK, BIRCH_CANNON_BLOCK, JUNGLE_CANNON_BLOCK, ACACIA_CANNON_BLOCK, DARK_OAK_CANNON_BLOCK, CRIMSON_CANNON_BLOCK, WARPED_CANNON_BLOCK)
 						.build(null)
 		);
+		GUNPOWDER_KEG_ENTITY = Registry.register(
+				Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "gunpowder_keg_block_entity"),
+				FabricBlockEntityTypeBuilder.create(
+						GunpowderKegBlockEntity::new, GUNPOWDER_KEG_BLOCK)
+						.build(null)
+		);
+
+
 
 		// Items
 		Registry.register(Registry.ITEM, new Identifier(MODID, "oak_cannon"), 		OAK_CANNON_ITEM);
@@ -145,6 +157,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "dark_oak_cannon"), DARK_OAK_CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "crimson_cannon"), 	CRIMSON_CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "warped_cannon"), 	WARPED_CANNON_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "gunpowder_keg"), GUNPOWDER_KEG_ITEM);
 
 		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullets"), 			STONE_BULLETS_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullet"), 			STONE_BULLET_ITEM);

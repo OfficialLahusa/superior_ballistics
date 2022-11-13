@@ -1,5 +1,5 @@
 {
-    "parent": "superior_ballistics:superior_ballistics/root",
+    "parent": "superior_ballistics:superior_ballistics/black_powder",
     "display": {
       "icon": {
         "item": "superior_ballistics:spruce_cannon"

@@ -1,28 +1,28 @@
 {
-    "parent": "superior_ballistics:superior_ballistics/howitzers",
+    "parent": "superior_ballistics:superior_ballistics/black_powder",
     "display": {
       "icon": {
-        "item": "superior_ballistics:iron_cannonball"
+        "item": "superior_ballistics:flintlock_pistol"
       },
       "title": {
-        "translate": "advancements.superior_ballistics.excellent_caliber.title"
+        "translate": "advancements.superior_ballistics.pistol.title"
       },
       "description": {
-        "translate": "advancements.superior_ballistics.excellent_caliber.description"
+        "translate": "advancements.superior_ballistics.pistol.description"
       },
       "frame": "task",
       "show_toast": true,
-      "announce_to_chat": true,
+      "announce_to_chat": false,
       "hidden": false
     },
     "criteria": {
-      "iron_cannonball": {
+      "flintlock_pistol": {
         "trigger": "minecraft:inventory_changed",
         "conditions": {
           "items": [
             {
               "items": [
-                "superior_ballistics:iron_cannonball"
+                "superior_ballistics:flintlock_pistol"
               ]
             }
           ]
@@ -31,7 +31,7 @@
     },
     "requirements": [
       [
-        "iron_cannonball"
+        "flintlock_pistol"
       ]
     ]
   }

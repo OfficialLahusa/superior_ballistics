@@ -1,5 +1,5 @@
 {
-    "parent": "superior_ballistics:superior_ballistics/black_powder",
+    "parent": "superior_ballistics:superior_ballistics/howitzers",
     "display": {
       "icon": {
         "item": "minecraft:fire_charge"
@@ -10,7 +10,7 @@
       "description": {
         "translate": "advancements.superior_ballistics.backfired.description"
       },
-      "frame": "task",
+      "frame": "challenge",
       "show_toast": true,
       "announce_to_chat": true,
       "hidden": false

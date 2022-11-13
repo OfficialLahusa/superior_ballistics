@@ -33,6 +33,7 @@
 **Sonstiges:** 
 - [ ] Gunpowder Keg hinzufügen 
 - [ ] Mod Guidebook (z.B. mit Patchouli)
+- [ ] Hüte und 3D-Modelle im Inventar einheitlich rotieren
 
 **Ferne Ideen:** 
 - [ ] Hopper Einspeisung in Kanonen 

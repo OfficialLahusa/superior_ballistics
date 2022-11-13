@@ -62,12 +62,16 @@ public class StoneBulletEntity extends ThrownItemEntity {
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity(); // sets a new Entity instance as the EntityHitResult (victim)
 
-        DamageSource source =  (new BulletDamageSource("thrown", this, this.getOwner())).setProjectile();
+        // Randomize damage source text to produce a variety of death messages
+        String damageSourceName = switch(random.nextInt(20)) {
+            case 17, 18: yield "shot_uncommon";
+            case 19: yield "shot_rare";
+            default: yield "shot";
+        };
+        DamageSource source =  (new BulletDamageSource(damageSourceName, this, this.getOwner())).setProjectile();
 
         // Reset damage cooldown
-        if(entity instanceof LivingEntity livingEntity) {
-            ((LivingEntityAccessor)livingEntity).setLastDamageTaken(Float.MIN_VALUE);
-        }
+        if(entity instanceof LivingEntity livingEntity) ((LivingEntityAccessor)livingEntity).setLastDamageTaken(Float.MIN_VALUE);
 
         entity.damage(source, (float)damage); // deals damage
 

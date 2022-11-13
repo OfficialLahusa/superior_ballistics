@@ -56,5 +56,11 @@
     "advancements.superior_ballistics.bonaparte.title": "Bonaparte",
     "advancements.superior_ballistics.bonaparte.description": "Acquire a bicorne (sideways)",
     "advancements.superior_ballistics.rank_and_file.title": "In Rank and File",
-    "advancements.superior_ballistics.rank_and_file.description": "Acquire a shako"
+    "advancements.superior_ballistics.rank_and_file.description": "Acquire a shako",
+    "death.attack.shot": "%1$s was shot by %2$s",
+    "death.attack.shot.item": "%1$s was shot by %2$s using %3$s",
+    "death.attack.shot_uncommon": "%1$s was ripped to shreds by %2$s",
+    "death.attack.shot_uncommon.item": "%1$s was ripped to shreds by %2$s using %3$s",
+    "death.attack.shot_rare": "%1$s was turned into swiss cheese by %2$s",
+    "death.attack.shot_rare.item": "%1$s was turned into swiss cheese by %2$s using %3$s"
 }

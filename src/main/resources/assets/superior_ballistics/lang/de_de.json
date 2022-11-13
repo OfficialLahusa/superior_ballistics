@@ -56,6 +56,11 @@
     "advancements.superior_ballistics.bonaparte.title": "Bonaparte",
     "advancements.superior_ballistics.bonaparte.description": "Erlange einen Zweispitz (seitwärts)",
     "advancements.superior_ballistics.rank_and_file.title": "In Reih und Glied",
-    "advancements.superior_ballistics.rank_and_file.description": "Erlange einen Tschako"
-
+    "advancements.superior_ballistics.rank_and_file.description": "Erlange einen Tschako",
+    "death.attack.shot": "%1$s wurde von %2$s erschossen",
+    "death.attack.shot.item": "%1$s wurde von %2$s mit %3$s erschossen",
+    "death.attack.shot_uncommon": "%1$s wurde von %2$s durchlöchert",
+    "death.attack.shot_uncommon.item": "%1$s wurde von %2$s mit %3$s durchlöchert",
+    "death.attack.shot_rare": "%1$s wurde von %2$s in Schweizer Käse verwandelt",
+    "death.attack.shot_rare.item": "%1$s wurde von %2$s mit %3$s in Schweizer Käse verwandelt"
 }

@@ -18,7 +18,7 @@ public class FlintlockBlunderbussItem extends FlintlockMusketItem {
     public static final float REQUIRED_PULL_PROGRESS = 1.0f;
     protected static final float speed = 1.6f;
     protected static final float divergence = 10.0f;
-    protected static final int shotDamage = 2;
+    protected static final int shotDamage = 2000;
     protected static final int shotCount = 8;
     protected static final float soundPitch = 0.8f;
     protected static final float soundVolume = 1.1F;

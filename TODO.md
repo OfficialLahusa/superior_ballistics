@@ -14,7 +14,6 @@
 - [ ] Andere Art der Munition für die Pistole
 - [ ] Bajonett-Variante der Muskete
 - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
-- [ ] Todesnachricht ändern (insb. auf Deutsch) 🔥
 
 **Worldgen:** 
 - [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried
@@ -73,3 +72,4 @@
 - [x] "Haubitzen" (Kanone herstellen)
 - [x] "Heil dir im Siegerkranz" (Pickelhaube aufsetzen)
 - [x] Viewmodels größer sichtbar machen
+- [x] Todesnachricht ändern (insb. auf Deutsch)

@@ -13,7 +13,7 @@ import software.bernie.geckolib3.network.ISyncable;
 
 public class CannonBlockItem extends BlockItem implements IAnimatable, ISyncable {
 
-    public AnimationFactory factory = new AnimationFactory(this);
+    public final AnimationFactory factory = new AnimationFactory(this);
 
     public CannonBlockItem(Block block, Settings settings) {
         super(block, settings);

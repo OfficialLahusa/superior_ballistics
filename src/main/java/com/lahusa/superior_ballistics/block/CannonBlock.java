@@ -52,6 +52,8 @@ public class CannonBlock extends BlockWithEntity {
         ItemStack heldStack = player.getInventory().getMainHandStack();
         CannonBlockEntity blockEntity = (CannonBlockEntity) world.getBlockEntity(pos);
 
+        if(blockEntity == null) return ActionResult.FAIL;
+
         // Adjust angle with empty hand
         if(heldStack.isEmpty()) {
             // Calculate and set new angle
@@ -68,7 +70,7 @@ public class CannonBlock extends BlockWithEntity {
                 blockEntity.setAngle(newAngle);
             }
         }
-        else if(blockEntity != null) {
+        else {
             // Loading stages:
             switch(blockEntity.getLoadingStage()) {
                 case CannonBlockEntity.POWDER_LOADING_STAGE -> {

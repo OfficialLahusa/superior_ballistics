@@ -133,11 +133,12 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
             }
             case CannonBlockEntity.READY_STAGE -> {
                 // Show different text when cannon is creative
-                if(!isCreative()) {
-                    text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light").formatted(Formatting.DARK_GREEN));
+                if(isCreative()) {
+                    text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light_creative").formatted(Formatting.LIGHT_PURPLE));
+
                 }
                 else {
-                    text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light_creative").formatted(Formatting.LIGHT_PURPLE));
+                    text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light").formatted(Formatting.DARK_GREEN));
                 }
 
                 text.append(new LiteralText(" (").append(new TranslatableText("item.minecraft.flint_and_steel"))
@@ -418,6 +419,9 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
         double slopeHorizontal = Math.cos(Math.toRadians(angleDegrees));
         double slopeVertical = Math.sin(Math.toRadians(angleDegrees));
         Vec3d dir = new Vec3d(0.0, slopeVertical, 0.0);
+
+        if(world == null) return dir;
+
         switch (world.getBlockState(pos).get(Properties.HORIZONTAL_FACING)) {
             case NORTH -> dir = dir.add(0.0, 0.0, -slopeHorizontal);
             case SOUTH -> dir = dir.add(0.0, 0.0,  slopeHorizontal);
@@ -443,8 +447,9 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     }
 
     private float getProjectileYaw() {
-        BlockState state = world.getBlockState(pos);
+        if(world == null) return 0.0f;
 
+        BlockState state = world.getBlockState(pos);
         float yaw = 0.0f;
         switch (state.get(Properties.HORIZONTAL_FACING)) {
             case NORTH -> yaw = 180.0f;
@@ -541,6 +546,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     }
 
     private void sync() {
-        getWorld().updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_LISTENERS);
+        World world = getWorld();
+        if(world != null) getWorld().updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_LISTENERS);
     }
 }

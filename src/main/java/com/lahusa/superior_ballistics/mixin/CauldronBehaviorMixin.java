@@ -25,6 +25,7 @@ public interface CauldronBehaviorMixin {
     @Shadow @Final
     Map<Item, CauldronBehavior> WATER_CAULDRON_BEHAVIOR = null;
 
+    @SuppressWarnings("ConstantConditions")
     @Inject(at = @At("TAIL"), method = "registerBehavior()V")
     private static void registerSpongeOnAStickBehavior(CallbackInfo ci)
     {

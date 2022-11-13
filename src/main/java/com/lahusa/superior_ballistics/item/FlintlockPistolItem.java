@@ -22,7 +22,7 @@ import java.util.function.Predicate;
 
 public class FlintlockPistolItem extends RangedWeaponItem {
 
-    public static final float REQUIRED_PULL_PROGRESS = 0.25f;
+    public static final float REQUIRED_PULL_PROGRESS = 0.5f;
     protected static final float speed = 3.0f;
     protected static final float divergence = 5.2f;
     protected static final float soundPitch = 1.4f;

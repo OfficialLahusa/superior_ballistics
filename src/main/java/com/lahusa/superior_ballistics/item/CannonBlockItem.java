@@ -26,7 +26,7 @@ public class CannonBlockItem extends BlockItem implements IAnimatable, ISyncable
 
     @Override
     public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController(this, "controller", 0, this::predicate));
+        animationData.addAnimationController(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
     @Override

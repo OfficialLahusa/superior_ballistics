@@ -61,12 +61,8 @@ public class CannonMuzzleFireParticle extends SpriteBillboardParticle {
     }
 
     public float getSize(float tickDelta) {
-        float f = ((float)this.age + tickDelta) / (float)this.maxAge;
-        //return this.scale * (1.0F - f * f * 0.5F);
-        //return this.scale * (1.0f - (float)Math.pow(f, 4));
-        //return this.scale * (1.0f - (float)Math.pow(f, 3) + 0.2f * (float)Math.pow(f, 4));
-        f = 1.0f-f;
-        return this.scale * (f < 0.5f ? 8.0f * f * f * f * f : 1.0f - (float)Math.pow(-2.0f * f + 2.0f, 4.0f) / 2.0f);
+        float remainingLifeTimeFac = 1.0f - ((float)this.age + tickDelta) / (float)this.maxAge;
+        return this.scale * (remainingLifeTimeFac < 0.5f ? 8.0f * (float)Math.pow(remainingLifeTimeFac, 4) : 1.0f - (float)Math.pow(-2.0f * remainingLifeTimeFac + 2.0f, 4.0f) / 2.0f);
     }
 
     public int getBrightness(float tint) {

@@ -23,7 +23,7 @@ public class TricorneArmorItem extends ArmorItem implements IAnimatable {
     }
     @Override
     public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController(this, "controller", 20, this::predicate));
+        animationData.addAnimationController(new AnimationController<>(this, "controller", 20, this::predicate));
     }
 
     @Override

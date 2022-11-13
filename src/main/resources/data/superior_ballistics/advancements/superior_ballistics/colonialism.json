@@ -1,5 +1,5 @@
 {
-    "parent": "superior_ballistics:superior_ballistics/root",
+    "parent": "superior_ballistics:superior_ballistics/rank_and_file",
     "display": {
       "icon": {
         "item": "superior_ballistics:pith_helmet"

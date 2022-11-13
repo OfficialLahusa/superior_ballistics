@@ -1,14 +1,14 @@
 {
-    "parent": "superior_ballistics:superior_ballistics/rank_and_file",
+    "parent": "superior_ballistics:superior_ballistics/root",
     "display": {
       "icon": {
-        "item": "superior_ballistics:bicorne_side_helmet"
+        "item": "minecraft:gunpowder"
       },
       "title": {
-        "translate": "advancements.superior_ballistics.bonaparte.title"
+        "translate": "advancements.superior_ballistics.black_powder.title"
       },
       "description": {
-        "translate": "advancements.superior_ballistics.bonaparte.description"
+        "translate": "advancements.superior_ballistics.black_powder.description"
       },
       "frame": "task",
       "show_toast": true,
@@ -16,13 +16,13 @@
       "hidden": false
     },
     "criteria": {
-      "bicorne_side_helmet": {
+      "gunpowder": {
         "trigger": "minecraft:inventory_changed",
         "conditions": {
           "items": [
             {
               "items": [
-                "superior_ballistics:bicorne_side_helmet"
+                "minecraft:gunpowder"
               ]
             }
           ]
@@ -31,7 +31,7 @@
     },
     "requirements": [
       [
-        "bicorne_side_helmet"
+        "gunpowder"
       ]
     ]
   }

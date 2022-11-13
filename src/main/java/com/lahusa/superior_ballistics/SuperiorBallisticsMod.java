@@ -1,5 +1,6 @@
 package com.lahusa.superior_ballistics;
 
+import com.lahusa.superior_ballistics.advancement.criterion.CannonOverchargeCriterion;
 import com.lahusa.superior_ballistics.block.CannonBlock;
 import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
 import com.lahusa.superior_ballistics.entity.CannonBallEntity;
@@ -7,10 +8,13 @@ import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
 import com.lahusa.superior_ballistics.item.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.object.builder.v1.advancement.CriterionRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.advancement.criterion.Criteria;
+import net.minecraft.advancement.criterion.Criterion;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
@@ -103,6 +107,9 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final DefaultParticleType CANNON_MUZZLE_FIRE = FabricParticleTypes.simple();
 	public static final DefaultParticleType CANNON_MUZZLE_SMOKE_TRAIL = FabricParticleTypes.simple();
 
+	// TODO: Advancement criteria
+	public static final CannonOverchargeCriterion CANNON_OVERCHARGE_CRITERION = Criteria.register(new CannonOverchargeCriterion());
+
 	static {
 		GeckoLibMod.DISABLE_IN_DEV = true;
 	}
@@ -159,7 +166,6 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "bicorne_front_helmet"), 		BICORNE_FRONT_HELMET);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "bicorne_side_helmet"), 		BICORNE_SIDE_HELMET);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "pith_helmet"), 				PITH_HELMET);
-
 
 		// Particles
 		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "cannon_muzzle_fire"), 		CANNON_MUZZLE_FIRE);

@@ -1,37 +1,102 @@
 {
-    "parent": "superior_ballistics:superior_ballistics/root",
-    "display": {
-      "icon": {
-        "item": "superior_ballistics:shako_helmet"
-      },
-      "title": {
-        "translate": "advancements.superior_ballistics.rank_and_file.title"
-      },
-      "description": {
-        "translate": "advancements.superior_ballistics.rank_and_file.description"
-      },
-      "frame": "task",
-      "show_toast": true,
-      "announce_to_chat": true,
-      "hidden": false
+  "parent": "superior_ballistics:superior_ballistics/root",
+  "display": {
+    "icon": {
+      "item": "minecraft:leather"
     },
-    "criteria": {
-      "shako_helmet": {
-        "trigger": "minecraft:inventory_changed",
-        "conditions": {
-          "items": [
-            {
-              "items": [
-                "superior_ballistics:shako_helmet"
-              ]
-            }
-          ]
-        }
+    "title": {
+      "translate": "advancements.superior_ballistics.rank_and_file.title"
+    },
+    "description": {
+      "translate": "advancements.superior_ballistics.rank_and_file.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "shako_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "superior_ballistics:shako_helmet"
+            ]
+          }
+        ]
       }
     },
-    "requirements": [
-      [
-        "shako_helmet"
-      ]
+    "pickelhaube": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "superior_ballistics:pickelhaube_helmet"
+            ]
+          }
+        ]
+      }
+    },
+    "tricorne": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "superior_ballistics:tricorne_helmet"
+            ]
+          }
+        ]
+      }
+    },
+    "bicorne_side": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "superior_ballistics:bicorne_side_helmet"
+            ]
+          }
+        ]
+      }
+    },
+    "bicorne_front": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "superior_ballistics:bicorne_front_helmet"
+            ]
+          }
+        ]
+      }
+    },
+    "pith_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "superior_ballistics:pith_helmet"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "shako_helmet",
+      "pickelhaube",
+      "tricorne",
+      "bicorne_front",
+      "bicorne_side",
+      "pith_helmet"
     ]
-  }
+  ]
+}

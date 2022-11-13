@@ -16,6 +16,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -242,6 +243,9 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
                     if(powderAmount > MAX_POWDER && shotType != BLANK_SHOT) {
                         // Blow up cannon
                         world.createExplosion(player, pos.getX(), pos.getY(), pos.getZ(), Math.min(0.7f * powderAmount, 20.0f), true, Explosion.DestructionType.DESTROY);
+
+                        // Trigger overcharge advancement criterion
+                        SuperiorBallisticsMod.CANNON_OVERCHARGE_CRITERION.trigger((ServerPlayerEntity) player);
                     }
                     // Normal powder amount
                     else {

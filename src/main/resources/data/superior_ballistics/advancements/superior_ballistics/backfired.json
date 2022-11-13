@@ -1,0 +1,29 @@
+{
+    "parent": "superior_ballistics:superior_ballistics/black_powder",
+    "display": {
+      "icon": {
+        "item": "minecraft:fire_charge"
+      },
+      "title": {
+        "translate": "advancements.superior_ballistics.backfired.title"
+      },
+      "description": {
+        "translate": "advancements.superior_ballistics.backfired.description"
+      },
+      "frame": "task",
+      "show_toast": true,
+      "announce_to_chat": true,
+      "hidden": false
+    },
+    "criteria": {
+      "cannon_overcharge": {
+        "trigger": "superior_ballistics:cannon_overcharge",
+        "conditions": { }
+      }
+    },
+    "requirements": [
+      [
+        "cannon_overcharge"
+      ]
+    ]
+  }

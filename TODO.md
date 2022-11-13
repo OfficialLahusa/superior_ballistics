@@ -27,10 +27,8 @@
       nutzen
 
 **Advancements:** 🔥
-- [ ] "Schuss in den Ofen" (Kanone überladen und zünden)
 - [ ] "Auf Nimmerwiedersehen!" (Enderperle mit Kanone verschießen)
 - [ ] "Parry this!" (Schieße jemanden ab, der ein Schwert in der Hand hat)
-- [ ] Diverse Advancements für die Handfeuerwaffen und Uniformteile
 
 **Sonstiges:** 
 - [ ] Gunpowder Keg hinzufügen 
@@ -73,3 +71,5 @@
 - [x] "Heil dir im Siegerkranz" (Pickelhaube aufsetzen)
 - [x] Viewmodels größer sichtbar machen
 - [x] Todesnachricht ändern (insb. auf Deutsch)
+- [x] "Schuss in den Ofen" (Kanone überladen und zünden)
+- [x] Diverse Advancements für die Handfeuerwaffen und Uniformteile

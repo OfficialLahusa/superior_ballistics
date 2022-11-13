@@ -1,0 +1,124 @@
+{
+  "credit": "Made with Blockbench",
+  "parent": "builtin/entity",
+  "textures": {
+    "particle": "minecraft:block/anvil"
+  },
+  "texture_size": [
+    64,
+    64
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        49,
+        0,
+        0
+      ],
+      "translation": [
+        -6,
+        0,
+        -2.25
+      ],
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        49,
+        0,
+        0
+      ],
+      "translation": [
+        -6,
+        0,
+        -2.25
+      ],
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        -9,
+        0
+      ],
+      "translation": [
+        0,
+        -1.25,
+        1.5
+      ],
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        -9,
+        0
+      ],
+      "translation": [
+        0,
+        -1.25,
+        1.5
+      ],
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        -3.25,
+        0
+      ],
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ]
+    },
+    "gui": {
+      "rotation": [
+        15,
+        45,
+        15
+      ],
+      "translation": [
+        0.75,
+        -4,
+        0
+      ],
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ]
+    },
+    "head": {
+      "translation": [
+        0,
+        -6.5,
+        0
+      ]
+    },
+    "fixed": {
+      "translation": [
+        0,
+        -6.5,
+        0
+      ]
+    }
+  }
+}

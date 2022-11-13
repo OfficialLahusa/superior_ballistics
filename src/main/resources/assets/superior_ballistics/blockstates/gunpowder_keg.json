@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "": {
+            "model": "superior_ballistics:block/cannon_particle_empty"
+        }
+    }
+}

@@ -89,20 +89,20 @@ public class FlintlockPistolItem extends RangedWeaponItem {
         }
     }
 
-    protected void fireProjectile(World world, LivingEntity shooter, int damage, float speed, float divergence)
+    protected void fireProjectile(World world, LivingEntity shooter)
     {
         // Only execute on server
         if (!world.isClient) {
-            StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, shooter, damage, null);
+            StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, shooter, FlintlockPistolItem.shotDamage, null);
             stoneBulletEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
-            stoneBulletEntity.setVelocity(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, speed, divergence);
+            stoneBulletEntity.setVelocity(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, FlintlockPistolItem.speed, FlintlockPistolItem.divergence);
             world.spawnEntity(stoneBulletEntity);
         }
     }
 
     protected void shoot(World world, LivingEntity shooter) {
         // Shoot projectile
-        fireProjectile(world, shooter, FlintlockPistolItem.shotDamage, FlintlockPistolItem.speed, FlintlockPistolItem.divergence);
+        fireProjectile(world, shooter);
 
         // Play firing sound
         world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, FlintlockPistolItem.soundVolume, FlintlockPistolItem.soundPitch);

@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 
 public class FlintlockBlunderbussItem extends FlintlockMusketItem {
 
+    public static final float REQUIRED_PULL_PROGRESS = 1.0f;
     protected static final float speed = 1.6f;
     protected static final float divergence = 10.0f;
     protected static final int shotDamage = 2;
@@ -73,7 +74,7 @@ public class FlintlockBlunderbussItem extends FlintlockMusketItem {
                 float pullProgress = getPullProgress(i);
 
                 // Only execute, if pull progress is high enough
-                if (pullProgress >= 1.0f) {
+                if (pullProgress >= REQUIRED_PULL_PROGRESS) {
                     setCharged(stack, true);
                     subtractAmmunition(playerEntity, ammoStack);
                 }

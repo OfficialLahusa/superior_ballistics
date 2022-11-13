@@ -16,6 +16,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.client.item.UnclampedModelPredicateProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.Entity;
@@ -39,41 +40,41 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
         // BlockEntityRenderers
         BlockEntityRendererRegistry.register(SuperiorBallisticsMod.CANNON_BLOCK_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new CannonBlockRenderer());
 
-        // ModelPredictateProviders
-        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_MUSKET_ITEM, new Identifier("charged"),
-                (itemStack, clientWorld, livingEntity, seed)->{
-                    if(FlintlockMusketItem.isCharged(itemStack)){
-                        return 1.0F;
-                    }
-                    else {
-                        return 0.0F;
-                    }
+        // ModelPredicateProviders
+        UnclampedModelPredicateProvider firstPersonModelPredicateProvider = (itemStack, clientWorld, livingEntity, seed) -> (MinecraftClient.getInstance().options.getPerspective().isFirstPerson()) ? 1.0f : 0.0f;
+        UnclampedModelPredicateProvider usingItemModelPredicateProvider = (itemStack, clientWorld, livingEntity, seed) -> ((livingEntity != null && livingEntity.isUsingItem()) ? 1.0F : 0.0F);
+        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_PISTOL_ITEM, new Identifier("first_person"), firstPersonModelPredicateProvider);
+        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_MUSKET_ITEM, new Identifier("first_person"), firstPersonModelPredicateProvider);
+        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_BLUNDERBUSS_ITEM, new Identifier("first_person"), firstPersonModelPredicateProvider);
+        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_PISTOL_ITEM, new Identifier("using_item"), usingItemModelPredicateProvider);
+        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_MUSKET_ITEM, new Identifier("using_item"), usingItemModelPredicateProvider);
+        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_BLUNDERBUSS_ITEM, new Identifier("using_item"), usingItemModelPredicateProvider);
+        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_PISTOL_ITEM, new Identifier("pull"),
+                (itemStack, clientWorld, livingEntity, seed) -> {
+                    if (livingEntity == null) return 0.0F;
+                    float pullProgress = FlintlockPistolItem.getPullProgress(itemStack.getMaxUseTime() - livingEntity.getItemUseTimeLeft());
+                    return (livingEntity.getActiveItem() == itemStack && pullProgress >= FlintlockPistolItem.REQUIRED_PULL_PROGRESS) ? 1.0f : 0.0f;
                 }
+        );
+        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_MUSKET_ITEM, new Identifier("pull"),
+                (itemStack, clientWorld, livingEntity, seed) -> {
+                    if (livingEntity == null) return 0.0F;
+                    float pullProgress = FlintlockMusketItem.getPullProgress(itemStack.getMaxUseTime() - livingEntity.getItemUseTimeLeft());
+                    return (livingEntity.getActiveItem() == itemStack && pullProgress >= FlintlockMusketItem.REQUIRED_PULL_PROGRESS) ? 1.0f : 0.0f;
+                }
+        );
+        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_BLUNDERBUSS_ITEM, new Identifier("pull"),
+                (itemStack, clientWorld, livingEntity, seed) -> {
+                    if (livingEntity == null) return 0.0F;
+                    float pullProgress = FlintlockBlunderbussItem.getPullProgress(itemStack.getMaxUseTime() - livingEntity.getItemUseTimeLeft());
+                    return (livingEntity.getActiveItem() == itemStack && pullProgress >= FlintlockBlunderbussItem.REQUIRED_PULL_PROGRESS) ? 1.0f : 0.0f;
+                }
+        );
+        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_MUSKET_ITEM, new Identifier("charged"),
+                (itemStack, clientWorld, livingEntity, seed) -> (FlintlockMusketItem.isCharged(itemStack)) ? 1.0f : 0.0f
         );
         ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_BLUNDERBUSS_ITEM, new Identifier("charged"),
-                (itemStack, clientWorld, livingEntity, seed)->{
-                    if(FlintlockBlunderbussItem.isCharged(itemStack)){
-                        return 1.0F;
-                    }
-                    else {
-                        return 0.0F;
-                    }
-                }
-        );
-        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_PISTOL_ITEM, new Identifier("pull"),
-                (itemStack, clientWorld, livingEntity, seed)->{
-                    if (livingEntity == null){
-                        return 0.0F;
-                    };
-                    int useTime = itemStack.getMaxUseTime() - livingEntity.getItemUseTimeLeft();
-                    float pullProgress = FlintlockPistolItem.getPullProgress(useTime);
-                    if(pullProgress >= FlintlockPistolItem.REQUIRED_PULL_PROGRESS){
-                        return 1.0F;
-                    }
-                    else {
-                        return 0.0F;
-                    }
-                }
+                (itemStack, clientWorld, livingEntity, seed) -> (FlintlockBlunderbussItem.isCharged(itemStack)) ? 1.0f : 0.0f
         );
 
         // ItemRenderers

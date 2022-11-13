@@ -2,13 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "superior_ballistics:item/flintlock_pistol"
+		"layer0": "superior_ballistics:item/flintlock_pistol_pull"
 	},
-	"overrides": [
-		{"model": "superior_ballistics:item/flintlock_pistol_pull", "predicate": {"pull": 1}},
-		{"model": "superior_ballistics:item/flintlock_pistol_pov", "predicate": {"pull": 0, "using_item": 1, "first_person": 1}},
-		{"model": "superior_ballistics:item/flintlock_pistol_pov_pull", "predicate": {"pull": 1, "using_item": 1, "first_person": 1}}
-	],
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [-80, 260, -40],

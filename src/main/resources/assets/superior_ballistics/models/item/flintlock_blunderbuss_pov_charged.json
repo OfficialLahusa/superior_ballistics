@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "superior_ballistics:item/flintlock_blunderbuss_1"
+		"layer0": "superior_ballistics:item/flintlock_blunderbuss_charged"
 	},
 	"display": {
 		"thirdperson_righthand": {
@@ -16,14 +16,12 @@
 			"scale": [0.9, 0.9, 0.9]
 		},
 		"firstperson_righthand": {
-			"rotation": [0, -90, 25],
-			"translation": [1.13, 3.2, 1.13],
-			"scale": [0.68, 0.68, 0.68]
+			"rotation": [0, -30, 75],
+			"translation": [-1.75, -6, -12.75]
 		},
 		"firstperson_lefthand": {
-			"rotation": [0, 90, -25],
-			"translation": [1.13, 3.2, 1.13],
-			"scale": [0.68, 0.68, 0.68]
+			"rotation": [0, 160, -75],
+			"translation": [-1.75, -6, -12.75]
 		},
 		"fixed": {
 			"rotation": [0, -180, 0],

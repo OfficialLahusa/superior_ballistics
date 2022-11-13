@@ -27,8 +27,8 @@ import java.util.function.Predicate;
 
 public class FlintlockMusketItem extends RangedWeaponItem {
 
+    public static final float REQUIRED_PULL_PROGRESS = 1.0f;
     protected boolean loaded = false;
-
     protected static final float speed = 3.0f;
     protected static final float divergence = 3.0f;
     protected static final int shotDamage = 13;
@@ -104,7 +104,7 @@ public class FlintlockMusketItem extends RangedWeaponItem {
                 float pullProgress = getPullProgress(i);
 
                 // Only execute, if pull progress is high enough
-                if (pullProgress >= 1.0f) {
+                if (pullProgress >= REQUIRED_PULL_PROGRESS) {
                     setCharged(stack, true);
                     subtractAmmunition(playerEntity, ammoStack);
                 }

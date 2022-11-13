@@ -2,6 +2,9 @@ package com.lahusa.superior_ballistics;
 
 import com.lahusa.superior_ballistics.armor.renderer.*;
 import com.lahusa.superior_ballistics.block.renderer.CannonBlockRenderer;
+import com.lahusa.superior_ballistics.item.FlintlockBlunderbussItem;
+import com.lahusa.superior_ballistics.item.FlintlockMusketItem;
+import com.lahusa.superior_ballistics.item.FlintlockPistolItem;
 import com.lahusa.superior_ballistics.item.renderer.*;
 import com.lahusa.superior_ballistics.net.EntitySpawnPacket;
 import com.lahusa.superior_ballistics.particle.CannonMuzzleFireParticle;
@@ -12,10 +15,12 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
@@ -33,6 +38,43 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
 
         // BlockEntityRenderers
         BlockEntityRendererRegistry.register(SuperiorBallisticsMod.CANNON_BLOCK_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new CannonBlockRenderer());
+
+        // ModelPredictateProviders
+        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_MUSKET_ITEM, new Identifier("charged"),
+                (itemStack, clientWorld, livingEntity, seed)->{
+                    if(FlintlockMusketItem.isCharged(itemStack)){
+                        return 1.0F;
+                    }
+                    else {
+                        return 0.0F;
+                    }
+                }
+        );
+        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_BLUNDERBUSS_ITEM, new Identifier("charged"),
+                (itemStack, clientWorld, livingEntity, seed)->{
+                    if(FlintlockBlunderbussItem.isCharged(itemStack)){
+                        return 1.0F;
+                    }
+                    else {
+                        return 0.0F;
+                    }
+                }
+        );
+        ModelPredicateProviderRegistry.register(SuperiorBallisticsMod.FLINTLOCK_PISTOL_ITEM, new Identifier("pull"),
+                (itemStack, clientWorld, livingEntity, seed)->{
+                    if (livingEntity == null){
+                        return 0.0F;
+                    };
+                    int useTime = itemStack.getMaxUseTime() - livingEntity.getItemUseTimeLeft();
+                    float pullProgress = FlintlockPistolItem.getPullProgress(useTime);
+                    if(pullProgress >= FlintlockPistolItem.REQUIRED_PULL_PROGRESS){
+                        return 1.0F;
+                    }
+                    else {
+                        return 0.0F;
+                    }
+                }
+        );
 
         // ItemRenderers
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.OAK_CANNON_ITEM, new CannonBlockItemRenderer());

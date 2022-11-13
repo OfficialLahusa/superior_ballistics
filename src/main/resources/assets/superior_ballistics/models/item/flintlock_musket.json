@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "superior_ballistics:item/flintlock_musket"
+		"layer0": "superior_ballistics:item/flintlock_musket_0"
 	},
 	"display": {
 		"thirdperson_righthand": {
@@ -29,5 +29,13 @@
 			"rotation": [0, -180, 0],
 			"translation": [0, 0, -0.25]
 		}
-	}
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"charged": 1
+			},
+			"model": "superior_ballistics:item/flintlock_musket_1"
+		}
+	]
 }

@@ -22,6 +22,7 @@ import java.util.function.Predicate;
 
 public class FlintlockPistolItem extends RangedWeaponItem {
 
+    public static final float REQUIRED_PULL_PROGRESS = 0.25f;
     protected static final float speed = 3.0f;
     protected static final float divergence = 5.2f;
     protected static final float soundPitch = 1.4f;
@@ -57,7 +58,7 @@ public class FlintlockPistolItem extends RangedWeaponItem {
                 float pullProgress = getPullProgress(i);
 
                 // Only execute, if pull progress is high enough
-                if (!((double)pullProgress < 0.25D)) {
+                if (pullProgress >= REQUIRED_PULL_PROGRESS) {
                     // Shoot
                     shoot(world, user);
 

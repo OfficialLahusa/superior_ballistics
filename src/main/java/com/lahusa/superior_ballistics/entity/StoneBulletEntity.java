@@ -17,7 +17,6 @@ import net.minecraft.item.Item;
 import net.minecraft.network.Packet;
 import net.minecraft.particle.*;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.Tag;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;

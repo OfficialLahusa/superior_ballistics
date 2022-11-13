@@ -2,7 +2,6 @@ package com.lahusa.superior_ballistics.armor.model;
 
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import com.lahusa.superior_ballistics.item.PithHelmetArmorItem;
-import com.lahusa.superior_ballistics.item.TricorneArmorItem;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 

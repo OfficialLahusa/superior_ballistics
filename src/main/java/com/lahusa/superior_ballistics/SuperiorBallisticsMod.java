@@ -1,6 +1,5 @@
 package com.lahusa.superior_ballistics;
 
-import com.eliotlash.mclib.math.functions.classic.Mod;
 import com.lahusa.superior_ballistics.block.CannonBlock;
 import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
 import com.lahusa.superior_ballistics.entity.CannonBallEntity;
@@ -25,7 +24,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import software.bernie.example.GeckoLibMod;
-import software.bernie.geckolib3.GeckoLib;
 
 public class SuperiorBallisticsMod implements ModInitializer {
 

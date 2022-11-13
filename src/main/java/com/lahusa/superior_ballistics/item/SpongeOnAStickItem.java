@@ -2,12 +2,8 @@ package com.lahusa.superior_ballistics.item;
 
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.AreaEffectCloudEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;

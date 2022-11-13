@@ -2,7 +2,6 @@ package com.lahusa.superior_ballistics.mixin;
 
 import net.minecraft.client.render.model.ModelLoader;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.Inject;
 
 @Mixin(ModelLoader.class)
 public class ModelLoaderMixin {

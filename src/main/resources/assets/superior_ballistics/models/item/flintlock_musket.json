@@ -5,9 +5,9 @@
 		"layer0": "superior_ballistics:item/flintlock_musket"
 	},
 	"overrides": [
-		{"model": "superior_ballistics:item/flintlock_musket_charged", "predicate": {"charged": 1}},
 		{"model": "superior_ballistics:item/flintlock_musket_pov", "predicate": {"charged": 0, "first_person": 1, "using_item": 1}},
-		{"model": "superior_ballistics:item/flintlock_musket_pov_charged", "predicate": {"pull": 1, "first_person": 1, "using_item": 1}}
+		{"model": "superior_ballistics:item/flintlock_musket_pov_charged", "predicate": {"pull": 1, "first_person": 1, "using_item": 1}},
+		{"model": "superior_ballistics:item/flintlock_musket_charged", "predicate": {"charged": 1}}
 	],
 	"display": {
 		"thirdperson_righthand": {

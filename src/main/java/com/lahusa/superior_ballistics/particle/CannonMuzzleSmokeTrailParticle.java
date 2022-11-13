@@ -45,9 +45,9 @@ public class CannonMuzzleSmokeTrailParticle extends SpriteBillboardParticle {
                 this.velocityZ *= 1.1D;
             }
 
-            this.velocityX *= (double)this.velocityMultiplier;
-            this.velocityY *= (double)this.velocityMultiplier;
-            this.velocityZ *= (double)this.velocityMultiplier;
+            this.velocityX *= this.velocityMultiplier;
+            this.velocityY *= this.velocityMultiplier;
+            this.velocityZ *= this.velocityMultiplier;
             if (this.onGround) {
                 this.velocityX *= 0.699999988079071D;
                 this.velocityZ *= 0.699999988079071D;

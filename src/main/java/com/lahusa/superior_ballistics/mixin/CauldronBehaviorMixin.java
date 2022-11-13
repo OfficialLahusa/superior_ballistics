@@ -23,7 +23,7 @@ import java.util.Map;
 public interface CauldronBehaviorMixin {
     // Initialized with dummy value
     @Shadow @Final
-    public static Map<Item, CauldronBehavior> WATER_CAULDRON_BEHAVIOR = null;
+    Map<Item, CauldronBehavior> WATER_CAULDRON_BEHAVIOR = null;
 
     @Inject(at = @At("TAIL"), method = "registerBehavior()V")
     private static void registerSpongeOnAStickBehavior(CallbackInfo ci)

@@ -84,7 +84,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
     private boolean isCreative = false;
     private UUID lastUserUUID = null;
 
-    private AnimationFactory factory = new AnimationFactory(this);
+    private final AnimationFactory factory = new AnimationFactory(this);
 
 
     public CannonBlockEntity(BlockPos pos, BlockState state) {
@@ -295,7 +295,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
         }
     }
 
-    public boolean loadShot(short shotTypeToLoad, @Nullable PlayerEntity player) {
+    public void loadShot(short shotTypeToLoad, @Nullable PlayerEntity player) {
         if(!isShotLoaded) {
             shotType = shotTypeToLoad;
             isShotLoaded = true;
@@ -305,10 +305,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
             if(player != null) {
                 updateLastUserUUID(player);
             }
-
-            return true;
         }
-        return false;
     }
 
     public void push(@Nullable PlayerEntity player) {

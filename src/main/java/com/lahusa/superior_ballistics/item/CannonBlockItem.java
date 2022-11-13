@@ -35,7 +35,5 @@ public class CannonBlockItem extends BlockItem implements IAnimatable, ISyncable
     }
 
     @Override
-    public void onAnimationSync(int id, int state) {
-        return;
-    }
+    public void onAnimationSync(int id, int state) { }
 }

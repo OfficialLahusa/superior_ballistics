@@ -32,8 +32,8 @@ public class StoneBulletEntity extends ThrownItemEntity {
     public static final TagKey<Block> STONE_BULLET_BREAKABLE_TAG = TagKey.of(Registry.BLOCK_KEY, new Identifier(SuperiorBallisticsMod.MODID, "stone_bullet_breakable"));
     public static final TagKey<Block> FLOWER_POT_TAG = TagKey.of(Registry.BLOCK_KEY, new Identifier("minecraft", "flower_pots"));
 
-    private int damage;
-    private StatusEffect statusEffect;
+    private final int damage;
+    private final StatusEffect statusEffect;
 
     public StoneBulletEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);

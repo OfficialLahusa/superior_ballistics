@@ -15,9 +15,9 @@ public class CannonMuzzleFireParticle extends SpriteBillboardParticle {
         this.velocityX = velocityX;
         this.velocityY = velocityY;
         this.velocityZ = velocityZ;
-        this.x += (double)((this.random.nextFloat() - this.random.nextFloat()) * 0.05F);
-        this.y += (double)((this.random.nextFloat() - this.random.nextFloat()) * 0.05F);
-        this.z += (double)((this.random.nextFloat() - this.random.nextFloat()) * 0.05F);
+        this.x += (this.random.nextFloat() - this.random.nextFloat()) * 0.05F;
+        this.y += (this.random.nextFloat() - this.random.nextFloat()) * 0.05F;
+        this.z += (this.random.nextFloat() - this.random.nextFloat()) * 0.05F;
         this.maxAge = (int)(((8.0D / (Math.random() * 0.8D + 0.2D)) + 4.0) / 3.0);
         this.scale = 0.25f;
         this.gravityStrength = 2.0f;
@@ -44,9 +44,9 @@ public class CannonMuzzleFireParticle extends SpriteBillboardParticle {
                 this.velocityZ *= 1.1D;
             }
 
-            this.velocityX *= (double)this.velocityMultiplier;
-            this.velocityY *= (double)this.velocityMultiplier;
-            this.velocityZ *= (double)this.velocityMultiplier;
+            this.velocityX *= this.velocityMultiplier;
+            this.velocityY *= this.velocityMultiplier;
+            this.velocityZ *= this.velocityMultiplier;
             if (this.onGround) {
                 this.velocityX *= 0.699999988079071D;
                 this.velocityZ *= 0.699999988079071D;

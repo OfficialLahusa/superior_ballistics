@@ -3,7 +3,8 @@
 **Kanonen:** 
 - [ ] Kanone Lunte hinzufügen + Partikel
 - [ ] Magma-Kanonenkugeln
-- [ ] Reichweite der Kanonen verringern  
+- [ ] Reichweite der Kanonen verringern 🔥
+- [ ] Kanonenkugel Partikelspur 🔥
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
 - [ ] Zirkel/Theodolit/Tachymeter/Nivellier für genauere Distanzbestimmung und Winkelanzeige
 - [ ] Loot-only Cursed Cannonball (Super Secret Settings Shader als Statuseffekt)

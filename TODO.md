@@ -30,8 +30,7 @@
 - [ ] "Auf Nimmerwiedersehen!" (Enderperle mit Kanone verschießen)
 - [ ] "Parry this!" (Schieße jemanden ab, der ein Schwert in der Hand hat)
 
-**Sonstiges:** 
-- [ ] Gunpowder Keg hinzufügen 
+**Sonstiges:**
 - [ ] Mod Guidebook (z.B. mit Patchouli)
 - [ ] Hüte und 3D-Modelle im Inventar einheitlich rotieren
 
@@ -74,3 +73,4 @@
 - [x] Todesnachricht ändern (insb. auf Deutsch)
 - [x] "Schuss in den Ofen" (Kanone überladen und zünden)
 - [x] Diverse Advancements für die Handfeuerwaffen und Uniformteile
+- [x] Gunpowder Keg hinzufügen 

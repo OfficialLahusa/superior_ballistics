@@ -5,13 +5,13 @@
 			"loop": "hold_on_last_frame",
 			"animation_length": 1,
 			"bones": {
-				"bone2": {
+				"Powder_Level": {
 					"position": {
 						"0.0": {
-							"vector": [0, 1, 0]
+							"vector": [0, -13, 0]
 						},
 						"1.0": {
-							"vector": [0, 12, 0],
+							"vector": [0, 0, 0],
 							"easing": "linear"
 						}
 					}

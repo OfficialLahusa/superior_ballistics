@@ -1,6 +1,5 @@
 package com.lahusa.superior_ballistics.block.renderer;
 
-import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
 import com.lahusa.superior_ballistics.block.entity.GunpowderKegBlockEntity;
 import com.lahusa.superior_ballistics.block.model.GunpowderKegBlockModel;
 import net.minecraft.client.render.VertexConsumer;

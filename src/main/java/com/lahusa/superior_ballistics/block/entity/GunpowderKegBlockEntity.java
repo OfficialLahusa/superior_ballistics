@@ -1,7 +1,6 @@
 package com.lahusa.superior_ballistics.block.entity;
 
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
-import com.lahusa.superior_ballistics.block.GunpowderKegBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

@@ -2,7 +2,7 @@ package com.lahusa.superior_ballistics;
 
 import com.lahusa.superior_ballistics.armor.renderer.*;
 import com.lahusa.superior_ballistics.block.renderer.CannonBlockRenderer;
-import com.lahusa.superior_ballistics.block.renderer.GunpowderKegRenderer;
+import com.lahusa.superior_ballistics.block.renderer.GunpowderKegBlockRenderer;
 import com.lahusa.superior_ballistics.item.FlintlockBlunderbussItem;
 import com.lahusa.superior_ballistics.item.FlintlockMusketItem;
 import com.lahusa.superior_ballistics.item.FlintlockPistolItem;
@@ -40,7 +40,7 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
 
         // BlockEntityRenderers
         BlockEntityRendererRegistry.register(SuperiorBallisticsMod.CANNON_BLOCK_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new CannonBlockRenderer());
-        BlockEntityRendererRegistry.register(SuperiorBallisticsMod.GUNPOWDER_KEG_ENTITY, (BlockEntityRendererFactory.Context renderDispatcherIn) -> new GunpowderKegRenderer());
+        BlockEntityRendererRegistry.register(SuperiorBallisticsMod.GUNPOWDER_KEG_ENTITY, (BlockEntityRendererFactory.Context renderDispatcherIn) -> new GunpowderKegBlockRenderer());
 
         // ModelPredicateProviders
         UnclampedModelPredicateProvider firstPersonModelPredicateProvider = (itemStack, clientWorld, livingEntity, seed) -> (MinecraftClient.getInstance().options.getPerspective().isFirstPerson()) ? 1.0f : 0.0f;
@@ -88,7 +88,7 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.DARK_OAK_CANNON_ITEM, new CannonBlockItemRenderer());
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.CRIMSON_CANNON_ITEM, new CannonBlockItemRenderer());
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.WARPED_CANNON_ITEM, new CannonBlockItemRenderer());
-        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.GUNPOWDER_KEG_ITEM, new GunpowderKegItemRenderer());
+        GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.GUNPOWDER_KEG_ITEM, new GunpowderKegBlockItemRenderer());
         // ItemUniformRenderers
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.PICKELHAUBE_HELMET, new PickelhaubeItemRenderer());
         GeoItemRenderer.registerItemRenderer(SuperiorBallisticsMod.SHAKO_HELMET, new ShakoItemRenderer());

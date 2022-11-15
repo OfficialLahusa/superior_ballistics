@@ -5,7 +5,7 @@ import com.lahusa.superior_ballistics.block.entity.GunpowderKegBlockEntity;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public class GunpowderKegModel extends AnimatedGeoModel<GunpowderKegBlockEntity> {
+public class GunpowderKegBlockModel extends AnimatedGeoModel<GunpowderKegBlockEntity> {
     @Override
     public Identifier getModelLocation(GunpowderKegBlockEntity object) {
         return new Identifier(SuperiorBallisticsMod.MODID, "geo/gunpowder_keg.geo.json");

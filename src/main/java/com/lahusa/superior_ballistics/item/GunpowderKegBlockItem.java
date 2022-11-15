@@ -19,7 +19,7 @@ public class GunpowderKegBlockItem extends BlockItem implements IAnimatable, ISy
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gunpowder_keg.gunpowder_amount", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gunpowder_keg.idle", true));
         return PlayState.CONTINUE;
     }
 

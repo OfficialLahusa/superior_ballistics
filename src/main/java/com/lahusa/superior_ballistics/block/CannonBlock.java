@@ -64,7 +64,7 @@ public class CannonBlock extends BlockWithEntity {
             // Check if angle changed
             if(newAngle != oldAngle) {
                 // Play lever click sound
-                player.playSound(SoundEvents.BLOCK_LEVER_CLICK, 1.f, 0.6f);
+                world.playSound(null, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 1.f, .6f);
 
                 // Set new angle
                 blockEntity.setAngle(newAngle);
@@ -79,7 +79,7 @@ public class CannonBlock extends BlockWithEntity {
                         if(!world.isClient) blockEntity.addPowder(player);
 
                         // Play sound
-                        player.playSound(SoundEvents.BLOCK_SAND_BREAK, 1.f, 1.4f);
+                        world.playSound(null, pos, SoundEvents.BLOCK_SAND_BREAK, SoundCategory.BLOCKS, 1.f, 1.4f);
 
                         // Remove gunpowder from hand
                         if(!player.isCreative()) heldStack.decrement(1);
@@ -103,28 +103,28 @@ public class CannonBlock extends BlockWithEntity {
                             if(!world.isClient) blockEntity.loadShot(CannonBlockEntity.IRON_CANNONBALL, player);
 
                             // Play sound
-                            player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 0.75f, 1.4f);
+                            world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_LAND, SoundCategory.BLOCKS, .75f, 1.4f);
                         }
                         else if(heldStack.isOf(SuperiorBallisticsMod.IRON_GRAPESHOT)) {
                             // Load shot
                             if(!world.isClient) blockEntity.loadShot(CannonBlockEntity.IRON_GRAPESHOT, player);
 
                             // Play sound
-                            player.playSound(SoundEvents.BLOCK_ANVIL_LAND, 0.75f, 1.4f);
+                            world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_LAND, SoundCategory.BLOCKS, .75f, 1.4f);
                         }
                         else if(heldStack.isOf(Items.ENDER_PEARL)) {
                             // Load shot
                             if(!world.isClient) blockEntity.loadShot(CannonBlockEntity.ENDER_PEARL_SHOT, player);
 
                             // Play sound
-                            player.playSound(SoundEvents.ENTITY_ENDER_EYE_LAUNCH, 0.75f, 1.4f);
+                            world.playSound(null, pos, SoundEvents.ENTITY_ENDER_EYE_LAUNCH, SoundCategory.BLOCKS, .75f, 1.4f);
                         }
                         else if(heldStack.isOf(Items.PAPER)) {
                             // Load shot
                             if(!world.isClient) blockEntity.loadShot(CannonBlockEntity.BLANK_SHOT, player);
 
                             // Play sound
-                            player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.75f, 1.0f);
+                            world.playSound(null, pos, SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.BLOCKS, 0.75f, 1.0f);
                         }
 
                         // Remove shot from hand

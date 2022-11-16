@@ -31,6 +31,7 @@
     "item.superior_ballistics.creative_cannon_module.tooltip.phase_hint": "Während Ladestufe \"%s\" benutzen.",
     "item.superior_ballistics.creative_cannon_module.tooltip.description": "Wandelt die Kanone in eine kreative Kanone mit unendlich Munition um.",
     "item.superior_ballistics.creative_cannon_module.applied_message": "Kreatives Kanonenmodul wurde angewandt.",
+    "item.superior_ballistics.gunpowder_keg.tooltip": "Rechtsclick mit %s zum Öffnen/Schließen des Deckels",
     "entity.superior_ballistics.cannonball": "Kanonenkugel",
     "entity.superior_ballistics.stone_bullet": "Steinkugel",
     "superior_ballistics.cannon.loading_stage": "Kanonenladestufe: ",

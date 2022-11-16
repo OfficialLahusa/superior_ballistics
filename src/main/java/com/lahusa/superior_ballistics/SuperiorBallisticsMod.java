@@ -37,7 +37,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final float CANNON_STRENGTH = 2.0f;
 	public static final float CANNON_HARDNESS = 14.0f;
 	protected static final FabricBlockSettings cannonSettings = FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool();
-	protected static final FabricBlockSettings gunpowderKegSettings = FabricBlockSettings.of(Material.WOOD).nonOpaque().hardness(1.0f);
+	protected static final FabricBlockSettings gunpowderKegSettings = FabricBlockSettings.of(Material.WOOD).nonOpaque().hardness(1.0f).requiresTool();
 
 	public static final Block OAK_CANNON_BLOCK 		= new CannonBlock(new Identifier("minecraft", "oak_planks"), 		new Identifier("minecraft", "oak_log"), 		cannonSettings);
 	public static final Block SPRUCE_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "spruce_planks"), 		new Identifier("minecraft", "spruce_log"), 	cannonSettings);

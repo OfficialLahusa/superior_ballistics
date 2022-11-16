@@ -8,7 +8,6 @@
         "superior_ballistics:acacia_cannon",
         "superior_ballistics:dark_oak_cannon",
         "superior_ballistics:crimson_cannon",
-        "superior_ballistics:warped_cannon",
-        "superior_ballistics:gunpowder_keg"
+        "superior_ballistics:warped_cannon"
     ]
 }

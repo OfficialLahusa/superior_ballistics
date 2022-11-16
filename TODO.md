@@ -4,7 +4,6 @@
 - [ ] Kanone Lunte hinzufügen + Partikel
 - [ ] Magma-Kanonenkugeln
 - [ ] Reichweite der Kanonen verringern 🔥
-- [ ] Kanonenkugel Partikelspur 🔥
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
 - [ ] Zirkel/Theodolit/Tachymeter/Nivellier für genauere Distanzbestimmung und Winkelanzeige
 - [ ] Loot-only Cursed Cannonball (Super Secret Settings Shader als Statuseffekt)
@@ -74,3 +73,4 @@
 - [x] "Schuss in den Ofen" (Kanone überladen und zünden)
 - [x] Diverse Advancements für die Handfeuerwaffen und Uniformteile
 - [x] Gunpowder Keg hinzufügen 
+- [x] Kanonenkugel Partikelspur

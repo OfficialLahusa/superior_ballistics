@@ -33,6 +33,11 @@ public class CannonBallEntity extends ThrownItemEntity {
         super(SuperiorBallisticsMod.CANNONBALL_ENTITY_TYPE, x, y, z, world);
     }
 
+    public void tick() {
+        super.tick();
+        if(world.isClient) spawnTrailParticles();
+    }
+
     @Override
     protected Item getDefaultItem() {
         return null;
@@ -71,6 +76,11 @@ public class CannonBallEntity extends ThrownItemEntity {
             this.world.sendEntityStatus(this, (byte)3); // particle?
             this.remove(RemovalReason.KILLED);
         }
+    }
+
+    private void spawnTrailParticles() {
+        world.addParticle(ParticleTypes.FLAME, getX(), getY(), getZ(), 0, 0, 0);
+        world.addParticle(ParticleTypes.LARGE_SMOKE, getX(), getY(), getZ(), 0, 0, 0);
     }
 
     @Override

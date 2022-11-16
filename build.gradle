@@ -32,7 +32,7 @@ dependencies {
 	// You may need to force-disable transitiveness on them.
 
 	// GeckoLib implementation
-	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.18:3.0.50'
+	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.18:3.0.78'
 }
 
 processResources {

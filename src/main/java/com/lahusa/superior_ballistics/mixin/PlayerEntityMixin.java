@@ -4,7 +4,9 @@ import com.lahusa.superior_ballistics.block.CannonBlock;
 import com.lahusa.superior_ballistics.block.GunpowderKegBlock;
 import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
 import com.lahusa.superior_ballistics.block.entity.GunpowderKegBlockEntity;
+import com.lahusa.superior_ballistics.block.entity.IStatusTextProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,27 +41,15 @@ public abstract class PlayerEntityMixin {
             BlockHitResult blockHit = (BlockHitResult) hit;
             BlockPos pos = blockHit.getBlockPos();
             Block block = client.world.getBlockState(pos).getBlock();
+            BlockEntity blockEntity = client.world.getBlockEntity(pos);
 
-
-            // If looking at cannon
-            if(block instanceof CannonBlock) {
-                CannonBlockEntity blockEntity = (CannonBlockEntity)client.world.getBlockEntity(pos);
-
-                if(blockEntity != null) {
-                    client.inGameHud.setOverlayMessage(blockEntity.getStatusText(), false);
-                    isShowingStatusText = true;
-                }
+            // If looking at status text provider
+            if(blockEntity instanceof IStatusTextProvider statusTextProvider) {
+                client.inGameHud.setOverlayMessage(statusTextProvider.getStatusText(), false);
+                isShowingStatusText = true;
             }
-            else if(block instanceof GunpowderKegBlock) {
-                GunpowderKegBlockEntity blockEntity = (GunpowderKegBlockEntity)client.world.getBlockEntity(pos);
-
-                if(blockEntity != null) {
-                    client.inGameHud.setOverlayMessage(blockEntity.getStatusText(), false);
-                    isShowingStatusText = true;
-                }
-            }
+            // Reset overlay message
             else if(isShowingStatusText) {
-                // Reset overlay message
                 client.inGameHud.setOverlayMessage(new LiteralText(""), false);
                 isShowingStatusText = false;
             }

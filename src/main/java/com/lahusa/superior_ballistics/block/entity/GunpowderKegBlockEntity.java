@@ -24,7 +24,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class GunpowderKegBlockEntity extends BlockEntity implements IAnimatable {
+public class GunpowderKegBlockEntity extends BlockEntity implements IAnimatable, IStatusTextProvider {
 
     private short powderAmount = 0;
     private boolean closed = false;
@@ -48,6 +48,7 @@ public class GunpowderKegBlockEntity extends BlockEntity implements IAnimatable 
          return this.factory;
     }
 
+    @Override
     public Text getStatusText() {
         MutableText text = new LiteralText("[").formatted(Formatting.GRAY);
         text.append(new TranslatableText("superior_ballistics.gunpowder_keg.powder_amount_status_text").formatted(Formatting.DARK_GREEN));

@@ -41,7 +41,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.UUID;
 
-public class CannonBlockEntity extends BlockEntity implements IAnimatable {
+public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStatusTextProvider {
 
     // Loading stages
     public static final short POWDER_LOADING_STAGE = 0;
@@ -117,6 +117,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable {
         return this.factory;
     }
 
+    @Override
     public Text getStatusText() {
         MutableText text = new LiteralText("[").formatted(Formatting.GRAY)
                 .append(new TranslatableText("superior_ballistics.cannon.loading_stage").formatted(Formatting.BLACK));

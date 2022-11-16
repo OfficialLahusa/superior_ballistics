@@ -32,6 +32,8 @@
 **Sonstiges:**
 - [ ] Mod Guidebook (z.B. mit Patchouli)
 - [ ] Hüte und 3D-Modelle im Inventar einheitlich rotieren
+- [ ] Gunpowder Keg LootNumberProvider und Table
+- [ ] Gunpowder Keg Mining Sound
 
 **Ferne Ideen:** 
 - [ ] Hopper Einspeisung in Kanonen 

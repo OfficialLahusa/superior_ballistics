@@ -104,6 +104,9 @@ public class CannonBlock extends BlockWithEntity {
 
                             // Play sound
                             world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_LAND, SoundCategory.BLOCKS, .75f, 1.4f);
+
+                            // Remove shot from hand
+                            if(!player.isCreative()) heldStack.decrement(1);
                         }
                         else if(heldStack.isOf(SuperiorBallisticsMod.IRON_GRAPESHOT)) {
                             // Load shot
@@ -111,6 +114,9 @@ public class CannonBlock extends BlockWithEntity {
 
                             // Play sound
                             world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_LAND, SoundCategory.BLOCKS, .75f, 1.4f);
+
+                            // Remove shot from hand
+                            if(!player.isCreative()) heldStack.decrement(1);
                         }
                         else if(heldStack.isOf(Items.ENDER_PEARL)) {
                             // Load shot
@@ -118,6 +124,9 @@ public class CannonBlock extends BlockWithEntity {
 
                             // Play sound
                             world.playSound(null, pos, SoundEvents.ENTITY_ENDER_EYE_LAUNCH, SoundCategory.BLOCKS, .75f, 1.4f);
+
+                            // Remove shot from hand
+                            if(!player.isCreative()) heldStack.decrement(1);
                         }
                         else if(heldStack.isOf(Items.PAPER)) {
                             // Load shot
@@ -125,10 +134,10 @@ public class CannonBlock extends BlockWithEntity {
 
                             // Play sound
                             world.playSound(null, pos, SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.BLOCKS, 0.75f, 1.0f);
-                        }
 
-                        // Remove shot from hand
-                        if(!player.isCreative()) heldStack.decrement(1);
+                            // Remove shot from hand
+                            if(!player.isCreative()) heldStack.decrement(1);
+                        }
                     }
                     // If cannon is loaded and piston loader is held
                     else if(heldStack.isOf(SuperiorBallisticsMod.PISTON_LOADER_ITEM)) {

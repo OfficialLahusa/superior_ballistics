@@ -12,6 +12,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.advancement.criterion.Criteria;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
@@ -24,6 +25,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.*;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
@@ -33,12 +35,13 @@ public class SuperiorBallisticsMod implements ModInitializer {
 
 	public static final String MODID = "superior_ballistics";
 
-	// Blocks
+	// Block Settings
 	public static final float CANNON_STRENGTH = 2.0f;
 	public static final float CANNON_HARDNESS = 14.0f;
 	protected static final FabricBlockSettings cannonSettings = FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool();
-	protected static final FabricBlockSettings gunpowderKegSettings = FabricBlockSettings.of(Material.WOOD).nonOpaque().hardness(1.0f).requiresTool();
+	protected static final FabricBlockSettings gunpowderKegSettings = FabricBlockSettings.of(Material.WOOD).nonOpaque().hardness(1.0f).requiresTool().sounds(BlockSoundGroup.WOOD);
 
+	// Blocks
 	public static final Block OAK_CANNON_BLOCK 		= new CannonBlock(new Identifier("minecraft", "oak_planks"), 		new Identifier("minecraft", "oak_log"), 		cannonSettings);
 	public static final Block SPRUCE_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "spruce_planks"), 		new Identifier("minecraft", "spruce_log"), 	cannonSettings);
 	public static final Block BIRCH_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "birch_planks"), 		new Identifier("minecraft", "birch_log"), 	cannonSettings);
@@ -48,6 +51,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final Block CRIMSON_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "crimson_planks"), 	new Identifier(MODID, "crimson_stem"), 				cannonSettings);
 	public static final Block WARPED_CANNON_BLOCK 	= new CannonBlock(new Identifier("minecraft", "warped_planks"), 		new Identifier(MODID, "warped_stem"), 					cannonSettings);
 	public static final Block GUNPOWDER_KEG_BLOCK =new GunpowderKegBlock(gunpowderKegSettings);
+
 	// BlockEntities
 	public static BlockEntityType<CannonBlockEntity> CANNON_BLOCK_ENTITY;
 	public static BlockEntityType<GunpowderKegBlockEntity> GUNPOWDER_KEG_ENTITY;
@@ -131,19 +135,20 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "crimson_cannon"), 	CRIMSON_CANNON_BLOCK);
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "warped_cannon"), 		WARPED_CANNON_BLOCK);
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "gunpowder_keg"), 		GUNPOWDER_KEG_BLOCK);
+		FlammableBlockRegistry.getDefaultInstance().add(GUNPOWDER_KEG_BLOCK, 5, 5);
 
 		// BlockEntities
 		CANNON_BLOCK_ENTITY = Registry.register(
 				Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "cannon_block_entity"),
 				FabricBlockEntityTypeBuilder.create(
-						CannonBlockEntity::new, OAK_CANNON_BLOCK, SPRUCE_CANNON_BLOCK, BIRCH_CANNON_BLOCK, JUNGLE_CANNON_BLOCK, ACACIA_CANNON_BLOCK, DARK_OAK_CANNON_BLOCK, CRIMSON_CANNON_BLOCK, WARPED_CANNON_BLOCK)
-						.build(null)
+						CannonBlockEntity::new, OAK_CANNON_BLOCK, SPRUCE_CANNON_BLOCK, BIRCH_CANNON_BLOCK, JUNGLE_CANNON_BLOCK, ACACIA_CANNON_BLOCK, DARK_OAK_CANNON_BLOCK, CRIMSON_CANNON_BLOCK, WARPED_CANNON_BLOCK
+				).build(null)
 		);
 		GUNPOWDER_KEG_ENTITY = Registry.register(
 				Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "gunpowder_keg_block_entity"),
 				FabricBlockEntityTypeBuilder.create(
-						GunpowderKegBlockEntity::new, GUNPOWDER_KEG_BLOCK)
-						.build(null)
+						GunpowderKegBlockEntity::new, GUNPOWDER_KEG_BLOCK
+				).build(null)
 		);
 
 

@@ -15,6 +15,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -67,9 +68,12 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
     // Firing phase
     private static final double BARREL_LENGTH = 13.0/16.0;
     private static final double MUZZLE_PARTICLE_OFFSET = 4.5/16.0;
-    private static final float FIRING_SOUND_VOLUME = 2.0f;
-    private static final float FIRING_SOUND_PITCH = 1.2f;
-    private static final float SHOT_SPEED = 2.0f;
+    private static final float FIRING_SOUND_VOLUME = 4.0f;
+    private static final float FIRING_SOUND_FAR_VOLUME_COMPENSATION_RATE = 0.062f;
+    private static final float FIRING_SOUND_PITCH = 1.1f;
+    private static final float FIRING_SOUND_FAR_PITCH = 0.48f;
+    private static final float FIRING_SOUND_FAR_RANGE = 380.0f;
+    private static final float SHOT_SPEED = 1.0f;
     private static final float SHOT_DIVERGENCE = 1.2f;
     private static final float GRAPESHOT_DIVERGENCE = 3.0f;
 
@@ -160,11 +164,11 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
         if(world == null) return;
 
         if(loadingStage == LIT_STAGE) {
-            // Play sound
-            world.playSound(null, pos, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, FIRING_SOUND_VOLUME, FIRING_SOUND_PITCH);
-
             // Summon particles
             if(!world.isClient) {
+                // Play sound
+                playFiringSound();
+
                 // Determine barrel pivot point
                 Vec3d pivot = new Vec3d(0.5, 7.5/16.0, 0.5);
                 final double offset = 1.0/32.0;
@@ -208,7 +212,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
                     double c = world.random.nextGaussian();
                     Vec3d particleDir = new Vec3d(dir.x + scaleFac * a, dir.y + scaleFac * b, dir.z + scaleFac * c);
 
-                    float speed = getProjectileSpeedFactor() * 0.5f * (float) Math.abs(world.random.nextGaussian());
+                    float speed = getProjectileSpeedFactor() * 0.25f * (float) Math.abs(world.random.nextGaussian());
 
                     ((ServerWorld)world).spawnParticles(
                             SuperiorBallisticsMod.CANNON_MUZZLE_SMOKE_TRAIL,
@@ -225,7 +229,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
                     double c = world.random.nextGaussian();
                     Vec3d particleDir = new Vec3d(dir.x + scaleFac * a, dir.y + scaleFac * b, dir.z + scaleFac * c);
 
-                    float speed = getProjectileSpeedFactor() * 0.35f * (float) Math.abs(world.random.nextGaussian());
+                    float speed = getProjectileSpeedFactor() * 0.175f * (float) Math.abs(world.random.nextGaussian());
 
                     ((ServerWorld)world).spawnParticles(
                             SuperiorBallisticsMod.CANNON_MUZZLE_FIRE,
@@ -285,6 +289,32 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
                 litTicks = 0;
             }
         }
+    }
+
+    private void playFiringSound() {
+        ServerWorld serverWorld = ((ServerWorld)world);
+        // Reduce close/far sound shift dist to 80%, so the change feels smoother
+        double closeSoundDist = 0.8 * 16.0 * FIRING_SOUND_VOLUME;
+
+        // Send sound packet to each player
+        for(ServerPlayerEntity player : serverWorld.getPlayers()) {
+            double playerDist = Math.sqrt(pos.getSquaredDistanceFromCenter(player.getX(), player.getY(), player.getZ()));
+
+            // Player in close sound range
+            if(playerDist <= closeSoundDist ) {
+                player.networkHandler.sendPacket(
+                        new PlaySoundS2CPacket(SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, pos.getX(), pos.getY(), pos.getZ(), FIRING_SOUND_VOLUME, FIRING_SOUND_PITCH)
+                );
+            }
+            // Player in far sound range (apply range compensation and change pitch)
+            else if(playerDist <= FIRING_SOUND_FAR_RANGE) {
+                float rangeCompensation = FIRING_SOUND_FAR_VOLUME_COMPENSATION_RATE * (float) (playerDist - closeSoundDist);
+                player.networkHandler.sendPacket(
+                        new PlaySoundS2CPacket(SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, pos.getX(), pos.getY(), pos.getZ(), FIRING_SOUND_VOLUME + rangeCompensation, FIRING_SOUND_FAR_PITCH)
+                );
+            }
+        }
+
     }
 
     public void addPowder(@Nullable PlayerEntity player) {
@@ -448,7 +478,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
     }
 
     private float getProjectileSpeedFactor() {
-        return 0.5f * powderAmount;
+        return powderAmount;
     }
 
     private float getProjectileYaw() {

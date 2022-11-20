@@ -79,5 +79,7 @@
     "death.attack.shot_uncommon": "%1$s wurde von %2$s durchlöchert",
     "death.attack.shot_uncommon.item": "%1$s wurde von %2$s mit %3$s durchlöchert",
     "death.attack.shot_rare": "%1$s wurde von %2$s in Schweizer Käse verwandelt",
-    "death.attack.shot_rare.item": "%1$s wurde von %2$s mit %3$s in Schweizer Käse verwandelt"
+    "death.attack.shot_rare.item": "%1$s wurde von %2$s mit %3$s in Schweizer Käse verwandelt",
+    "subtitles.block.cannon.shot": "Kanonenschuss",
+    "subtitles.block.cannon.shot_distant": "Entfernter Kanonenschuss"
 }

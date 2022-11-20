@@ -79,5 +79,7 @@
     "death.attack.shot_uncommon": "%1$s was ripped to shreds by %2$s",
     "death.attack.shot_uncommon.item": "%1$s was ripped to shreds by %2$s using %3$s",
     "death.attack.shot_rare": "%1$s was turned into swiss cheese by %2$s",
-    "death.attack.shot_rare.item": "%1$s was turned into swiss cheese by %2$s using %3$s"
+    "death.attack.shot_rare.item": "%1$s was turned into swiss cheese by %2$s using %3$s",
+    "subtitles.block.cannon.shot": "Cannon shot",
+    "subtitles.block.cannon.shot_distant": "Distant cannon shot"
 }

@@ -26,6 +26,7 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.*;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
@@ -117,6 +118,12 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final DefaultParticleType CANNON_MUZZLE_FIRE = FabricParticleTypes.simple();
 	public static final DefaultParticleType CANNON_MUZZLE_SMOKE_TRAIL = FabricParticleTypes.simple();
 
+	// SoundEvents
+	public static final Identifier CANNON_SHOT_SOUND_ID = new Identifier(MODID, "block.cannon.shot");
+	public static SoundEvent CANNON_SHOT_SOUND_EVENT = new SoundEvent(CANNON_SHOT_SOUND_ID);
+	public static final Identifier CANNON_SHOT_DISTANT_SOUND_ID = new Identifier(MODID, "block.cannon.shot_distant");
+	public static SoundEvent CANNON_SHOT_DISTANT_SOUND_EVENT = new SoundEvent(CANNON_SHOT_DISTANT_SOUND_ID);
+
 	static {
 		GeckoLibMod.DISABLE_IN_DEV = true;
 	}
@@ -188,6 +195,10 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		// Particles
 		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "cannon_muzzle_fire"), 		CANNON_MUZZLE_FIRE);
 		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MODID, "cannon_muzzle_smoke_trail"), 	CANNON_MUZZLE_SMOKE_TRAIL);
+
+		// SoundEvents
+		Registry.register(Registry.SOUND_EVENT, CANNON_SHOT_SOUND_ID, CANNON_SHOT_SOUND_EVENT);
+		Registry.register(Registry.SOUND_EVENT, CANNON_SHOT_DISTANT_SOUND_ID, CANNON_SHOT_DISTANT_SOUND_EVENT);
 
 		System.out.println("Superior Ballistics Init: Done");
 	}

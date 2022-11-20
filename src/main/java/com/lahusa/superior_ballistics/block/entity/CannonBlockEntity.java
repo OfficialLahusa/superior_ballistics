@@ -3,6 +3,8 @@ package com.lahusa.superior_ballistics.block.entity;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import com.lahusa.superior_ballistics.entity.CannonBallEntity;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -292,7 +294,9 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
     }
 
     private void playFiringSound() {
+        if(world == null || world.isClient) return;
         ServerWorld serverWorld = ((ServerWorld)world);
+
         // Reduce close/far sound shift dist to 80%, so the change feels smoother
         double closeSoundDist = 0.8 * 16.0 * FIRING_SOUND_VOLUME;
 
@@ -303,14 +307,14 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
             // Player in close sound range
             if(playerDist <= closeSoundDist ) {
                 player.networkHandler.sendPacket(
-                        new PlaySoundS2CPacket(SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, pos.getX(), pos.getY(), pos.getZ(), FIRING_SOUND_VOLUME, FIRING_SOUND_PITCH)
+                        new PlaySoundS2CPacket(SuperiorBallisticsMod.CANNON_SHOT_SOUND_EVENT, SoundCategory.NEUTRAL, pos.getX(), pos.getY(), pos.getZ(), FIRING_SOUND_VOLUME, FIRING_SOUND_PITCH)
                 );
             }
             // Player in far sound range (apply range compensation and change pitch)
             else if(playerDist <= FIRING_SOUND_FAR_RANGE) {
                 float rangeCompensation = FIRING_SOUND_FAR_VOLUME_COMPENSATION_RATE * (float) (playerDist - closeSoundDist);
                 player.networkHandler.sendPacket(
-                        new PlaySoundS2CPacket(SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, pos.getX(), pos.getY(), pos.getZ(), FIRING_SOUND_VOLUME + rangeCompensation, FIRING_SOUND_FAR_PITCH)
+                        new PlaySoundS2CPacket(SuperiorBallisticsMod.CANNON_SHOT_DISTANT_SOUND_EVENT, SoundCategory.NEUTRAL, pos.getX(), pos.getY(), pos.getZ(), FIRING_SOUND_VOLUME + rangeCompensation, FIRING_SOUND_FAR_PITCH)
                 );
             }
         }

@@ -1,0 +1,20 @@
+{
+    "block.cannon.shot": {
+        "sounds": [
+            "random/explode1",
+            "random/explode2",
+            "random/explode3",
+            "random/explode4"
+        ],
+        "subtitle": "subtitles.block.cannon.shot"
+    },
+    "block.cannon.shot_distant": {
+        "sounds": [
+            "random/explode1",
+            "random/explode2",
+            "random/explode3",
+            "random/explode4"
+        ],
+        "subtitle": "subtitles.block.cannon.shot_distant"
+    }
+}

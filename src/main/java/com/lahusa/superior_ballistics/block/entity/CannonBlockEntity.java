@@ -3,12 +3,14 @@ package com.lahusa.superior_ballistics.block.entity;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import com.lahusa.superior_ballistics.entity.CannonBallEntity;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
+import com.lahusa.superior_ballistics.util.CannonDistanceLookup;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -78,6 +80,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
 
     // Barrel angle
     public static final short MAX_ANGLE = 15;
+    public static final Item DETAIL_ITEM = Items.CLOCK;
 
     private short angle = 4;
     private short loadingStage = 0;
@@ -123,36 +126,52 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
     @Override
     public Text getStatusText(PlayerEntity player) {
         MutableText text = new LiteralText("[").formatted(Formatting.GRAY);
-        text.append(new TranslatableText("superior_ballistics.cannon.loading_stage").formatted(Formatting.BLACK));
-        switch (getLoadingStage()) {
-            case CannonBlockEntity.POWDER_LOADING_STAGE -> {
-                text.append(new TranslatableText("superior_ballistics.cannon.insert_powder").formatted(Formatting.DARK_GREEN));
-                text.append(new LiteralText(" (" + getPowderAmount() + "/" + CannonBlockEntity.MAX_POWDER + ")")
-                        .formatted(getPowderAmount() > CannonBlockEntity.MAX_POWDER ? Formatting.RED : Formatting.GOLD)
-                );
-            }
-            case CannonBlockEntity.SHOT_LOADING_STAGE -> {
-                text.append(new TranslatableText("superior_ballistics.cannon.insert_shot").formatted(Formatting.DARK_GREEN));
-                text.append(new LiteralText(" (").append(getShotName()).append(new LiteralText(")")).formatted(Formatting.GOLD));
-            }
-            case CannonBlockEntity.READY_STAGE -> {
-                // Show different text when cannon is creative
-                if(isCreative()) {
-                    text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light_creative").formatted(Formatting.LIGHT_PURPLE));
 
-                }
-                else {
-                    text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light").formatted(Formatting.DARK_GREEN));
-                }
+        // Detail info item held
+        if(player.getMainHandStack().isOf(Items.CLOCK) || player.getOffHandStack().isOf(Items.CLOCK)) {
+            boolean isOverloaded = getPowderAmount() > MAX_POWDER;
+            int rangeEstimate = (int)Math.round(CannonDistanceLookup.getShotRangeEstimate(isOverloaded ? MAX_POWDER : getPowderAmount(), getAngle()));
 
-                text.append(new LiteralText(" (").append(new TranslatableText("item.minecraft.flint_and_steel"))
-                        .append(new LiteralText(" / ")).append(new TranslatableText("itemGroup.redstone")).append(new LiteralText(")"))
-                        .formatted(Formatting.GOLD));
-            }
-            case CannonBlockEntity.LIT_STAGE -> text.append(new TranslatableText("superior_ballistics.cannon.firing").formatted(Formatting.RED));
-            case CannonBlockEntity.CLEANUP_STAGE -> text.append(new TranslatableText("superior_ballistics.cannon.cleanup").formatted(Formatting.DARK_GREEN));
-            default -> text.append(new LiteralText("INVALID").formatted(Formatting.RED));
+            text.append(new TranslatableText("superior_ballistics.cannon.trajectory").append(new LiteralText(": ")).formatted(Formatting.BLACK));
+            text.append(new TranslatableText("superior_ballistics.cannon.launch_angle").append(new LiteralText(": ")).formatted(Formatting.DARK_GREEN));
+            text.append(new LiteralText(" (" + getAngleDegrees() + "°) ").formatted(Formatting.GOLD));
+            text.append(new TranslatableText("superior_ballistics.cannon.range").append(new LiteralText(": ")).formatted(Formatting.DARK_GREEN));
+            text.append(new LiteralText(" (" + rangeEstimate + " ").append(new TranslatableText("superior_ballistics.cannon.distance_unit")).append(new LiteralText(")")).formatted(Formatting.GOLD));
         }
+        // Generic info
+        else {
+            text.append(new TranslatableText("superior_ballistics.cannon.loading_stage").formatted(Formatting.BLACK));
+            switch (getLoadingStage()) {
+                case CannonBlockEntity.POWDER_LOADING_STAGE -> {
+                    text.append(new TranslatableText("superior_ballistics.cannon.insert_powder").formatted(Formatting.DARK_GREEN));
+                    text.append(new LiteralText("(" + getPowderAmount() + "/" + CannonBlockEntity.MAX_POWDER + ")")
+                            .formatted(getPowderAmount() > CannonBlockEntity.MAX_POWDER ? Formatting.RED : Formatting.GOLD)
+                    );
+                }
+                case CannonBlockEntity.SHOT_LOADING_STAGE -> {
+                    text.append(new TranslatableText("superior_ballistics.cannon.insert_shot").formatted(Formatting.DARK_GREEN));
+                    text.append(new LiteralText("(").append(getShotName()).append(new LiteralText(")")).formatted(Formatting.GOLD));
+                }
+                case CannonBlockEntity.READY_STAGE -> {
+                    // Show different text when cannon is creative
+                    if(isCreative()) {
+                        text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light_creative").formatted(Formatting.LIGHT_PURPLE));
+
+                    }
+                    else {
+                        text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light").formatted(Formatting.DARK_GREEN));
+                    }
+
+                    text.append(new LiteralText(" (").append(new TranslatableText("item.minecraft.flint_and_steel"))
+                            .append(new LiteralText(" / ")).append(new TranslatableText("itemGroup.redstone")).append(new LiteralText(")"))
+                            .formatted(Formatting.GOLD));
+                }
+                case CannonBlockEntity.LIT_STAGE -> text.append(new TranslatableText("superior_ballistics.cannon.firing").formatted(Formatting.RED));
+                case CannonBlockEntity.CLEANUP_STAGE -> text.append(new TranslatableText("superior_ballistics.cannon.cleanup").formatted(Formatting.DARK_GREEN));
+                default -> text.append(new LiteralText("INVALID").formatted(Formatting.RED));
+            }
+        }
+
         text.append(new LiteralText("]").formatted(Formatting.GRAY));
 
         return text;

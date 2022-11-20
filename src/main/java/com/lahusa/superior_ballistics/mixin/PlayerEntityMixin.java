@@ -1,5 +1,6 @@
 package com.lahusa.superior_ballistics.mixin;
 
+import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
 import com.lahusa.superior_ballistics.block.entity.IStatusTextProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
@@ -60,7 +61,7 @@ public abstract class PlayerEntityMixin {
     @Inject(at = @At("HEAD"), method = "shouldCancelInteraction()Z", cancellable = true)
     private void overwriteSneakInteractionCancelling(CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         ItemStack heldStack = ((PlayerEntity)(Object)this).getMainHandStack();
-        boolean allowedItemHeld = heldStack.isOf(Items.GUNPOWDER);
+        boolean allowedItemHeld = heldStack.isOf(Items.GUNPOWDER) || heldStack.isOf(CannonBlockEntity.DETAIL_ITEM);
         if(allowedItemHeld) callbackInfoReturnable.setReturnValue(false);
     }
 }

@@ -54,8 +54,8 @@ public class CannonBlock extends BlockWithEntity {
 
         if(blockEntity == null) return ActionResult.FAIL;
 
-        // Adjust angle with empty hand
-        if(heldStack.isEmpty()) {
+        // Adjust angle with empty hand or held detail item
+        if(heldStack.isEmpty() || heldStack.isOf(CannonBlockEntity.DETAIL_ITEM)) {
             // Calculate and set new angle
             short oldAngle = blockEntity.getAngle();
             short delta = (short)(player.isSneaking() ? -1 : 1);

@@ -2,12 +2,8 @@
 
 **Kanonen:** 
 - [ ] Kanone Lunte hinzufügen + Partikel
-- [ ] Magma-Kanonenkugeln
-- [ ] Reichweite der Kanonen verringern 🔥
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
-- [ ] Zirkel/Theodolit/Tachymeter/Nivellier für genauere Distanzbestimmung und Winkelanzeige
-- [ ] Loot-only Cursed Cannonball (Super Secret Settings Shader als Statuseffekt)
-- [ ] Dragons Breath Cannonball
+- [ ] Zirkel/Theodolit/Tachymeter/Nivellier für ungefähre Distanzbestimmung und Winkelanzeige
 
 **Schusswaffen:**
 - [ ] Andere Art der Munition für die Pistole
@@ -33,11 +29,13 @@
 - [ ] Mod Guidebook (z.B. mit Patchouli)
 - [ ] Hüte und 3D-Modelle im Inventar einheitlich rotieren
 - [ ] Gunpowder Keg LootNumberProvider und Table
-- [ ] Gunpowder Keg Mining Sound
 
 **Ferne Ideen:** 
 - [ ] Hopper Einspeisung in Kanonen 
-- [ ] Boote 
+- [ ] Boote
+- [ ] Loot-only Cursed Cannonball (Super Secret Settings Shader als Statuseffekt)
+- [ ] Magma-Kanonenkugeln
+- [ ] Dragons Breath Cannonball
 
 **Bereits abgearbeitete Punkte (Archiv):** 
 - [x] Kanonen mit Spitzhacke/Axt abbaubar machen 
@@ -76,3 +74,4 @@
 - [x] Diverse Advancements für die Handfeuerwaffen und Uniformteile
 - [x] Gunpowder Keg hinzufügen 
 - [x] Kanonenkugel Partikelspur
+- [x] Gunpowder Keg Mining Sound

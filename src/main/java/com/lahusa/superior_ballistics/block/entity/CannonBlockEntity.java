@@ -121,10 +121,9 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
     }
 
     @Override
-    public Text getStatusText() {
-        MutableText text = new LiteralText("[").formatted(Formatting.GRAY)
-                .append(new TranslatableText("superior_ballistics.cannon.loading_stage").formatted(Formatting.BLACK));
-
+    public Text getStatusText(PlayerEntity player) {
+        MutableText text = new LiteralText("[").formatted(Formatting.GRAY);
+        text.append(new TranslatableText("superior_ballistics.cannon.loading_stage").formatted(Formatting.BLACK));
         switch (getLoadingStage()) {
             case CannonBlockEntity.POWDER_LOADING_STAGE -> {
                 text.append(new TranslatableText("superior_ballistics.cannon.insert_powder").formatted(Formatting.DARK_GREEN));

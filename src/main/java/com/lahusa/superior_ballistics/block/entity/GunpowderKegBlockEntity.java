@@ -4,6 +4,7 @@ import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
@@ -49,7 +50,7 @@ public class GunpowderKegBlockEntity extends BlockEntity implements IAnimatable,
     }
 
     @Override
-    public Text getStatusText() {
+    public Text getStatusText(PlayerEntity player) {
         MutableText text = new LiteralText("[").formatted(Formatting.GRAY);
         text.append(new TranslatableText("superior_ballistics.gunpowder_keg.powder_amount_status_text").formatted(Formatting.DARK_GREEN));
         text.append(new LiteralText(" (" + getPowderAmount() + "/" + GunpowderKegBlockEntity.MAX_POWDER_AMOUNT + ")").formatted(Formatting.GOLD));

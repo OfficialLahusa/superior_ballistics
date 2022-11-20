@@ -41,7 +41,7 @@ public abstract class PlayerEntityMixin {
 
             // If looking at status text provider
             if(blockEntity instanceof IStatusTextProvider statusTextProvider) {
-                client.inGameHud.setOverlayMessage(statusTextProvider.getStatusText(), false);
+                client.inGameHud.setOverlayMessage(statusTextProvider.getStatusText((PlayerEntity)(Object)this), false);
                 isShowingStatusText = true;
             }
             // Reset overlay message

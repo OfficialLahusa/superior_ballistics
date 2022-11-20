@@ -3,7 +3,6 @@ package com.lahusa.superior_ballistics.item.model;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import com.lahusa.superior_ballistics.item.GunpowderKegBlockItem;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class GunpowderKegBlockItemModel extends AnimatedGeoModel<GunpowderKegBlockItem> {

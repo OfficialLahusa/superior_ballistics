@@ -1,9 +1,5 @@
 package com.lahusa.superior_ballistics.mixin;
 
-import com.lahusa.superior_ballistics.block.CannonBlock;
-import com.lahusa.superior_ballistics.block.GunpowderKegBlock;
-import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
-import com.lahusa.superior_ballistics.block.entity.GunpowderKegBlockEntity;
 import com.lahusa.superior_ballistics.block.entity.IStatusTextProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;

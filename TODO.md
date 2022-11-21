@@ -1,43 +1,43 @@
-**TODO-Liste:**
+# **TODO-Liste:**
 
-**Kanonen:** 
+### **Kanonen:** 
 - [ ] Kanone Lunte hinzufügen + Partikel
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
 - [ ] Zirkel/Theodolit/Tachymeter/Nivellier für ungefähre Distanzbestimmung und Winkelanzeige
 
-**Schusswaffen:**
+### **Schusswaffen:**
 - [ ] Andere Art der Munition für die Pistole
 - [ ] Bajonett-Variante der Muskete
 - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
 
-**Worldgen:** 
+### **Worldgen:** 
 - [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried
       Treasures, Drowned-Dörfern und Shipwrecks
 
-**Entities:** 
+### **Entities:** 
 - [ ] Boss, den man beschwören kann
 - [ ] Pillager, die Schusswaffen nutzen 
 - [ ] Skelette, die Schusswaffen nutzen  
 - [ ] Drowned, die Schusswaffen
       nutzen
 
-**Advancements:** 🔥
+### **Advancements:** 🔥
 - [ ] "Auf Nimmerwiedersehen!" (Enderperle mit Kanone verschießen)
 - [ ] "Parry this!" (Schieße jemanden ab, der ein Schwert in der Hand hat)
 
-**Sonstiges:**
+### **Sonstiges:**
 - [ ] Mod Guidebook (z.B. mit Patchouli)
 - [ ] Hüte und 3D-Modelle im Inventar einheitlich rotieren
 - [ ] Gunpowder Keg LootNumberProvider und Table
 
-**Ferne Ideen:** 
+### **Ferne Ideen:** 
 - [ ] Hopper Einspeisung in Kanonen 
 - [ ] Boote
 - [ ] Loot-only Cursed Cannonball (Super Secret Settings Shader als Statuseffekt)
 - [ ] Magma-Kanonenkugeln
 - [ ] Dragons Breath Cannonball
 
-**Bereits abgearbeitete Punkte (Archiv):** 
+### **Bereits abgearbeitete Punkte (Archiv):** 
 - [x] Kanonen mit Spitzhacke/Axt abbaubar machen 
 - [x] Slowness bei Flintlock Pistole entfernen 
 - [x] Synchronisation des Ladens der Kanonen 

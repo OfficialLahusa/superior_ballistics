@@ -1,6 +1,8 @@
 package com.lahusa.superior_ballistics;
 
 import com.lahusa.superior_ballistics.advancement.criterion.CannonOverchargeCriterion;
+import com.lahusa.superior_ballistics.advancement.criterion.EnderPearlCannonShot;
+import com.lahusa.superior_ballistics.advancement.criterion.SwordUserShotCriterion;
 import com.lahusa.superior_ballistics.block.CannonBlock;
 import com.lahusa.superior_ballistics.block.GunpowderKegBlock;
 import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
@@ -111,8 +113,9 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	// Entity spawn packet
 	public static final Identifier PacketID = new Identifier(SuperiorBallisticsMod.MODID, "spawn_packet");
 
-	// TODO: Advancement criteria
 	public static final CannonOverchargeCriterion CANNON_OVERCHARGE_CRITERION = Criteria.register(new CannonOverchargeCriterion());
+	public static final SwordUserShotCriterion SWORD_USER_SHOT_CRITERION = Criteria.register(new SwordUserShotCriterion());
+	public static final EnderPearlCannonShot ENDER_PEARL_CANNON_SHOT = Criteria.register(new EnderPearlCannonShot());
 
 	// Particles
 	public static final DefaultParticleType CANNON_MUZZLE_FIRE = FabricParticleTypes.simple();

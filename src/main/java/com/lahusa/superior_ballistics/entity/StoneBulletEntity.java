@@ -14,8 +14,10 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.SwordItem;
 import net.minecraft.network.Packet;
 import net.minecraft.particle.*;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -61,6 +63,7 @@ public class StoneBulletEntity extends ThrownItemEntity {
     protected void onEntityHit(EntityHitResult entityHitResult) { // called on entity hit.
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity(); // sets a new Entity instance as the EntityHitResult (victim)
+        Entity owner = this.getOwner();
 
         // Randomize damage source text to produce a variety of death messages
         String damageSourceName = switch(random.nextInt(20)) {
@@ -68,10 +71,17 @@ public class StoneBulletEntity extends ThrownItemEntity {
             case 19: yield "shot_rare";
             default: yield "shot";
         };
-        DamageSource source =  (new BulletDamageSource(damageSourceName, this, this.getOwner())).setProjectile();
+        DamageSource source =  (new BulletDamageSource(damageSourceName, this, owner)).setProjectile();
 
         // Reset damage cooldown
-        if(entity instanceof LivingEntity livingEntity) ((LivingEntityAccessor)livingEntity).setLastDamageTaken(Float.MIN_VALUE);
+        if(entity instanceof LivingEntity livingEntity) {
+            ((LivingEntityAccessor)livingEntity).setLastDamageTaken(Float.MIN_VALUE);
+
+            // Is target holding sword and shot my a ServerPlayer
+            if(!world.isClient && livingEntity.getMainHandStack().getItem() instanceof SwordItem && owner instanceof ServerPlayerEntity player) {
+                SuperiorBallisticsMod.SWORD_USER_SHOT_CRITERION.trigger(player);
+            }
+        }
 
         entity.damage(source, (float)damage); // deals damage
 

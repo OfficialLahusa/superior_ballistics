@@ -1,0 +1,29 @@
+{
+    "parent": "superior_ballistics:superior_ballistics/pistol",
+    "display": {
+      "icon": {
+        "item": "minecraft:iron_sword"
+      },
+      "title": {
+        "translate": "advancements.superior_ballistics.parry_this.title"
+      },
+      "description": {
+        "translate": "advancements.superior_ballistics.parry_this.description"
+      },
+      "frame": "challenge",
+      "show_toast": true,
+      "announce_to_chat": true,
+      "hidden": false
+    },
+    "criteria": {
+      "sword_user_shot": {
+        "trigger": "superior_ballistics:sword_user_shot",
+        "conditions": { }
+      }
+    },
+    "requirements": [
+      [
+        "sword_user_shot"
+      ]
+    ]
+  }

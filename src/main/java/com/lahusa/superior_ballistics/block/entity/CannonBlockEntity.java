@@ -284,6 +284,9 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
                                 enderPearlEntity.setItem(new ItemStack(Items.ENDER_PEARL));
                                 enderPearlEntity.setVelocity(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, SHOT_DIVERGENCE);
                                 world.spawnEntity(enderPearlEntity);
+
+                                // Trigger advancement
+                                SuperiorBallisticsMod.ENDER_PEARL_CANNON_SHOT.trigger((ServerPlayerEntity) player);
                             }
                             case IRON_GRAPESHOT -> {
                                 for(int i = 0; i < 8; i++) {

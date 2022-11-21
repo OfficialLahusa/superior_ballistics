@@ -1,0 +1,29 @@
+{
+    "parent": "superior_ballistics:superior_ballistics/howitzers",
+    "display": {
+      "icon": {
+        "item": "minecraft:ender_pearl"
+      },
+      "title": {
+        "translate": "advancements.superior_ballistics.other_side.title"
+      },
+      "description": {
+        "translate": "advancements.superior_ballistics.other_side.description"
+      },
+      "frame": "challenge",
+      "show_toast": true,
+      "announce_to_chat": true,
+      "hidden": false
+    },
+    "criteria": {
+      "ender_pearl_cannon_shot": {
+        "trigger": "superior_ballistics:ender_pearl_cannon_shot",
+        "conditions": { }
+      }
+    },
+    "requirements": [
+      [
+        "ender_pearl_cannon_shot"
+      ]
+    ]
+  }

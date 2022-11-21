@@ -3,7 +3,8 @@
 ### **Kanonen:** 
 - [ ] Kanone Lunte hinzufügen + Partikel
 - [ ] Maybe mehr Ungenauigkeit bei Kanonen
-- [ ] Zirkel/Theodolit/Tachymeter/Nivellier für ungefähre Distanzbestimmung und Winkelanzeige
+- [ ] Uhr durch anderes Detail-Item ersetzen oder erklärenden Tooltip anhängen
+- [ ] Overcharge Damage fixen
 
 ### **Schusswaffen:**
 - [ ] Andere Art der Munition für die Pistole

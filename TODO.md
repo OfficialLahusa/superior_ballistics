@@ -2,9 +2,9 @@
 
 ### Kanonen: 
 - [ ] Kanone Lunte hinzufügen + Partikel
-- [ ] Maybe mehr Ungenauigkeit bei Kanonen
 - [ ] Uhr durch anderes Detail-Item ersetzen oder erklärenden Tooltip anhängen
 - [ ] Overcharge Damage fixen
+- [ ] Munitions-Tooltips
 
 ### Schusswaffen:
 - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
@@ -75,3 +75,4 @@
 - [x] Gunpowder Keg Mining Sound
 - [x] "Auf Nimmerwiedersehen!" (Enderperle mit Kanone verschießen)
 - [x] "Parry this!" (Schieße jemanden ab, der ein Schwert in der Hand hat)
+- [x] Mehr Ungenauigkeit bei Kanonen

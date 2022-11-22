@@ -7,7 +7,6 @@
 - [ ] Overcharge Damage fixen
 
 ### Schusswaffen:
-- [ ] Bajonett-Variante der Muskete
 - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
 
 ### Worldgen:
@@ -34,6 +33,7 @@
 - [ ] Loot-only Cursed Cannonball (Super Secret Settings Shader als Statuseffekt)
 - [ ] Magma-Kanonenkugeln
 - [ ] Dragons Breath Cannonball
+- [ ] Bajonett-Variante der Muskete
 
 ### Bereits abgearbeitete Punkte (Archiv):
 - [x] Kanonen mit Spitzhacke/Axt abbaubar machen 

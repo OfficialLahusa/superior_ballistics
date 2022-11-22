@@ -28,6 +28,7 @@
 - [ ] Gunpowder Keg LootNumberProvider und Table
 
 ### Ferne Ideen:
+- [ ] Holzarten aus anderen Mods unterstützen (compat)
 - [ ] Hopper Einspeisung in Kanonen 
 - [ ] Boote
 - [ ] Loot-only Cursed Cannonball (Super Secret Settings Shader als Statuseffekt)

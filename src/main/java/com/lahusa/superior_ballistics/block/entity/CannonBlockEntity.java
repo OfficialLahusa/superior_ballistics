@@ -75,8 +75,8 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
     private static final float FIRING_SOUND_FAR_PITCH = 0.48f;
     private static final float FIRING_SOUND_FAR_RANGE = 380.0f;
     private static final float SHOT_SPEED = 1.0f;
-    private static final float SHOT_DIVERGENCE = 1.2f;
-    private static final float GRAPESHOT_DIVERGENCE = 3.0f;
+    private static final float SHOT_DIVERGENCE = 3.0f;
+    private static final float GRAPESHOT_DIVERGENCE = 4.5f;
 
     // Barrel angle
     public static final short MAX_ANGLE = 15;

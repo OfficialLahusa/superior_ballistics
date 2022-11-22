@@ -43,7 +43,8 @@ public class CannonBallEntity extends ThrownItemEntity {
         return null;
     }
 
-    protected void onEntityHit(EntityHitResult entityHitResult) { // called on entity hit.
+    // Called on entity hit
+    protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity(); // sets a new Entity instance as the EntityHitResult (victim)
         entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), (float)13); // deals damage
@@ -53,7 +54,8 @@ public class CannonBallEntity extends ThrownItemEntity {
         }
     }
 
-    protected void onCollision(HitResult hitResult) { // called on collision with a block
+    // Called on block collision
+    protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
         if (!this.world.isClient) {
 

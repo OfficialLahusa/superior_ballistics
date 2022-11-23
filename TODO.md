@@ -22,6 +22,9 @@
 
 ### Sonstiges:
 - [ ] Mod Guidebook (z.B. mit Patchouli)
+- [ ] Curseforge Page
+- [ ] Mod Trailer/Showcase
+- [ ] Discord Server
 
 ### Ferne Ideen:
 - [ ] Holzarten aus anderen Mods unterstützen (compat)

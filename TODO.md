@@ -4,13 +4,11 @@
 - [ ] Kanone Lunte hinzufügen + Partikel
 - [ ] Overcharge Damage fixen
 
-
 ### Items:
 - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
 - [ ] Munitions-Tooltips
 - [ ] Werfbare Rauch-/Feuertöpfe und Dynamitstangen
 - [ ] Uhr durch anderes Detail-Item ersetzen oder erklärenden Tooltip anhängen
-
 
 ### Worldgen:
 - [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried

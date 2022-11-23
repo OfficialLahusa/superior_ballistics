@@ -1,14 +1,16 @@
 # TODO-Liste:
 
-### Kanonen: 
+### Blöcke: 
 - [ ] Kanone Lunte hinzufügen + Partikel
 - [ ] Overcharge Damage fixen
+- [ ] Gunpowder Keg LootNumberProvider und Table
 
 ### Items:
 - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
 - [ ] Munitions-Tooltips
 - [ ] Werfbare Rauch-/Feuertöpfe und Dynamitstangen
 - [ ] Uhr durch anderes Detail-Item ersetzen oder erklärenden Tooltip anhängen
+- [ ] Hüte und 3D-Modelle im Inventar einheitlich rotieren
 
 ### Worldgen:
 - [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried
@@ -20,8 +22,6 @@
 
 ### Sonstiges:
 - [ ] Mod Guidebook (z.B. mit Patchouli)
-- [ ] Hüte und 3D-Modelle im Inventar einheitlich rotieren
-- [ ] Gunpowder Keg LootNumberProvider und Table
 
 ### Ferne Ideen:
 - [ ] Holzarten aus anderen Mods unterstützen (compat)

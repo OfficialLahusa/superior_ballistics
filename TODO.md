@@ -14,11 +14,6 @@
       Treasures, Drowned-Dörfern und Shipwrecks
 
 ### Entities:
-- [ ] Boss, den man beschwören kann
-- [ ] Pillager, die Schusswaffen nutzen 
-- [ ] Skelette, die Schusswaffen nutzen  
-- [ ] Drowned, die Schusswaffen
-      nutzen
 
 ### Advancements:
 
@@ -35,6 +30,10 @@
 - [ ] Magma-Kanonenkugeln
 - [ ] Dragons Breath Cannonball
 - [ ] Bajonett-Variante der Muskete
+- [ ] Boss, den man beschwören kann
+- [ ] Pillager, die Schusswaffen nutzen
+- [ ] Skelette, die Schusswaffen nutzen
+- [ ] Drowned, die Schusswaffen nutzen
 
 ### Bereits abgearbeitete Punkte (Archiv):
 - [x] Kanonen mit Spitzhacke/Axt abbaubar machen 

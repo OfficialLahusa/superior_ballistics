@@ -10,7 +10,7 @@
 - [ ] Munitions-Tooltips
 - [ ] Werfbare Rauch-/Feuertöpfe und Dynamitstangen
 - [ ] Uhr durch anderes Detail-Item ersetzen oder erklärenden Tooltip anhängen
-- [ ] Hüte und 3D-Modelle im Inventar einheitlich rotieren
+- [ ] Anderes Haltemodell für Kanonenkugeln
 
 ### Worldgen:
 - [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried
@@ -27,6 +27,7 @@
 - [ ] Discord Server
 
 ### Ferne Ideen:
+- [ ] Hüte und 3D-Modelle im Inventar einheitlich rotieren (maybe GeckoLib 4)
 - [ ] Holzarten aus anderen Mods unterstützen (compat)
 - [ ] Hopper Einspeisung in Kanonen 
 - [ ] Boote

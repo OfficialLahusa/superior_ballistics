@@ -25,7 +25,6 @@
 - [ ] Mod Guidebook (z.B. mit Patchouli)
 - [ ] Curseforge Page
 - [ ] Mod Trailer/Showcase
-- [ ] Discord Server
 
 ### Ferne Ideen:
 - [ ] Hüte und 3D-Modelle im Inventar einheitlich rotieren (maybe GeckoLib 4)
@@ -82,3 +81,4 @@
 - [x] "Auf Nimmerwiedersehen!" (Enderperle mit Kanone verschießen)
 - [x] "Parry this!" (Schieße jemanden ab, der ein Schwert in der Hand hat)
 - [x] Mehr Ungenauigkeit bei Kanonen
+- [x] Discord Server

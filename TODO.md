@@ -11,6 +11,7 @@
 - [ ] Werfbare Rauch-/Feuertöpfe und Dynamitstangen
 - [ ] Uhr durch anderes Detail-Item ersetzen oder erklärenden Tooltip anhängen
 - [ ] Anderes Haltemodell für Kanonenkugeln
+- [ ] Nachladesound fixen
 
 ### Worldgen:
 - [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried

@@ -6,7 +6,6 @@
 - [ ] Gunpowder Keg LootNumberProvider und Table / ItemStack mit Füllstand-NBT droppen
 
 ### Items:
-- [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
 - [ ] Munitions-Tooltips
 - [ ] Werfbare Rauch-/Feuertöpfe und Dynamitstangen
 - [ ] Uhr durch anderes Detail-Item ersetzen oder erklärenden Tooltip anhängen
@@ -82,3 +81,4 @@
 - [x] "Parry this!" (Schieße jemanden ab, der ein Schwert in der Hand hat)
 - [x] Mehr Ungenauigkeit bei Kanonen
 - [x] Discord Server
+- [x] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)

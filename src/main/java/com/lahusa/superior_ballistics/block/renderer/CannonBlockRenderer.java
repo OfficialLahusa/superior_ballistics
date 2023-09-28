@@ -35,7 +35,7 @@ public class CannonBlockRenderer extends GeoBlockRenderer<CannonBlockEntity> {
 
         // Rotate cannon barrel
         float angleDegrees = animatable.getAngleDegrees();
-        float angleRadians = angleDegrees / 180.0f * (float)Math.PI;
+        float angleRadians = (float)Math.toRadians(angleDegrees);
         getGeoModelProvider().getAnimationProcessor().getBone("Cannon").setRotationX(angleRadians);
     }
 

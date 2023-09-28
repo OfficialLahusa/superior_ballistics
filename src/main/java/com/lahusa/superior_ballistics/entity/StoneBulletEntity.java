@@ -19,6 +19,8 @@ import net.minecraft.network.Packet;
 import net.minecraft.particle.*;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
@@ -73,14 +75,18 @@ public class StoneBulletEntity extends ThrownItemEntity {
         };
         DamageSource source =  (new BulletDamageSource(damageSourceName, this, owner)).setProjectile();
 
-        // Reset damage cooldown
+
         if(entity instanceof LivingEntity livingEntity) {
+            // Reset damage cooldown
             ((LivingEntityAccessor)livingEntity).setLastDamageTaken(Float.MIN_VALUE);
 
-            // Is target holding sword and shot my a ServerPlayer
+            // Is target holding sword and shot by a ServerPlayer
             if(!world.isClient && livingEntity.getMainHandStack().getItem() instanceof SwordItem && owner instanceof ServerPlayerEntity player) {
                 SuperiorBallisticsMod.SWORD_USER_SHOT_CRITERION.trigger(player);
             }
+        }
+        if(owner instanceof ServerPlayerEntity player && entity instanceof ServerPlayerEntity targetPlayer && !player.equals(targetPlayer)) {
+            player.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F);
         }
 
         entity.damage(source, (float)damage); // deals damage

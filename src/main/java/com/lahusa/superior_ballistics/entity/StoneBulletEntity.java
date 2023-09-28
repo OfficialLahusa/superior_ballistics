@@ -86,7 +86,7 @@ public class StoneBulletEntity extends ThrownItemEntity {
             }
         }
         if(owner instanceof ServerPlayerEntity player && entity instanceof ServerPlayerEntity targetPlayer && !player.equals(targetPlayer)) {
-            player.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F);
+            targetPlayer.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F);
         }
 
         entity.damage(source, (float)damage); // deals damage

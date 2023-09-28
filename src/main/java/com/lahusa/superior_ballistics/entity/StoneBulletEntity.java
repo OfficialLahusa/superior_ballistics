@@ -16,6 +16,7 @@ import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.SwordItem;
 import net.minecraft.network.Packet;
+import net.minecraft.network.packet.s2c.play.GameStateChangeS2CPacket;
 import net.minecraft.particle.*;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -85,8 +86,8 @@ public class StoneBulletEntity extends ThrownItemEntity {
                 SuperiorBallisticsMod.SWORD_USER_SHOT_CRITERION.trigger(player);
             }
         }
-        if(owner instanceof ServerPlayerEntity player && entity instanceof ServerPlayerEntity targetPlayer && !player.equals(targetPlayer)) {
-            targetPlayer.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F);
+        if(owner instanceof ServerPlayerEntity ownerPlayer && entity instanceof ServerPlayerEntity targetPlayer && !ownerPlayer.equals(targetPlayer)) {
+            ((ServerPlayerEntity)ownerPlayer).networkHandler.sendPacket(new GameStateChangeS2CPacket(GameStateChangeS2CPacket.PROJECTILE_HIT_PLAYER, 0.0F));
         }
 
         entity.damage(source, (float)damage); // deals damage

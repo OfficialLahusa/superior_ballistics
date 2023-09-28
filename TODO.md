@@ -3,14 +3,15 @@
 ### Blöcke: 
 - [ ] Kanone Lunte hinzufügen + Partikel
 - [ ] Overcharge Damage fixen
-- [ ] Gunpowder Keg LootNumberProvider und Table
+- [ ] Gunpowder Keg LootNumberProvider und Table / ItemStack mit Füllstand-NBT droppen
 
 ### Items:
 - [ ] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
 - [ ] Munitions-Tooltips
 - [ ] Werfbare Rauch-/Feuertöpfe und Dynamitstangen
 - [ ] Uhr durch anderes Detail-Item ersetzen oder erklärenden Tooltip anhängen
-- [ ] Hüte und 3D-Modelle im Inventar einheitlich rotieren
+- [ ] Anderes Haltemodell für Kanonenkugeln
+- [ ] Nachladesound fixen
 
 ### Worldgen:
 - [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried
@@ -24,9 +25,9 @@
 - [ ] Mod Guidebook (z.B. mit Patchouli)
 - [ ] Curseforge Page
 - [ ] Mod Trailer/Showcase
-- [ ] Discord Server
 
 ### Ferne Ideen:
+- [ ] Hüte und 3D-Modelle im Inventar einheitlich rotieren (maybe GeckoLib 4)
 - [ ] Holzarten aus anderen Mods unterstützen (compat)
 - [ ] Hopper Einspeisung in Kanonen 
 - [ ] Boote
@@ -80,3 +81,4 @@
 - [x] "Auf Nimmerwiedersehen!" (Enderperle mit Kanone verschießen)
 - [x] "Parry this!" (Schieße jemanden ab, der ein Schwert in der Hand hat)
 - [x] Mehr Ungenauigkeit bei Kanonen
+- [x] Discord Server

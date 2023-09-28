@@ -86,12 +86,14 @@ public class StoneBulletEntity extends ThrownItemEntity {
                 SuperiorBallisticsMod.SWORD_USER_SHOT_CRITERION.trigger(player);
             }
         }
-        if(owner instanceof ServerPlayerEntity ownerPlayer && entity instanceof ServerPlayerEntity targetPlayer && !ownerPlayer.equals(targetPlayer)) {
-            ((ServerPlayerEntity)ownerPlayer).networkHandler.sendPacket(new GameStateChangeS2CPacket(GameStateChangeS2CPacket.PROJECTILE_HIT_PLAYER, 0.0F));
+
+        // Play hit ding sound
+        if(owner instanceof ServerPlayerEntity ownerPlayer && entity instanceof ServerPlayerEntity targetPlayer
+                && !ownerPlayer.equals(targetPlayer) && !targetPlayer.isCreative()) {
+            ownerPlayer.networkHandler.sendPacket(new GameStateChangeS2CPacket(GameStateChangeS2CPacket.PROJECTILE_HIT_PLAYER, 0.0F));
         }
 
         entity.damage(source, (float)damage); // deals damage
-
 
         if (statusEffect != null && entity instanceof LivingEntity) { // checks if entity is an instance of LivingEntity (meaning it is not a boat or minecart)
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(statusEffect, 20 * 3, 1))); // applies a status effect

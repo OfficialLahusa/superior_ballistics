@@ -1,9 +1,10 @@
 # TODO-Liste:
 
-### Blöcke: 
+### Blöcke:
 - [ ] Kanone Lunte hinzufügen + Partikel
 - [ ] Overcharge Damage fixen
 - [ ] Gunpowder Keg LootNumberProvider und Table / ItemStack mit Füllstand-NBT droppen
+- [ ] Beschreibung vom Start-Advancement ändern
 
 ### Items:
 - [ ] Munitions-Tooltips

@@ -5,10 +5,10 @@
 - [ ] Overcharge Damage fixen
 
 ### Items:
+- [ ] Bayonett mit Smithing Table hinzufügen (an anderer Mod inspirieren lassen)
 - [ ] Munitions-Tooltips
 - [ ] Werfbare Rauch-/Feuertöpfe und Dynamitstangen
 - [ ] Uhr durch anderes Detail-Item ersetzen oder erklärenden Tooltip anhängen
-- [ ] Anderes Haltemodell für Kanonenkugeln
 - [ ] Nachladesound fixen
 
 ### Worldgen:
@@ -37,6 +37,8 @@
 - [ ] Pillager, die Schusswaffen nutzen
 - [ ] Skelette, die Schusswaffen nutzen
 - [ ] Drowned, die Schusswaffen nutzen
+- [ ] Anderes Haltemodell für Kanonenkugeln
+
 
 ### Bereits abgearbeitete Punkte (Archiv):
 - [x] Kanonen mit Spitzhacke/Axt abbaubar machen 

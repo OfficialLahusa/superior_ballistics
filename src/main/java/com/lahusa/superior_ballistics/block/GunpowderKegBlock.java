@@ -7,12 +7,14 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -98,5 +100,17 @@ public class GunpowderKegBlock extends BlockWithEntity {
         }
 
         return ActionResult.SUCCESS;
+    }
+
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (!state.isOf(newState.getBlock())) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if(blockEntity instanceof GunpowderKegBlockEntity kegBlockEntity) {
+                ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.GUNPOWDER, kegBlockEntity.getPowderAmount()));
+                world.updateComparators(pos, this);
+            }
+
+            super.onStateReplaced(state, world, pos, newState, moved);
+        }
     }
 }

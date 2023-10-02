@@ -3,7 +3,6 @@
 ### Blöcke:
 - [ ] Kanone Lunte hinzufügen + Partikel
 - [ ] Overcharge Damage fixen
-- [ ] Gunpowder Keg LootNumberProvider und Table / ItemStack mit Füllstand-NBT droppen
 - [ ] Beschreibung vom Start-Advancement ändern
 
 ### Items:
@@ -83,3 +82,5 @@
 - [x] Mehr Ungenauigkeit bei Kanonen
 - [x] Discord Server
 - [x] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
+- [x] Gunpowder Keg ~~LootNumberProvider und Table~~ / ItemStack mit Füllstand-NBT droppen
+

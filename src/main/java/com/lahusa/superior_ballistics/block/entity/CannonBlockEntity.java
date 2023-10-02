@@ -134,9 +134,9 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
 
             text.append(new TranslatableText("superior_ballistics.cannon.trajectory").append(new LiteralText(": ")).formatted(Formatting.BLACK));
             text.append(new TranslatableText("superior_ballistics.cannon.launch_angle").append(new LiteralText(": ")).formatted(Formatting.DARK_GREEN));
-            text.append(new LiteralText(" (" + getAngleDegrees() + "°) ").formatted(Formatting.GOLD));
+            text.append(new LiteralText("(" + getAngleDegrees() + "°) ").formatted(Formatting.GOLD));
             text.append(new TranslatableText("superior_ballistics.cannon.range").append(new LiteralText(": ")).formatted(Formatting.DARK_GREEN));
-            text.append(new LiteralText(" (" + rangeEstimate + " ").append(new TranslatableText("superior_ballistics.cannon.distance_unit")).append(new LiteralText(")")).formatted(Formatting.GOLD));
+            text.append(new LiteralText("(" + rangeEstimate + " ").append(new TranslatableText("superior_ballistics.cannon.distance_unit")).append(new LiteralText(")")).formatted(Formatting.GOLD));
         }
         // Generic info
         else {
@@ -144,13 +144,13 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
             switch (getLoadingStage()) {
                 case CannonBlockEntity.POWDER_LOADING_STAGE -> {
                     text.append(new TranslatableText("superior_ballistics.cannon.insert_powder").formatted(Formatting.DARK_GREEN));
-                    text.append(new LiteralText("(" + getPowderAmount() + "/" + CannonBlockEntity.MAX_POWDER + ")")
+                    text.append(new LiteralText(" (" + getPowderAmount() + "/" + CannonBlockEntity.MAX_POWDER + ")")
                             .formatted(getPowderAmount() > CannonBlockEntity.MAX_POWDER ? Formatting.RED : Formatting.GOLD)
                     );
                 }
                 case CannonBlockEntity.SHOT_LOADING_STAGE -> {
                     text.append(new TranslatableText("superior_ballistics.cannon.insert_shot").formatted(Formatting.DARK_GREEN));
-                    text.append(new LiteralText("(").append(getShotName()).append(new LiteralText(")")).formatted(Formatting.GOLD));
+                    text.append(new LiteralText(" (").append(getShotName()).append(new LiteralText(")")).formatted(Formatting.GOLD));
                 }
                 case CannonBlockEntity.READY_STAGE -> {
                     // Show different text when cannon is creative

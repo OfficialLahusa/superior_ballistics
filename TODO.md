@@ -9,8 +9,6 @@
 - [ ] Nachladesound fixen
 
 ### Worldgen:
-- [ ] Items (Schmuck/Taschenuhr/Monokel/...) in Kisten in Buried
-      Treasures, Drowned-Dörfern und Shipwrecks
 
 ### Entities:
 
@@ -37,6 +35,7 @@
 - [ ] Anderes Haltemodell für Kanonenkugeln
 - [ ] Werfbare Rauch-/Feuertöpfe und Dynamitstangen
 - [ ] Kanone Lunte hinzufügen + Partikel
+- [ ] Items (Kanonenkugeln/Waffen/...) zu Loot Tables hinzufügen
 
 
 ### Bereits abgearbeitete Punkte (Archiv):

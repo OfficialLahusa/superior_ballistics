@@ -29,6 +29,8 @@ public final class ModConfig {
     private float musketShotSpeed = 3.0f;
     private float musketShotDivergence = 3.0f;
     private int musketShotDamage = 13;
+    private int musketBayonetDamage = 6;
+    private float musketBayonetSpeed = 1.2f;
 
     // Blunderbuss properties
     private int blunderbussShotCount = 8;
@@ -91,6 +93,8 @@ public final class ModConfig {
         setMusketShotSpeed(this.musketShotSpeed);
         setMusketShotDivergence(this.musketShotDivergence);
         setMusketShotDamage(this.musketShotDamage);
+        setMusketBayonetDamage(this.musketBayonetDamage);
+        setMusketBayonetSpeed(this.musketBayonetSpeed);
 
         // Blunderbuss properties
         setBlunderbussShotCount(this.blunderbussShotCount);
@@ -188,6 +192,22 @@ public final class ModConfig {
 
     public void setMusketShotDamage(int musketShotDamage) {
         this.musketShotDamage = Math.max(1, musketShotDamage);
+    }
+
+    public int getMusketBayonetDamage() {
+        return musketBayonetDamage;
+    }
+
+    public void setMusketBayonetDamage(int musketBayonetDamage) {
+        this.musketBayonetDamage = Math.max(1, musketBayonetDamage);
+    }
+
+    public float getMusketBayonetSpeed() {
+        return musketBayonetSpeed;
+    }
+
+    public void setMusketBayonetSpeed(float musketBayonetSpeed) {
+        this.musketBayonetSpeed = Math.max(0.1f, musketBayonetSpeed);
     }
 
     // Blunderbuss properties

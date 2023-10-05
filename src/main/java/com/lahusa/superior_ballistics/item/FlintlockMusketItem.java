@@ -48,8 +48,14 @@ public class FlintlockMusketItem extends RangedWeaponItem {
         // Add modifiers for bayonet
         if(hasBayonet) {
             ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> attributeBuilder = ImmutableMultimap.builder();
-            attributeBuilder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Weapon modifier", 6, EntityAttributeModifier.Operation.ADDITION));
-            attributeBuilder.put(EntityAttributes.GENERIC_ATTACK_SPEED,  new EntityAttributeModifier("Weapon modifier", -2.8f, EntityAttributeModifier.Operation.ADDITION));
+            attributeBuilder.put(
+                    EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                    new EntityAttributeModifier("Weapon modifier", SuperiorBallisticsMod.CONFIG.getMusketBayonetDamage(), EntityAttributeModifier.Operation.ADDITION)
+            );
+            attributeBuilder.put(
+                    EntityAttributes.GENERIC_ATTACK_SPEED,
+                    new EntityAttributeModifier("Weapon modifier", SuperiorBallisticsMod.CONFIG.getMusketBayonetSpeed() - 4.0f, EntityAttributeModifier.Operation.ADDITION)
+            );
             bayonetModifiers = attributeBuilder.build();
         }
         else {

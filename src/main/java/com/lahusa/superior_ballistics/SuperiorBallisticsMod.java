@@ -81,15 +81,16 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static final Item STONE_BULLETS_ITEM 		= new StoneBulletsItem(new FabricItemSettings().group(ItemGroup.MISC));
 	public static final Item STONE_BULLET_ITEM 			= new StoneBulletItem(new FabricItemSettings());
 	public static final Item FLINTLOCK_PISTOL_ITEM 		= new FlintlockPistolItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(225));
-	public static final Item FLINTLOCK_MUSKET_ITEM 		= new FlintlockMusketItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(600));
-	public static final Item FLINTLOCK_BLUNDERBUSS_ITEM = new FlintlockBlunderbussItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(480));
-	public static final Item SPONGE_ON_A_STICK_ITEM 	= new SpongeOnAStickItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
-	public static final Item WET_SPONGE_ON_A_STICK_ITEM = new WetSpongeOnAStickItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
-	public static final Item PISTON_LOADER_ITEM 		= new PistonLoaderItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
-	public static final Item IRON_CANNONBALL 			= new IronCannonballItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(16));
-	public static final Item IRON_GRAPESHOT 			= new IronGrapeshotItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(16));
-	public static final Item IRON_SINGLE_GRAPESHOT 		= new IronSingleGrapeshotItem(new FabricItemSettings());
-	public static final Item CREATIVE_CANNON_MODULE		= new CreativeCannonModuleItem(new FabricItemSettings().rarity(Rarity.EPIC).group(ItemGroup.COMBAT));
+	public static final Item FLINTLOCK_MUSKET_ITEM 			= new FlintlockMusketItem(false, new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(600));
+	public static final Item FLINTLOCK_MUSKET_BAYONET_ITEM	= new FlintlockMusketItem(true, new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(600));
+	public static final Item FLINTLOCK_BLUNDERBUSS_ITEM 	= new FlintlockBlunderbussItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(480));
+	public static final Item SPONGE_ON_A_STICK_ITEM 		= new SpongeOnAStickItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
+	public static final Item WET_SPONGE_ON_A_STICK_ITEM 	= new WetSpongeOnAStickItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
+	public static final Item PISTON_LOADER_ITEM 			= new PistonLoaderItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(120));
+	public static final Item IRON_CANNONBALL 				= new IronCannonballItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(16));
+	public static final Item IRON_GRAPESHOT 				= new IronGrapeshotItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(16));
+	public static final Item IRON_SINGLE_GRAPESHOT 			= new IronSingleGrapeshotItem(new FabricItemSettings());
+	public static final Item CREATIVE_CANNON_MODULE			= new CreativeCannonModuleItem(new FabricItemSettings().rarity(Rarity.EPIC).group(ItemGroup.COMBAT));
 
 	//Armor
 	public static final ArmorMaterial UNIFORM_ARMOR_MATERIAL = new UniformArmorMaterial();
@@ -183,18 +184,19 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "warped_cannon"), 	WARPED_CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "gunpowder_keg"), GUNPOWDER_KEG_ITEM);
 
-		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullets"), 			STONE_BULLETS_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullet"), 			STONE_BULLET_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_pistol"), 		FLINTLOCK_PISTOL_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_musket"), 		FLINTLOCK_MUSKET_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_blunderbuss"), 	FLINTLOCK_BLUNDERBUSS_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "sponge_on_a_stick"), 		SPONGE_ON_A_STICK_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "wet_sponge_on_a_stick"), 	WET_SPONGE_ON_A_STICK_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "piston_loader"), 			PISTON_LOADER_ITEM);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_cannonball"), 		IRON_CANNONBALL);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_grapeshot"), 			IRON_GRAPESHOT);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_single_grapeshot"), 	IRON_SINGLE_GRAPESHOT);
-		Registry.register(Registry.ITEM, new Identifier(MODID, "creative_cannon_module"),	CREATIVE_CANNON_MODULE);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullets"), 				STONE_BULLETS_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "stone_bullet"), 				STONE_BULLET_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_pistol"), 			FLINTLOCK_PISTOL_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_musket"), 			FLINTLOCK_MUSKET_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_musket_bayonet"), 	FLINTLOCK_MUSKET_BAYONET_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "flintlock_blunderbuss"), 		FLINTLOCK_BLUNDERBUSS_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "sponge_on_a_stick"), 			SPONGE_ON_A_STICK_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "wet_sponge_on_a_stick"), 		WET_SPONGE_ON_A_STICK_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "piston_loader"), 				PISTON_LOADER_ITEM);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_cannonball"), 			IRON_CANNONBALL);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_grapeshot"), 				IRON_GRAPESHOT);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "iron_single_grapeshot"), 		IRON_SINGLE_GRAPESHOT);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "creative_cannon_module"),		CREATIVE_CANNON_MODULE);
 
 		// Armor
 		Registry.register(Registry.ITEM, new Identifier(MODID, "pickelhaube_helmet"), 			PICKELHAUBE_HELMET);

@@ -21,7 +21,7 @@ public class FlintlockBlunderbussItem extends FlintlockMusketItem {
     protected static final float soundVolume = 1.1F;
 
     public FlintlockBlunderbussItem(Settings settings) {
-        super(settings);
+        super(false, settings);
     }
 
     @Override

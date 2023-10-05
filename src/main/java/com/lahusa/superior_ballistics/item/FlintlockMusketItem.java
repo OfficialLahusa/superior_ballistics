@@ -1,8 +1,15 @@
 package com.lahusa.superior_ballistics.item;
 
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
+import com.ibm.icu.impl.locale.XCldrStub;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -33,9 +40,29 @@ public class FlintlockMusketItem extends RangedWeaponItem {
     protected static final float soundVolume = 1.0F;
 
     public static final TagKey<Item> AMMUNITION_TAG = TagKey.of(Registry.ITEM_KEY, new Identifier(SuperiorBallisticsMod.MODID, "pistol_ammunition"));
+    public final Multimap<EntityAttribute, EntityAttributeModifier> bayonetModifiers;
 
-    public FlintlockMusketItem(Settings settings) {
+    public FlintlockMusketItem(boolean hasBayonet, Settings settings) {
         super(settings);
+
+        // Add modifiers for bayonet
+        if(hasBayonet) {
+            ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> attributeBuilder = ImmutableMultimap.builder();
+            attributeBuilder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("Weapon modifier", 6, EntityAttributeModifier.Operation.ADDITION));
+            attributeBuilder.put(EntityAttributes.GENERIC_ATTACK_SPEED,  new EntityAttributeModifier("Weapon modifier", -2.8f, EntityAttributeModifier.Operation.ADDITION));
+            bayonetModifiers = attributeBuilder.build();
+        }
+        else {
+            bayonetModifiers = null;
+        }
+    }
+
+    @Override
+    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
+        if(slot == EquipmentSlot.MAINHAND && bayonetModifiers != null)
+            return bayonetModifiers;
+        else
+            return super.getAttributeModifiers(slot);
     }
 
     public static boolean isCharged(ItemStack stack) {

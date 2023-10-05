@@ -5,7 +5,6 @@
 
 ### Items:
 - [ ] Bayonett mit Smithing Table hinzufügen (an anderer Mod inspirieren lassen)
-- [ ] Munitions-Tooltips
 - [ ] Nachladesound fixen
 
 ### Entities:
@@ -82,3 +81,4 @@
 - [x] Gunpowder Keg ~~LootNumberProvider und Table~~ / ItemStack mit Füllstand-NBT droppen
 - [x] Beschreibung vom Start-Advancement ändern
 - [x] Uhr ~~durch anderes Detail-Item ersetzen oder~~ erklärenden Tooltip anhängen
+- [x] Munitions-Tooltips

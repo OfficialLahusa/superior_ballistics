@@ -161,8 +161,6 @@ public class SuperiorBallisticsMod implements ModInitializer {
 				).build(null)
 		);
 
-
-
 		// Items
 		Registry.register(Registry.ITEM, new Identifier(MODID, "oak_cannon"), 		OAK_CANNON_ITEM);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "spruce_cannon"), 	SPRUCE_CANNON_ITEM);

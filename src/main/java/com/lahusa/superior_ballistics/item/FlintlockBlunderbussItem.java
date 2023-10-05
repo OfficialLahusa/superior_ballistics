@@ -1,5 +1,6 @@
 package com.lahusa.superior_ballistics.item;
 
+import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -16,10 +17,6 @@ import net.minecraft.world.World;
 public class FlintlockBlunderbussItem extends FlintlockMusketItem {
 
     public static final float REQUIRED_PULL_PROGRESS = 1.0f;
-    protected static final float speed = 1.6f;
-    protected static final float divergence = 10.0f;
-    protected static final int shotDamage = 2000;
-    protected static final int shotCount = 8;
     protected static final float soundPitch = 0.8f;
     protected static final float soundVolume = 1.1F;
 
@@ -29,10 +26,13 @@ public class FlintlockBlunderbussItem extends FlintlockMusketItem {
 
     @Override
     protected void shoot(World world, LivingEntity shooter) {
-        for(int i = 0; i < shotCount; i++)
+        for(int i = 0; i < SuperiorBallisticsMod.CONFIG.getBlunderbussShotCount(); i++)
         {
             // Shoot projectile
-            fireProjectile(world, shooter, FlintlockBlunderbussItem.shotDamage, FlintlockBlunderbussItem.speed, FlintlockBlunderbussItem.divergence);
+            fireProjectile(world, shooter,
+                    SuperiorBallisticsMod.CONFIG.getBlunderbussShotDamage(),
+                    SuperiorBallisticsMod.CONFIG.getBlunderbussShotSpeed(),
+                    SuperiorBallisticsMod.CONFIG.getBlunderbussShotDivergence());
         }
 
         // Play firing sound
@@ -59,7 +59,7 @@ public class FlintlockBlunderbussItem extends FlintlockMusketItem {
 
             // Get the ammo stack, that should be used
             ItemStack ammoStack = playerEntity.getArrowType(stack);
-            boolean hasAmmo = playerEntity.getArrowType(stack).getCount() >= shotCount;
+            boolean hasAmmo = playerEntity.getArrowType(stack).getCount() >= SuperiorBallisticsMod.CONFIG.getBlunderbussShotCount();
             boolean hasGunpowder = playerEntity.getInventory().contains(Items.GUNPOWDER.getDefaultStack());
 
             // Only execute, is there is ammo and gunpowder or user is in creative mode
@@ -87,7 +87,7 @@ public class FlintlockBlunderbussItem extends FlintlockMusketItem {
         // Subtract ammo, if found
         if (!player.getAbilities().creativeMode) {
             PlayerInventory inventory = player.getInventory();
-            ammoStack.decrement(shotCount);
+            ammoStack.decrement(SuperiorBallisticsMod.CONFIG.getBlunderbussShotCount());
 
             // Remove bullet
             if (ammoStack.isEmpty()) {

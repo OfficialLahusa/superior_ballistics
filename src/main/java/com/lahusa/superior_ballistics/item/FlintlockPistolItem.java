@@ -23,11 +23,9 @@ import java.util.function.Predicate;
 public class FlintlockPistolItem extends RangedWeaponItem {
 
     public static final float REQUIRED_PULL_PROGRESS = 0.5f;
-    protected static final float speed = 3.0f;
-    protected static final float divergence = 5.2f;
     protected static final float soundPitch = 1.4f;
     protected static final float soundVolume = 1.0F;
-    protected static final int shotDamage = 8;
+
 
     public FlintlockPistolItem(Settings settings) {
         super(settings);
@@ -93,9 +91,12 @@ public class FlintlockPistolItem extends RangedWeaponItem {
     {
         // Only execute on server
         if (!world.isClient) {
-            StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, shooter, FlintlockPistolItem.shotDamage, null);
+            StoneBulletEntity stoneBulletEntity = new StoneBulletEntity(world, shooter, SuperiorBallisticsMod.CONFIG.getPistolShotDamage(), null);
             stoneBulletEntity.setItem(new ItemStack(SuperiorBallisticsMod.STONE_BULLET_ITEM));
-            stoneBulletEntity.setVelocity(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, FlintlockPistolItem.speed, FlintlockPistolItem.divergence);
+            stoneBulletEntity.setVelocity(
+                    shooter, shooter.getPitch(), shooter.getYaw(), 0.0F,
+                    SuperiorBallisticsMod.CONFIG.getPistolShotSpeed(),
+                    SuperiorBallisticsMod.CONFIG.getPistolShotDivergence());
             world.spawnEntity(stoneBulletEntity);
         }
     }

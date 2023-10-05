@@ -29,9 +29,6 @@ public class FlintlockMusketItem extends RangedWeaponItem {
 
     public static final float REQUIRED_PULL_PROGRESS = 1.0f;
     protected boolean loaded = false;
-    protected static final float speed = 3.0f;
-    protected static final float divergence = 3.0f;
-    protected static final int shotDamage = 13;
     protected static final float soundPitch = 1.0f;
     protected static final float soundVolume = 1.0F;
 
@@ -162,7 +159,10 @@ public class FlintlockMusketItem extends RangedWeaponItem {
 
     protected void shoot(World world, LivingEntity shooter) {
         // Shoot projectile
-        fireProjectile(world, shooter, FlintlockMusketItem.shotDamage, FlintlockMusketItem.speed, FlintlockMusketItem.divergence);
+        fireProjectile(world, shooter,
+                SuperiorBallisticsMod.CONFIG.getMusketShotDamage(),
+                SuperiorBallisticsMod.CONFIG.getMusketShotSpeed(),
+                SuperiorBallisticsMod.CONFIG.getMusketShotDivergence());
 
         // Play firing sound
         world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, FlintlockMusketItem.soundVolume, FlintlockMusketItem.soundPitch);

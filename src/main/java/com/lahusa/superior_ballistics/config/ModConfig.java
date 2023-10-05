@@ -15,6 +15,10 @@ public final class ModConfig {
 
     // Cannon properties
     private boolean cannonOverchargingAllowed = true;
+    private short cannonMaxLitTicks = 40;
+    private float cannonShotSpeed = 1.0f;
+    private float cannonShotDivergence = 3.0f;
+    private float cannonGrapeShotDivergence = 4.5f;
 
     // Pistol properties
     private float pistolShotSpeed = 3.0f;
@@ -73,6 +77,10 @@ public final class ModConfig {
         // Enforce validity of all fields by feeding the values through the setters, which ensure validity
         // Cannon properties
         setCannonOverchargingAllowed(this.cannonOverchargingAllowed);
+        setCannonMaxLitTicks(this.cannonMaxLitTicks);
+        setCannonShotSpeed(this.cannonShotSpeed);
+        setCannonShotDivergence(this.cannonShotDivergence);
+        setCannonGrapeShotDivergence(this.cannonGrapeShotDivergence);
 
         // Pistol properties
         setPistolShotSpeed(this.pistolShotSpeed);
@@ -98,6 +106,38 @@ public final class ModConfig {
 
     public void setCannonOverchargingAllowed(boolean cannonOverchargingAllowed) {
         this.cannonOverchargingAllowed = cannonOverchargingAllowed;
+    }
+
+    public short getCannonMaxLitTicks() {
+        return cannonMaxLitTicks;
+    }
+
+    public void setCannonMaxLitTicks(short cannonMaxLitTicks) {
+        this.cannonMaxLitTicks = (short)Math.max(1, cannonMaxLitTicks);
+    }
+
+    public float getCannonShotSpeed() {
+        return cannonShotSpeed;
+    }
+
+    public void setCannonShotSpeed(float cannonShotSpeed) {
+        this.cannonShotSpeed = Math.max(0.1f, cannonShotSpeed);
+    }
+
+    public float getCannonShotDivergence() {
+        return cannonShotDivergence;
+    }
+
+    public void setCannonShotDivergence(float cannonShotDivergence) {
+        this.cannonShotDivergence = Math.max(0.f, cannonShotDivergence);
+    }
+
+    public float getCannonGrapeShotDivergence() {
+        return cannonGrapeShotDivergence;
+    }
+
+    public void setCannonGrapeShotDivergence(float cannonGrapeShotDivergence) {
+        this.cannonGrapeShotDivergence = Math.max(0.f, cannonGrapeShotDivergence);
     }
 
     // Pistol properties

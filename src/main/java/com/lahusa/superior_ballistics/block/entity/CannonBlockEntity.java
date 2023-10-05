@@ -63,9 +63,6 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
     public static final short ENDER_PEARL_SHOT = 3;
     public static final short BLANK_SHOT = 4;
 
-    // Lit phase
-    public static final short MAX_LIT_TICKS = 40;
-
     // Firing phase
     private static final double BARREL_LENGTH = 13.0/16.0;
     private static final double MUZZLE_PARTICLE_OFFSET = 4.5/16.0;
@@ -74,9 +71,6 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
     private static final float FIRING_SOUND_PITCH = 1.1f;
     private static final float FIRING_SOUND_FAR_PITCH = 0.48f;
     private static final float FIRING_SOUND_FAR_RANGE = 380.0f;
-    private static final float SHOT_SPEED = 1.0f;
-    private static final float SHOT_DIVERGENCE = 3.0f;
-    private static final float GRAPESHOT_DIVERGENCE = 4.5f;
 
     // Barrel angle
     public static final short MAX_ANGLE = 15;
@@ -103,7 +97,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
             ++blockEntity.litTicks;
         }
 
-        if(blockEntity.litTicks >= MAX_LIT_TICKS) {
+        if(blockEntity.litTicks >= SuperiorBallisticsMod.CONFIG.getCannonMaxLitTicks()) {
             blockEntity.fire();
         }
     }
@@ -275,14 +269,19 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
                             case IRON_CANNONBALL -> {
                                 CannonBallEntity cannonBallEntity = new CannonBallEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
                                 cannonBallEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_CANNONBALL));
-                                cannonBallEntity.setVelocity(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, SHOT_DIVERGENCE);
+                                cannonBallEntity.setVelocity(
+                                        player, getProjectilePitch(), getProjectileYaw(), 0.0F,
+                                        getProjectileSpeedFactor() * SuperiorBallisticsMod.CONFIG.getCannonShotSpeed(),
+                                        SuperiorBallisticsMod.CONFIG.getCannonShotDivergence());
                                 world.spawnEntity(cannonBallEntity);
                             }
                             case ENDER_PEARL_SHOT -> {
                                 EnderPearlEntity enderPearlEntity = new EnderPearlEntity(world, player);
                                 enderPearlEntity.setPos(muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z);
                                 enderPearlEntity.setItem(new ItemStack(Items.ENDER_PEARL));
-                                enderPearlEntity.setVelocity(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, SHOT_DIVERGENCE);
+                                enderPearlEntity.setVelocity(player, getProjectilePitch(), getProjectileYaw(), 0.0F,
+                                        getProjectileSpeedFactor() * SuperiorBallisticsMod.CONFIG.getCannonShotSpeed(),
+                                        SuperiorBallisticsMod.CONFIG.getCannonShotDivergence());
                                 world.spawnEntity(enderPearlEntity);
 
                                 // Trigger advancement
@@ -292,7 +291,9 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
                                 for(int i = 0; i < 8; i++) {
                                     StoneBulletEntity grapeshotEntity = new StoneBulletEntity(world, muzzleParticlePos.x, muzzleParticlePos.y, muzzleParticlePos.z, 13, StatusEffects.SLOWNESS);
                                     grapeshotEntity.setItem(new ItemStack(SuperiorBallisticsMod.IRON_SINGLE_GRAPESHOT));
-                                    grapeshotEntity.setVelocity(player, getProjectilePitch(), getProjectileYaw(), 0.0F, getProjectileSpeedFactor() * SHOT_SPEED, GRAPESHOT_DIVERGENCE);
+                                    grapeshotEntity.setVelocity(player, getProjectilePitch(), getProjectileYaw(), 0.0F,
+                                            getProjectileSpeedFactor() * SuperiorBallisticsMod.CONFIG.getCannonShotSpeed(),
+                                            SuperiorBallisticsMod.CONFIG.getCannonGrapeShotDivergence());
                                     world.spawnEntity(grapeshotEntity);
                                 }
                             }

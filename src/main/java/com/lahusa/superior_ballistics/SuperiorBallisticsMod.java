@@ -7,6 +7,7 @@ import com.lahusa.superior_ballistics.block.CannonBlock;
 import com.lahusa.superior_ballistics.block.GunpowderKegBlock;
 import com.lahusa.superior_ballistics.block.entity.CannonBlockEntity;
 import com.lahusa.superior_ballistics.block.entity.GunpowderKegBlockEntity;
+import com.lahusa.superior_ballistics.config.ModConfig;
 import com.lahusa.superior_ballistics.entity.CannonBallEntity;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
 import com.lahusa.superior_ballistics.item.*;
@@ -43,6 +44,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 
 	public static final String MODID = "superior_ballistics";
 	public static final Logger LOGGER = LoggerFactory.getLogger("Superior Ballistics");
+	public static ModConfig CONFIG = new ModConfig();
 
 	// Block Settings
 	public static final float CANNON_STRENGTH = 2.0f;
@@ -140,6 +142,9 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Init: Started");
+
+		// Load Config File
+		CONFIG = ModConfig.load();
 
 		// Blocks
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "oak_cannon"), 		OAK_CANNON_BLOCK);

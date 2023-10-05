@@ -8,8 +8,6 @@
 - [ ] Munitions-Tooltips
 - [ ] Nachladesound fixen
 
-### Worldgen:
-
 ### Entities:
 
 ### Advancements:

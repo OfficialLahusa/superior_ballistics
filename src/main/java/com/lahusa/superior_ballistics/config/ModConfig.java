@@ -13,7 +13,7 @@ import java.nio.file.Files;
 public final class ModConfig {
     private static final File CONFIG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), SuperiorBallisticsMod.MODID + ".json");
 
-    private boolean canOverchargeCannons = true;
+    private boolean cannonOverchargingAllowed = true;
 
     public ModConfig() {}
 
@@ -46,11 +46,11 @@ public final class ModConfig {
         }
     }
 
-    public boolean getCanOverchargeCannons() {
-        return canOverchargeCannons;
+    public boolean isCannonOverchargingAllowed() {
+        return cannonOverchargingAllowed;
     }
 
-    public void setCanOverchargeCannons(boolean canOverchargeCannons) {
-        this.canOverchargeCannons = canOverchargeCannons;
+    public void setCannonOverchargingAllowed(boolean cannonOverchargingAllowed) {
+        this.cannonOverchargingAllowed = cannonOverchargingAllowed;
     }
 }

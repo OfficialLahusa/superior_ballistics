@@ -262,7 +262,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
                     if(player == null) return;
 
                     // Check for powder overload
-                    if(powderAmount > MAX_POWDER && shotType != BLANK_SHOT) {
+                    if(powderAmount > MAX_POWDER && shotType != BLANK_SHOT && SuperiorBallisticsMod.CONFIG.isCannonOverchargingAllowed()) {
                         // Blow up cannon
                         world.createExplosion(player, pos.getX(), pos.getY(), pos.getZ(), Math.min(0.7f * powderAmount, 20.0f), true, Explosion.DestructionType.DESTROY);
 
@@ -496,7 +496,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
     }
 
     public boolean canLoadPowder() {
-        return powderAmount < MAX_POWDER_OVERLOADING;
+        return powderAmount < MAX_POWDER || SuperiorBallisticsMod.CONFIG.isCannonOverchargingAllowed() && powderAmount < MAX_POWDER_OVERLOADING;
     }
 
     private float getProjectileSpeedFactor() {

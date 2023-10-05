@@ -34,6 +34,8 @@
     "item.superior_ballistics.gunpowder_keg.tooltip": "Rechtsclick mit %s zum Öffnen/Schließen des Deckels",
     "item.superior_ballistics.clock.tooltip.line1": "Wenn in der Hand, während Kanone angeschaut wird:",
     "item.superior_ballistics.clock.tooltip.line2": "Zeigt Abschusswinkel und geschätzte Reichweite an",
+    "item.superior_ballistics.cannonball.tooltip.line1": "Explodiert beim Aufprall",
+    "item.superior_ballistics.grapeshot.tooltip.line2": "Kann benutzt werden, um mehrere Ziele gleichzeitig zu treffen",
     "entity.superior_ballistics.cannonball": "Kanonenkugel",
     "entity.superior_ballistics.stone_bullet": "Steinkugel",
     "superior_ballistics.cannon.loading_stage": "Kanonenladestufe: ",

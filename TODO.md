@@ -1,14 +1,11 @@
 # TODO-Liste:
 
 ### Blöcke:
-- [ ] Kanone Lunte hinzufügen + Partikel
 - [ ] Overcharge Damage fixen
 
 ### Items:
 - [ ] Bayonett mit Smithing Table hinzufügen (an anderer Mod inspirieren lassen)
 - [ ] Munitions-Tooltips
-- [ ] Werfbare Rauch-/Feuertöpfe und Dynamitstangen
-- [ ] Uhr durch anderes Detail-Item ersetzen oder erklärenden Tooltip anhängen
 - [ ] Nachladesound fixen
 
 ### Worldgen:
@@ -38,6 +35,8 @@
 - [ ] Skelette, die Schusswaffen nutzen
 - [ ] Drowned, die Schusswaffen nutzen
 - [ ] Anderes Haltemodell für Kanonenkugeln
+- [ ] Werfbare Rauch-/Feuertöpfe und Dynamitstangen
+- [ ] Kanone Lunte hinzufügen + Partikel
 
 
 ### Bereits abgearbeitete Punkte (Archiv):
@@ -85,3 +84,4 @@
 - [x] Pling-Sound wie beim Bogen für alle Schusswaffen implementieren (maybe)
 - [x] Gunpowder Keg ~~LootNumberProvider und Table~~ / ItemStack mit Füllstand-NBT droppen
 - [x] Beschreibung vom Start-Advancement ändern
+- [x] Uhr ~~durch anderes Detail-Item ersetzen oder~~ erklärenden Tooltip anhängen

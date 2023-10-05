@@ -11,6 +11,7 @@ import com.lahusa.superior_ballistics.entity.CannonBallEntity;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
 import com.lahusa.superior_ballistics.item.*;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -29,6 +30,8 @@ import net.minecraft.item.*;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
@@ -200,6 +203,14 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		// SoundEvents
 		Registry.register(Registry.SOUND_EVENT, CANNON_SHOT_SOUND_ID, CANNON_SHOT_SOUND_EVENT);
 		Registry.register(Registry.SOUND_EVENT, CANNON_SHOT_DISTANT_SOUND_ID, CANNON_SHOT_DISTANT_SOUND_EVENT);
+
+		// Item tooltips
+		ItemTooltipCallback.EVENT.register((stack, context, lines) -> {
+			if(stack.isOf(Items.CLOCK)) {
+				lines.add(new TranslatableText("item.superior_ballistics.clock.tooltip.line1").formatted(Formatting.GRAY));
+				lines.add(new TranslatableText("item.superior_ballistics.clock.tooltip.line2").formatted(Formatting.GRAY));
+			}
+		});
 
 		System.out.println("Superior Ballistics Init: Done");
 	}

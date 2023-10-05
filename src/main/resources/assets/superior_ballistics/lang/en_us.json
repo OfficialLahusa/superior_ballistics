@@ -32,6 +32,8 @@
     "item.superior_ballistics.creative_cannon_module.tooltip.description": "Turns the cannon into a creative cannon with infinite ammunition.",
     "item.superior_ballistics.creative_cannon_module.applied_message": "Creative cannon module was applied.",
     "item.superior_ballistics.gunpowder_keg.tooltip": "Right click with a %s to open/close the lid.",
+    "item.superior_ballistics.clock.tooltip.line1": "When held while looking at cannon:",
+    "item.superior_ballistics.clock.tooltip.line2": "Displays launch angle and estimated range",
     "entity.superior_ballistics.cannonball": "Cannonball",
     "entity.superior_ballistics.stone_bullet": "Stone Bullet",
     "superior_ballistics.cannon.loading_stage": "Cannon Loading Stage: ",

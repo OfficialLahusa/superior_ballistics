@@ -1,7 +1,7 @@
 # TODO-Liste:
 
 ### Blöcke:
-- [ ] Overcharge Damage fixen
+- [ ] Overcharge Damage fixen (Spieler nimmt keinen Damage, aber Mobs)
 
 ### Items:
 - [ ] Bayonett mit Smithing Table hinzufügen (an anderer Mod inspirieren lassen)

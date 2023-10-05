@@ -35,11 +35,14 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.bernie.example.GeckoLibMod;
 
 public class SuperiorBallisticsMod implements ModInitializer {
 
 	public static final String MODID = "superior_ballistics";
+	public static final Logger LOGGER = LoggerFactory.getLogger("Superior Ballistics");
 
 	// Block Settings
 	public static final float CANNON_STRENGTH = 2.0f;
@@ -136,7 +139,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		System.out.println("Superior Ballistics Init: Starting");
+		LOGGER.info("Init: Started");
 
 		// Blocks
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "oak_cannon"), 		OAK_CANNON_BLOCK);
@@ -212,6 +215,6 @@ public class SuperiorBallisticsMod implements ModInitializer {
 			}
 		});
 
-		System.out.println("Superior Ballistics Init: Done");
+		LOGGER.info("Init: Done");
 	}
 }

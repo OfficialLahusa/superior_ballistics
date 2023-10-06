@@ -10,7 +10,7 @@ import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
-public class EnderPearlCannonShot extends AbstractCriterion<EnderPearlCannonShot.Conditions> {
+public class EnderPearlCannonShotCriterion extends AbstractCriterion<EnderPearlCannonShotCriterion.Conditions> {
     static final Identifier ID = new Identifier(SuperiorBallisticsMod.MODID, "ender_pearl_cannon_shot");
 
     @Override
@@ -23,8 +23,8 @@ public class EnderPearlCannonShot extends AbstractCriterion<EnderPearlCannonShot
     }
 
     @Override
-    public EnderPearlCannonShot.Conditions conditionsFromJson(JsonObject jsonObject, EntityPredicate.Extended player, AdvancementEntityPredicateDeserializer advancementEntityPredicateDeserializer) {
-        return new EnderPearlCannonShot.Conditions(player);
+    public EnderPearlCannonShotCriterion.Conditions conditionsFromJson(JsonObject jsonObject, EntityPredicate.Extended player, AdvancementEntityPredicateDeserializer advancementEntityPredicateDeserializer) {
+        return new EnderPearlCannonShotCriterion.Conditions(player);
     }
 
     public static class Conditions extends AbstractCriterionConditions {

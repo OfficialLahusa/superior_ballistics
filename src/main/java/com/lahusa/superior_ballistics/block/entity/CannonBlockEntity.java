@@ -258,7 +258,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
                     // Check for powder overload
                     if(powderAmount > MAX_POWDER && shotType != BLANK_SHOT && SuperiorBallisticsMod.CONFIG.isCannonOverchargingAllowed()) {
                         // Blow up cannon
-                        world.createExplosion(player, pos.getX(), pos.getY(), pos.getZ(), Math.min(0.7f * powderAmount, 20.0f), true, Explosion.DestructionType.DESTROY);
+                        world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), Math.min(0.7f * powderAmount, 20.0f), true, Explosion.DestructionType.DESTROY);
 
                         // Trigger overcharge advancement criterion
                         SuperiorBallisticsMod.CANNON_OVERCHARGE_CRITERION.trigger((ServerPlayerEntity) player);

@@ -1,7 +1,6 @@
 # TODO-Liste:
 
 ### Blöcke:
-- [ ] Overcharge Damage fixen (Spieler nimmt keinen Damage, aber Mobs)
 
 ### Items:
 - [ ] Nachladesound fixen
@@ -82,3 +81,4 @@
 - [x] Uhr ~~durch anderes Detail-Item ersetzen oder~~ erklärenden Tooltip anhängen
 - [x] Munitions-Tooltips
 - [x] Bajonett mit Smithing Table hinzufügen (an anderer Mod inspirieren lassen)
+- [x] Overcharge Damage fixen (Spieler nimmt keinen Damage, aber Mobs)

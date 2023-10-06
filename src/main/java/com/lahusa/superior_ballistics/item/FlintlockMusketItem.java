@@ -5,6 +5,9 @@ import com.google.common.collect.Multimap;
 import com.ibm.icu.impl.locale.XCldrStub;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.Material;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -25,6 +28,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -41,9 +45,11 @@ public class FlintlockMusketItem extends RangedWeaponItem {
 
     public static final TagKey<Item> AMMUNITION_TAG = TagKey.of(Registry.ITEM_KEY, new Identifier(SuperiorBallisticsMod.MODID, "pistol_ammunition"));
     public final Multimap<EntityAttribute, EntityAttributeModifier> bayonetModifiers;
+    private final boolean hasBayonet;
 
     public FlintlockMusketItem(boolean hasBayonet, Settings settings) {
         super(settings);
+        this.hasBayonet = hasBayonet;
 
         // Add modifiers for bayonet
         if(hasBayonet) {
@@ -155,7 +161,6 @@ public class FlintlockMusketItem extends RangedWeaponItem {
                 world.playSound(null, user.getBlockPos(), SoundEvents.BLOCK_LEVER_CLICK, (user instanceof PlayerEntity)? SoundCategory.PLAYERS:SoundCategory.HOSTILE,1.0f,0.6f);
             }
         }
-
     }
 
     public void subtractAmmunition(PlayerEntity player, ItemStack ammoStack) {
@@ -222,6 +227,42 @@ public class FlintlockMusketItem extends RangedWeaponItem {
         }
 
         return f;
+    }
+
+    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        // Only consume durability when bayonet is attached
+        if(!hasBayonet) return false;
+        stack.damage(1, attacker, (e) -> {
+            e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND);
+        });
+        return true;
+    }
+
+    public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
+        // Only consume durability when bayonet is attached
+        if(!hasBayonet) return false;
+        if (state.getHardness(world, pos) != 0.0F) {
+            stack.damage(2, miner, (e) -> {
+                e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND);
+            });
+        }
+        return true;
+    }
+
+    public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
+        // Only increase speed when bayonet is attached
+        if(!hasBayonet) return 1.0f;
+        if (state.isOf(Blocks.COBWEB)) {
+            return 15.0F;
+        } else {
+            Material material = state.getMaterial();
+            return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && !state.isIn(BlockTags.LEAVES) && material != Material.GOURD ? 1.0F : 1.5F;
+        }
+    }
+
+    public boolean isSuitableFor(BlockState state) {
+        // Only a valid tool for cobweb when bayonet is attached
+        return hasBayonet && state.isOf(Blocks.COBWEB);
     }
 
     public int getMaxUseTime(ItemStack stack) {

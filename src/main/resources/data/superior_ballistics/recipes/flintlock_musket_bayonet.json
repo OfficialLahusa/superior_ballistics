@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+      "item": "superior_ballistics:flintlock_musket"
+    },
+    "addition": {
+      "item": "minecraft:iron_sword"
+    },
+    "result": {
+      "item": "superior_ballistics:flintlock_musket_bayonet"
+    }
+  }

@@ -4,7 +4,6 @@
 - [ ] Overcharge Damage fixen (Spieler nimmt keinen Damage, aber Mobs)
 
 ### Items:
-- [ ] Bajonett mit Smithing Table hinzufügen (an anderer Mod inspirieren lassen)
 - [ ] Nachladesound fixen
 
 ### Entities:
@@ -82,3 +81,4 @@
 - [x] Beschreibung vom Start-Advancement ändern
 - [x] Uhr ~~durch anderes Detail-Item ersetzen oder~~ erklärenden Tooltip anhängen
 - [x] Munitions-Tooltips
+- [x] Bajonett mit Smithing Table hinzufügen (an anderer Mod inspirieren lassen)

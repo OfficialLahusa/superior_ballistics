@@ -14,36 +14,36 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.property.Properties;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.animatable.GeoBlockEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.UUID;
 
-public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStatusTextProvider {
+public class CannonBlockEntity extends BlockEntity implements GeoBlockEntity, IStatusTextProvider {
 
     // Loading stages
     public static final short POWDER_LOADING_STAGE = 0;
@@ -85,7 +85,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
     private boolean isCreative = false;
     private UUID lastUserUUID = null;
 
-    private final AnimationFactory factory = new AnimationFactory(this);
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
 
     public CannonBlockEntity(BlockPos pos, BlockState state) {
@@ -102,71 +102,71 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
         }
     }
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.animated_cannon.idle", true));
+    private <E extends GeoAnimatable> PlayState predicate(AnimationState<E> event) {
+        event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.animated_cannon.idle"));
         return PlayState.CONTINUE;
     }
 
     @Override
-    public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController<>(this, "controller", 0, this::predicate));
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
     @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.cache;
     }
 
     @Override
     public Text getStatusText(PlayerEntity player) {
-        MutableText text = new LiteralText("[").formatted(Formatting.GRAY);
+        MutableText text = Text.literal("[").formatted(Formatting.GRAY);
 
         // Detail info item held
         if(player.getMainHandStack().isOf(Items.CLOCK) || player.getOffHandStack().isOf(Items.CLOCK)) {
             boolean isOverloaded = getPowderAmount() > MAX_POWDER;
             int rangeEstimate = (int)Math.round(CannonDistanceLookup.getShotRangeEstimate(isOverloaded ? MAX_POWDER : getPowderAmount(), getAngle()));
 
-            text.append(new TranslatableText("superior_ballistics.cannon.trajectory").append(new LiteralText(": ")).formatted(Formatting.BLACK));
-            text.append(new TranslatableText("superior_ballistics.cannon.launch_angle").append(new LiteralText(": ")).formatted(Formatting.DARK_GREEN));
-            text.append(new LiteralText("(" + getAngleDegrees() + "°) ").formatted(Formatting.GOLD));
-            text.append(new TranslatableText("superior_ballistics.cannon.range").append(new LiteralText(": ")).formatted(Formatting.DARK_GREEN));
-            text.append(new LiteralText("(" + rangeEstimate + " ").append(new TranslatableText("superior_ballistics.cannon.distance_unit")).append(new LiteralText(")")).formatted(Formatting.GOLD));
+            text.append(Text.translatable("superior_ballistics.cannon.trajectory").append(Text.literal(": ")).formatted(Formatting.BLACK));
+            text.append(Text.translatable("superior_ballistics.cannon.launch_angle").append(Text.literal(": ")).formatted(Formatting.DARK_GREEN));
+            text.append(Text.literal("(" + getAngleDegrees() + "°) ").formatted(Formatting.GOLD));
+            text.append(Text.translatable("superior_ballistics.cannon.range").append(Text.literal(": ")).formatted(Formatting.DARK_GREEN));
+            text.append(Text.literal("(" + rangeEstimate + " ").append(Text.translatable("superior_ballistics.cannon.distance_unit")).append(Text.literal(")")).formatted(Formatting.GOLD));
         }
         // Generic info
         else {
-            text.append(new TranslatableText("superior_ballistics.cannon.loading_stage").formatted(Formatting.BLACK));
+            text.append(Text.translatable("superior_ballistics.cannon.loading_stage").formatted(Formatting.BLACK));
             switch (getLoadingStage()) {
                 case CannonBlockEntity.POWDER_LOADING_STAGE -> {
-                    text.append(new TranslatableText("superior_ballistics.cannon.insert_powder").formatted(Formatting.DARK_GREEN));
-                    text.append(new LiteralText(" (" + getPowderAmount() + "/" + CannonBlockEntity.MAX_POWDER + ")")
+                    text.append(Text.translatable("superior_ballistics.cannon.insert_powder").formatted(Formatting.DARK_GREEN));
+                    text.append(Text.literal(" (" + getPowderAmount() + "/" + CannonBlockEntity.MAX_POWDER + ")")
                             .formatted(getPowderAmount() > CannonBlockEntity.MAX_POWDER ? Formatting.RED : Formatting.GOLD)
                     );
                 }
                 case CannonBlockEntity.SHOT_LOADING_STAGE -> {
-                    text.append(new TranslatableText("superior_ballistics.cannon.insert_shot").formatted(Formatting.DARK_GREEN));
-                    text.append(new LiteralText(" (").append(getShotName()).append(new LiteralText(")")).formatted(Formatting.GOLD));
+                    text.append(Text.translatable("superior_ballistics.cannon.insert_shot").formatted(Formatting.DARK_GREEN));
+                    text.append(Text.literal(" (").append(getShotName()).append(Text.literal(")")).formatted(Formatting.GOLD));
                 }
                 case CannonBlockEntity.READY_STAGE -> {
                     // Show different text when cannon is creative
                     if(isCreative()) {
-                        text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light_creative").formatted(Formatting.LIGHT_PURPLE));
+                        text.append(Text.translatable("superior_ballistics.cannon.ready_to_light_creative").formatted(Formatting.LIGHT_PURPLE));
 
                     }
                     else {
-                        text.append(new TranslatableText("superior_ballistics.cannon.ready_to_light").formatted(Formatting.DARK_GREEN));
+                        text.append(Text.translatable("superior_ballistics.cannon.ready_to_light").formatted(Formatting.DARK_GREEN));
                     }
 
-                    text.append(new LiteralText(" (").append(new TranslatableText("item.minecraft.flint_and_steel"))
-                            .append(new LiteralText(" / ")).append(new TranslatableText("itemGroup.redstone")).append(new LiteralText(")"))
+                    text.append(Text.literal(" (").append(Text.translatable("item.minecraft.flint_and_steel"))
+                            .append(Text.literal(" / ")).append(Text.translatable("itemGroup.redstone")).append(Text.literal(")"))
                             .formatted(Formatting.GOLD));
                 }
-                case CannonBlockEntity.LIT_STAGE -> text.append(new TranslatableText("superior_ballistics.cannon.firing").formatted(Formatting.RED));
-                case CannonBlockEntity.CLEANUP_STAGE -> text.append(new TranslatableText("superior_ballistics.cannon.cleanup").formatted(Formatting.DARK_GREEN));
-                default -> text.append(new LiteralText("INVALID").formatted(Formatting.RED));
+                case CannonBlockEntity.LIT_STAGE -> text.append(Text.translatable("superior_ballistics.cannon.firing").formatted(Formatting.RED));
+                case CannonBlockEntity.CLEANUP_STAGE -> text.append(Text.translatable("superior_ballistics.cannon.cleanup").formatted(Formatting.DARK_GREEN));
+                default -> text.append(Text.literal("INVALID").formatted(Formatting.RED));
             }
         }
 
-        text.append(new LiteralText("]").formatted(Formatting.GRAY));
+        text.append(Text.literal("]").formatted(Formatting.GRAY));
 
         return text;
     }
@@ -261,7 +261,7 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
                         world.removeBlock(pos, false);
 
                         // Blow up cannon
-                        world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), Math.min(0.6f * powderAmount, 10.0f), true, Explosion.DestructionType.DESTROY);
+                        world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), Math.min(0.6f * powderAmount, 10.0f), World.ExplosionSourceType.BLOCK);
 
                         // Trigger overcharge advancement criterion
                         SuperiorBallisticsMod.CANNON_OVERCHARGE_CRITERION.trigger((ServerPlayerEntity) player);
@@ -329,14 +329,16 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
             // Player in close sound range
             if(playerDist <= closeSoundDist ) {
                 player.networkHandler.sendPacket(
-                        new PlaySoundS2CPacket(SuperiorBallisticsMod.CANNON_SHOT_SOUND_EVENT, SoundCategory.NEUTRAL, pos.getX(), pos.getY(), pos.getZ(), FIRING_SOUND_VOLUME, FIRING_SOUND_PITCH)
+                        new PlaySoundS2CPacket(Registries.SOUND_EVENT.getEntry(SuperiorBallisticsMod.CANNON_SHOT_SOUND_EVENT),
+                                SoundCategory.NEUTRAL, pos.getX(), pos.getY(), pos.getZ(), FIRING_SOUND_VOLUME, FIRING_SOUND_PITCH, 0)
                 );
             }
             // Player in far sound range (apply range compensation and change pitch)
             else if(playerDist <= FIRING_SOUND_FAR_RANGE) {
                 float rangeCompensation = FIRING_SOUND_FAR_VOLUME_COMPENSATION_RATE * (float) (playerDist - closeSoundDist);
                 player.networkHandler.sendPacket(
-                        new PlaySoundS2CPacket(SuperiorBallisticsMod.CANNON_SHOT_DISTANT_SOUND_EVENT, SoundCategory.NEUTRAL, pos.getX(), pos.getY(), pos.getZ(), FIRING_SOUND_VOLUME + rangeCompensation, FIRING_SOUND_FAR_PITCH)
+                        new PlaySoundS2CPacket(Registries.SOUND_EVENT.getEntry(SuperiorBallisticsMod.CANNON_SHOT_SOUND_EVENT),
+                                SoundCategory.NEUTRAL, pos.getX(), pos.getY(), pos.getZ(), FIRING_SOUND_VOLUME + rangeCompensation, FIRING_SOUND_FAR_PITCH, 0)
                 );
             }
         }
@@ -531,11 +533,11 @@ public class CannonBlockEntity extends BlockEntity implements IAnimatable, IStat
 
     public Text getShotName() {
         return switch (shotType) {
-            case IRON_CANNONBALL -> new TranslatableText("item.superior_ballistics.iron_cannonball");
-            case IRON_GRAPESHOT -> new TranslatableText("item.superior_ballistics.iron_grapeshot");
-            case ENDER_PEARL_SHOT -> new TranslatableText("item.minecraft.ender_pearl");
-            case BLANK_SHOT -> new TranslatableText("superior_ballistics.cannon.blank_shot");
-            default -> new TranslatableText("superior_ballistics.cannon.empty");
+            case IRON_CANNONBALL -> Text.translatable("item.superior_ballistics.iron_cannonball");
+            case IRON_GRAPESHOT -> Text.translatable("item.superior_ballistics.iron_grapeshot");
+            case ENDER_PEARL_SHOT -> Text.translatable("item.minecraft.ender_pearl");
+            case BLANK_SHOT -> Text.translatable("superior_ballistics.cannon.blank_shot");
+            default -> Text.translatable("superior_ballistics.cannon.empty");
         };
     }
 

@@ -32,7 +32,7 @@ dependencies {
 	// You may need to force-disable transitiveness on them.
 
 	// GeckoLib implementation
-	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.18:3.0.78'
+	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.20.1:4.2.2'
 }
 
 processResources {
@@ -87,5 +87,13 @@ publishing {
 		// Notice: This block does NOT have the same function as the block in the top level.
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
+	}
+}
+
+loom {
+	runs {
+		client {
+			vmArgs "-Dgeckolib.disable_examples=true"
+		}
 	}
 }

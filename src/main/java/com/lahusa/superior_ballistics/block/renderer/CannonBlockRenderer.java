@@ -8,45 +8,39 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.geo.render.built.GeoBone;
-import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.cache.object.GeoBone;
+import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
 public class CannonBlockRenderer extends GeoBlockRenderer<CannonBlockEntity> {
 
     protected final Identifier ANVIL_TEXTURE = new Identifier("minecraft", "textures/block/anvil.png");
     protected final Identifier BLACKSTONE_TOP_TEXTURE = new Identifier("minecraft", "textures/block/blackstone_top.png");
 
-    private CannonBlockEntity currentEntityBeingRendered;
     private float currentPartialTicks;
-    private VertexConsumerProvider renderTypeBuffer;
+    private VertexConsumerProvider bufferSource;
 
     public CannonBlockRenderer() {
         super(new CannonBlockModel());
     }
 
     @Override
-    public void renderEarly(
-            CannonBlockEntity animatable, MatrixStack stackIn, float partialTicks,
-            VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn,
-            int packedOverlayIn, float red, float green, float blue, float alpha) {
-        super.renderEarly(animatable, stackIn, partialTicks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+    public void preRender(MatrixStack poseStack, CannonBlockEntity animatable, BakedGeoModel model, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
 
-        this.renderTypeBuffer = renderTypeBuffer;
+        this.bufferSource = bufferSource;
 
         // Rotate cannon barrel
         float angleDegrees = animatable.getAngleDegrees();
         float angleRadians = (float)Math.toRadians(angleDegrees);
-        getGeoModelProvider().getAnimationProcessor().getBone("Cannon").setRotationX(angleRadians);
+        getGeoModel().getAnimationProcessor().getBone("Cannon").setRotX(angleRadians);
     }
 
     @Override
-    public void renderLate(CannonBlockEntity animatable, MatrixStack stackIn, float ticks, VertexConsumerProvider renderTypeBuffer,
-                           VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue,
-                           float partialTicks) {
-        super.renderLate(animatable, stackIn, ticks, renderTypeBuffer, bufferIn, packedLightIn, packedOverlayIn, red,
-                green, blue, partialTicks);
-        this.currentEntityBeingRendered = animatable;
-        this.currentPartialTicks = partialTicks;
+    public void postRender(MatrixStack poseStack, CannonBlockEntity animatable, BakedGeoModel model, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        super.postRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+
+        this.currentPartialTicks = partialTick;
     }
 
     private Identifier getBlockTexture(Identifier block) {
@@ -64,24 +58,23 @@ public class CannonBlockRenderer extends GeoBlockRenderer<CannonBlockEntity> {
     }
 
     @Override
-    public void renderRecursively(GeoBone bone, MatrixStack stack, VertexConsumer bufferIn, int packedLightIn,
-                                  int packedOverlayIn, float red, float green, float blue, float alpha) {
-        Identifier tfb = this.getTextureForBone(bone.getName(), this.currentEntityBeingRendered);
+    public void renderRecursively(MatrixStack poseStack, CannonBlockEntity animatable, GeoBone bone, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        if(animatable == null) return;
+
+        Identifier tfb = this.getTextureForBone(bone.getName(), animatable);
         boolean customTextureMarker = tfb != null;
-        Identifier currentTexture = getTextureLocation(this.currentEntityBeingRendered);
+        Identifier currentTexture = getTextureLocation(animatable);
         if (customTextureMarker) {
             currentTexture = tfb;
-            RenderLayer rt = this.getRenderType(this.currentEntityBeingRendered, this.currentPartialTicks,
-                    stack, this.renderTypeBuffer, bufferIn, packedLightIn, currentTexture);
-            bufferIn = this.renderTypeBuffer.getBuffer(rt);
+            RenderLayer rt = this.getRenderType(animatable, currentTexture, bufferSource, this.currentPartialTicks);
+            buffer = this.bufferSource.getBuffer(rt);
 
         }
         else {
-            RenderLayer rt = this.getRenderType(this.currentEntityBeingRendered, this.currentPartialTicks,
-                    stack, this.renderTypeBuffer, bufferIn, packedLightIn, currentTexture);
-            bufferIn = this.renderTypeBuffer.getBuffer(rt);
+            RenderLayer rt = this.getRenderType(animatable, currentTexture, bufferSource, this.currentPartialTicks);
+            buffer = this.bufferSource.getBuffer(rt);
         }
 
-        super.renderRecursively(bone, stack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+        super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }

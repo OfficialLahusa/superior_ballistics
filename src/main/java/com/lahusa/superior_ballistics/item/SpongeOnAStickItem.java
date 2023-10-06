@@ -4,12 +4,11 @@ import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -30,7 +29,7 @@ public class SpongeOnAStickItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
-        tooltip.add(new TranslatableText("item.superior_ballistics.sponge_on_a_stick.tooltip").formatted(Formatting.GRAY).append(new TranslatableText("block.minecraft.water").formatted(Formatting.DARK_BLUE)));
+        tooltip.add(Text.translatable("item.superior_ballistics.sponge_on_a_stick.tooltip").formatted(Formatting.GRAY).append(Text.translatable("block.minecraft.water").formatted(Formatting.DARK_BLUE)));
     }
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {

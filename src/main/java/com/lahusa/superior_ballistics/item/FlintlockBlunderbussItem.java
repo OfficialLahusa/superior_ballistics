@@ -58,8 +58,8 @@ public class FlintlockBlunderbussItem extends FlintlockMusketItem {
             boolean creativeMode = playerEntity.getAbilities().creativeMode;
 
             // Get the ammo stack, that should be used
-            ItemStack ammoStack = playerEntity.getArrowType(stack);
-            boolean hasAmmo = playerEntity.getArrowType(stack).getCount() >= SuperiorBallisticsMod.CONFIG.getBlunderbussShotCount();
+            ItemStack ammoStack = playerEntity.getProjectileType(stack);
+            boolean hasAmmo = playerEntity.getProjectileType(stack).getCount() >= SuperiorBallisticsMod.CONFIG.getBlunderbussShotCount();
             boolean hasGunpowder = playerEntity.getInventory().contains(Items.GUNPOWDER.getDefaultStack());
 
             // Only execute, is there is ammo and gunpowder or user is in creative mode

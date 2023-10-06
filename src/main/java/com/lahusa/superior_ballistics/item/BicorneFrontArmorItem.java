@@ -1,33 +1,75 @@
 package com.lahusa.superior_ballistics.item;
 
+import com.lahusa.superior_ballistics.armor.renderer.BicorneFrontArmorRenderer;
+import com.lahusa.superior_ballistics.item.renderer.BicorneFrontItemRenderer;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import net.minecraft.item.ItemStack;
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.client.RenderProvider;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class BicorneFrontArmorItem extends ArmorItem implements IAnimatable {
-    private final AnimationFactory factory = new AnimationFactory(this);
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
-    public BicorneFrontArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
+public class BicorneFrontArmorItem extends ArmorItem implements GeoItem {
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
+
+    public BicorneFrontArmorItem(ArmorMaterial material, ArmorItem.Type slot, Settings settings) {
         super(material, slot, settings);
     }
-    private <P extends IAnimatable> PlayState predicate(AnimationEvent<P> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bicorne_front.idle", true));
+    private <P extends GeoAnimatable> PlayState predicate(AnimationState<P> event) {
+        event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.bicorne_front.idle"));
         return PlayState.CONTINUE;
     }
     @Override
-    public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController<>(this, "controller", 20, this::predicate));
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, "controller", 20, this::predicate));
     }
 
     @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.cache;
+    }
+
+    @Override
+    public void createRenderer(Consumer<Object> consumer) {
+        consumer.accept(new RenderProvider() {
+            private BicorneFrontItemRenderer itemRenderer;
+            private BicorneFrontArmorRenderer armorRenderer;
+            @Override
+            public BuiltinModelItemRenderer getCustomRenderer() {
+                if(this.itemRenderer == null) this.itemRenderer = new BicorneFrontItemRenderer();
+                return this.itemRenderer;
+            }
+
+            @Override
+            public BipedEntityModel<LivingEntity> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, BipedEntityModel<LivingEntity> original) {
+                if(this.armorRenderer == null) this.armorRenderer = new BicorneFrontArmorRenderer();
+
+                // This prepares our GeoArmorRenderer for the current render frame.
+                // These parameters may be null however, so we don't do anything further with them
+                this.armorRenderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
+
+                return this.armorRenderer;
+            }
+        });
+    }
+
+    @Override
+    public Supplier<Object> getRenderProvider() {
+        return this.renderProvider;
     }
 }

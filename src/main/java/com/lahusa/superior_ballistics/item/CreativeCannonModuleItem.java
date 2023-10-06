@@ -4,7 +4,6 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
@@ -19,10 +18,10 @@ public class CreativeCannonModuleItem extends Item {
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
         tooltip.add(
-                new TranslatableText("item.superior_ballistics.creative_cannon_module.tooltip.phase_hint",
-                        new TranslatableText("superior_ballistics.cannon.ready_to_light").formatted(Formatting.GREEN)
+                Text.translatable("item.superior_ballistics.creative_cannon_module.tooltip.phase_hint",
+                        Text.translatable("superior_ballistics.cannon.ready_to_light").formatted(Formatting.GREEN)
                 ).formatted(Formatting.GRAY)
         );
-        tooltip.add(new TranslatableText("item.superior_ballistics.creative_cannon_module.tooltip.description").formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("item.superior_ballistics.creative_cannon_module.tooltip.description").formatted(Formatting.GRAY));
     }
 }

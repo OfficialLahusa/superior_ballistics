@@ -2,12 +2,10 @@ package com.lahusa.superior_ballistics.item;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.ibm.icu.impl.locale.XCldrStub;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import com.lahusa.superior_ballistics.entity.StoneBulletEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -18,19 +16,20 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.*;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.stat.Stats;
-import net.minecraft.tag.*;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 
@@ -43,7 +42,7 @@ public class FlintlockMusketItem extends RangedWeaponItem {
     protected static final float soundPitch = 1.0f;
     protected static final float soundVolume = 1.0F;
 
-    public static final TagKey<Item> AMMUNITION_TAG = TagKey.of(Registry.ITEM_KEY, new Identifier(SuperiorBallisticsMod.MODID, "pistol_ammunition"));
+    public static final TagKey<Item> AMMUNITION_TAG = TagKey.of(RegistryKeys.ITEM, new Identifier(SuperiorBallisticsMod.MODID, "pistol_ammunition"));
     public final Multimap<EntityAttribute, EntityAttributeModifier> bayonetModifiers;
     private final boolean hasBayonet;
 
@@ -108,7 +107,7 @@ public class FlintlockMusketItem extends RangedWeaponItem {
 
             return TypedActionResult.consume(itemStack);
 
-        } else if (!user.getArrowType(itemStack).isEmpty() || user.getAbilities().creativeMode) {
+        } else if (!user.getProjectileType(itemStack).isEmpty() || user.getAbilities().creativeMode) {
             if (!isCharged(itemStack)) {
                 this.loaded = false;
                 user.setCurrentHand(hand);
@@ -124,8 +123,8 @@ public class FlintlockMusketItem extends RangedWeaponItem {
             boolean creativeMode = playerEntity.getAbilities().creativeMode;
 
             // Get the ammo stack, that should be used
-            ItemStack ammoStack = playerEntity.getArrowType(stack);
-            boolean hasAmmo = !playerEntity.getArrowType(stack).isEmpty();
+            ItemStack ammoStack = playerEntity.getProjectileType(stack);
+            boolean hasAmmo = !playerEntity.getProjectileType(stack).isEmpty();
             boolean hasGunpowder = playerEntity.getInventory().contains(Items.GUNPOWDER.getDefaultStack());
 
             // Only execute, is there is ammo and gunpowder or user is in creative mode
@@ -255,8 +254,7 @@ public class FlintlockMusketItem extends RangedWeaponItem {
         if (state.isOf(Blocks.COBWEB)) {
             return 15.0F;
         } else {
-            Material material = state.getMaterial();
-            return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && !state.isIn(BlockTags.LEAVES) && material != Material.GOURD ? 1.0F : 1.5F;
+            return state.isIn(BlockTags.SWORD_EFFICIENT) ? 1.5F : 1.0F;
         }
     }
 

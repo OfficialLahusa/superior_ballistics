@@ -1,6 +1,8 @@
 # TODO-Liste:
 
 ### Blöcke:
+- [ ] Flackernde Räder der Kanonen fixen
+- [ ] Unsichtbaren Deckel des Gunpowder Kegs fixen
 
 ### Items:
 - [ ] Nachladesound fixen

@@ -3,22 +3,22 @@ package com.lahusa.superior_ballistics.armor.model;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import com.lahusa.superior_ballistics.item.PithHelmetArmorItem;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.model.GeoModel;
 
-public class PithHelmetArmorModel extends AnimatedGeoModel<PithHelmetArmorItem> {
+public class PithHelmetArmorModel extends GeoModel<PithHelmetArmorItem> {
 
     @Override
-    public Identifier getModelLocation(PithHelmetArmorItem object) {
+    public Identifier getModelResource(PithHelmetArmorItem object) {
         return new Identifier(SuperiorBallisticsMod.MODID, "geo/pith_helmet.geo.json");
     }
 
     @Override
-    public Identifier getTextureLocation(PithHelmetArmorItem object) {
+    public Identifier getTextureResource(PithHelmetArmorItem object) {
         return new Identifier(SuperiorBallisticsMod.MODID, "textures/models/armor/pith_helmet_layer_1.png");
     }
 
     @Override
-    public Identifier getAnimationFileLocation(PithHelmetArmorItem animatable) {
+    public Identifier getAnimationResource(PithHelmetArmorItem animatable) {
         return new Identifier(SuperiorBallisticsMod.MODID, "animations/pith_helmet.animation.json");
     }
 }

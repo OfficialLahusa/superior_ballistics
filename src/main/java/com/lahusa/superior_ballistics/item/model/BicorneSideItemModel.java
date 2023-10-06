@@ -3,22 +3,22 @@ package com.lahusa.superior_ballistics.item.model;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import com.lahusa.superior_ballistics.item.BicorneSideArmorItem;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.model.GeoModel;
 
-public class BicorneSideItemModel extends AnimatedGeoModel<BicorneSideArmorItem> {
+public class BicorneSideItemModel extends GeoModel<BicorneSideArmorItem> {
 
     @Override
-    public Identifier getModelLocation(BicorneSideArmorItem object) {
+    public Identifier getModelResource(BicorneSideArmorItem object) {
         return new Identifier(SuperiorBallisticsMod.MODID, "geo/bicorne_side.geo.json");
     }
 
     @Override
-    public Identifier getTextureLocation(BicorneSideArmorItem object) {
+    public Identifier getTextureResource(BicorneSideArmorItem object) {
         return new Identifier(SuperiorBallisticsMod.MODID, "textures/models/armor/bicorne_layer_1.png");
     }
 
     @Override
-    public Identifier getAnimationFileLocation(BicorneSideArmorItem animatable) {
+    public Identifier getAnimationResource(BicorneSideArmorItem animatable) {
         return new Identifier(SuperiorBallisticsMod.MODID, "animations/bicorne_side.animation.json");
     }
 }

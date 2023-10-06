@@ -1,6 +1,7 @@
 package com.lahusa.superior_ballistics.item;
 
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
@@ -12,13 +13,13 @@ public class UniformArmorMaterial implements ArmorMaterial {
     private static final int[] PROTECTION_VALUES = new int[] {1, 1, 1, 2};
 
     @Override
-    public int getDurability(EquipmentSlot slot) {
-        return BASE_DURABILITY[slot.getEntitySlotId()] * 20;
+    public int getDurability(ArmorItem.Type slot) {
+        return BASE_DURABILITY[slot.getEquipmentSlot().getEntitySlotId()] * 20;
     }
 
     @Override
-    public int getProtectionAmount(EquipmentSlot slot) {
-        return PROTECTION_VALUES[slot.getEntitySlotId()];
+    public int getProtection(ArmorItem.Type slot) {
+        return PROTECTION_VALUES[slot.getEquipmentSlot().getEntitySlotId()];
     }
 
     @Override

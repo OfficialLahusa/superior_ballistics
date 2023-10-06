@@ -5,9 +5,10 @@ import com.lahusa.superior_ballistics.block.model.GunpowderKegBlockModel;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
-import software.bernie.geckolib3.core.processor.AnimationProcessor;
-import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
+import software.bernie.geckolib.core.animation.AnimationProcessor;
+import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
 public class GunpowderKegBlockRenderer extends GeoBlockRenderer<GunpowderKegBlockEntity> {
     public GunpowderKegBlockRenderer() {
@@ -15,23 +16,19 @@ public class GunpowderKegBlockRenderer extends GeoBlockRenderer<GunpowderKegBloc
     }
 
     @Override
-    public void renderEarly(
-            GunpowderKegBlockEntity animatable, MatrixStack stackIn, float partialTicks,
-            VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn,
-            int packedOverlayIn, float red, float green, float blue, float alpha) {
-        super.renderEarly(animatable, stackIn, partialTicks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+    public void preRender(MatrixStack poseStack, GunpowderKegBlockEntity animatable, BakedGeoModel model, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
 
-        AnimationProcessor animProc = getGeoModelProvider().getAnimationProcessor();
-        IBone powder = animProc.getBone("Powder_Level");
-        IBone lid = animProc.getBone("Lid");
-        powder.setPositionY(-13+13*((float)animatable.getPowderAmount() / GunpowderKegBlockEntity.MAX_POWDER_AMOUNT));
+        AnimationProcessor<GunpowderKegBlockEntity> animProc = getGeoModel().getAnimationProcessor();
+        CoreGeoBone powder = animProc.getBone("Powder_Level");
+        CoreGeoBone lid = animProc.getBone("Lid");
+        short powderAmount = animatable.getPowderAmount();
+        powder.setPosY(-13+13*((float)powderAmount / GunpowderKegBlockEntity.MAX_POWDER_AMOUNT));
 
         // Toggle Lid and Powder Visibility
-        lid.setScaleX(animatable.getClosed() ? 1.f : 0.f);
-        lid.setScaleY(animatable.getClosed() ? 1.f : 0.f);
-        lid.setScaleZ(animatable.getClosed() ? 1.f : 0.f);
-        powder.setScaleX(animatable.getClosed() ? 0.f : 1.f);
-        powder.setScaleY(animatable.getClosed() ? 0.f : 1.f);
-        powder.setScaleZ(animatable.getClosed() ? 0.f : 1.f);
+        boolean hideLid = !animatable.getClosed();
+        boolean hidePowder = animatable.getClosed() || powderAmount == 0;
+        //lid.setHidden(hideLid);
+        powder.setHidden(hidePowder);
     }
 }

@@ -40,7 +40,7 @@ public class CannonMuzzleSmokeTrailParticle extends SpriteBillboardParticle {
         } else {
             this.velocityY -= 0.04D * (double)this.gravityStrength;
             this.move(this.velocityX, this.velocityY, this.velocityZ);
-            if (this.field_28787 && this.y == this.prevPosY) {
+            if (this.ascending && this.y == this.prevPosY) {
                 this.velocityX *= 1.1D;
                 this.velocityZ *= 1.1D;
             }

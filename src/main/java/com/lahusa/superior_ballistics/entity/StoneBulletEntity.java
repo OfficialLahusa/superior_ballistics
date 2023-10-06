@@ -1,8 +1,7 @@
 package com.lahusa.superior_ballistics.entity;
 
-import com.lahusa.superior_ballistics.entity.damage.BulletDamageSource;
+import com.lahusa.superior_ballistics.entity.damage.CustomDamageTypes;
 import com.lahusa.superior_ballistics.mixin.LivingEntityAccessor;
-import com.lahusa.superior_ballistics.net.EntitySpawnPacket;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -10,32 +9,32 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.SwordItem;
-import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.GameStateChangeS2CPacket;
 import net.minecraft.particle.*;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class StoneBulletEntity extends ThrownItemEntity {
 
-    public static final TagKey<Block> STONE_BULLET_BREAKABLE_TAG = TagKey.of(Registry.BLOCK_KEY, new Identifier(SuperiorBallisticsMod.MODID, "stone_bullet_breakable"));
-    public static final TagKey<Block> FLOWER_POT_TAG = TagKey.of(Registry.BLOCK_KEY, new Identifier("minecraft", "flower_pots"));
+    public static final TagKey<Block> STONE_BULLET_BREAKABLE_TAG = TagKey.of(RegistryKeys.BLOCK, new Identifier(SuperiorBallisticsMod.MODID, "stone_bullet_breakable"));
+    public static final TagKey<Block> FLOWER_POT_TAG = TagKey.of(RegistryKeys.BLOCK, new Identifier("minecraft", "flower_pots"));
 
     private final int damage;
     private final StatusEffect statusEffect;
@@ -69,12 +68,12 @@ public class StoneBulletEntity extends ThrownItemEntity {
         Entity owner = this.getOwner();
 
         // Randomize damage source text to produce a variety of death messages
-        String damageSourceName = switch(random.nextInt(20)) {
-            case 17, 18: yield "shot_uncommon";
-            case 19: yield "shot_rare";
-            default: yield "shot";
+        RegistryKey<DamageType> damageTypeKey = switch(random.nextInt(20)) {
+            case 17, 18: yield CustomDamageTypes.SHOT__UNCOMMON_DAMAGE_TYPE;
+            case 19: yield CustomDamageTypes.SHOT__RARE_DAMAGE_TYPE;
+            default: yield CustomDamageTypes.SHOT_DAMAGE_TYPE;
         };
-        DamageSource source =  (new BulletDamageSource(damageSourceName, this, owner)).setProjectile();
+        DamageSource source = CustomDamageTypes.of(this.getWorld(), damageTypeKey);
 
 
         if(entity instanceof LivingEntity livingEntity) {
@@ -82,7 +81,7 @@ public class StoneBulletEntity extends ThrownItemEntity {
             ((LivingEntityAccessor)livingEntity).setLastDamageTaken(Float.MIN_VALUE);
 
             // Is target holding sword and shot by a ServerPlayer
-            if(!world.isClient && livingEntity.getMainHandStack().getItem() instanceof SwordItem && owner instanceof ServerPlayerEntity player) {
+            if(!getWorld().isClient && livingEntity.getMainHandStack().getItem() instanceof SwordItem && owner instanceof ServerPlayerEntity player) {
                 SuperiorBallisticsMod.SWORD_USER_SHOT_CRITERION.trigger(player);
             }
         }
@@ -102,19 +101,20 @@ public class StoneBulletEntity extends ThrownItemEntity {
 
     protected void onCollision(HitResult hitResult) { // called on collision with a block
         super.onCollision(hitResult);
-        if (!this.world.isClient) {
+        if (!getWorld().isClient) {
             // Determine hit block and break it, if it's contained in the tags
-            BlockPos hitBlockPos = new BlockPos(hitResult.getPos().add(getVelocity().normalize().multiply(0.5)));
+            Vec3d hitPos = hitResult.getPos().add(getVelocity().normalize().multiply(0.5));
+            BlockPos hitBlockPos = new BlockPos((int) hitPos.x, (int) hitPos.y, (int) hitPos.z);
 
-            Block hitBlock = this.world.getBlockState(hitBlockPos).getBlock();
+            Block hitBlock = getWorld().getBlockState(hitBlockPos).getBlock();
             RegistryEntry.Reference<Block> hitBlockRegEntry = hitBlock.getRegistryEntry();
             if(hitBlockRegEntry.isIn(STONE_BULLET_BREAKABLE_TAG) || hitBlockRegEntry.isIn(FLOWER_POT_TAG))
             {
-                this.world.breakBlock(hitBlockPos, false, this.getOwner(), 400);
+                getWorld().breakBlock(hitBlockPos, false, this.getOwner(), 400);
             }
 
             // Spawn impact particles
-            ((ServerWorld) world).spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.STONE.getDefaultState()),
+            ((ServerWorld)getWorld()).spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.STONE.getDefaultState()),
                     hitResult.getPos().getX(),
                     hitResult.getPos().getY(),
                     hitResult.getPos().getZ(),
@@ -125,13 +125,8 @@ public class StoneBulletEntity extends ThrownItemEntity {
                     0.01);
 
             // Remove entity
-            this.world.sendEntityStatus(this, (byte)3); // particle?
+            getWorld().sendEntityStatus(this, (byte)3); // particle?
             this.remove(RemovalReason.KILLED);
         }
-    }
-
-    @Override
-    public Packet<?> createSpawnPacket() {
-        return EntitySpawnPacket.create(this, SuperiorBallisticsMod.PacketID);
     }
 }

@@ -1,17 +1,14 @@
 package com.lahusa.superior_ballistics.entity;
 
-import com.lahusa.superior_ballistics.net.EntitySpawnPacket;
 import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.network.Packet;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -19,7 +16,6 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
 
 public class CannonBallEntity extends ThrownItemEntity {
 
@@ -35,7 +31,7 @@ public class CannonBallEntity extends ThrownItemEntity {
 
     public void tick() {
         super.tick();
-        if(world.isClient) spawnTrailParticles();
+        if(getWorld().isClient) spawnTrailParticles();
     }
 
     @Override
@@ -47,7 +43,7 @@ public class CannonBallEntity extends ThrownItemEntity {
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity(); // sets a new Entity instance as the EntityHitResult (victim)
-        entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), (float)13); // deals damage
+        entity.damage(entity.getDamageSources().thrown(this, this.getOwner()), (float)13); // deals damage
 
         if (entity instanceof LivingEntity) { // checks if entity is an instance of LivingEntity (meaning it is not a boat or minecart)
             ((LivingEntity) entity).addStatusEffect((new StatusEffectInstance(StatusEffects.SLOWNESS, 20 * 3, 2))); // applies a status effect
@@ -57,14 +53,14 @@ public class CannonBallEntity extends ThrownItemEntity {
     // Called on block collision
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
-        if (!this.world.isClient) {
+        if (!getWorld().isClient) {
 
             Vec3d hitPos = hitResult.getPos();
 
-            this.world.createExplosion(this.getOwner(), hitPos.x, hitPos.y, hitPos.z, 5.0f, false, Explosion.DestructionType.DESTROY);
+            getWorld().createExplosion(this.getOwner(), hitPos.x, hitPos.y, hitPos.z, 5.0f, false, World.ExplosionSourceType.MOB);
 
             // Spawn impact particles
-            ((ServerWorld) world).spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.BLACKSTONE.getDefaultState()),
+            ((ServerWorld)getWorld()).spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.BLACKSTONE.getDefaultState()),
                     hitResult.getPos().getX(),
                     hitResult.getPos().getY(),
                     hitResult.getPos().getZ(),
@@ -75,18 +71,13 @@ public class CannonBallEntity extends ThrownItemEntity {
                     0.01);
 
             // Remove entity
-            this.world.sendEntityStatus(this, (byte)3); // particle?
+            getWorld().sendEntityStatus(this, (byte)3); // particle?
             this.remove(RemovalReason.KILLED);
         }
     }
 
     private void spawnTrailParticles() {
-        world.addParticle(ParticleTypes.FLAME, getX(), getY(), getZ(), 0, 0, 0);
-        world.addParticle(ParticleTypes.LARGE_SMOKE, getX(), getY(), getZ(), 0, 0, 0);
-    }
-
-    @Override
-    public Packet<?> createSpawnPacket() {
-        return EntitySpawnPacket.create(this, SuperiorBallisticsMod.PacketID);
+        getWorld().addParticle(ParticleTypes.FLAME, getX(), getY(), getZ(), 0, 0, 0);
+        getWorld().addParticle(ParticleTypes.LARGE_SMOKE, getX(), getY(), getZ(), 0, 0, 0);
     }
 }

@@ -9,7 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -47,13 +47,13 @@ public abstract class PlayerEntityMixin {
             }
             // Reset overlay message
             else if(isShowingStatusText) {
-                client.inGameHud.setOverlayMessage(new LiteralText(""), false);
+                client.inGameHud.setOverlayMessage(Text.literal(""), false);
                 isShowingStatusText = false;
             }
         }
         else if(isShowingStatusText){
             // Reset overlay message
-            client.inGameHud.setOverlayMessage(new LiteralText(""), false);
+            client.inGameHud.setOverlayMessage(Text.literal(""), false);
             isShowingStatusText = false;
         }
     }

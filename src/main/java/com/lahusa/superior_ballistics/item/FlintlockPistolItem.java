@@ -41,7 +41,7 @@ public class FlintlockPistolItem extends RangedWeaponItem {
             boolean creativeMode = playerEntity.getAbilities().creativeMode;
 
             // Get the ammo stack, that should be used
-            ItemStack itemStack = playerEntity.getArrowType(stack);
+            ItemStack itemStack = playerEntity.getProjectileType(stack);
             boolean hasGunpowder = playerEntity.getInventory().contains(Items.GUNPOWDER.getDefaultStack());
 
             // Only execute, is there is ammo and gunpowder or user is in creative mode
@@ -144,7 +144,7 @@ public class FlintlockPistolItem extends RangedWeaponItem {
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        boolean bl = !user.getArrowType(itemStack).isEmpty();
+        boolean bl = !user.getProjectileType(itemStack).isEmpty();
         if (!user.getAbilities().creativeMode && !bl) {
             return TypedActionResult.fail(itemStack);
         } else {

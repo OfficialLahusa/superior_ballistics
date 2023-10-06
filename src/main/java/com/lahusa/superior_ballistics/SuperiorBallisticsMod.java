@@ -65,7 +65,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 
 	// BlockEntities
 	public static BlockEntityType<CannonBlockEntity> CANNON_BLOCK_ENTITY;
-	public static BlockEntityType<GunpowderKegBlockEntity> GUNPOWDER_KEG_ENTITY;
+	public static BlockEntityType<GunpowderKegBlockEntity> GUNPOWDER_KEG_BLOCK_ENTITY;
 
 	// Items
 	public static final Item OAK_CANNON_ITEM 		= new CannonBlockItem(OAK_CANNON_BLOCK, 		new FabricItemSettings().group(ItemGroup.COMBAT));
@@ -166,7 +166,7 @@ public class SuperiorBallisticsMod implements ModInitializer {
 						CannonBlockEntity::new, OAK_CANNON_BLOCK, SPRUCE_CANNON_BLOCK, BIRCH_CANNON_BLOCK, JUNGLE_CANNON_BLOCK, ACACIA_CANNON_BLOCK, DARK_OAK_CANNON_BLOCK, CRIMSON_CANNON_BLOCK, WARPED_CANNON_BLOCK
 				).build(null)
 		);
-		GUNPOWDER_KEG_ENTITY = Registry.register(
+		GUNPOWDER_KEG_BLOCK_ENTITY = Registry.register(
 				Registry.BLOCK_ENTITY_TYPE, new Identifier(MODID, "gunpowder_keg_block_entity"),
 				FabricBlockEntityTypeBuilder.create(
 						GunpowderKegBlockEntity::new, GUNPOWDER_KEG_BLOCK

@@ -22,8 +22,6 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
@@ -42,7 +40,7 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
 
         // BlockEntityRenderers
         BlockEntityRendererRegistry.register(SuperiorBallisticsMod.CANNON_BLOCK_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new CannonBlockRenderer());
-        BlockEntityRendererRegistry.register(SuperiorBallisticsMod.GUNPOWDER_KEG_ENTITY, (BlockEntityRendererFactory.Context renderDispatcherIn) -> new GunpowderKegBlockRenderer());
+        BlockEntityRendererRegistry.register(SuperiorBallisticsMod.GUNPOWDER_KEG_BLOCK_ENTITY, (BlockEntityRendererFactory.Context renderDispatcherIn) -> new GunpowderKegBlockRenderer());
 
         // ModelPredicateProviders
         UnclampedModelPredicateProvider firstPersonModelPredicateProvider = (itemStack, clientWorld, livingEntity, seed) -> (MinecraftClient.getInstance().options.getPerspective().isFirstPerson()) ? 1.0f : 0.0f;

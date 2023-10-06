@@ -32,7 +32,7 @@ public class GunpowderKegBlockEntity extends BlockEntity implements IAnimatable,
     public static final short MAX_POWDER_AMOUNT = 128;
     private final AnimationFactory factory = new AnimationFactory(this);
     public GunpowderKegBlockEntity(BlockPos pos, BlockState state) {
-        super(SuperiorBallisticsMod.GUNPOWDER_KEG_ENTITY, pos, state);
+        super(SuperiorBallisticsMod.GUNPOWDER_KEG_BLOCK_ENTITY, pos, state);
     }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gunpowder_keg.idle", true));

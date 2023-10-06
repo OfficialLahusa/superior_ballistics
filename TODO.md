@@ -4,7 +4,7 @@
 - [ ] Overcharge Damage fixen (Spieler nimmt keinen Damage, aber Mobs)
 
 ### Items:
-- [ ] Bayonett mit Smithing Table hinzufügen (an anderer Mod inspirieren lassen)
+- [ ] Bajonett mit Smithing Table hinzufügen (an anderer Mod inspirieren lassen)
 - [ ] Nachladesound fixen
 
 ### Entities:

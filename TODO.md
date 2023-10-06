@@ -10,7 +10,6 @@
 ### Advancements:
 
 ### Sonstiges:
-- [ ] Mod Guidebook (z.B. mit Patchouli)
 - [ ] Curseforge Page
 - [ ] Mod Trailer/Showcase
 
@@ -31,6 +30,8 @@
 - [ ] Werfbare Rauch-/Feuertöpfe und Dynamitstangen
 - [ ] Kanone Lunte hinzufügen + Partikel
 - [ ] Items (Kanonenkugeln/Waffen/...) zu Loot Tables hinzufügen
+- [ ] Mod Guidebook (z.B. mit Patchouli)
+
 
 
 ### Bereits abgearbeitete Punkte (Archiv):

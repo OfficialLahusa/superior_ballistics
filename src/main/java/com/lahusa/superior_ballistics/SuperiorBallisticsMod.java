@@ -47,9 +47,10 @@ public class SuperiorBallisticsMod implements ModInitializer {
 	public static ModConfig CONFIG = new ModConfig();
 
 	// Block Settings
-	public static final float CANNON_STRENGTH = 2.0f;
-	public static final float CANNON_HARDNESS = 14.0f;
-	protected static final FabricBlockSettings cannonSettings = FabricBlockSettings.of(Material.WOOD).strength(CANNON_STRENGTH).hardness(CANNON_HARDNESS).requiresTool();
+	public static final float CANNON_HARDNESS = 5.0f;
+	public static final float CANNON_RESISTANCE = 4.0f;
+
+	protected static final FabricBlockSettings cannonSettings = FabricBlockSettings.of(Material.WOOD).strength(CANNON_HARDNESS, CANNON_RESISTANCE).requiresTool().sounds(BlockSoundGroup.ANVIL);
 	protected static final FabricBlockSettings gunpowderKegSettings = FabricBlockSettings.of(Material.WOOD).nonOpaque().hardness(1.0f).requiresTool().sounds(BlockSoundGroup.WOOD);
 
 	// Blocks

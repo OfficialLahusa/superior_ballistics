@@ -32,8 +32,6 @@
 - [ ] Items (Kanonenkugeln/Waffen/...) zu Loot Tables hinzufügen
 - [ ] Mod Guidebook (z.B. mit Patchouli)
 
-
-
 ### Bereits abgearbeitete Punkte (Archiv):
 - [x] Kanonen mit Spitzhacke/Axt abbaubar machen 
 - [x] Slowness bei Flintlock Pistole entfernen 

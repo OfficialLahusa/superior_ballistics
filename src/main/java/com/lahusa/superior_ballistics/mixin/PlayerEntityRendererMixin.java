@@ -18,7 +18,7 @@ public class PlayerEntityRendererMixin {
     private static void handleArmPoses(AbstractClientPlayerEntity abstractClientPlayerEntity, Hand hand, CallbackInfoReturnable<BipedEntityModel.ArmPose> cir) {
         ItemStack stackInHand = abstractClientPlayerEntity.getStackInHand(hand);
 
-        if((stackInHand.getItem() == SuperiorBallisticsMod.FLINTLOCK_MUSKET_ITEM || stackInHand.getItem() == SuperiorBallisticsMod.FLINTLOCK_BLUNDERBUSS_ITEM) && FlintlockMusketItem.isCharged(stackInHand)) {
+        if((stackInHand.getItem() instanceof FlintlockMusketItem) && FlintlockMusketItem.isCharged(stackInHand)) {
             cir.setReturnValue(BipedEntityModel.ArmPose.CROSSBOW_HOLD);
         }
     }

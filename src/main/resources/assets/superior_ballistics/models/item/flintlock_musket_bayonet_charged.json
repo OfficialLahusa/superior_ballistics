@@ -2,31 +2,45 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
-		"1": "superior_ballistics:item/flintlock_musket_bayonet_charged",
-		"particle": "superior_ballistics:item/flintlock_musket_bayonet_charged"
+		"layer0": "superior_ballistics:item/flintlock_musket_bayonet_charged"
 	},
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [-80, 260, -40],
-			"translation": [0.25, 1.25, -2.25],
-			"scale": [0.9, 0.9, 0.9]
+			"translation": [0.25, 2.25, -12.5],
+			"scale": [1.8, 1.8, 0.9]
 		},
 		"thirdperson_lefthand": {
 			"rotation": [80, 100, -120],
-			"translation": [-0.25, 1.25, -2.25],
-			"scale": [0.9, 0.9, 0.9]
+			"translation": [-0.75, 2, -12.25],
+			"scale": [1.8, 1.8, 0.9]
 		},
 		"firstperson_righthand": {
 			"rotation": [-40.25, -90, 0],
-			"translation": [1.88, 3.2, -5.37]
+			"translation": [1.88, 4.15, -16.62],
+			"scale": [2, 2, 1]
 		},
 		"firstperson_lefthand": {
 			"rotation": [-40.25, 90, 0],
-			"translation": [1.88, 3.2, -5.37]
+			"translation": [1.88, 4.15, -16.62],
+			"scale": [2, 2, 1]
+		},
+		"ground": {
+			"translation": [-4, 4, 0],
+			"scale": [1, 1, 0.5]
+		},
+		"gui": {
+			"translation": [-7, 8, 0],
+			"scale": [2, 2, 1]
+		},
+		"head": {
+			"translation": [-8, 8, 0],
+			"scale": [2, 2, 1]
 		},
 		"fixed": {
 			"rotation": [0, -180, 0],
-			"translation": [0, 0, -0.25]
+			"translation": [7, 7, -0.25],
+			"scale": [2, 2, 1]
 		}
 	}
 }

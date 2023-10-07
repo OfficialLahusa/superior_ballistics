@@ -22,8 +22,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
-import java.util.UUID;
-
 public class SuperiorBallisticsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {

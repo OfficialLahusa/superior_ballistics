@@ -1,7 +1,6 @@
 package com.lahusa.superior_ballistics.mixin;
 
 import com.lahusa.superior_ballistics.item.FlintlockMusketItem;
-import com.lahusa.superior_ballistics.SuperiorBallisticsMod;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;

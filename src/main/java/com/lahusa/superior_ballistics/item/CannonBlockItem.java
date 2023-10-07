@@ -1,6 +1,5 @@
 package com.lahusa.superior_ballistics.item;
 
-import com.lahusa.superior_ballistics.item.renderer.BicorneFrontItemRenderer;
 import com.lahusa.superior_ballistics.item.renderer.CannonBlockItemRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;

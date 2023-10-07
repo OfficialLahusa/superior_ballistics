@@ -215,14 +215,6 @@ public class SuperiorBallisticsMod implements ModInitializer {
 		Registry.register(Registry.SOUND_EVENT, CANNON_SHOT_SOUND_ID, CANNON_SHOT_SOUND_EVENT);
 		Registry.register(Registry.SOUND_EVENT, CANNON_SHOT_DISTANT_SOUND_ID, CANNON_SHOT_DISTANT_SOUND_EVENT);
 
-		// Item tooltips
-		ItemTooltipCallback.EVENT.register((stack, context, lines) -> {
-			if(stack.isOf(Items.CLOCK)) {
-				lines.add(new TranslatableText("item.superior_ballistics.clock.tooltip.line1").formatted(Formatting.GRAY));
-				lines.add(new TranslatableText("item.superior_ballistics.clock.tooltip.line2").formatted(Formatting.GRAY));
-			}
-		});
-
 		LOGGER.info("Init: Done");
 	}
 }

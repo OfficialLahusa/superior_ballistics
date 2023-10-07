@@ -1,7 +1,6 @@
 # TODO-Liste:
 
 ### Blöcke:
-- [ ] Flackernde Räder der Kanonen fixen
 
 ### Items:
 - [ ] Nachladesound fixen
@@ -83,4 +82,5 @@
 - [x] Bajonett mit Smithing Table hinzufügen (an anderer Mod inspirieren lassen)
 - [x] Overcharge Damage fixen (Spieler nimmt keinen Damage, aber Mobs)
 - [x] Unsichtbaren Deckel des Gunpowder Kegs fixen
-- [x] Gunpowder nicht abziehen, wenn man im Creative Mode ein Gunpowder Keg befüllt 
+- [x] Gunpowder nicht abziehen, wenn man im Creative Mode ein Gunpowder Keg befüllt
+- [x] Flackernde Räder der Kanonen fixen

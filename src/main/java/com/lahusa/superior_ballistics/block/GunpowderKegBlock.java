@@ -63,7 +63,7 @@ public class GunpowderKegBlock extends BlockWithEntity {
 
         if(!closed) {
             // Extract powder
-            if(!player.isSneaking() && powderAmount > 0) {
+            if(player.isSneaking() && powderAmount > 0) {
                 // Reduce powder stored
                 blockEntity.setPowderAmount(--powderAmount);
 
@@ -88,14 +88,14 @@ public class GunpowderKegBlock extends BlockWithEntity {
 
             }
             // Insert powder
-            else if(player.isSneaking() && heldStack.isOf(Items.GUNPOWDER) && heldStack.getCount() > 0 && powderAmount < GunpowderKegBlockEntity.MAX_POWDER_AMOUNT) {
+            else if(!player.isSneaking() && heldStack.isOf(Items.GUNPOWDER) && heldStack.getCount() > 0 && powderAmount < GunpowderKegBlockEntity.MAX_POWDER_AMOUNT) {
                 // Increase powder stored
                 blockEntity.setPowderAmount(++powderAmount);
 
                 // Play sound
                 world.playSound(null, pos, SoundEvents.BLOCK_SAND_BREAK, SoundCategory.BLOCKS, 1.f, 1.4f);
 
-                heldStack.decrement(1);
+                if(!player.getAbilities().creativeMode) heldStack.decrement(1);
             }
         }
 

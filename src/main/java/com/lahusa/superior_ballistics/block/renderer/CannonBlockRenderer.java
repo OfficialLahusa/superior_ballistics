@@ -17,9 +17,6 @@ public class CannonBlockRenderer extends GeoBlockRenderer<CannonBlockEntity> {
     protected final Identifier ANVIL_TEXTURE = new Identifier("minecraft", "textures/block/anvil.png");
     protected final Identifier BLACKSTONE_TOP_TEXTURE = new Identifier("minecraft", "textures/block/blackstone_top.png");
 
-    private float currentPartialTicks;
-    private VertexConsumerProvider bufferSource;
-
     public CannonBlockRenderer() {
         super(new CannonBlockModel());
     }
@@ -27,8 +24,6 @@ public class CannonBlockRenderer extends GeoBlockRenderer<CannonBlockEntity> {
     @Override
     public void preRender(MatrixStack poseStack, CannonBlockEntity animatable, BakedGeoModel model, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
-
-        this.bufferSource = bufferSource;
 
         // Rotate cannon barrel
         float angleDegrees = animatable.getAngleDegrees();
@@ -39,8 +34,6 @@ public class CannonBlockRenderer extends GeoBlockRenderer<CannonBlockEntity> {
     @Override
     public void postRender(MatrixStack poseStack, CannonBlockEntity animatable, BakedGeoModel model, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         super.postRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
-
-        this.currentPartialTicks = partialTick;
     }
 
     private Identifier getBlockTexture(Identifier block) {
@@ -59,20 +52,18 @@ public class CannonBlockRenderer extends GeoBlockRenderer<CannonBlockEntity> {
 
     @Override
     public void renderRecursively(MatrixStack poseStack, CannonBlockEntity animatable, GeoBone bone, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        if(animatable == null) return;
-
         Identifier tfb = this.getTextureForBone(bone.getName(), animatable);
         boolean customTextureMarker = tfb != null;
         Identifier currentTexture = getTextureLocation(animatable);
         if (customTextureMarker) {
             currentTexture = tfb;
-            RenderLayer rt = this.getRenderType(animatable, currentTexture, bufferSource, this.currentPartialTicks);
-            buffer = this.bufferSource.getBuffer(rt);
+            RenderLayer rt = this.getRenderType(animatable, currentTexture, bufferSource, partialTick);
+            buffer = bufferSource.getBuffer(rt);
 
         }
         else {
-            RenderLayer rt = this.getRenderType(animatable, currentTexture, bufferSource, this.currentPartialTicks);
-            buffer = this.bufferSource.getBuffer(rt);
+            RenderLayer rt = this.getRenderType(animatable, currentTexture, bufferSource, partialTick);
+            buffer = bufferSource.getBuffer(rt);
         }
 
         super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);

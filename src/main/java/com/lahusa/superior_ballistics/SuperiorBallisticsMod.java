@@ -116,9 +116,6 @@ public class SuperiorBallisticsMod implements ModInitializer {
 					.build()
 	);
 
-	// Entity spawn packet
-	public static final Identifier PacketID = new Identifier(SuperiorBallisticsMod.MODID, "spawn_packet");
-
 	public static final CannonOverchargeCriterion CANNON_OVERCHARGE_CRITERION = Criteria.register(new CannonOverchargeCriterion());
 	public static final SwordUserShotCriterion SWORD_USER_SHOT_CRITERION = Criteria.register(new SwordUserShotCriterion());
 	public static final EnderPearlCannonShotCriterion ENDER_PEARL_CANNON_SHOT = Criteria.register(new EnderPearlCannonShotCriterion());
@@ -142,14 +139,14 @@ public class SuperiorBallisticsMod implements ModInitializer {
 
 		// Blocks
 		Registry.register(Registries.BLOCK, new Identifier(MODID, "oak_cannon"), 		OAK_CANNON_BLOCK);
-		Registry.register(Registries.BLOCK, new Identifier(MODID, "spruce_cannon"), 		SPRUCE_CANNON_BLOCK);
-		Registry.register(Registries.BLOCK, new Identifier(MODID, "birch_cannon"), 		BIRCH_CANNON_BLOCK);
-		Registry.register(Registries.BLOCK, new Identifier(MODID, "jungle_cannon"), 		JUNGLE_CANNON_BLOCK);
-		Registry.register(Registries.BLOCK, new Identifier(MODID, "acacia_cannon"), 		ACACIA_CANNON_BLOCK);
+		Registry.register(Registries.BLOCK, new Identifier(MODID, "spruce_cannon"), 	SPRUCE_CANNON_BLOCK);
+		Registry.register(Registries.BLOCK, new Identifier(MODID, "birch_cannon"), 	BIRCH_CANNON_BLOCK);
+		Registry.register(Registries.BLOCK, new Identifier(MODID, "jungle_cannon"), 	JUNGLE_CANNON_BLOCK);
+		Registry.register(Registries.BLOCK, new Identifier(MODID, "acacia_cannon"), 	ACACIA_CANNON_BLOCK);
 		Registry.register(Registries.BLOCK, new Identifier(MODID, "dark_oak_cannon"), 	DARK_OAK_CANNON_BLOCK);
 		Registry.register(Registries.BLOCK, new Identifier(MODID, "crimson_cannon"), 	CRIMSON_CANNON_BLOCK);
-		Registry.register(Registries.BLOCK, new Identifier(MODID, "warped_cannon"), 		WARPED_CANNON_BLOCK);
-		Registry.register(Registries.BLOCK, new Identifier(MODID, "gunpowder_keg"), 		GUNPOWDER_KEG_BLOCK);
+		Registry.register(Registries.BLOCK, new Identifier(MODID, "warped_cannon"), 	WARPED_CANNON_BLOCK);
+		Registry.register(Registries.BLOCK, new Identifier(MODID, "gunpowder_keg"), 	GUNPOWDER_KEG_BLOCK);
 		FlammableBlockRegistry.getDefaultInstance().add(GUNPOWDER_KEG_BLOCK, 5, 5);
 
 		// BlockEntities

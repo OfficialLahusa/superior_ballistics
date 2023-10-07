@@ -65,6 +65,11 @@ jar {
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
 	}
+	exclude('**/*.xcf')
+	exclude('**/*.bbmodel')
+	exclude('/assets/superior_ballistics/geo/texturen/*.png')
+	exclude('/assets/superior_ballistics/icon_old.png')
+	exclude('/assets/superior_ballistics/icon_2048x2048.png')
 }
 
 // configure the maven publication

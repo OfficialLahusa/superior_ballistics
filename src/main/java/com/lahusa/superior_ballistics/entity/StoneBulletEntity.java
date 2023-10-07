@@ -73,7 +73,7 @@ public class StoneBulletEntity extends ThrownItemEntity {
             case 19: yield CustomDamageTypes.SHOT__RARE_DAMAGE_TYPE;
             default: yield CustomDamageTypes.SHOT_DAMAGE_TYPE;
         };
-        DamageSource source = CustomDamageTypes.of(this.getWorld(), damageTypeKey);
+        DamageSource source = CustomDamageTypes.of(this.getWorld(), damageTypeKey, this.getOwner());
 
 
         if(entity instanceof LivingEntity livingEntity) {

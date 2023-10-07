@@ -28,7 +28,19 @@ public class GunpowderKegBlockRenderer extends GeoBlockRenderer<GunpowderKegBloc
         // Toggle Lid and Powder Visibility
         boolean hideLid = !animatable.getClosed();
         boolean hidePowder = animatable.getClosed() || powderAmount == 0;
-        //lid.setHidden(hideLid);
+        lid.setHidden(hideLid);
         powder.setHidden(hidePowder);
+    }
+
+    @Override
+    public void postRender(MatrixStack poseStack, GunpowderKegBlockEntity animatable, BakedGeoModel model, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        super.postRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+        AnimationProcessor<GunpowderKegBlockEntity> animProc = getGeoModel().getAnimationProcessor();
+        CoreGeoBone powder = animProc.getBone("Powder_Level");
+        CoreGeoBone lid = animProc.getBone("Lid");
+
+        // Un-hide bones, so they're visible for other instances that re-use this model without manually unhiding
+        lid.setHidden(false);
+        powder.setHidden(false);
     }
 }

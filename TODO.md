@@ -2,7 +2,7 @@
 
 ### Blöcke:
 - [ ] Flackernde Räder der Kanonen fixen
-- [ ] Unsichtbaren Deckel des Gunpowder Kegs fixen
+- [ ] Gunpowder nicht abziehen, wenn man im Creative Mode ein Gunpowder Keg befüllt 
 
 ### Items:
 - [ ] Nachladesound fixen
@@ -83,3 +83,4 @@
 - [x] Munitions-Tooltips
 - [x] Bajonett mit Smithing Table hinzufügen (an anderer Mod inspirieren lassen)
 - [x] Overcharge Damage fixen (Spieler nimmt keinen Damage, aber Mobs)
+- [x] Unsichtbaren Deckel des Gunpowder Kegs fixen

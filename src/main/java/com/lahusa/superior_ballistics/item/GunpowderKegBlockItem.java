@@ -33,7 +33,7 @@ public class GunpowderKegBlockItem extends BlockItem implements GeoItem {
     }
 
     private <E extends GeoAnimatable> PlayState predicate(AnimationState<E> event) {
-        event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.gunpowder_keg.idle"));
+        event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.gunpowder_keg.idle_hide_lid"));
         return PlayState.CONTINUE;
     }
 

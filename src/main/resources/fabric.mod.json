@@ -14,7 +14,7 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/superior_ballistics/icon.png",
+  "icon": "assets/superior_ballistics/icon_512x512.png",
 
   "environment": "*",
   "entrypoints": {

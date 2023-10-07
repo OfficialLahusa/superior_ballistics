@@ -8,6 +8,7 @@ import com.lahusa.superior_ballistics.item.FlintlockPistolItem;
 import com.lahusa.superior_ballistics.particle.CannonMuzzleFireParticle;
 import com.lahusa.superior_ballistics.particle.CannonMuzzleSmokeTrailParticle;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
@@ -16,6 +17,9 @@ import net.minecraft.client.item.ClampedModelPredicateProvider;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
+import net.minecraft.item.Items;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
 import java.util.UUID;
@@ -78,5 +82,13 @@ public class SuperiorBallisticsClient implements ClientModInitializer {
         // Particles
         ParticleFactoryRegistry.getInstance().register(SuperiorBallisticsMod.CANNON_MUZZLE_FIRE, CannonMuzzleFireParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(SuperiorBallisticsMod.CANNON_MUZZLE_SMOKE_TRAIL, CannonMuzzleSmokeTrailParticle.Factory::new);
+
+        // Item tooltips
+        ItemTooltipCallback.EVENT.register((stack, context, lines) -> {
+            if(stack.isOf(Items.CLOCK)) {
+                lines.add(Text.translatable("item.superior_ballistics.clock.tooltip.line1").formatted(Formatting.GRAY));
+                lines.add(Text.translatable("item.superior_ballistics.clock.tooltip.line2").formatted(Formatting.GRAY));
+            }
+        });
     }
 }
